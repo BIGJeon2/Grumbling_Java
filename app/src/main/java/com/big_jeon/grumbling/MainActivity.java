@@ -1,8 +1,10 @@
-package com.example.grumbling;
+package com.big_jeon.grumbling;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.grumbling.R;
 
 public class MainActivity extends AppCompatActivity {
 
