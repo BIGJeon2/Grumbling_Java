@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "347089977816",
+    "project_id": "grumber-9d1b9",
+    "storage_bucket": "grumber-9d1b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347089977816:android:dca1bb765e1d40cf6fb2ad",
+        "android_client_info": {
+          "package_name": "com.example.grumbling"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "347089977816-ag4k7ve7pk7ala9r6oqc6bvl5i4vonn8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.grumbling",
+            "certificate_hash": "2ce1162046675751d5be41adacf786a2a8993a7f"
+          }
+        },
+        {
+          "client_id": "347089977816-9lis4suvohu33nc0a1j7rg06knfrsgu9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-usJVcqQxiUI_kWYl4dg2dzu2M68hh4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "347089977816-9lis4suvohu33nc0a1j7rg06knfrsgu9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

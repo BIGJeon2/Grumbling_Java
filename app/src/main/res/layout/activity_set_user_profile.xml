@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data class = "Profile_Binding">
+        <variable
+            name="User_Profile_Set_Activity"
+            type="com.bigjeon.grumbling.Set_User_Profile_Activity"/>
+    </data>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bigjeon.grumbling.Set_User_Profile_Activity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/User_Img"
+        android:layout_marginTop="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="100dp"
+        android:layout_height="100dp">
+    </de.hdodenhof.circleimageview.CircleImageView>
+    <EditText
+        android:id="@+id/User_Name"
+        android:hint="사용하실 이름을 입력하세요."
+        android:textSize="15dp"
+        android:layout_below="@id/User_Img"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content">
+    </EditText>
+
+    <Button
+        android:id="@+id/Complete_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/User_Name"
+        android:layout_toEndOf="@+id/User_Name"
+        android:text="완료"></Button>
+</RelativeLayout>
+</layout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="10dp"
+    android:layout_width="200dp"
+    android:layout_height="300dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/Set_User_Profile_Image_CIV"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="100dp"
+        android:layout_height="100dp">
+    </de.hdodenhof.circleimageview.CircleImageView>
+    <EditText
+        android:id="@+id/Set_User_Profile_Name_ETV"
+        android:hint="사용하실 이름을 입력하세요."
+        android:textSize="15dp"
+        android:layout_below="@+id/Set_User_Profile_Image_CIV"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content">
+    </EditText>
+    <Button
+        android:id="@+id/Set_User_Profile_Complete_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="완료"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true">
+    </Button>
+</RelativeLayout>
