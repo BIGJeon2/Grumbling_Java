@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Grumbling">
-        <activity android:name="com.bigjeon.grumbling.Set_User_Profile_Activity"></activity>
+        <activity android:name="com.bigjeon.grumbling.Google_Login_Activity"></activity>
+        <activity android:name="com.bigjeon.grumbling.Set_User_Profile_Activity" />
         <activity android:name="com.bigjeon.grumbling.App_Main_Activity" />
         <activity android:name="com.bigjeon.grumbling.MainActivity">
             <intent-filter>
