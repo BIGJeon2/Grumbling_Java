@@ -98,9 +98,9 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
                                             SharedPreferences My_Data = getSharedPreferences("My_Data", MODE_PRIVATE);
                                             SharedPreferences.Editor editor = My_Data.edit();
                                             editor.putString("UID", My_Uid);
-                                            editor.putString("Name", My_Name);
+                                            editor.putString("NAME", My_Name);
                                             editor.putString("IMG", My_Img);
-                                            editor.putStringSet("Friends", null);
+                                            editor.putStringSet("FRIENDS", null);
                                             editor.commit();
                                             Go_App_Main();
                                         }

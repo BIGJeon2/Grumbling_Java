@@ -2,7 +2,6 @@ package com.bigjeon.grumbling;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.grumbling.R;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(Go_Google_Login);
                 }else{
                     //첫 사용자일시 구글 로그인 화면으로 이동
-                    Toast.makeText(MainActivity.this, My_Data.getString("Name", null) + "님 환영합니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, My_Data.getString("NAME", null) + "님 환영합니다.", Toast.LENGTH_SHORT).show();
                     Intent Go_App_Main = new Intent(MainActivity.this, App_Main_Activity.class);
                     startActivity(Go_App_Main);
                 }

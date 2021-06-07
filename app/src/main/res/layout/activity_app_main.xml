@@ -1,9 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data class=".App_Main_Binding">
+        <variable
+            name="App_Main_Activity"
+            type="com.bigjeon.grumbling.App_Main_Activity" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.bigjeon.grumbling.App_Main_Activity">
 
+    <RelativeLayout
+        android:id="@+id/Title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:background="@drawable/ic_launcher_foreground"
+            android:layout_marginLeft="5dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp">
+        </de.hdodenhof.circleimageview.CircleImageView>
+        <TextView
+            android:id="@+id/App_Main_User_Name_Tv"
+            android:text="User_Name"
+            android:textSize="15dp"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/App_Main_User_Img_Circle_Imv"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/App_Main_User_Name_Tv"
+            android:background="@drawable/ic_launcher_foreground"
+            android:layout_width="50dp"
+            android:layout_height="50dp">
+        </de.hdodenhof.circleimageview.CircleImageView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Title">
+
+        <Button
+            android:id="@+id/App_Main_All_Post_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:text="All_Post"
+            android:textColor="@color/black"
+            android:textSize="10dp"></Button>
+
+        <Button
+            android:id="@+id/App_Main_Firend_Post_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:text="Fired_Post"
+            android:textColor="@color/black"
+            android:textSize="10dp"></Button>
+
+        <Button
+            android:id="@+id/App_Main_Firend_List_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:text="Friend_List"
+            android:textColor="@color/black"
+            android:textSize="10dp"></Button>
+
+        <Button
+            android:id="@+id/App_Main_My_Set_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:text="Set"
+            android:textColor="@color/black"
+            android:textSize="10dp"></Button>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/Google_AdMob"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/App_Main_Fragment_FrameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/Google_AdMob"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"></FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
