@@ -34,7 +34,12 @@ android {
 dependencies {
     //gif파일 쉬운 삽입을 위한 Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+    //firesotre 사용
     implementation 'com.google.firebase:firebase-firestore:23.0.0'
+    //프레그먼트 ViewModel 사용
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     //갤러리로 부터 사진 쉽게 가져요기 위한 Picasso
     implementation 'com.squareup.picasso:picasso:2.8'

@@ -2,16 +2,17 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="10dp"
+    android:layout_marginBottom="5dp"
+    android:background="@color/white"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="300dp">
 
     <RelativeLayout
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="5dp"
+        android:background="@drawable/post_view_title_under_edge_1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -36,57 +37,69 @@
 
         <ImageView
             android:id="@+id/Post_View_Declaration_Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="7dp"
-            android:background="?android:attr/alertDialogIcon"></ImageView>
+            android:layout_marginBottom="10dp"
+            android:background="@android:drawable/ic_menu_info_details"></ImageView>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/Post_View_Content_Container"
-        android:layout_weight="8"
+        android:layout_weight="10"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/Post_View_Background"
+                android:scaleType="fitXY"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </ImageView>
+        </FrameLayout>
         <TextView
             android:id="@+id/Post_View_Content"
-            android:text="Content"
+            android:text="나는 가끔 눈물을 흘린다."
+            android:background="#50000000"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </TextView>
-        <LinearLayout
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
-            <ImageButton
-                android:id="@+id/Post_View_Favorite_Image_Btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:drawable/btn_star"></ImageButton>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/Post_View_Favorite_Circle_CIV"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_baseline_favorite_24"></de.hdodenhof.circleimageview.CircleImageView>
 
             <ImageButton
                 android:id="@+id/Post_View_Comment_Image_Btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@android:drawable/ic_menu_send"></ImageButton>
-        </LinearLayout>
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/ic_baseline_eco_24"></ImageButton>
         <TextView
             android:id="@+id/Post_View_WriteDate"
             android:text="Write_Date"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </TextView>

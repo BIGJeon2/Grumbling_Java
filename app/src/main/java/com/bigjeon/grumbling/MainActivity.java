@@ -34,11 +34,13 @@ public class MainActivity extends AppCompatActivity {
                     //백그라운드 작업으로 파이어 베이스에서 회원 정보 가져오기
                     Intent Go_Google_Login = new Intent(MainActivity.this, Google_Login_Activity.class);
                     startActivity(Go_Google_Login);
+                    finish();
                 }else{
                     //첫 사용자일시 구글 로그인 화면으로 이동
                     Toast.makeText(MainActivity.this, My_Data.getString("NAME", null) + "님 환영합니다.", Toast.LENGTH_SHORT).show();
                     Intent Go_App_Main = new Intent(MainActivity.this, App_Main_Activity.class);
                     startActivity(Go_App_Main);
+                    finish();
                 }
             }
         }, 2000);
