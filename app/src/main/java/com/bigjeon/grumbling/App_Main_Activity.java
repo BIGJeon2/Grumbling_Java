@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.bigjeon.grumbling.dialogs.Post_Dialog;
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
 import com.example.grumbling.App_Main_Binding;
 import com.example.grumbling.R;
@@ -36,6 +37,8 @@ public class App_Main_Activity extends AppCompatActivity {
 
     private void Alert_Post_Dialog() {
         //포스팅 작성 dialog 띄워줌
+        Post_Dialog post_dialog = new Post_Dialog(this);
+        post_dialog.show();
         Toast.makeText(getApplicationContext(), "글작성 띄워주기", Toast.LENGTH_SHORT).show();
     }
 
