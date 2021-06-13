@@ -2,16 +2,15 @@ package com.bigjeon.grumbling;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.View;
 
-import com.bigjeon.grumbling.dialogs.Post_Dialog;
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
+import com.bigjeon.grumbling.fragments.Post_Write_Fragment;
 import com.example.grumbling.App_Main_Binding;
 import com.example.grumbling.R;
 import com.squareup.picasso.Picasso;
@@ -23,6 +22,7 @@ public class App_Main_Activity extends AppCompatActivity {
     public String My_Img;
     public String My_Name;
     private Post_View_Fragment post_view_fragment = new Post_View_Fragment();
+    private Post_Write_Fragment post_write_fragment = new Post_Write_Fragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +32,7 @@ public class App_Main_Activity extends AppCompatActivity {
 
         Set_My_Data();
         Change_Fragment("Post_View");
-        binding.AppMainWritePostStartFloationgBtn.setOnClickListener(v -> Alert_Post_Dialog());
-    }
-
-    private void Alert_Post_Dialog() {
-        //포스팅 작성 dialog 띄워줌
-        Post_Dialog post_dialog = new Post_Dialog(this);
-        post_dialog.show();
-        Toast.makeText(getApplicationContext(), "글작성 띄워주기", Toast.LENGTH_SHORT).show();
+        binding.AppMainWritePostStartCircleImgBtn.setOnClickListener(v -> Change_Fragment("Post_Write"));
     }
 
     private void Set_My_Data(){
@@ -50,15 +43,28 @@ public class App_Main_Activity extends AppCompatActivity {
         Picasso.get().load(My_Img).into(binding.AppMainUserImgCircleImv);
         binding.AppMainUserNameTv.setText(My_Name);
     }
-
+    //프레그먼트 전환
     private void Change_Fragment(String FRAGMENT_ID){
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
         switch (FRAGMENT_ID){
             case "Post_View" :
-                FragmentManager fm = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.add(R.id.App_Main_Fragment, post_view_fragment);
+                fragmentTransaction.replace(R.id.App_Main_Fragment, post_view_fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+                break;
+
+            case "Post_Write" :
+                Bundle bundle = new Bundle();
+                bundle.putString("UID", My_Uid);
+                bundle.putString("NAME", My_Name);
+                bundle.putString("IMG", My_Img);
+                post_write_fragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.App_Main_Fragment, post_write_fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                binding.AppMainWritePostStartCircleImgBtn.setVisibility(View.INVISIBLE);
+                break;
         }
     }
 }

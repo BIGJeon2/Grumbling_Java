@@ -120,14 +120,16 @@
         </fragment>
     </FrameLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/App_Main_Write_Post_Start_Floationg_Btn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/App_Main_Write_Post_Start_CircleImgBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:src="@drawable/ic_baseline_create_24"
         app:layout_constraintBottom_toTopOf="@id/Google_AdMob"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp">
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+    </de.hdodenhof.circleimageview.CircleImageView>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

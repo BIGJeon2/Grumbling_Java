@@ -8,15 +8,7 @@ public class Post_Data {
     private String User_Uid;
     private String Content;
     private String Grade;
-
-    public String getGrade() {
-        return Grade;
-    }
-
-    public void setGrade(String grade) {
-        Grade = grade;
-    }
-
+    private int Content_Text_Size;
     private int Content_Text_Color;
     private int Content_Back_Color;
     private String Post_Write_Date;
@@ -24,12 +16,13 @@ public class Post_Data {
     private int Favorite_Count;
     private int Declared_Count;
 
-    public Post_Data(String user_Name, String user_Img, String user_Uid, String content, String grade, int content_Text_Color, int content_Back_Color, String post_Write_Date, int post_Background, int favorite_Count, int declared_Count) {
+    public Post_Data(String user_Name, String user_Img, String user_Uid, String content, String grade, int content_Text_Size, int content_Text_Color, int content_Back_Color, String post_Write_Date, int post_Background, int favorite_Count, int declared_Count) {
         User_Name = user_Name;
         User_Img = user_Img;
         User_Uid = user_Uid;
         Content = content;
         Grade = grade;
+        Content_Text_Size = content_Text_Size;
         Content_Text_Color = content_Text_Color;
         Content_Back_Color = content_Back_Color;
         Post_Write_Date = post_Write_Date;
@@ -68,6 +61,22 @@ public class Post_Data {
 
     public void setContent(String content) {
         Content = content;
+    }
+
+    public String getGrade() {
+        return Grade;
+    }
+
+    public void setGrade(String grade) {
+        Grade = grade;
+    }
+
+    public int getContent_Text_Size() {
+        return Content_Text_Size;
+    }
+
+    public void setContent_Text_Size(int content_Text_Size) {
+        Content_Text_Size = content_Text_Size;
     }
 
     public int getContent_Text_Color() {

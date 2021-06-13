@@ -47,6 +47,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Holder>{
         Picasso.get().load(data.getUser_Img()).into(holder.User_Img);
         holder.User_Name.setText(data.getUser_Name());
         holder.Post_Content.setText(data.getContent());
+        holder.Post_Content.setTextSize(data.getContent_Text_Size());
         holder.Post_Content.setBackgroundColor(data.getContent_Back_Color());
         holder.Post_Content.setTextColor(data.getContent_Text_Color());
         Glide.with(holder.itemView).load(data.getPost_Background()).into(holder.Post_Background_Img);

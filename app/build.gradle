@@ -32,6 +32,8 @@ android {
 }
 
 dependencies {
+    //스와이프 가능 프레그컨트 컨테이너를 위한 ViewPgaer2
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
     //gif파일 쉬운 삽입을 위한 Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     //firesotre 사용
