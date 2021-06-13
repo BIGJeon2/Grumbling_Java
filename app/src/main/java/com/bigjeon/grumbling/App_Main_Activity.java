@@ -32,7 +32,19 @@ public class App_Main_Activity extends AppCompatActivity {
 
         Set_My_Data();
         Change_Fragment("Post_View");
-        binding.AppMainWritePostStartCircleImgBtn.setOnClickListener(v -> Change_Fragment("Post_Write"));
+        binding.AppMainWritePostStartCircleImgBtn.setOnClickListener(v -> Alert_Post_Write_Dialog());
+    }
+
+    private void Alert_Post_Write_Dialog() {
+        Post_Write_Fragment post_write_fragment = new Post_Write_Fragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("UID", My_Uid);
+        bundle.putString("NAME", My_Name);
+        bundle.putString("IMG", My_Img);
+        post_write_fragment.setArguments(bundle);
+        post_write_fragment.show(
+                getSupportFragmentManager(), "Post_Dialog"
+        );
     }
 
     private void Set_My_Data(){
@@ -52,18 +64,6 @@ public class App_Main_Activity extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.App_Main_Fragment, post_view_fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-                break;
-
-            case "Post_Write" :
-                Bundle bundle = new Bundle();
-                bundle.putString("UID", My_Uid);
-                bundle.putString("NAME", My_Name);
-                bundle.putString("IMG", My_Img);
-                post_write_fragment.setArguments(bundle);
-                fragmentTransaction.replace(R.id.App_Main_Fragment, post_write_fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-                binding.AppMainWritePostStartCircleImgBtn.setVisibility(View.INVISIBLE);
                 break;
         }
     }

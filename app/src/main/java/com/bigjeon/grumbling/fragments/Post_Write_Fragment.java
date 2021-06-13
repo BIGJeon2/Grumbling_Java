@@ -1,5 +1,6 @@
 package com.bigjeon.grumbling.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -7,11 +8,13 @@ import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -24,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
 
-public class Post_Write_Fragment extends Fragment {
+public class Post_Write_Fragment extends DialogFragment {
     //포트팅에 들어갈 데이터 초기값 설정(Default 값)
     private PostWriteFragmentBinding binding;
 
@@ -45,9 +48,8 @@ public class Post_Write_Fragment extends Fragment {
     @org.jetbrains.annotations.Nullable
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.post__write__fragment, container, false);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.post__write__fragment, null, false);
         View root = binding.getRoot();
-
         Get_User_Profile();
 
         binding.DialogPostingCompleteCIV.setOnClickListener(v -> Upload_Post());

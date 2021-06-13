@@ -11,8 +11,10 @@ import android.widget.Toast;
 
 import com.example.grumbling.R;
 import com.example.grumbling.databinding.Login_Binding;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInApi;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
@@ -61,6 +63,7 @@ public class Google_Login_Activity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
             case 1001:
+                Log.e("RESULT", Auth.GoogleSignInApi.getSignInResultFromIntent(data).getStatus().toString());
                 if(resultCode == RESULT_OK){
                     Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
                     try {
@@ -70,6 +73,8 @@ public class Google_Login_Activity extends AppCompatActivity {
                     }catch (ApiException e){
                         e.printStackTrace();
                     }
+                }else {
+                    Toast.makeText(Google_Login_Activity.this, "구글 로그인 실패!" + resultCode, Toast.LENGTH_SHORT).show();
                 }break;
         }
     }
