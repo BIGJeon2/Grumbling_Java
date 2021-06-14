@@ -10,23 +10,17 @@
             type="com.bigjeon.grumbling.fragments.Post_Write_Fragment" />
     </data>
 
-<LinearLayout
+<RelativeLayout
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.bigjeon.grumbling.fragments.Post_Write_Fragment"
-    android:layout_marginBottom="5dp"
     android:background="@color/white"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="400dp">
-
+    android:layout_height="wrap_content">
     <RelativeLayout
-        android:layout_weight="2"
+        android:id="@+id/Top_Bar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="60dp"
         android:background="@drawable/post_view_title_under_edge_1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_alignParentTop="true">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/Dialog_Posting_User_Img"
             android:src="@mipmap/ic_launcher"
@@ -57,12 +51,9 @@
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/Dialog_Posting_Content_Container"
-        android:layout_weight="10"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="240dp"
+        android:layout_below="@+id/Top_Bar">
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -85,9 +76,9 @@
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/Dialog_Posting_Setting_Container"
-        android:layout_weight="6"
+        android:layout_below="@+id/Dialog_Posting_Content_Container"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="150dp">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/Dialog_Posting_Set_Img"
             android:layout_marginLeft="10dp"
@@ -115,8 +106,36 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp">
         </Button>
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/Dialog_Posting_Background_Container"
+            android:visibility="visible"
             android:layout_below="@id/Dialog_Posting_Set_Text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/Dialog_Posting_Background_Gallery"
+                android:background="@drawable/ic_baseline_insert_photo_24"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="5dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+            </de.hdodenhof.circleimageview.CircleImageView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Dialog_Posting_Background_DB"
+            android:layout_centerInParent="true"
+            tools:listitem="@layout/db_gif_img_item"
+            android:layout_toLeftOf="@+id/Dialog_Posting_Background_Gallery"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginRight="10dp">
+        </androidx.recyclerview.widget.RecyclerView>
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/Dialog_Posting_Text_Set_Container"
+            android:layout_below="@id/Dialog_Posting_Set_Text"
+            android:visibility="invisible"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -195,5 +214,5 @@
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>
 </layout>

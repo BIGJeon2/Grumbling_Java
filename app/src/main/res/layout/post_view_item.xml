@@ -48,7 +48,7 @@
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/Post_View_Content_Container"
-        android:layout_weight="10"
+        android:layout_weight="8"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"

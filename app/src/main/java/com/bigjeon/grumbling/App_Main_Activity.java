@@ -22,7 +22,6 @@ public class App_Main_Activity extends AppCompatActivity {
     public String My_Img;
     public String My_Name;
     private Post_View_Fragment post_view_fragment = new Post_View_Fragment();
-    private Post_Write_Fragment post_write_fragment = new Post_Write_Fragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +35,8 @@ public class App_Main_Activity extends AppCompatActivity {
     }
 
     private void Alert_Post_Write_Dialog() {
-        Post_Write_Fragment post_write_fragment = new Post_Write_Fragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("UID", My_Uid);
-        bundle.putString("NAME", My_Name);
-        bundle.putString("IMG", My_Img);
-        post_write_fragment.setArguments(bundle);
-        post_write_fragment.show(
-                getSupportFragmentManager(), "Post_Dialog"
-        );
+        Post_Write_Fragment post_write_fragment = new Post_Write_Fragment(App_Main_Activity.this);
+        post_write_fragment.show();
     }
 
     private void Set_My_Data(){
