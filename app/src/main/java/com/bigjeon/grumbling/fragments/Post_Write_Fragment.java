@@ -19,6 +19,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,9 +39,11 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.Objects;
 
-public class Post_Write_Fragment extends Dialog {
+public class Post_Write_Fragment extends DialogFragment {
+    public static final String TAG_POST_WRITE = "Post_Dialog";
     //포트팅에 들어갈 데이터 초기값 설정(Default 값)
     private PostWriteFragmentBinding binding;
     private String Grade_All = "모든 사용자";
@@ -61,20 +64,20 @@ public class Post_Write_Fragment extends Dialog {
     private int Declared_Count = 0;
     private String Set_Status = "Background";
 
-    public Post_Write_Fragment(@NonNull Context context) {
-        super(context);
-        this.context = context;
+    public Post_Write_Fragment(){}
+    public static Post_Write_Fragment getInstance(){
+        Post_Write_Fragment post_write_fragment = new Post_Write_Fragment();
+        return post_write_fragment;
     }
 
+    @Nullable
+    @org.jetbrains.annotations.Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.post__write__fragment, null, false);
+    public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.post__write__fragment, container, false);
         View root = binding.getRoot();
-        setContentView(root);
-        Objects.requireNonNull(getWindow()).setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
-        Objects.requireNonNull(getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Get_User_Profile();
         //글자 크기==============================================
         binding.DialogPostingContentTextSizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -106,7 +109,7 @@ public class Post_Write_Fragment extends Dialog {
 
         //백그라운드 이미지 설정 부분
         binding.DialogPostingBackgroundGallery.setOnClickListener(v -> Get_Img_In_Gallery());
-
+        return root;
     }
 
     //================================================================================================
@@ -138,16 +141,22 @@ public class Post_Write_Fragment extends Dialog {
         }
     }
     //갤러리 사진 가져오기
-//    private void Get_Img_In_Gallery() {
-//        Intent Get_Img = new Intent(Intent.ACTION_PICK);
-//        Get_Img.setType("image/*");
-//    }
+    private void Get_Img_In_Gallery() {
+        Intent Get_Img = new Intent(Intent.ACTION_PICK);
+        Get_Img.setType("image/*");
+        startActivityForResult(Get_Img, 10);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     //보안 등급 설정
     private void Set_Posting_Grade() {
         String[] Grade = {Grade_All, Grade_Friends, Grade_Secret};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("공개 범위 설정").setItems(Grade, new OnClickListener() {
+        builder.setTitle("공개 범위 설정").setItems(Grade, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Posting_Grade = Grade[which];
@@ -181,5 +190,6 @@ public class Post_Write_Fragment extends Dialog {
             );
         }
         Toast.makeText(getContext(), Posting_Write_Date, Toast.LENGTH_SHORT).show();
+        dismiss();
     }
 }

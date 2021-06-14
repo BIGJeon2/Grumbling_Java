@@ -35,8 +35,8 @@ public class App_Main_Activity extends AppCompatActivity {
     }
 
     private void Alert_Post_Write_Dialog() {
-        Post_Write_Fragment post_write_fragment = new Post_Write_Fragment(App_Main_Activity.this);
-        post_write_fragment.show();
+        Post_Write_Fragment post_write_fragment = Post_Write_Fragment.getInstance();
+        post_write_fragment.show(getSupportFragmentManager(), Post_Write_Fragment.TAG_POST_WRITE);
     }
 
     private void Set_My_Data(){
