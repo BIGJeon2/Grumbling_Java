@@ -12,11 +12,11 @@ public class Post_Data {
     private int Content_Text_Color;
     private int Content_Back_Color;
     private String Post_Write_Date;
-    private int Post_Background;
+    private String Post_Background;
     private int Favorite_Count;
     private int Declared_Count;
 
-    public Post_Data(String user_Name, String user_Img, String user_Uid, String content, String grade, int content_Text_Size, int content_Text_Color, int content_Back_Color, String post_Write_Date, int post_Background, int favorite_Count, int declared_Count) {
+    public Post_Data(String user_Name, String user_Img, String user_Uid, String content, String grade, int content_Text_Size, int content_Text_Color, int content_Back_Color, String post_Write_Date, String  post_Background, int favorite_Count, int declared_Count) {
         User_Name = user_Name;
         User_Img = user_Img;
         User_Uid = user_Uid;
@@ -103,11 +103,11 @@ public class Post_Data {
         Post_Write_Date = post_Write_Date;
     }
 
-    public int getPost_Background() {
+    public String getPost_Background() {
         return Post_Background;
     }
 
-    public void setPost_Background(int post_Background) {
+    public void setPost_Background(String post_Background) {
         Post_Background = post_Background;
     }
 

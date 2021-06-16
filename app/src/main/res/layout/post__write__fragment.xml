@@ -123,7 +123,7 @@
                 android:layout_height="50dp">
             </de.hdodenhof.circleimageview.CircleImageView>
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/Dialog_Posting_Background_DB"
+            android:id="@+id/Dialog_Posting_Background_DB_Rcv"
             android:layout_centerInParent="true"
             tools:listitem="@layout/db_gif_img_item"
             android:layout_toLeftOf="@+id/Dialog_Posting_Background_Gallery"

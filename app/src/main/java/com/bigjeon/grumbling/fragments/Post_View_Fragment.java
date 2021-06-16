@@ -29,7 +29,6 @@ public class Post_View_Fragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_view, container, false);
         View root = binding.getRoot();
         View v = inflater.inflate(R.layout.fragment_post_view, container, false);
-        list.add(new Post_Data("희태", null, "BIg", "확인합시다", "ALL_USER", 10,R.color.black, R.color.white, "now", R.drawable.multi_colred_motion, 0, 0));
         RecyclerView rcv = binding.PostRecyclerView;
         Post_View_Rcv_Adapter adapter = new Post_View_Rcv_Adapter(list);
         LinearLayoutManager lm = new LinearLayoutManager(v.getContext());

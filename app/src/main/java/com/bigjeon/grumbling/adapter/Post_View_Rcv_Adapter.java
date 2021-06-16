@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Holder>{
+public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Adapter.Holder>{
     ArrayList<Post_Data> list;
 
     public Post_View_Rcv_Adapter(ArrayList<Post_Data> list){
@@ -59,26 +59,26 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Holder>{
         return list.size();
     }
 
-}
-class Holder extends RecyclerView.ViewHolder{
-    CircleImageView User_Img;
-    TextView User_Name;
-    TextView Post_Content;
-    ImageView Post_Background_Img;
-    TextView Post_Write_Date;
-    CircleImageView favorite_Btn;
-    ImageButton Go_To_Comment_Btn;
-    ImageView Declare_Btn;
+    public class Holder extends RecyclerView.ViewHolder{
+        CircleImageView User_Img;
+        TextView User_Name;
+        TextView Post_Content;
+        ImageView Post_Background_Img;
+        TextView Post_Write_Date;
+        CircleImageView favorite_Btn;
+        ImageButton Go_To_Comment_Btn;
+        ImageView Declare_Btn;
 
-    public Holder(@NonNull @NotNull View itemView) {
-        super(itemView);
-        User_Img = itemView.findViewById(R.id.Post_View_User_Img);
-        User_Name = itemView.findViewById(R.id.Post_View_User_Name);
-        Post_Content = itemView.findViewById(R.id.Post_View_Content);
-        Post_Background_Img = itemView.findViewById(R.id.Post_View_Background);
-        Post_Write_Date = itemView.findViewById(R.id.Post_View_WriteDate);
-        favorite_Btn = itemView.findViewById(R.id.Post_View_Favorite_Circle_CIV);
-        Go_To_Comment_Btn = itemView.findViewById(R.id.Post_View_Comment_Image_Btn);
-        Declare_Btn = itemView.findViewById(R.id.Post_View_Declaration_Btn);
+        public Holder(@NonNull @NotNull View itemView) {
+            super(itemView);
+            User_Img = itemView.findViewById(R.id.Post_View_User_Img);
+            User_Name = itemView.findViewById(R.id.Post_View_User_Name);
+            Post_Content = itemView.findViewById(R.id.Post_View_Content);
+            Post_Background_Img = itemView.findViewById(R.id.Post_View_Background);
+            Post_Write_Date = itemView.findViewById(R.id.Post_View_WriteDate);
+            favorite_Btn = itemView.findViewById(R.id.Post_View_Favorite_Circle_CIV);
+            Go_To_Comment_Btn = itemView.findViewById(R.id.Post_View_Comment_Image_Btn);
+            Declare_Btn = itemView.findViewById(R.id.Post_View_Declaration_Btn);
+        }
     }
 }

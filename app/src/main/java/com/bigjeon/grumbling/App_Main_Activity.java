@@ -1,10 +1,12 @@
 package com.bigjeon.grumbling;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -37,6 +39,7 @@ public class App_Main_Activity extends AppCompatActivity {
     private void Alert_Post_Write_Dialog() {
         Post_Write_Fragment post_write_fragment = Post_Write_Fragment.getInstance();
         post_write_fragment.show(getSupportFragmentManager(), Post_Write_Fragment.TAG_POST_WRITE);
+
     }
 
     private void Set_My_Data(){
