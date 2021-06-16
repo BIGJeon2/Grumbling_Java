@@ -16,7 +16,11 @@ public class Post_Data {
     private int Favorite_Count;
     private int Declared_Count;
 
-    public Post_Data(String user_Name, String user_Img, String user_Uid, String content, String grade, int content_Text_Size, int content_Text_Color, int content_Back_Color, String post_Write_Date, String  post_Background, int favorite_Count, int declared_Count) {
+    public Post_Data(){
+
+    }
+
+    public Post_Data(String user_Name, String user_Img, String user_Uid, String content, String grade, int content_Text_Size, int content_Text_Color, int content_Back_Color, String post_Write_Date, String post_Background, int favorite_Count, int declared_Count) {
         User_Name = user_Name;
         User_Img = user_Img;
         User_Uid = user_Uid;

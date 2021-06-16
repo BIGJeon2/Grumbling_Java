@@ -18,9 +18,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +54,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Post_Write_Fragment extends DialogFragment {
+    private static final String TAG = "My_Post_Check";
     public static final String TAG_POST_WRITE = "Post_Dialog";
     //포트팅에 들어갈 데이터 초기값 설정(Default 값)
     private PostWriteFragmentBinding binding;
@@ -221,6 +224,20 @@ public class Post_Write_Fragment extends DialogFragment {
     private void Upload_Post() {
         Posting_Content = binding.DialogPostingContent.getText().toString();
         Posting_Write_Date = new SimpleDateFormat("yyyMMddhhmmss").format(new Date());
+        Post_Data post = new Post_Data(
+                User_Name,//
+                User_Img,//
+                User_Uid,//
+                Posting_Content,//
+                Posting_Grade,//
+                Posting_Content_Size,//
+                Posting_Content_Color,
+                Posting_Content_BackColor,
+                Posting_Write_Date,//
+                Background_Img_String,//
+                Favorite_Count,
+                Declared_Count
+        );
         //작성글이 있을 경우에만 저장
         if (Posting_Content.length() > 2) {
             if (Background_Status.equals("Uri")){
@@ -235,38 +252,33 @@ public class Post_Write_Fragment extends DialogFragment {
                         Post_Img_Ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                Background_Img_String = uri.toString();
+                                Log.d(TAG, "Uri = "+ uri.toString());
+                                post.setPost_Background(uri.toString());
+                                FirebaseFirestore DB = FirebaseFirestore.getInstance();
+                                DB.collection("Posts")
+                                        .document(Posting_Write_Date + User_Uid)
+                                        .set(post)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                            }
+                                        });
                             }
                         });
                     }
                 });
-            }
-            //글 업로드
-            Post_Data post = new Post_Data(
-                    User_Name,//
-                    User_Img,//
-                    User_Uid,//
-                    Posting_Content,//
-                    Posting_Grade,//
-                    Posting_Content_Size,//
-                    Posting_Content_Color,
-                    Posting_Content_BackColor,
-                    Posting_Write_Date,//
-                    Background_Img_String,//
-                    Favorite_Count,
-                    Declared_Count
-            );
-            FirebaseFirestore DB = FirebaseFirestore.getInstance();
-            DB.collection("Posts")
-                    .document(Posting_Write_Date + User_Uid)
-                    .set(post)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-
-                        }
-                    });
-            Toast.makeText(getContext(), "게시글이 정상적으로 등록괴었습니다!", Toast.LENGTH_SHORT).show();
+            }else{
+                FirebaseFirestore DB = FirebaseFirestore.getInstance();
+                DB.collection("Posts")
+                        .document(Posting_Write_Date + User_Uid)
+                        .set(post)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                            }
+                        });
+                    }
+            Toast.makeText(getContext(), "게시글이 정상적으로 등록되었습니다!", Toast.LENGTH_SHORT).show();
             dismiss();
         }else {
             Toast.makeText(getContext(), "최소 3글자 이상 입력해 주세요!", Toast.LENGTH_SHORT).show();

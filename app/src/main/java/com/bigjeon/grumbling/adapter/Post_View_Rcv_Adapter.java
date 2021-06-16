@@ -44,8 +44,8 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
     @Override
     public void onBindViewHolder(@NonNull @NotNull Holder holder, int position) {
         Post_Data data = list.get(position);
-        Picasso.get().load(data.getUser_Img()).into(holder.User_Img);
         holder.User_Name.setText(data.getUser_Name());
+        Picasso.get().load(data.getUser_Img()).into(holder.User_Img);
         holder.Post_Content.setText(data.getContent());
         holder.Post_Content.setTextSize(data.getContent_Text_Size());
         holder.Post_Content.setBackgroundColor(data.getContent_Back_Color());
@@ -60,8 +60,8 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
     }
 
     public class Holder extends RecyclerView.ViewHolder{
-        CircleImageView User_Img;
         TextView User_Name;
+        CircleImageView User_Img;
         TextView Post_Content;
         ImageView Post_Background_Img;
         TextView Post_Write_Date;

@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.View;
 
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
 import com.bigjeon.grumbling.fragments.Post_Write_Fragment;
+import com.bumptech.glide.Glide;
 import com.example.grumbling.App_Main_Binding;
 import com.example.grumbling.R;
 import com.squareup.picasso.Picasso;
@@ -33,12 +35,6 @@ public class App_Main_Activity extends AppCompatActivity {
 
         Set_My_Data();
         Change_Fragment("Post_View");
-        binding.AppMainWritePostStartCircleImgBtn.setOnClickListener(v -> Alert_Post_Write_Dialog());
-    }
-
-    private void Alert_Post_Write_Dialog() {
-        Post_Write_Fragment post_write_fragment = Post_Write_Fragment.getInstance();
-        post_write_fragment.show(getSupportFragmentManager(), Post_Write_Fragment.TAG_POST_WRITE);
 
     }
 
