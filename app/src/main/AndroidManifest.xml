@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Grumbling">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name="com.bigjeon.grumbling.Google_Login_Activity"></activity>
         <activity android:name="com.bigjeon.grumbling.Set_User_Profile_Activity" />
         <activity android:name="com.bigjeon.grumbling.App_Main_Activity" />

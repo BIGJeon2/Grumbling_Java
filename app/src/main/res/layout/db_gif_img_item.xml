@@ -9,8 +9,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/Gif_Circle_IMV"
         android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@raw/multi_colred_motion">
+        android:layout_height="50dp">
     </de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView
