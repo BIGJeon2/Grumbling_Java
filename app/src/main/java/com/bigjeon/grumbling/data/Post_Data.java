@@ -2,7 +2,10 @@ package com.bigjeon.grumbling.data;
 
 import android.content.res.ColorStateList;
 
+import java.util.HashMap;
+
 public class Post_Data {
+    private String Post_Title;
     private String User_Name;
     private String User_Img;
     private String User_Uid;
@@ -14,13 +17,15 @@ public class Post_Data {
     private String Post_Write_Date;
     private String Post_Background;
     private int Favorite_Count;
+    private HashMap<String, Boolean> Favorite = new HashMap<>();
     private int Declared_Count;
 
     public Post_Data(){
 
     }
 
-    public Post_Data(String user_Name, String user_Img, String user_Uid, String content, String grade, int content_Text_Size, int content_Text_Color, int content_Back_Color, String post_Write_Date, String post_Background, int favorite_Count, int declared_Count) {
+    public Post_Data(String post_Title, String user_Name, String user_Img, String user_Uid, String content, String grade, int content_Text_Size, int content_Text_Color, int content_Back_Color, String post_Write_Date, String post_Background, int favorite_Count, int declared_Count, HashMap<String, Boolean> favorite) {
+        Post_Title = post_Title;
         User_Name = user_Name;
         User_Img = user_Img;
         User_Uid = user_Uid;
@@ -33,7 +38,17 @@ public class Post_Data {
         Post_Background = post_Background;
         Favorite_Count = favorite_Count;
         Declared_Count = declared_Count;
+        Favorite = favorite;
     }
+
+    public String getPost_Title() {
+        return Post_Title;
+    }
+
+    public void setPost_Title(String post_Title) {
+        Post_Title = post_Title;
+    }
+
 
     public String getUser_Name() {
         return User_Name;
@@ -129,5 +144,13 @@ public class Post_Data {
 
     public void setDeclared_Count(int declared_Count) {
         Declared_Count = declared_Count;
+    }
+
+    public HashMap<String, Boolean> getFavorite() {
+        return Favorite;
+    }
+
+    public void setFavorite(HashMap<String, Boolean> favorite) {
+        Favorite = favorite;
     }
 }

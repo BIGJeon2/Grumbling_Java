@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "347089977816",
+    "firebase_url": "https://grumber-9d1b9-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "grumber-9d1b9",
     "storage_bucket": "grumber-9d1b9.appspot.com"
   },
@@ -19,6 +20,14 @@
           "android_info": {
             "package_name": "com.example.grumbling",
             "certificate_hash": "2ce1162046675751d5be41adacf786a2a8993a7f"
+          }
+        },
+        {
+          "client_id": "347089977816-vbr5poc89eujs2hi6s8t00833r91c7gc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.grumbling",
+            "certificate_hash": "9729c4bfe3d1130cc5617d896ffa3f5527cc2e1c"
           }
         },
         {

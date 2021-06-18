@@ -2,9 +2,11 @@ package com.bigjeon.grumbling.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +26,14 @@ import com.example.grumbling.databinding.FragmentPostViewBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -32,10 +42,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class Post_View_Fragment extends Fragment{
+public class Post_View_Fragment extends Fragment {
     private static final String TAG = "My_Check";
     private FragmentPostViewBinding binding;
-    private FirebaseFirestore DB;
+    private FirebaseAuth mAuth;
+    private DatabaseReference DB;
     private Post_View_Rcv_Adapter adapter;
     ArrayList<Post_Data> list = new ArrayList<>();
 
@@ -45,7 +56,8 @@ public class Post_View_Fragment extends Fragment{
         View root = binding.getRoot();
         View v = inflater.inflate(R.layout.fragment_post_view, container, false);
 
-        DB = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        DB = FirebaseDatabase.getInstance().getReference("Posts");
 
         RecyclerView rcv = binding.PostRecyclerView;
         adapter = new Post_View_Rcv_Adapter(list);
@@ -66,7 +78,7 @@ public class Post_View_Fragment extends Fragment{
             }
         });
 
-        binding.PostWritePostStartCircleImgBtn.setOnClickListener( V -> Alert_Post_Write_Dialog());
+        binding.PostWritePostStartCircleImgBtn.setOnClickListener(V -> Alert_Post_Write_Dialog());
         return root;
     }
 
@@ -75,22 +87,23 @@ public class Post_View_Fragment extends Fragment{
         post_write_fragment.show(getParentFragmentManager(), Post_Write_Fragment.TAG_POST_WRITE);
     }
 
-    private void Get_Post(){
-        DB.collection("Posts")
-                .whereEqualTo("grade", "모든 사용자")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            for (QueryDocumentSnapshot document : task.getResult()){
-                                Post_Data post = document.toObject(Post_Data.class);
-                                list.add(0, post);
-                                Log.d(TAG, "Uri = "+ post.getPost_Background());
-                                adapter.notifyDataSetChanged();
-                            }
-                        }
-                    }
-                });
-        }
+    private void Get_Post() {
+        DB.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                list.clear();
+                for (DataSnapshot data : snapshot.getChildren()){
+                    Post_Data post = data.getValue(Post_Data.class);
+                    if (post.getGrade().equals("모든 사용자"))list.add(0, post);
+                    Log.d(TAG, "Uri = "+ post.getPost_Background());
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+    }
 }

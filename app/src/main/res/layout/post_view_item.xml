@@ -72,16 +72,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </TextView>
-
+        <TextView
+            android:id="@+id/Posting_Favorite_Count_TV"
+            android:text="000"
+            android:textSize="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp">
+        </TextView>
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/Post_View_Favorite_Circle_CIV"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_weight="1"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/ic_baseline_favorite_24"></de.hdodenhof.circleimageview.CircleImageView>
+            android:layout_toLeftOf="@+id/Posting_Favorite_Count_TV"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/ic_baseline_favorite_border_24">
+        </de.hdodenhof.circleimageview.CircleImageView>
 
             <ImageButton
                 android:id="@+id/Post_View_Comment_Image_Btn"

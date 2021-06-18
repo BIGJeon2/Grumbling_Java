@@ -41,6 +41,9 @@ import com.example.grumbling.R;
 
 import com.example.grumbling.databinding.PostWriteFragmentBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -52,6 +55,7 @@ import org.jetbrains.annotations.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class Post_Write_Fragment extends DialogFragment {
     private static final String TAG = "My_Post_Check";
@@ -62,6 +66,7 @@ public class Post_Write_Fragment extends DialogFragment {
     private String Grade_All = "모든 사용자";
     private String Grade_Friends = "친구 공개";
     private String Grade_Secret = "비공개";
+    private String Post_Title;
     private Context context;
     private String User_Name;
     private String User_Uid;
@@ -78,6 +83,10 @@ public class Post_Write_Fragment extends DialogFragment {
     private int Declared_Count = 0;
     private String Set_Status = "Background";
     private String Background_Status = "String";
+    private HashMap<String, Boolean> Favorite = new HashMap<>();
+
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference reference = database.getReference("Posts");
 
     public Post_Write_Fragment(){}
     public static Post_Write_Fragment getInstance(){
@@ -224,7 +233,9 @@ public class Post_Write_Fragment extends DialogFragment {
     private void Upload_Post() {
         Posting_Content = binding.DialogPostingContent.getText().toString();
         Posting_Write_Date = new SimpleDateFormat("yyyMMddhhmmss").format(new Date());
+        Post_Title = Posting_Write_Date + User_Uid;
         Post_Data post = new Post_Data(
+                Post_Title,
                 User_Name,//
                 User_Img,//
                 User_Uid,//
@@ -236,7 +247,8 @@ public class Post_Write_Fragment extends DialogFragment {
                 Posting_Write_Date,//
                 Background_Img_String,//
                 Favorite_Count,
-                Declared_Count
+                Declared_Count,
+                Favorite
         );
         //작성글이 있을 경우에만 저장
         if (Posting_Content.length() > 2) {
@@ -254,30 +266,14 @@ public class Post_Write_Fragment extends DialogFragment {
                             public void onSuccess(Uri uri) {
                                 Log.d(TAG, "Uri = "+ uri.toString());
                                 post.setPost_Background(uri.toString());
-                                FirebaseFirestore DB = FirebaseFirestore.getInstance();
-                                DB.collection("Posts")
-                                        .document(Posting_Write_Date + User_Uid)
-                                        .set(post)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                            }
-                                        });
+                                reference.child(Post_Title).setValue(post);
                             }
                         });
                     }
                 });
             }else{
-                FirebaseFirestore DB = FirebaseFirestore.getInstance();
-                DB.collection("Posts")
-                        .document(Posting_Write_Date + User_Uid)
-                        .set(post)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                            }
-                        });
-                    }
+                reference.child(Post_Title).setValue(post);
+            }
             Toast.makeText(getContext(), "게시글이 정상적으로 등록되었습니다!", Toast.LENGTH_SHORT).show();
             dismiss();
         }else {
