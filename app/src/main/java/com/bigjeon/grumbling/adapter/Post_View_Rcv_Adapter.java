@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,7 +31,11 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -58,11 +63,11 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         holder.User_Name.setText(data.getUser_Name());
         Picasso.get().load(data.getUser_Img()).into(holder.User_Img);
         holder.Post_Content.setText(data.getContent());
-        holder.Post_Content.setTextSize(data.getContent_Text_Size());
+        holder.Post_Content.setTextSize(Dimension.DP, data.getContent_Text_Size());
         holder.Post_Content.setBackgroundColor(data.getContent_Back_Color());
         holder.Post_Content.setTextColor(data.getContent_Text_Color());
         Glide.with(holder.itemView).load(data.getPost_Background()).into(holder.Post_Background_Img);
-        holder.Post_Write_Date.setText(data.getPost_Write_Date());
+        holder.Post_Write_Date.setText(DateChange(data.getPost_Write_Date()));
         holder.Favorite_Count.setText(Integer.toString(data.getFavorite_Count()));
         if (data.getFavorite().containsKey(mAuth.getCurrentUser().getUid())){
             holder.Favorite_Btn.setImageResource(R.drawable.ic_baseline_favorite_24);
@@ -77,6 +82,20 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         });
     }
 
+    private String DateChange(String date){
+        SimpleDateFormat old_format = new SimpleDateFormat("yyyyMMddhhmmss");
+        old_format.setTimeZone(TimeZone.getTimeZone("KST"));
+        SimpleDateFormat new_format = new SimpleDateFormat("yy.MM.dd HH:mm");
+        try {
+            Date old_date = old_format.parse(date);
+            String new_date = new_format.format(old_date);
+            return new_date;
+
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
     @Override
     public int getItemCount() {
         return list.size();
@@ -90,7 +109,6 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         TextView Post_Write_Date;
         CircleImageView Favorite_Btn;
         ImageButton Go_To_Comment_Btn;
-        ImageView Declare_Btn;
         TextView Favorite_Count;
 
         public Holder(@NonNull @NotNull View itemView) {
@@ -102,7 +120,6 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
             Post_Write_Date = itemView.findViewById(R.id.Post_View_WriteDate);
             Favorite_Btn = itemView.findViewById(R.id.Post_View_Favorite_Circle_CIV);
             Go_To_Comment_Btn = itemView.findViewById(R.id.Post_View_Comment_Image_Btn);
-            Declare_Btn = itemView.findViewById(R.id.Post_View_Declaration_Btn);
             Favorite_Count = itemView.findViewById(R.id.Posting_Favorite_Count_TV);
         }
     }
@@ -123,7 +140,6 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
                     data.setFavorite_Count(data.getFavorite_Count() + 1);
                     data.getFavorite().put(mAuth.getCurrentUser().getUid(), true);
                 }
-
                 currentData.setValue(data);
                 return Transaction.success(currentData);
             }

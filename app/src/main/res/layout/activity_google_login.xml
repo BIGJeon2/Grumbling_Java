@@ -11,26 +11,16 @@ xmlns:tools="http://schemas.android.com/tools">
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/loading_background"
     tools:context="com.bigjeon.grumbling.Google_Login_Activity">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/App_Logo"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/common_google_signin_btn_icon_dark_focused">
-    </de.hdodenhof.circleimageview.CircleImageView>
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/Google_SignIn_Btn"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="100dp"
         android:layout_width="200dp"
-        android:layout_height="wrap_content">
+        android:layout_height="35dp">
     </com.google.android.gms.common.SignInButton>
 </RelativeLayout>
 </layout>

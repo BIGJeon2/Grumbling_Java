@@ -23,29 +23,34 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:background="@drawable/ic_launcher_foreground"
             android:layout_marginLeft="5dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp">
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:background="@android:color/transparent"
+            android:src="@drawable/app_logo">
         </de.hdodenhof.circleimageview.CircleImageView>
         <TextView
             android:id="@+id/App_Main_User_Name_Tv"
             android:text="User_Name"
-            android:textSize="15dp"
-            android:layout_centerInParent="true"
+            android:textSize="10dp"
+            android:textColor="@color/black"
             android:layout_marginRight="10dp"
             android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </TextView>
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/App_Main_User_Img_Circle_Imv"
-            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginRight="5dp"
             android:layout_toLeftOf="@+id/App_Main_User_Name_Tv"
             android:background="@drawable/ic_launcher_foreground"
-            android:layout_width="50dp"
-            android:layout_height="50dp">
+            android:layout_width="40dp"
+            android:layout_height="40dp">
         </de.hdodenhof.circleimageview.CircleImageView>
     </RelativeLayout>
 

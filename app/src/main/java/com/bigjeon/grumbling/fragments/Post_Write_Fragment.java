@@ -73,7 +73,7 @@ public class Post_Write_Fragment extends DialogFragment {
     private String User_Img;
     private String Posting_Content;
     private String Posting_Grade = Grade_All;
-    private int Posting_Content_Size = 10;
+    private int Posting_Content_Size = 45;
     private int Posting_Content_Color = R.color.black; //미구현
     private int Posting_Content_BackColor = R.color.Transparent_Black; //미구현
     private String Posting_Write_Date;
@@ -232,7 +232,7 @@ public class Post_Write_Fragment extends DialogFragment {
     //작성 완료된 포스트 파이어베이스에 저장
     private void Upload_Post() {
         Posting_Content = binding.DialogPostingContent.getText().toString();
-        Posting_Write_Date = new SimpleDateFormat("yyyMMddhhmmss").format(new Date());
+        Posting_Write_Date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         Post_Title = Posting_Write_Date + User_Uid;
         Post_Data post = new Post_Data(
                 Post_Title,

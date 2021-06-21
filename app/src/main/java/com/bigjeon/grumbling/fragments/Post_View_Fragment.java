@@ -78,7 +78,7 @@ public class Post_View_Fragment extends Fragment {
             }
         });
 
-        binding.PostWritePostStartCircleImgBtn.setOnClickListener(V -> Alert_Post_Write_Dialog());
+        binding.PostWritePostStartCircleImg.setOnClickListener(V -> Alert_Post_Write_Dialog());
         return root;
     }
 

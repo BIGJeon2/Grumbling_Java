@@ -30,6 +30,8 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
     private String My_Uid;
     private String My_Name;
     private String My_Img;
+    private String My_Email;
+
     private String Intent_Code;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
         Intent intent = getIntent();
         Intent_Code = intent.getStringExtra("CODE");
         My_Uid = intent.getStringExtra("UID");
+        My_Email = intent.getStringExtra("EMAIL");
         //Cirle_Image_Btn 클릭시 갤러리에서 사진 가져오기
         binding.UserImg.setOnClickListener(v -> Get_Img_From_Gallery());
         //FireSotre에 프로필 저장 / 업데이트
@@ -85,6 +88,7 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
                         public void onSuccess(Uri uri) {
                             My_Img = uri.toString();
                             HashMap<String, Object> My_Profile = new HashMap<>();
+                            My_Profile.put("EMAIL", My_Email);
                             My_Profile.put("UID", My_Uid);
                             My_Profile.put("Name", My_Name);
                             My_Profile.put("Img", My_Img);
@@ -97,10 +101,10 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
                                         public void onSuccess(Void unused) {
                                             SharedPreferences My_Data = getSharedPreferences("My_Data", MODE_PRIVATE);
                                             SharedPreferences.Editor editor = My_Data.edit();
+                                            editor.putString("EMAIL", My_Email);
                                             editor.putString("UID", My_Uid);
                                             editor.putString("NAME", My_Name);
                                             editor.putString("IMG", My_Img);
-                                            editor.putStringSet("FRIENDS", null);
                                             editor.commit();
                                             Go_App_Main();
                                         }
