@@ -148,10 +148,12 @@ public class Google_Login_Activity extends AppCompatActivity {
         Set_Profile_Intent.putExtra("CODE", "FIRST_SET");
         Set_Profile_Intent.putExtra("EMAIL", My_Email);
         startActivity(Set_Profile_Intent);
+        finish();
     }
 
     private void Intent_To_App_Main(){
         Intent Go_Main = new Intent(this, App_Main_Activity.class);
         startActivity(Go_Main);
+        finish();
     }
 }

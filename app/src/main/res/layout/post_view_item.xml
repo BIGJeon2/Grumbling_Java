@@ -2,11 +2,11 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="5dp"
     android:background="@color/white"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="250dp">
+    android:layout_height="300dp">
     <RelativeLayout
         android:id="@+id/Post_View_Content_Container"
         android:layout_weight="7"
@@ -25,25 +25,60 @@
                 android:layout_height="match_parent">
             </ImageView>
         </FrameLayout>
+        <RelativeLayout
+            android:background="@color/Transparent_Black"
+            android:layout_width="match_parent"
+            android:layout_height="35dp">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/Post_View_User_Img"
+                android:src="@mipmap/ic_launcher"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp">
+            </de.hdodenhof.circleimageview.CircleImageView>
+            <TextView
+                android:id="@+id/Post_View_User_Name"
+                android:text="User_Name"
+                android:textSize="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_toRightOf="@+id/Post_View_User_Img"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+            <TextView
+                android:id="@+id/Posting_Favorite_Count_TV"
+                android:text="000"
+                android:textSize="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp">
+            </TextView>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/Post_View_Favorite_Circle_CIV"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@+id/Posting_Favorite_Count_TV"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/ic_baseline_favorite_border_24">
+            </de.hdodenhof.circleimageview.CircleImageView>
+        </RelativeLayout>
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/Post_View_User_Img"
-            android:src="@mipmap/ic_launcher"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp">
+            android:id="@+id/Post_ContextMenu_CIV"
+            android:src="@drawable/ic_baseline_delete_forever_24"
+            android:visibility="gone"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp">
         </de.hdodenhof.circleimageview.CircleImageView>
-        <TextView
-            android:id="@+id/Post_View_User_Name"
-            android:text="User_Name"
-            android:textSize="10dp"
-            android:textColor="@color/black"
-            android:layout_toRightOf="@+id/Post_View_User_Img"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </TextView>
         <TextView
             android:id="@+id/Post_View_Content"
             android:text="나는 가끔 눈물을 흘린다."
@@ -53,40 +88,11 @@
             android:layout_height="wrap_content">
         </TextView>
         <TextView
-            android:id="@+id/Posting_Favorite_Count_TV"
-            android:text="000"
-            android:textSize="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp">
-        </TextView>
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/Post_View_Favorite_Circle_CIV"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_toLeftOf="@+id/Posting_Favorite_Count_TV"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/ic_baseline_favorite_border_24">
-        </de.hdodenhof.circleimageview.CircleImageView>
-
-            <ImageButton
-                android:id="@+id/Post_View_Comment_Image_Btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/ic_baseline_eco_24"></ImageButton>
-        <TextView
             android:id="@+id/Post_View_WriteDate"
             android:text="Write_Date"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">

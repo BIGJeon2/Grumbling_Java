@@ -1,22 +1,29 @@
 package com.bigjeon.grumbling.adapter;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.text.Layout;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bigjeon.grumbling.App_Main_Activity;
 import com.bigjeon.grumbling.data.Post_Data;
 import com.bumptech.glide.Glide;
 import com.example.grumbling.R;
@@ -80,6 +87,9 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
                 onFavoriteClicked(database.getReference().child("Posts").child(data.getPost_Title()));
             }
         });
+        if (mAuth.getCurrentUser().getUid().equals(data.getUser_Uid())){
+            holder.Post_ContextMenu_CIV.setVisibility(View.VISIBLE);
+        }
     }
 
     private String DateChange(String date){
@@ -101,15 +111,15 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         return list.size();
     }
 
-    public class Holder extends RecyclerView.ViewHolder{
+    public class Holder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
         TextView User_Name;
         CircleImageView User_Img;
         TextView Post_Content;
         ImageView Post_Background_Img;
         TextView Post_Write_Date;
         CircleImageView Favorite_Btn;
-        ImageButton Go_To_Comment_Btn;
         TextView Favorite_Count;
+        CircleImageView Post_ContextMenu_CIV;
 
         public Holder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -119,9 +129,33 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
             Post_Background_Img = itemView.findViewById(R.id.Post_View_Background);
             Post_Write_Date = itemView.findViewById(R.id.Post_View_WriteDate);
             Favorite_Btn = itemView.findViewById(R.id.Post_View_Favorite_Circle_CIV);
-            Go_To_Comment_Btn = itemView.findViewById(R.id.Post_View_Comment_Image_Btn);
             Favorite_Count = itemView.findViewById(R.id.Posting_Favorite_Count_TV);
+            Post_ContextMenu_CIV = itemView.findViewById(R.id.Post_ContextMenu_CIV);
+            Post_ContextMenu_CIV.setOnCreateContextMenuListener(this);
         }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            MenuItem delete = menu.add(Menu.NONE, R.id.Delete_Post, 1, "삭제하기");
+            MenuItem change = menu.add(Menu.NONE, R.id.Change_Post, 2, "수정하기");
+            delete.setOnMenuItemClickListener(onMenuItemClickListener);
+            change.setOnMenuItemClickListener(onMenuItemClickListener);
+        }
+        
+        private final MenuItem.OnMenuItemClickListener onMenuItemClickListener = new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.Delete_Post:
+                        Toast.makeText(itemView.getContext(), "삭제", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.Change_Post:
+                        Toast.makeText(itemView.getContext(), "수정", Toast.LENGTH_SHORT).show();
+                        return true;
+                }
+                return false;
+            }
+        };
     }
     private void onFavoriteClicked(DatabaseReference databaseReference){
         databaseReference.runTransaction(new Transaction.Handler() {

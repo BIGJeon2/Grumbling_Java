@@ -3,10 +3,15 @@ package com.bigjeon.grumbling;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.bigjeon.grumbling.data.User_Profile;
@@ -74,6 +79,15 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
         if(My_Name.length() < 2){
             Toast.makeText(this, "사용하실 이름을 모두 작성해 주세요(2글자 이상)", Toast.LENGTH_SHORT).show();
         }else{
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    final ProgressDialog dialog = new ProgressDialog(Set_User_Profile_Activity.this);
+                    dialog.setIndeterminate(true);
+                    dialog.setMessage("잠시만 기다려 주세요");
+                    dialog.show();
+                }
+            }, 300);
             SimpleDateFormat date = new SimpleDateFormat("yyyMMddhhmmss");
             String File_Name = date.format(new Date()) + ".png";
             FirebaseStorage FireStorage = FirebaseStorage.getInstance();
@@ -119,5 +133,6 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
     private void Go_App_Main(){
         Intent Go_App_Main = new Intent(this, App_Main_Activity.class);
         startActivity(Go_App_Main);
+        finish();
     }
 }

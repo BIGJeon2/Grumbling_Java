@@ -12,7 +12,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.bigjeon.grumbling.Set_User_Profile_Activity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true">
+        <TextView
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="-프로필 설정-"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:background="@drawable/app_logo"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </de.hdodenhof.circleimageview.CircleImageView>
+    </RelativeLayout>
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/User_Img"
         android:layout_marginTop="200dp"

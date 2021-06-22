@@ -56,6 +56,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.TimeZone;
 
 public class Post_Write_Fragment extends DialogFragment {
     private static final String TAG = "My_Post_Check";
@@ -232,7 +233,9 @@ public class Post_Write_Fragment extends DialogFragment {
     //작성 완료된 포스트 파이어베이스에 저장
     private void Upload_Post() {
         Posting_Content = binding.DialogPostingContent.getText().toString();
-        Posting_Write_Date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+        SimpleDateFormat date = new SimpleDateFormat("yyyyMMddhhmmss");
+        date.setTimeZone(TimeZone.getTimeZone("KST"));
+        Posting_Write_Date = date.format(new Date());
         Post_Title = Posting_Write_Date + User_Uid;
         Post_Data post = new Post_Data(
                 Post_Title,

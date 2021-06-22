@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
+import com.bigjeon.grumbling.fragments.My_Post_View_Fragment;
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
 import com.bigjeon.grumbling.fragments.Post_Write_Fragment;
 import com.bumptech.glide.Glide;
@@ -26,6 +27,7 @@ public class App_Main_Activity extends AppCompatActivity {
     public String My_Img;
     public String My_Name;
     private Post_View_Fragment post_view_fragment = new Post_View_Fragment();
+    private My_Post_View_Fragment my_post_view_fragment = new My_Post_View_Fragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,9 @@ public class App_Main_Activity extends AppCompatActivity {
 
         Set_My_Data();
         Change_Fragment("Post_View");
+
+        binding.AppMainAllPostBtn.setOnClickListener(v -> Change_Fragment("Post_View"));
+        binding.AppMainMyPostListBtn.setOnClickListener(v -> Change_Fragment("My_Post"));
 
     }
 
@@ -56,6 +61,10 @@ public class App_Main_Activity extends AppCompatActivity {
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 break;
+            case "My_Post" :
+                fragmentTransaction.replace(R.id.App_Main_Fragment, my_post_view_fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
         }
     }
 }

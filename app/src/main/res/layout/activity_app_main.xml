@@ -68,8 +68,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="게시글"
+            android:textStyle="bold"
             android:backgroundTint="@color/white"
-            android:text="All_Post"
             android:textColor="@color/black"
             android:textSize="10dp"></Button>
 
@@ -80,16 +81,18 @@
             android:layout_weight="1"
             android:backgroundTint="@color/white"
             android:text="Fired_Post"
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="10dp"></Button>
 
         <Button
-            android:id="@+id/App_Main_Firend_List_Btn"
+            android:id="@+id/App_Main_My_Post_List_Btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/white"
-            android:text="Friend_List"
+            android:text="내가 쓴글"
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="10dp"></Button>
 
@@ -100,6 +103,7 @@
             android:layout_weight="1"
             android:backgroundTint="@color/white"
             android:text="Set"
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="10dp"></Button>
     </LinearLayout>
