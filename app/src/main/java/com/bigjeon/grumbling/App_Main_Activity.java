@@ -1,33 +1,39 @@
 package com.bigjeon.grumbling;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Switch;
 
-import com.bigjeon.grumbling.fragments.My_Post_View_Fragment;
+import com.bigjeon.grumbling.adapter.Fragment_Swipe_Adapter;
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
-import com.bigjeon.grumbling.fragments.Post_Write_Fragment;
-import com.bumptech.glide.Glide;
+import com.bigjeon.grumbling.fragments.TimeLine_Fragment;
 import com.example.grumbling.App_Main_Binding;
 import com.example.grumbling.R;
 import com.squareup.picasso.Picasso;
 
-public class App_Main_Activity extends AppCompatActivity {
-
+public class App_Main_Activity extends AppCompatActivity implements View.OnCreateContextMenuListener{
+    public static Context mcontext;
     App_Main_Binding binding;
     public String My_Uid;
     public String My_Img;
     public String My_Name;
-    private Post_View_Fragment post_view_fragment = new Post_View_Fragment();
-    private My_Post_View_Fragment my_post_view_fragment = new My_Post_View_Fragment();
+    private int page_count = 3;
+    private String Show_Grade = "모든 사용자";
+    private FragmentStateAdapter ViewPager_Adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +42,69 @@ public class App_Main_Activity extends AppCompatActivity {
         binding.setAppMainActivity(this);
 
         Set_My_Data();
-        Change_Fragment("Post_View");
+        mcontext = this;
+        ViewPager_Adapter = new Fragment_Swipe_Adapter(this, page_count);
+        binding.AppMainViewPager2.setAdapter(ViewPager_Adapter);
+        binding.AppMainViewPager2.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+        binding.AppMainViewPager2.setCurrentItem(100);
+        binding.AppMainViewPager2.setOffscreenPageLimit(2);
 
-        binding.AppMainAllPostBtn.setOnClickListener(v -> Change_Fragment("Post_View"));
-        binding.AppMainMyPostListBtn.setOnClickListener(v -> Change_Fragment("My_Post"));
+        binding.AppMainViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                if (positionOffsetPixels == 0){
+                    binding.AppMainViewPager2.setCurrentItem(position);
+                }
+            }
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                Button_Background_Change(position);
+            }
+        });
+        binding.AppMainPostBtn.setOnCreateContextMenuListener(this);
+    }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        MenuItem All_Post = menu.add(Menu.NONE, R.menu.post_view_grade_menu, 1, "모든 게시글");
+        MenuItem My_Post = menu.add(Menu.NONE, R.menu.post_view_grade_menu, 2, "나의 게시글");
+        MenuItem Favorite_Post = menu.add(Menu.NONE, R.menu.post_view_grade_menu, 3, "좋아요 게시글");
+        All_Post.setOnMenuItemClickListener(OnMenuClicked);
+        My_Post.setOnMenuItemClickListener(OnMenuClicked);
+        Favorite_Post.setOnMenuItemClickListener(OnMenuClicked);
+    }
+
+    private final MenuItem.OnMenuItemClickListener OnMenuClicked = new MenuItem.OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            switch (item.getOrder()){
+                case 1 :
+                    Show_Grade = "모든 사용자";
+                    binding.AppMainPostBtn.setText(Show_Grade);
+//                    ((Post_View_Fragment)findFragmentByPosition(1)).Get_Post();
+                    return true;
+                case 2 :
+                    Show_Grade = "내가 쓴글";
+                    binding.AppMainPostBtn.setText(Show_Grade);
+//                    ((Post_View_Fragment)findFragmentByPosition(1)).Get_Post();
+                    return true;
+                case 3 :
+                    Show_Grade = "좋아요";
+                    binding.AppMainPostBtn.setText(Show_Grade);
+//                    ((Post_View_Fragment)findFragmentByPosition(1)).Get_Post();
+                    return true;
+            }
+            return false;
+        }
+    };
+    //미구현(널에러)
+//    public Fragment findFragmentByPosition(int position){
+//        return getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.App_Main_ViewPager2 + ":" + position);
+//    }
+    public String Set_Grade(){
+        return Show_Grade;
     }
 
     private void Set_My_Data(){
@@ -51,20 +115,24 @@ public class App_Main_Activity extends AppCompatActivity {
         Picasso.get().load(My_Img).into(binding.AppMainUserImgCircleImv);
         binding.AppMainUserNameTv.setText(My_Name);
     }
-    //프레그먼트 전환
-    private void Change_Fragment(String FRAGMENT_ID){
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        switch (FRAGMENT_ID){
-            case "Post_View" :
-                fragmentTransaction.replace(R.id.App_Main_Fragment, post_view_fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+
+    private void Button_Background_Change(int position){
+        switch (position % page_count){
+            case 0 :
+                binding.AppMainTimeLineBtn.setTextColor(getColor(R.color.purple_200));
+                binding.AppMainPostBtn.setTextColor(getColor(R.color.Gray));
+                binding.AppMainSettingBtn.setTextColor(getColor(R.color.Gray));
                 break;
-            case "My_Post" :
-                fragmentTransaction.replace(R.id.App_Main_Fragment, my_post_view_fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+            case 1 :
+                binding.AppMainTimeLineBtn.setTextColor(getColor(R.color.Gray));
+                binding.AppMainPostBtn.setTextColor(getColor(R.color.purple_200));
+                binding.AppMainSettingBtn.setTextColor(getColor(R.color.Gray));
+                break;
+            case 2 :
+                binding.AppMainTimeLineBtn.setTextColor(getColor(R.color.Gray));
+                binding.AppMainPostBtn.setTextColor(getColor(R.color.Gray));
+                binding.AppMainSettingBtn.setTextColor(getColor(R.color.purple_200));
+                break;
         }
     }
 }

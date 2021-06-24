@@ -84,6 +84,12 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         holder.Favorite_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+            }
+        });
+        holder.Favorite_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 onFavoriteClicked(database.getReference().child("Posts").child(data.getPost_Title()));
             }
         });

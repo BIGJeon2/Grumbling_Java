@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/All_Post"
+        android:title="모든 사용자">
+    </item>
+    <item
+        android:id="@+id/My_Post"
+        android:title="내가 쓴 글">
+    </item>
+    <item
+        android:id="@+id/Favorite_Post"
+        android:title="좋아요 한 글">
+    </item>
+</menu>
