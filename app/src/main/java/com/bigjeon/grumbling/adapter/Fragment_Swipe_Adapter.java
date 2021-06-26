@@ -13,31 +13,22 @@ import org.jetbrains.annotations.NotNull;
 
 public class Fragment_Swipe_Adapter extends FragmentStateAdapter {
 
-    public int mCount;
-
-    public Fragment_Swipe_Adapter(@NonNull @NotNull FragmentActivity fa, int count) {
-        super(fa);
-        this.mCount = count;
+    public Fragment_Swipe_Adapter(@NonNull @NotNull FragmentActivity fragmentActivity) {
+        super(fragmentActivity);
     }
-
 
     @NonNull
     @NotNull
     @Override
     public Fragment createFragment(int position) {
-        int index = getRealPosition(position);
 
-        if (index == 0) return new TimeLine_Fragment();
-        else if (index == 1) return new Post_View_Fragment();
+        if (position == 0) return new TimeLine_Fragment();
+        else if (position == 1) return new Post_View_Fragment();
         else return new Setting_Fragment();
-    }
-
-    private int getRealPosition(int position){
-        return position % mCount;
     }
 
     @Override
     public int getItemCount() {
-        return 200;
+        return 3;
     }
 }

@@ -76,7 +76,7 @@ public class Post_Write_Fragment extends DialogFragment {
     private String Posting_Grade = Grade_All;
     private int Posting_Content_Size = 45;
     private int Posting_Content_Color = R.color.black; //미구현
-    private int Posting_Content_BackColor = R.color.Transparent_Black; //미구현
+    private int Posting_Content_BackColor = R.color.Transparent_Black40; //미구현
     private String Posting_Write_Date;
     private String Background_Img_String = null; //미구현
     private Uri Background_Img_Uri;

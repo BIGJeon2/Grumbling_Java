@@ -16,38 +16,36 @@
     <RelativeLayout
         android:id="@+id/Title"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:orientation="horizontal"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_marginLeft="5dp"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_centerInParent="true"
             android:layout_alignParentLeft="true"
             android:background="@android:color/transparent"
             android:src="@drawable/app_logo">
         </de.hdodenhof.circleimageview.CircleImageView>
-        <TextView
-            android:id="@+id/App_Main_User_Name_Tv"
-            android:text="User_Name"
-            android:textSize="10dp"
-            android:textColor="@color/black"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </TextView>
+
+        <ImageView
+            android:background="@android:color/transparent"
+            android:src="@drawable/grung_title"
+            android:layout_centerInParent="true"
+            android:layout_width="100dp"
+            android:layout_height="40dp">
+        </ImageView>
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/App_Main_User_Img_Circle_Imv"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
             android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/App_Main_User_Name_Tv"
             android:background="@drawable/ic_launcher_foreground"
             android:layout_width="40dp"
             android:layout_height="40dp">
@@ -59,6 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Title">
@@ -66,7 +65,7 @@
         <Button
             android:id="@+id/App_Main_TimeLine_Btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:text="타임 피드"
@@ -78,24 +77,26 @@
         <Button
             android:id="@+id/App_Main_Post_Btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="1"
-            android:text="게시글"
+            android:text="모든 게시글"
             android:textStyle="bold"
             android:background="@android:color/transparent"
-            android:textColor="@color/black"
-            android:textSize="10dp"></Button>
+            android:textColor="@color/purple_200"
+            android:textSize="10dp">
+        </Button>
 
         <Button
             android:id="@+id/App_Main_Setting_Btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:text="설정"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="10dp"></Button>
+            android:textSize="10dp">
+        </Button>
     </LinearLayout>
 
     <RelativeLayout

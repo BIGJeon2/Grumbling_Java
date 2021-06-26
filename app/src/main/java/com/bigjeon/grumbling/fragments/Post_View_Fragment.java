@@ -70,7 +70,7 @@ public class Post_View_Fragment extends Fragment {
         My_Uid = mAuth.getUid();
 
         RecyclerView rcv = binding.PostRecyclerView;
-        adapter = new Post_View_Rcv_Adapter(list);
+        adapter = new Post_View_Rcv_Adapter(getContext(), list);
         LinearLayoutManager lm = new LinearLayoutManager(v.getContext());
         rcv.setLayoutManager(lm);
         rcv.setAdapter(adapter);
@@ -100,14 +100,14 @@ public class Post_View_Fragment extends Fragment {
     public void Get_Post() {
         Get_Content_Grade = ((App_Main_Activity)App_Main_Activity.mcontext).Set_Grade();
 
-        if (Get_Content_Grade.equals("모든 사용자")) {
+        if (Get_Content_Grade.equals("모든 게시글")) {
             DB.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                     list.clear();
                     for (DataSnapshot data : snapshot.getChildren()) {
                         Post_Data post = data.getValue(Post_Data.class);
-                        if (post.getGrade().equals(Get_Content_Grade)) list.add(0, post);
+                        if (post.getGrade().equals("모든 사용자")) list.add(0, post);
                         Log.d(TAG, "Uri = " + post.getPost_Background());
                     }
                     adapter.notifyDataSetChanged();
@@ -118,7 +118,7 @@ public class Post_View_Fragment extends Fragment {
 
                 }
             });
-        }else if (Get_Content_Grade.equals("내가 쓴글")){
+        }else if (Get_Content_Grade.equals("나의 게시글")){
             DB.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -191,6 +191,7 @@ public class Post_View_Fragment extends Fragment {
                     }
                 }
                 adapter.notifyDataSetChanged();
+
             }
 
             @Override

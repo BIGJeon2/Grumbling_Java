@@ -2,39 +2,42 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/Gray"
-    android:layout_marginBottom="2dp"
+    android:background="@color/white"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="300dp">
+    android:layout_height="350dp">
     <RelativeLayout
         android:id="@+id/Post_View_Content_Container"
-        android:layout_weight="7"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <FrameLayout
+            android:layout_below="@id/Post_View_Title_Container"
+            android:layout_above="@+id/Post_View_Bottom_Container"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
                 android:id="@+id/Post_View_Background"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </ImageView>
         </FrameLayout>
         <RelativeLayout
-            android:background="@color/Transparent_Black"
+            android:id="@+id/Post_View_Title_Container"
+            android:background="@color/Transparent_White"
             android:layout_width="match_parent"
-            android:layout_height="35dp">
+            android:layout_height="wrap_content">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Post_View_User_Img"
                 android:src="@mipmap/ic_launcher"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                android:layout_alignParentLeft="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp">
             </de.hdodenhof.circleimageview.CircleImageView>
@@ -44,6 +47,7 @@
                 android:textSize="10dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
+                android:layout_centerInParent="true"
                 android:layout_toRightOf="@+id/Post_View_User_Img"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="5dp"
@@ -51,35 +55,15 @@
                 android:layout_height="wrap_content">
             </TextView>
             <TextView
-                android:id="@+id/Posting_Favorite_Count_TV"
-                android:text="000"
-                android:textSize="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:id="@+id/Post_View_WriteDate"
+                android:text="Write_Date"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp">
-            </TextView>
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/Post_View_Favorite_Circle_CIV"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
                 android:layout_centerInParent="true"
-                android:layout_toLeftOf="@+id/Posting_Favorite_Count_TV"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/ic_baseline_favorite_border_24">
-            </de.hdodenhof.circleimageview.CircleImageView>
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
         </RelativeLayout>
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/Post_ContextMenu_CIV"
-            android:src="@drawable/ic_baseline_delete_forever_24"
-            android:visibility="gone"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"
-            android:layout_width="30dp"
-            android:layout_height="30dp">
-        </de.hdodenhof.circleimageview.CircleImageView>
         <TextView
             android:id="@+id/Post_View_Content"
             android:text="나는 가끔 눈물을 흘린다."
@@ -88,15 +72,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </TextView>
-        <TextView
-            android:id="@+id/Post_View_WriteDate"
-            android:text="Write_Date"
-            android:layout_alignParentRight="true"
+        <RelativeLayout
+            android:id="@+id/Post_View_Bottom_Container"
             android:layout_alignParentBottom="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </TextView>
+            android:background="@color/Transparent_Black70"
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+            <TextView
+                android:id="@+id/Posting_Favorite_Count_TV"
+                android:text="000"
+                android:textSize="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp">
+            </TextView>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/Post_View_Favorite_Circle_CIV"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@+id/Posting_Favorite_Count_TV"
+                android:background="@drawable/ic_baseline_favorite_border_24">
+            </de.hdodenhof.circleimageview.CircleImageView>
+        </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>

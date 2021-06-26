@@ -1,14 +1,116 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View">
+        </import>
+        <variable
+            name="post_setting_binding"
+            type="com.bigjeon.grumbling.fragments.Setting_Fragment" />
+    </data>
+<FrameLayout
+    android:background="@color/white"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.bigjeon.grumbling.fragments.Setting_Fragment">
 
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="35dp"
-        android:text="설정 프레그먼트" />
-
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <RelativeLayout
+                android:layout_weight="5"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/Setting_Fragment_My_Profile_Img_Civ"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/ic_launcher_background"
+                android:layout_marginLeft="10dp"
+                android:layout_width="100dp"
+                android:layout_height="match_parent">
+            </de.hdodenhof.circleimageview.CircleImageView>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_toRightOf="@+id/Setting_Fragment_My_Profile_Img_Civ"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/Setting_Fragment_My_Name_Tv"
+                    android:text="Big_Jeon"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:layout_toRightOf="@+id/Setting_Fragment_My_Profile_Img_Civ"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/Setting_Fragment_My_Uid_Tv"
+                    android:text="#UID"
+                    android:gravity="center"
+                    android:layout_below="@+id/Setting_Fragment_My_Name_Tv"
+                    android:layout_toRightOf="@+id/Setting_Fragment_My_Profile_Img_Civ"
+                    android:textSize="15dp"
+                    android:textColor="@color/Transparent_Black40"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </TextView>
+                </LinearLayout>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_weight="2"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <Button
+                    android:id="@+id/Setting_Fragment_Unregister_Btn"
+                    android:layout_weight="1"
+                    android:text="계정 탈퇴"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </Button>
+                <Button
+                    android:id="@+id/Setting_Fragment_Change_Profile_Btn"
+                    android:layout_weight="1"
+                    android:text="프로필 수정"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </Button>
+                <Button
+                    android:id="@+id/Setting_Fragment_Sign_Out_Btn"
+                    android:layout_weight="1"
+                    android:text="로그아웃"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </Button>
+            </LinearLayout>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_weight="9"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Setting_Fragmnet_My_Posts_RCV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/post_view_item">
+            </androidx.recyclerview.widget.RecyclerView>
+        </RelativeLayout>
+    </LinearLayout>
 </FrameLayout>
+</layout>

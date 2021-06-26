@@ -20,6 +20,7 @@ import android.widget.Switch;
 
 import com.bigjeon.grumbling.adapter.Fragment_Swipe_Adapter;
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
+import com.bigjeon.grumbling.fragments.Setting_Fragment;
 import com.bigjeon.grumbling.fragments.TimeLine_Fragment;
 import com.example.grumbling.App_Main_Binding;
 import com.example.grumbling.R;
@@ -31,8 +32,8 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
     public String My_Uid;
     public String My_Img;
     public String My_Name;
-    private int page_count = 3;
-    private String Show_Grade = "모든 사용자";
+    private String Show_Grade = "모든 게시글";
+    private Post_View_Fragment frag = new Post_View_Fragment();
     private FragmentStateAdapter ViewPager_Adapter;
 
     @Override
@@ -41,13 +42,14 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         binding = DataBindingUtil.setContentView(this, R.layout.activity_app_main);
         binding.setAppMainActivity(this);
 
-        Set_My_Data();
         mcontext = this;
-        ViewPager_Adapter = new Fragment_Swipe_Adapter(this, page_count);
+        Set_My_Data();
+
+        ViewPager_Adapter = new Fragment_Swipe_Adapter(this);
         binding.AppMainViewPager2.setAdapter(ViewPager_Adapter);
         binding.AppMainViewPager2.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-        binding.AppMainViewPager2.setCurrentItem(100);
-        binding.AppMainViewPager2.setOffscreenPageLimit(2);
+        binding.AppMainViewPager2.setCurrentItem(1, false);
+        binding.AppMainViewPager2.setOffscreenPageLimit(1);
 
         binding.AppMainViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -63,6 +65,7 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
                 Button_Background_Change(position);
             }
         });
+
         binding.AppMainPostBtn.setOnCreateContextMenuListener(this);
     }
 
@@ -81,28 +84,28 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getOrder()){
                 case 1 :
-                    Show_Grade = "모든 사용자";
+                    Show_Grade = "모든 게시글";
                     binding.AppMainPostBtn.setText(Show_Grade);
-//                    ((Post_View_Fragment)findFragmentByPosition(1)).Get_Post();
+                    //((Post_View_Fragment)getSupportFragmentManager().findFragmentById(R.id.App_Main_Fragment_FrameLayout)).Get_Post(Show_Grade);
                     return true;
                 case 2 :
-                    Show_Grade = "내가 쓴글";
+                    Show_Grade = "나의 게시글";
                     binding.AppMainPostBtn.setText(Show_Grade);
-//                    ((Post_View_Fragment)findFragmentByPosition(1)).Get_Post();
+                    //((Post_View_Fragment)findFragmentByPosition(1)).Get_Post(Show_Grade);
                     return true;
                 case 3 :
-                    Show_Grade = "좋아요";
+                    Show_Grade = "좋아요 게시글";
                     binding.AppMainPostBtn.setText(Show_Grade);
-//                    ((Post_View_Fragment)findFragmentByPosition(1)).Get_Post();
+                    //((Post_View_Fragment)findFragmentByPosition(1)).Get_Post(Show_Grade);
                     return true;
             }
             return false;
         }
     };
     //미구현(널에러)
-//    public Fragment findFragmentByPosition(int position){
-//        return getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.App_Main_ViewPager2 + ":" + position);
-//    }
+    private Fragment findFragmentByPosition(int position){
+    return getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.App_Main_ViewPager2 + ":" + ViewPager_Adapter.getItemId(position));
+    }
     public String Set_Grade(){
         return Show_Grade;
     }
@@ -113,11 +116,10 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         My_Name = My_Data.getString("NAME", null);
         My_Img = My_Data.getString("IMG", null);
         Picasso.get().load(My_Img).into(binding.AppMainUserImgCircleImv);
-        binding.AppMainUserNameTv.setText(My_Name);
     }
 
     private void Button_Background_Change(int position){
-        switch (position % page_count){
+        switch (position){
             case 0 :
                 binding.AppMainTimeLineBtn.setTextColor(getColor(R.color.purple_200));
                 binding.AppMainPostBtn.setTextColor(getColor(R.color.Gray));

@@ -121,6 +121,7 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
                                             editor.putString("IMG", My_Img);
                                             editor.commit();
                                             Go_App_Main();
+                                            finish();
                                         }
                                     });
                         }

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View">
+        </import>
+        <variable
+            name="select_post_view"
+            type="com.bigjeon.grumbling.Show_Selected_Post_Activity" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bigjeon.grumbling.Show_Selected_Post_Activity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/Selected_Post_Content_Container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/Selected_Post_Bottom_Container"
+                android:layout_below="@id/Selected_Post_Title_Container">
+
+                <ImageView
+                    android:id="@+id/Selected_Post_Background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"></ImageView>
+            </FrameLayout>
+
+            <RelativeLayout
+                android:id="@+id/Selected_Post_Title_Container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/Transparent_White">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/Selected_Post_User_Img"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@mipmap/ic_launcher"></de.hdodenhof.circleimageview.CircleImageView>
+
+                <TextView
+                    android:id="@+id/Selected_Post_User_Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@+id/Selected_Post_User_Img"
+                    android:text="User_Name"
+                    android:textColor="@color/black"
+                    android:textSize="10dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/Selected_Post_WriteDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:text="Write_Date"></TextView>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/Selected_Post_Content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="#50000000"
+                android:text="나는 가끔 눈물을 흘린다."></TextView>
+
+            <RelativeLayout
+                android:id="@+id/Selected_Post_Bottom_Container"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/Transparent_Black70">
+
+                <TextView
+                    android:id="@+id/Selected_Post_Favorite_Count_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:text="000"
+                    android:textSize="10dp"></TextView>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/Selected_Post_Favorite_Circle_CIV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toLeftOf="@+id/Selected_Post_Favorite_Count_TV"
+                    android:background="@drawable/ic_baseline_favorite_border_24"></de.hdodenhof.circleimageview.CircleImageView>
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
