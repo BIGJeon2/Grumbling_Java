@@ -54,7 +54,7 @@ public class Post_View_Fragment extends Fragment {
     private FirebaseAuth mAuth;
     private DatabaseReference DB;
     private Post_View_Rcv_Adapter adapter;
-    private String Get_Content_Grade;
+    private String Get_Content_Grade = "모든 게시글";
     ArrayList<Post_Data> list = new ArrayList<>();
 
     @Override
@@ -67,7 +67,7 @@ public class Post_View_Fragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         DB = FirebaseDatabase.getInstance().getReference("Posts");
 
-        My_Uid = mAuth.getUid();
+        My_Uid = mAuth.getCurrentUser().getUid();
 
         RecyclerView rcv = binding.PostRecyclerView;
         adapter = new Post_View_Rcv_Adapter(getContext(), list);
@@ -98,111 +98,7 @@ public class Post_View_Fragment extends Fragment {
     }
 
     public void Get_Post() {
-        Get_Content_Grade = ((App_Main_Activity)App_Main_Activity.mcontext).Set_Grade();
-
-        if (Get_Content_Grade.equals("모든 게시글")) {
-            DB.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                    list.clear();
-                    for (DataSnapshot data : snapshot.getChildren()) {
-                        Post_Data post = data.getValue(Post_Data.class);
-                        if (post.getGrade().equals("모든 사용자")) list.add(0, post);
-                        Log.d(TAG, "Uri = " + post.getPost_Background());
-                    }
-                    adapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                }
-            });
-        }else if (Get_Content_Grade.equals("나의 게시글")){
-            DB.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                    list.clear();
-                    for (DataSnapshot data : snapshot.getChildren()) {
-                        Post_Data post = data.getValue(Post_Data.class);
-                        if (post.getUser_Uid().equals(My_Uid)) list.add(0, post);
-                        Log.d(TAG, "Uri = " + post.getPost_Background());
-                    }
-                    adapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                }
-            });
-        }else{
-            DB.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                    list.clear();
-                    for (DataSnapshot data : snapshot.getChildren()) {
-                        Post_Data post = data.getValue(Post_Data.class);
-                        if (post.getFavorite().containsKey(My_Uid)) list.add(0, post);
-                        Log.d(TAG, "Uri = " + post.getPost_Background());
-                    }
-                    adapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                }
-            });
-        }
-
-        DB.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-                Log.d(TAG, "@@@@@@@@@@@@@" + snapshot.getValue().toString());
-                Post_Data post = snapshot.getValue(Post_Data.class);
-                for (int i = 0; i < list.size(); i++){
-                    if (list.get(i).getPost_Title().equals(post.getPost_Title())){
-                        list.set(i, post);
-                    }
-                }
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-                Log.d(TAG, "@@@@@@@@@@@@@" + snapshot.getValue().toString());
-                Post_Data post = snapshot.getValue(Post_Data.class);
-                for (int i = 0; i < list.size(); i++){
-                    if (list.get(i).getPost_Title().equals(post.getPost_Title())){
-                        list.set(i, post);
-                    }
-                }
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
-                Log.d(TAG, "@@@@@@@@@@@@@" + snapshot.getValue().toString());
-                Post_Data post = snapshot.getValue(Post_Data.class);
-                for (int i = 0; i < list.size(); i++){
-                    if (list.get(i).getPost_Title().equals(post.getPost_Title())){
-                        list.set(i, post);
-                    }
-                }
-                adapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
+        adapter.Get_Post(Get_Content_Grade);
+        adapter.notifyDataSetChanged();
     }
 }

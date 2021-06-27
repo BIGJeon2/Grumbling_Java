@@ -89,8 +89,8 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
                 }
             }, 300);
             SimpleDateFormat date = new SimpleDateFormat("yyyMMddhhmmss");
-            String File_Name = date.format(new Date()) + ".png";
             FirebaseStorage FireStorage = FirebaseStorage.getInstance();
+            String File_Name = date.format(new Date()) + ".png";
             final StorageReference Img_Ref =FireStorage.getReference("Profile_Images/" + File_Name);
             //스토리지에 파일을 저장했으니 바로 경로 가져옴
             UploadTask uploadTask = Img_Ref.putFile(Img_Uri);

@@ -15,7 +15,6 @@
         app:layout_constraintTop_toTopOf="parent">
         <FrameLayout
             android:layout_below="@id/Post_View_Title_Container"
-            android:layout_above="@+id/Post_View_Bottom_Container"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
@@ -75,9 +74,9 @@
         <RelativeLayout
             android:id="@+id/Post_View_Bottom_Container"
             android:layout_alignParentBottom="true"
-            android:background="@color/Transparent_Black70"
+            android:background="@drawable/gradient_transparentblack_to_blak"
             android:layout_width="match_parent"
-            android:layout_height="30dp">
+            android:layout_height="40dp">
             <TextView
                 android:id="@+id/Posting_Favorite_Count_TV"
                 android:text="000"

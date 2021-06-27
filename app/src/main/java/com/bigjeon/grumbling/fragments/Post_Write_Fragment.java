@@ -174,7 +174,7 @@ public class Post_Write_Fragment extends DialogFragment {
 
     //App_Main_Activity에서 넘겨준 유저 정보 가져옴
     private void Get_User_Profile() {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("My_Data", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("My_Data", Context.MODE_PRIVATE);
         User_Uid = sharedPreferences.getString("UID", null);
         User_Name = sharedPreferences.getString("NAME", null);
         User_Img = sharedPreferences.getString("IMG", null);

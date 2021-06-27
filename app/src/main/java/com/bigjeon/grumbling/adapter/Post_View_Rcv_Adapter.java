@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.text.Layout;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -32,12 +33,14 @@ import com.bumptech.glide.Glide;
 import com.example.grumbling.App_Main_Binding;
 import com.example.grumbling.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
@@ -53,8 +56,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Adapter.Holder>{
     private Context mContext;
     ArrayList<Post_Data> list;
+
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference DB = FirebaseDatabase.getInstance().getReference("Posts");
     public Post_View_Rcv_Adapter(Context context, ArrayList<Post_Data> list){
         this.mContext = context;
         this.list = list;
@@ -169,6 +174,108 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
 
             @Override
             public void onComplete(@Nullable @org.jetbrains.annotations.Nullable DatabaseError error, boolean committed, @Nullable @org.jetbrains.annotations.Nullable DataSnapshot currentData) {
+
+            }
+        });
+    }
+
+    public void Get_Post(String str){
+        if (str.equals("모든 게시글")) {
+            DB.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    list.clear();
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        Post_Data post = data.getValue(Post_Data.class);
+                        if (post.getGrade().equals("모든 사용자")) list.add(0, post);
+                    }
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+        }else if (str.equals("나의 게시글")){
+            DB.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    list.clear();
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        Post_Data post = data.getValue(Post_Data.class);
+                        if (post.getUser_Uid().equals(mAuth.getCurrentUser().getUid())){
+                            list.add(0, post);
+                        }
+                    }
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+        }else{
+            DB.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    list.clear();
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        Post_Data post = data.getValue(Post_Data.class);
+                        if (post.getFavorite().containsKey(mAuth.getCurrentUser().getUid())) list.add(0, post);
+                    }
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+        }
+
+        DB.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+                Post_Data post = snapshot.getValue(Post_Data.class);
+                for (int i = 0; i < list.size(); i++){
+                    if (list.get(i).getPost_Title().equals(post.getPost_Title())){
+                        list.set(i, post);
+                    }
+                }
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+                Post_Data post = snapshot.getValue(Post_Data.class);
+                for (int i = 0; i < list.size(); i++){
+                    if (list.get(i).getPost_Title().equals(post.getPost_Title())){
+                        list.set(i, post);
+                    }
+                }
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
+                Post_Data post = snapshot.getValue(Post_Data.class);
+                for (int i = 0; i < list.size(); i++){
+                    if (list.get(i).getPost_Title().equals(post.getPost_Title())){
+                        list.set(i, post);
+                    }
+                }
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
             }
         });

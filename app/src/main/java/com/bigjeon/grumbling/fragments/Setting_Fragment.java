@@ -99,21 +99,7 @@ public class Setting_Fragment extends Fragment {
     }
 
     private void Get_My_Posts() {
-        DB.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                list.clear();
-                for (DataSnapshot data : snapshot.getChildren()) {
-                    Post_Data post = data.getValue(Post_Data.class);
-                    if (post.getUser_Uid().equals(My_Uid)) list.add(0, post);
-                }
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
+        adapter.Get_Post("나의 게시글");
+        adapter.notifyDataSetChanged();
     }
 }
