@@ -34,6 +34,7 @@ import android.widget.Toast;
 
 import com.bigjeon.grumbling.adapter.DB_Posting_Bacground_GIF_Adapter;
 import com.bigjeon.grumbling.adapter.Gif_OnClikListener;
+import com.bigjeon.grumbling.adapter.Post_View_Rcv_Adapter;
 import com.bigjeon.grumbling.data.DB_Posting_Background_GIF;
 import com.bigjeon.grumbling.data.Post_Data;
 import com.bumptech.glide.Glide;
@@ -68,7 +69,6 @@ public class Post_Write_Fragment extends DialogFragment {
     private String Grade_Friends = "친구 공개";
     private String Grade_Secret = "비공개";
     private String Post_Title;
-    private Context context;
     private String User_Name;
     private String User_Uid;
     private String User_Img;

@@ -10,6 +10,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -32,6 +33,7 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
     public String My_Uid;
     public String My_Img;
     public String My_Name;
+    public String My_Email;
     private String Show_Grade = "모든 게시글";
     private Post_View_Fragment frag = new Post_View_Fragment();
     private FragmentStateAdapter ViewPager_Adapter;
@@ -66,7 +68,17 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
             }
         });
 
+        binding.AppMainUserImgCircleImv.setOnClickListener( v -> Go_Profile_Set_Act());
+
         binding.AppMainPostBtn.setOnCreateContextMenuListener(this);
+    }
+
+    private void Go_Profile_Set_Act() {
+        Intent Set_Profile_Intent = new Intent(this, Set_User_Profile_Activity.class);
+        Set_Profile_Intent.putExtra("UID", My_Uid);
+        Set_Profile_Intent.putExtra("CODE", "CHANGE_SET");
+        Set_Profile_Intent.putExtra("EMAIL", My_Email);
+        startActivity(Set_Profile_Intent);
     }
 
     @Override
@@ -115,6 +127,7 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         My_Uid = My_Data.getString("UID", null);
         My_Name = My_Data.getString("NAME", null);
         My_Img = My_Data.getString("IMG", null);
+        My_Email = My_Data.getString("EMAIL", null);
         Picasso.get().load(My_Img).into(binding.AppMainUserImgCircleImv);
     }
 

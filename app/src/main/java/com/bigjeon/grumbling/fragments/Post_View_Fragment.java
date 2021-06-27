@@ -47,7 +47,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class Post_View_Fragment extends Fragment {
-    private static final String TAG = "My_Check";
     public static Context mcontext;
     private String My_Uid;
     private FragmentPostViewBinding binding;
@@ -70,7 +69,7 @@ public class Post_View_Fragment extends Fragment {
         My_Uid = mAuth.getCurrentUser().getUid();
 
         RecyclerView rcv = binding.PostRecyclerView;
-        adapter = new Post_View_Rcv_Adapter(getContext(), list);
+        adapter = new Post_View_Rcv_Adapter(getContext(), list, Get_Content_Grade);
         LinearLayoutManager lm = new LinearLayoutManager(v.getContext());
         rcv.setLayoutManager(lm);
         rcv.setAdapter(adapter);
@@ -98,7 +97,8 @@ public class Post_View_Fragment extends Fragment {
     }
 
     public void Get_Post() {
-        adapter.Get_Post(Get_Content_Grade);
+        adapter.Get_Post_Single();
+        adapter.Get_Post_Child_Listener();
         adapter.notifyDataSetChanged();
     }
 }

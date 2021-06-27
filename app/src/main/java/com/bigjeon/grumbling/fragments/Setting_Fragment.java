@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bigjeon.grumbling.Google_Login_Activity;
 import com.bigjeon.grumbling.MainActivity;
+import com.bigjeon.grumbling.Set_User_Profile_Activity;
 import com.bigjeon.grumbling.adapter.Post_View_Rcv_Adapter;
 import com.bigjeon.grumbling.data.Post_Data;
 import com.example.grumbling.R;
@@ -42,11 +43,12 @@ import java.util.ArrayList;
 public class Setting_Fragment extends Fragment {
 
     private FirebaseAuth mAuth;
-    private GoogleSignInClient mgoogleSignInClient;
     private String My_Uid;
     private String My_Name;
     private String My_Img;
+    private String My_Email;
     private DatabaseReference DB;
+    private String Get_Post_Key = "나의 게시글";
     private FragmentSettingBinding binding;
     private Post_View_Rcv_Adapter adapter;
     private ArrayList<Post_Data> list = new ArrayList<>();
@@ -62,7 +64,7 @@ public class Setting_Fragment extends Fragment {
         DB = FirebaseDatabase.getInstance().getReference("Posts");
 
         RecyclerView rcv = binding.SettingFragmnetMyPostsRCV;
-        adapter = new Post_View_Rcv_Adapter(getContext(), list);
+        adapter = new Post_View_Rcv_Adapter(getContext(), list, Get_Post_Key);
         LinearLayoutManager lm = new LinearLayoutManager(root.getContext());
         rcv.setLayoutManager(lm);
         rcv.setAdapter(adapter);
@@ -71,8 +73,16 @@ public class Setting_Fragment extends Fragment {
         Get_My_Posts();
 
         binding.SettingFragmentSignOutBtn.setOnClickListener(v -> Sign_Out());
-
+        binding.SettingFragmentChangeProfileBtn.setOnClickListener(v -> Go_Profile_Set_Act());
         return root;
+    }
+
+    private void Go_Profile_Set_Act() {
+        Intent Set_Profile_Intent = new Intent(getActivity(), Set_User_Profile_Activity.class);
+        Set_Profile_Intent.putExtra("UID", My_Uid);
+        Set_Profile_Intent.putExtra("CODE", "CHANGE_SET");
+        Set_Profile_Intent.putExtra("EMAIL", My_Email);
+        startActivity(Set_Profile_Intent);
     }
 
     private void Sign_Out() {
@@ -93,13 +103,15 @@ public class Setting_Fragment extends Fragment {
         My_Uid = My_Data.getString("UID", null);
         My_Name = My_Data.getString("NAME", null);
         My_Img = My_Data.getString("IMG", null);
+        My_Email = My_Data.getString("EMAIL", null);
         Picasso.get().load(My_Img).into(binding.SettingFragmentMyProfileImgCiv);
         binding.SettingFragmentMyNameTv.setText("이름: " + My_Name);
         binding.SettingFragmentMyUidTv.setText("#ID: " + My_Uid);
     }
 
     private void Get_My_Posts() {
-        adapter.Get_Post("나의 게시글");
+        adapter.Get_Post_Single();
+        adapter.Get_Post_Child_Listener();
         adapter.notifyDataSetChanged();
     }
 }
