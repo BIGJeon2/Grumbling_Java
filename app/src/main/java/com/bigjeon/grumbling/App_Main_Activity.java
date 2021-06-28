@@ -2,10 +2,6 @@ package com.bigjeon.grumbling;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -17,12 +13,9 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Switch;
 
 import com.bigjeon.grumbling.adapter.Fragment_Swipe_Adapter;
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
-import com.bigjeon.grumbling.fragments.Setting_Fragment;
-import com.bigjeon.grumbling.fragments.TimeLine_Fragment;
 import com.example.grumbling.App_Main_Binding;
 import com.example.grumbling.R;
 import com.squareup.picasso.Picasso;
@@ -68,17 +61,15 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
             }
         });
 
-        binding.AppMainUserImgCircleImv.setOnClickListener( v -> Go_Profile_Set_Act());
+        binding.AppMainUserImgCircleImv.setOnClickListener( v -> Go_User_Profile_View_Act());
 
         binding.AppMainPostBtn.setOnCreateContextMenuListener(this);
     }
 
-    private void Go_Profile_Set_Act() {
-        Intent Set_Profile_Intent = new Intent(this, Set_User_Profile_Activity.class);
-        Set_Profile_Intent.putExtra("UID", My_Uid);
-        Set_Profile_Intent.putExtra("CODE", "CHANGE_SET");
-        Set_Profile_Intent.putExtra("EMAIL", My_Email);
-        startActivity(Set_Profile_Intent);
+    private void Go_User_Profile_View_Act() {
+        Intent Go_View_User_Profile_Intent = new Intent(this, User_Profile_View_activity.class);
+        Go_View_User_Profile_Intent.putExtra("UID", My_Uid);
+        startActivity(Go_View_User_Profile_Intent);
     }
 
     @Override
@@ -114,13 +105,6 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
             return false;
         }
     };
-    //미구현(널에러)
-    private Fragment findFragmentByPosition(int position){
-    return getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.App_Main_ViewPager2 + ":" + ViewPager_Adapter.getItemId(position));
-    }
-    public String Set_Grade(){
-        return Show_Grade;
-    }
 
     private void Set_My_Data(){
         SharedPreferences My_Data = getSharedPreferences("My_Data", MODE_PRIVATE);

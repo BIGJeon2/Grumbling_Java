@@ -6,6 +6,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,6 +45,7 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
     private String My_Uid;
     private String My_Name;
     private String My_Img;
+    private String Default_Img = "https://firebasestorage.googleapis.com/v0/b/grumber-9d1b9.appspot.com/o/Profile_Images%2Fuser_profile_default_img.png?alt=media&token=23407f6b-59a9-4148-969a-6434d361af47";
     private String My_Email;
     private Boolean Img_Pick_State = false;
     private String Intent_Code;
@@ -59,6 +61,7 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
         Intent_Code = intent.getStringExtra("CODE");
         My_Uid = intent.getStringExtra("UID");
         My_Email = intent.getStringExtra("EMAIL");
+        My_Img = Default_Img;
 
         if (Intent_Code.equals("CHANGE_SET")){
             SharedPreferences data = getSharedPreferences("My_Data", MODE_PRIVATE);
@@ -70,10 +73,17 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
             binding.UserName.setText(My_Name);
         }
         //Cirle_Image_Btn 클릭시 갤러리에서 사진 가져오기
-        binding.UserImg.setOnClickListener(v -> Get_Img_From_Gallery());
+        binding.SetUserImgFromGalleryBtn.setOnClickListener(v -> Get_Img_From_Gallery());
+        binding.SetUserImgDefaultBtn.setOnClickListener(v -> Set_Defalt_Img());
         //FireSotre에 프로필 저장 / 업데이트
         binding.CompleteBtn.setOnClickListener(v -> Upload_User_Profile());
 
+    }
+
+    private void Set_Defalt_Img() {
+        My_Img = Default_Img;
+        Img_Pick_State = false;
+        Picasso.get().load(R.drawable.user_profile_default_img).into(binding.UserImg);
     }
 
     ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
@@ -81,12 +91,15 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
                 @Override
                 public void onActivityResult(Uri result) {
                         Img_Uri = result;
-                        Picasso.get().load(Img_Uri).into(binding.UserImg);
-                        Img_Pick_State = true;
+                        if (Img_Uri != null){
+                            Picasso.get().load(Img_Uri).into(binding.UserImg);
+                            Img_Pick_State = true;
+                        }
                     }
             });
 
     private void Get_Img_From_Gallery() {
+        Picasso.get().load(My_Img).into(binding.UserImg);
         mGetContent.launch("image/*");
     }
 

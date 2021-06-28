@@ -18,6 +18,8 @@ import com.bigjeon.grumbling.data.Post_Data;
 import com.bumptech.glide.Glide;
 import com.example.grumbling.R;
 import com.example.grumbling.databinding.ActivityShowSelectedPostBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +29,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
@@ -43,8 +48,9 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
     private DatabaseReference DB;
     private FirebaseAuth mAuth;
     private String Post_Title;
-    private String My_Uid;
+    private String My_Email;
     private String My_Name;
+    private String My_Uid;
     private String My_Img;
     private Boolean Favorite_State;
     private int Favorite_Count;
@@ -58,12 +64,12 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
 
         Intent Get_Post_Title = getIntent();
         Post_Title = Get_Post_Title.getStringExtra("TITLE");
-
         mAuth = FirebaseAuth.getInstance();
         DB = FirebaseDatabase.getInstance().getReference("Posts");
 
         Get_Selected_Posts();
-
+        Set_My_Data();
+//        binding.SelectedPostMyUserImgCiv.setOnClickListener(v -> Go_Selected_User_Profile());
         binding.SelectedPostFavoriteCircleCIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,12 +89,10 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
     }
     private void Set_My_Data(){
         SharedPreferences My_Data = getSharedPreferences("My_Data", Context.MODE_PRIVATE);
-        My_Uid = My_Data.getString("UID", null);
+        My_Email = My_Data.getString("EMAIL", null);
         My_Name = My_Data.getString("NAME", null);
         My_Img = My_Data.getString("IMG", null);
-//        Picasso.get().load(My_Img).into(binding.SettingFragmentMyProfileImgCiv);
-//        binding.SettingFragmentMyNameTv.setText("이름: " + My_Name);
-//        binding.SettingFragmentMyUidTv.setText("#ID: " + My_Uid);
+        Picasso.get().load(My_Img).into(binding.SelectedPostMyUserImgCiv);
     }
 
     private void Get_Selected_Posts() {
@@ -154,9 +158,20 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
     }
 
     private void Data_Adjust(Post_Data post){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Users").whereEqualTo("UID", Post.getUser_Uid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()){
+                        Picasso.get().load(document.getString("Img")).into(binding.SelectedPostUserImg);
+                        binding.SelectedPostUserName.setText(document.getString("Name"));
+                        break;
+                    }
+                }
+            }
+        });
         Glide.with(Show_Selected_Post_Activity.this).load(Post.getPost_Background()).into(binding.SelectedPostBackground);
-        Picasso.get().load(Post.getUser_Img()).into(binding.SelectedPostUserImg);
-        binding.SelectedPostUserName.setText(Post.getUser_Name());
         binding.SelectedPostWriteDate.setText(DateChange(Post.getPost_Write_Date()));
         binding.SelectedPostContent.setText(Post.getContent());
         binding.SelectedPostContent.setTextSize(Dimension.DP, Post.getContent_Text_Size());

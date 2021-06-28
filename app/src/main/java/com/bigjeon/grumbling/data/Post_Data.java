@@ -6,8 +6,6 @@ import java.util.HashMap;
 
 public class Post_Data {
     private String Post_Title;
-    private String User_Name;
-    private String User_Img;
     private String User_Uid;
     private String Content;
     private String Grade;
@@ -24,10 +22,8 @@ public class Post_Data {
 
     }
 
-    public Post_Data(String post_Title, String user_Name, String user_Img, String user_Uid, String content, String grade, int content_Text_Size, int content_Text_Color, int content_Back_Color, String post_Write_Date, String post_Background, int favorite_Count, int declared_Count, HashMap<String, Boolean> favorite) {
+    public Post_Data(String post_Title, String user_Uid, String content, String grade, int content_Text_Size, int content_Text_Color, int content_Back_Color, String post_Write_Date, String post_Background, int favorite_Count, int declared_Count, HashMap<String, Boolean> favorite) {
         Post_Title = post_Title;
-        User_Name = user_Name;
-        User_Img = user_Img;
         User_Uid = user_Uid;
         Content = content;
         Grade = grade;
@@ -47,23 +43,6 @@ public class Post_Data {
 
     public void setPost_Title(String post_Title) {
         Post_Title = post_Title;
-    }
-
-
-    public String getUser_Name() {
-        return User_Name;
-    }
-
-    public void setUser_Name(String user_Name) {
-        User_Name = user_Name;
-    }
-
-    public String getUser_Img() {
-        return User_Img;
-    }
-
-    public void setUser_Img(String user_Img) {
-        User_Img = user_Img;
     }
 
     public String getUser_Uid() {

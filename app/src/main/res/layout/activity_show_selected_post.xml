@@ -22,9 +22,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
+            android:layout_weight="7"
             android:id="@+id/Selected_Post_Content_Container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -55,7 +56,8 @@
                     android:layout_centerInParent="true"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    android:src="@mipmap/ic_launcher"></de.hdodenhof.circleimageview.CircleImageView>
+                    android:src="@mipmap/ic_launcher">
+                </de.hdodenhof.circleimageview.CircleImageView>
 
                 <TextView
                     android:id="@+id/Selected_Post_User_Name"
@@ -79,7 +81,6 @@
                     android:layout_marginRight="10dp"
                     android:text="Write_Date"></TextView>
             </RelativeLayout>
-
             <TextView
                 android:id="@+id/Selected_Post_Content"
                 android:layout_width="wrap_content"
@@ -94,24 +95,68 @@
                 android:layout_height="50dp"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/gradient_transparentblack_to_blak">
-
                 <TextView
                     android:id="@+id/Selected_Post_Favorite_Count_TV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="20dp"
                     android:text="000"
-                    android:textSize="10dp"></TextView>
+                    android:textSize="10dp">
+                </TextView>
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Selected_Post_Favorite_Circle_CIV"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
                     android:layout_toLeftOf="@+id/Selected_Post_Favorite_Count_TV"
-                    android:background="@drawable/ic_baseline_favorite_border_24"></de.hdodenhof.circleimageview.CircleImageView>
+                    android:background="@drawable/ic_baseline_favorite_border_24">
+                </de.hdodenhof.circleimageview.CircleImageView>
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:background="@color/black"
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/Selected_Post_My_User_Img_Civ"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10dp"
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="@color/white"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp">
+                </de.hdodenhof.circleimageview.CircleImageView>
+                <EditText
+                    android:id="@+id/Selected_Post_Comment_Et"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:layout_toRightOf="@id/Selected_Post_My_User_Img_Civ"
+                    android:layout_toLeftOf="@id/Selected_Post_Send_Comment_Civ"
+                    android:hint="댓글을 입력하세요...."
+                    android:textSize="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </EditText>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/Selected_Post_Send_Comment_Civ"
+                    android:background="@drawable/ic_baseline_send_24"
+                    android:backgroundTint="@color/white"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp">
+                </de.hdodenhof.circleimageview.CircleImageView>
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>

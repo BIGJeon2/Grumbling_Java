@@ -69,16 +69,17 @@ public class Post_Write_Fragment extends DialogFragment {
     private String Grade_Friends = "친구 공개";
     private String Grade_Secret = "비공개";
     private String Post_Title;
+    private String User_Email;
     private String User_Name;
-    private String User_Uid;
     private String User_Img;
+    private String User_Uid;
     private String Posting_Content;
     private String Posting_Grade = Grade_All;
     private int Posting_Content_Size = 45;
     private int Posting_Content_Color = R.color.black; //미구현
     private int Posting_Content_BackColor = R.color.Transparent_Black40; //미구현
     private String Posting_Write_Date;
-    private String Background_Img_String = null; //미구현
+    private String Background_Img_String = null;
     private Uri Background_Img_Uri;
     private int Favorite_Count = 0;
     private int Declared_Count = 0;
@@ -175,11 +176,11 @@ public class Post_Write_Fragment extends DialogFragment {
     //App_Main_Activity에서 넘겨준 유저 정보 가져옴
     private void Get_User_Profile() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("My_Data", Context.MODE_PRIVATE);
-        User_Uid = sharedPreferences.getString("UID", null);
+        User_Email = sharedPreferences.getString("EMAIL", null);
         User_Name = sharedPreferences.getString("NAME", null);
-        User_Img = sharedPreferences.getString("IMG", null);
+        User_Uid = sharedPreferences.getString("UID", null);
         binding.DialogPostingUserName.setText(User_Name);
-        Picasso.get().load(User_Img).into(binding.DialogPostingUserImg);
+        Picasso.get().load(sharedPreferences.getString("IMG", null)).into(binding.DialogPostingUserImg);
     }
 
     //갤러리 사진 가져오기
@@ -239,16 +240,14 @@ public class Post_Write_Fragment extends DialogFragment {
         Post_Title = Posting_Write_Date + User_Uid;
         Post_Data post = new Post_Data(
                 Post_Title,
-                User_Name,//
-                User_Img,//
-                User_Uid,//
-                Posting_Content,//
-                Posting_Grade,//
-                Posting_Content_Size,//
+                User_Uid,
+                Posting_Content,
+                Posting_Grade,
+                Posting_Content_Size,
                 Posting_Content_Color,
                 Posting_Content_BackColor,
-                Posting_Write_Date,//
-                Background_Img_String,//
+                Posting_Write_Date,
+                Background_Img_String,
                 Favorite_Count,
                 Declared_Count,
                 Favorite

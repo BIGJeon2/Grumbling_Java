@@ -93,11 +93,12 @@
             android:layout_height="30dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:text="설정"
+            android:text="좋아요 게시글"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="10dp">
         </Button>
+
     </LinearLayout>
 
     <RelativeLayout
