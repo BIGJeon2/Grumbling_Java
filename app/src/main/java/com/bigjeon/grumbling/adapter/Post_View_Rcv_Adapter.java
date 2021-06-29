@@ -24,6 +24,7 @@ import android.widget.Toast;
 import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bigjeon.grumbling.App_Main_Activity;
@@ -33,7 +34,6 @@ import com.bigjeon.grumbling.User_Profile_View_activity;
 import com.bigjeon.grumbling.data.Post_Data;
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
 import com.bumptech.glide.Glide;
-import com.example.grumbling.App_Main_Binding;
 import com.example.grumbling.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -91,8 +91,8 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         Post_Data data = list.get(position);
         holder.Post_Content.setText(data.getContent());
         holder.Post_Content.setTextSize(Dimension.DP, data.getContent_Text_Size());
-        holder.Post_Content.setBackgroundColor(data.getContent_Back_Color());
-        holder.Post_Content.setTextColor(data.getContent_Text_Color());
+        holder.Post_Content.setBackgroundColor(ContextCompat.getColor(mContext, data.getContent_Back_Color()));
+        holder.Post_Content.setTextColor(ContextCompat.getColor(mContext, data.getContent_Text_Color()));
         Glide.with(holder.itemView).load(data.getPost_Background()).into(holder.Post_Background_Img);
         holder.Post_Write_Date.setText(DateChange(data.getPost_Write_Date()));
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -143,8 +143,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
     }
 
     private String DateChange(String date){
-        SimpleDateFormat old_format = new SimpleDateFormat("yyyyMMddhhmmss");
-        old_format.setTimeZone(TimeZone.getTimeZone("KST"));
+        SimpleDateFormat old_format = new SimpleDateFormat("yyyyMMddHHmmss");
         SimpleDateFormat new_format = new SimpleDateFormat("yy.MM.dd HH:mm");
         try {
             Date old_date = old_format.parse(date);

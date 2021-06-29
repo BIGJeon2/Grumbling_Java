@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.bigjeon.grumbling.adapter.Fragment_Swipe_Adapter;
+import com.bigjeon.grumbling.adapter.Post_View_Rcv_Adapter;
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
 import com.example.grumbling.App_Main_Binding;
 import com.example.grumbling.R;

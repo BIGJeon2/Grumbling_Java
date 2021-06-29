@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -32,6 +34,8 @@ import android.view.WindowManager;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.bigjeon.grumbling.adapter.Color_Adapter_OnClickListener;
+import com.bigjeon.grumbling.adapter.Color_Select_Rcv_Adapter;
 import com.bigjeon.grumbling.adapter.DB_Posting_Bacground_GIF_Adapter;
 import com.bigjeon.grumbling.adapter.Gif_OnClikListener;
 import com.bigjeon.grumbling.adapter.Post_View_Rcv_Adapter;
@@ -65,6 +69,7 @@ public class Post_Write_Fragment extends DialogFragment {
     //포트팅에 들어갈 데이터 초기값 설정(Default 값)
     private PostWriteFragmentBinding binding;
     private DB_Posting_Bacground_GIF_Adapter adapter;
+    private Color_Select_Rcv_Adapter color_adapter;
     private String Grade_All = "모든 사용자";
     private String Grade_Friends = "친구 공개";
     private String Grade_Secret = "비공개";
@@ -76,8 +81,8 @@ public class Post_Write_Fragment extends DialogFragment {
     private String Posting_Content;
     private String Posting_Grade = Grade_All;
     private int Posting_Content_Size = 45;
-    private int Posting_Content_Color = R.color.black; //미구현
-    private int Posting_Content_BackColor = R.color.Transparent_Black40; //미구현
+    private int Posting_Content_Color = R.color.black;
+    private int Posting_Content_BackColor = R.color.Transparent_Black40;
     private String Posting_Write_Date;
     private String Background_Img_String = null;
     private Uri Background_Img_Uri;
@@ -105,7 +110,9 @@ public class Post_Write_Fragment extends DialogFragment {
 
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         Get_User_Profile();
+
         //글자 크기==============================================
         binding.DialogPostingContentTextSizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -124,6 +131,7 @@ public class Post_Write_Fragment extends DialogFragment {
                 Toast.makeText(getContext(), "현재 글자 크기 : " + Posting_Content_Size, Toast.LENGTH_SHORT).show();
             }
         });
+
         //보안 등급 설정 버튼===========================================
         binding.DialogPostingSetGrade.setOnClickListener(v -> Set_Posting_Grade());
         //백그라운드 이미지 버튼==========================================
@@ -133,13 +141,52 @@ public class Post_Write_Fragment extends DialogFragment {
         //포스팅 완료 버튼==============================================
         binding.DialogPostingCompleteCIV.setOnClickListener(v -> Upload_Post());
 
-
         //백그라운드 이미지 설정 부분
         Get_Gif_In_raw();
+        //텍스트 색 지정
+        Set_Content_Color();
+        //텍스트 배경 색 지정
+        Set_Content_Back_Color();
         binding.DialogPostingBackgroundGallery.setOnClickListener(v -> Get_Img_In_Gallery());
         binding.DialogPostingBackgroundDBRcv.setAdapter(adapter);
 
         return root;
+    }
+
+    private void Set_Content_Back_Color() {
+        color_adapter = new Color_Select_Rcv_Adapter(getContext());
+        color_adapter.Set_Color_List(0);
+        binding.DialogPostingContentTextBackColorRcv.setAdapter(color_adapter);
+        color_adapter.setOnClickListener(new Color_Adapter_OnClickListener() {
+            @Override
+            public void onItemClick(Color_Select_Rcv_Adapter.Holder_Color holder_color, View v, int pos) {
+                Posting_Content_BackColor = color_adapter.Get_Color(pos);
+                binding.DialogPostingContent.setBackgroundColor(ContextCompat.getColor(getContext(), Posting_Content_BackColor));
+            }
+        });
+        LinearLayoutManager lm = new LinearLayoutManager(getContext());
+        lm.setOrientation(RecyclerView.HORIZONTAL);
+        binding.DialogPostingContentTextBackColorRcv.setLayoutManager(lm);
+        binding.DialogPostingContentTextBackColorRcv.setHasFixedSize(true);
+        color_adapter.notifyDataSetChanged();
+    }
+
+    private void Set_Content_Color() {
+        color_adapter = new Color_Select_Rcv_Adapter(getContext());
+        color_adapter.Set_Color_List(0);
+        binding.DialogPostingContentTextColorRcv.setAdapter(color_adapter);
+        color_adapter.setOnClickListener(new Color_Adapter_OnClickListener() {
+            @Override
+            public void onItemClick(Color_Select_Rcv_Adapter.Holder_Color holder_color, View v, int pos) {
+                Posting_Content_Color = color_adapter.Get_Color(pos);
+                binding.DialogPostingContent.setTextColor(ContextCompat.getColor(getContext(), Posting_Content_Color));
+            }
+        });
+        LinearLayoutManager lm = new LinearLayoutManager(getContext());
+        lm.setOrientation(RecyclerView.HORIZONTAL);
+        binding.DialogPostingContentTextColorRcv.setLayoutManager(lm);
+        binding.DialogPostingContentTextColorRcv.setHasFixedSize(true);
+        color_adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -234,9 +281,9 @@ public class Post_Write_Fragment extends DialogFragment {
     //작성 완료된 포스트 파이어베이스에 저장
     private void Upload_Post() {
         Posting_Content = binding.DialogPostingContent.getText().toString();
-        SimpleDateFormat date = new SimpleDateFormat("yyyyMMddhhmmss");
-        date.setTimeZone(TimeZone.getTimeZone("KST"));
-        Posting_Write_Date = date.format(new Date());
+        SimpleDateFormat simpledate = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date = new Date();
+        Posting_Write_Date = simpledate.format(date);
         Post_Title = Posting_Write_Date + User_Uid;
         Post_Data post = new Post_Data(
                 Post_Title,

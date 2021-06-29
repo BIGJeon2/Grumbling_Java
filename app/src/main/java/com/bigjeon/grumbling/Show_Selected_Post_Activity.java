@@ -4,6 +4,7 @@ import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Context;
@@ -175,7 +176,8 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         binding.SelectedPostWriteDate.setText(DateChange(Post.getPost_Write_Date()));
         binding.SelectedPostContent.setText(Post.getContent());
         binding.SelectedPostContent.setTextSize(Dimension.DP, Post.getContent_Text_Size());
-        binding.SelectedPostContent.setBackgroundColor(Post.getContent_Back_Color());
+        binding.SelectedPostContent.setTextColor(ContextCompat.getColor(this, Post.getContent_Text_Color()));
+        binding.SelectedPostContent.setBackgroundColor(ContextCompat.getColor(this, Post.getContent_Back_Color()));
         if (post.getFavorite().containsKey(mAuth.getCurrentUser().getUid())){
             binding.SelectedPostFavoriteCircleCIV.setImageResource(R.drawable.ic_baseline_favorite_24);
             Favorite_Count = Post.getFavorite_Count();
