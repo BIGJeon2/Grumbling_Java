@@ -4,33 +4,11 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp">
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/Chatting_User_Img_CIV"
-        android:src="@drawable/app_logo"
-        android:layout_alignParentRight="true"
-        app:civ_border_width="1dp"
-        app:civ_border_color="@color/black"
-        android:layout_marginRight="5dp"
-        android:layout_width="35dp"
-        android:layout_height="35dp">
-    </de.hdodenhof.circleimageview.CircleImageView>
 
-    <TextView
-        android:id="@+id/Chatting_User_Name_TV"
-        android:textSize="10dp"
-        android:text="유저 이름"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_toLeftOf="@+id/Chatting_User_Img_CIV"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </TextView>
     <RelativeLayout
         android:id="@+id/Chatting_Text_Container"
         android:layout_marginTop="5dp"
-        android:layout_toLeftOf="@+id/Chatting_User_Img_CIV"
-        android:layout_below="@id/Chatting_User_Name_TV"
+        android:layout_alignParentRight="true"
         android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

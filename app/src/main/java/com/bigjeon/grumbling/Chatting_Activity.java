@@ -109,8 +109,6 @@ public class Chatting_Activity extends AppCompatActivity {
 
             binding.ChattingETV.setText("");
 
-//            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-//            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
     }
 

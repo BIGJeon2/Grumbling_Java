@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bigjeon.grumbling.data.Chat_Data;
-import com.bigjeon.grumbling.data.Code;
 import com.example.grumbling.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -60,22 +59,8 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof My_Chat_ViewHolder){
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-            db.collection("Users").whereEqualTo("UID", Chat_Datas.get(position).getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()){
-                        for (QueryDocumentSnapshot document : task.getResult()){
-                            ((My_Chat_ViewHolder)holder).User_Name.setText(document.get("Name").toString());
-                            Picasso.get().load(document.getString("Img")).into(((My_Chat_ViewHolder)holder).User_Img);
-                            ((My_Chat_ViewHolder)holder).Comment.setText(Chat_Datas.get(position).getText());
-                            ((My_Chat_ViewHolder)holder).Write_Date.setText(Chat_Datas.get(position).getWriteDate());
-                            break;
-                        }
-                    }
-                }
-            });
+            ((My_Chat_ViewHolder)holder).Comment.setText(Chat_Datas.get(position).getText());
+            ((My_Chat_ViewHolder)holder).Write_Date.setText(Chat_Datas.get(position).getWriteDate());
         }else{
             ((Other_Chat_ViewHolder)holder).Comment.setText(Chat_Datas.get(position).getText());
             FirebaseFirestore db = FirebaseFirestore.getInstance();
