@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name="com.bigjeon.grumbling.User_Profile_View_activity"></activity>
+        <activity
+            android:name="com.bigjeon.grumbling.Chatting_Activity"
+            android:windowSoftInputMode="adjustNothing">
+        </activity>
+        <activity android:name="com.bigjeon.grumbling.User_Profile_View_activity" />
         <activity android:name="com.bigjeon.grumbling.Show_Selected_Post_Activity" />
         <activity android:name="com.bigjeon.grumbling.Google_Login_Activity" />
         <activity android:name="com.bigjeon.grumbling.Set_User_Profile_Activity" />

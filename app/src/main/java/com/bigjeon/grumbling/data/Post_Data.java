@@ -18,10 +18,6 @@ public class Post_Data {
     private HashMap<String, Boolean> Favorite = new HashMap<>();
     private int Declared_Count;
 
-    public Post_Data(){
-
-    }
-
     public Post_Data(String post_Title, String user_Uid, String content, String grade, int content_Text_Size, int content_Text_Color, int content_Back_Color, String post_Write_Date, String post_Background, int favorite_Count, int declared_Count, HashMap<String, Boolean> favorite) {
         Post_Title = post_Title;
         User_Uid = user_Uid;
@@ -35,6 +31,10 @@ public class Post_Data {
         Favorite_Count = favorite_Count;
         Declared_Count = declared_Count;
         Favorite = favorite;
+    }
+
+    public Post_Data() {
+
     }
 
     public String getPost_Title() {

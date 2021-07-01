@@ -87,13 +87,31 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
                 binding.SelectedPostFavoriteCountTV.setText(Integer.toString(Favorite_Count));
             }
         });
+        //채팅방으로 이동
+        binding.SelectedPostEnterChattingCIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Go_Chat = new Intent(Show_Selected_Post_Activity.this, Chatting_Activity.class);
+                Go_Chat.putExtra("CONTENT", binding.SelectedPostContent.getText().toString());
+                Go_Chat.putExtra("UID", My_Uid);
+                Go_Chat.putExtra("TITLE", Post_Title);
+                Check_Chatting_Room_State();
+                startActivity(Go_Chat);
+            }
+        });
     }
+
+    private void Check_Chatting_Room_State() {
+      //채팅방 상태 확인
+    }
+
     private void Set_My_Data(){
         SharedPreferences My_Data = getSharedPreferences("My_Data", Context.MODE_PRIVATE);
         My_Email = My_Data.getString("EMAIL", null);
         My_Name = My_Data.getString("NAME", null);
+        My_Uid = My_Data.getString("UID", null);
         My_Img = My_Data.getString("IMG", null);
-        Picasso.get().load(My_Img).into(binding.SelectedPostMyUserImgCiv);
+        Picasso.get().load(My_Img).into(binding.SelectedPostUserImg);
     }
 
     private void Get_Selected_Posts() {

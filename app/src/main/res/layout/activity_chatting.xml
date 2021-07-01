@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data class = "Chat_Binding">
+        <variable
+            name="Chat_Activity"
+            type="com.bigjeon.grumbling.Chatting_Activity" />
+    </data>
+<LinearLayout
+    tools:context="com.bigjeon.grumbling.Chatting_Activity"
+    android:background="@color/black"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_weight="11"
+            android:id="@+id/Post_View_Content_Container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/Chatting_Post_Content_TV"
+                android:text="포스팅 내용"
+                android:textSize="10dp"
+                android:textColor="@color/black"
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+            </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Chatting_List_ListView"
+        android:background="@color/white"
+        android:layout_weight="2"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:divider="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
+    <RelativeLayout
+        android:background="@color/purple_200"
+        android:layout_weight="10"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/Chatting_Edittext_Container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/Chatting_Send_CIV"
+                android:layout_centerInParent="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_baseline_send_24"
+                android:layout_width="30dp"
+                android:layout_height="30dp">
+            </de.hdodenhof.circleimageview.CircleImageView>
+            <EditText
+                android:id="@+id/Chatting_ETV"
+                android:layout_toLeftOf="@id/Chatting_Send_CIV"
+                android:hint="내용을 입력하세요."
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:textSize="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </EditText>
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>
+</layout>
