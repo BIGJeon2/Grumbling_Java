@@ -35,16 +35,59 @@
                 android:layout_height="wrap_content">
             </TextView>
             </RelativeLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Chatting_List_ListView"
-        android:background="@color/white"
+    <RelativeLayout
         android:layout_weight="2"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
-        android:divider="@color/white"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Chatting_List_ListView"
+            android:background="@color/white"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:divider="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
+        <RelativeLayout
+            android:id="@+id/Replided_Edit_Container"
+            android:visibility="gone"
+            android:background="@color/Transparent_Black70"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+            <RelativeLayout
+                android:id="@+id/Replide_Target_Name_Container"
+                android:background="@drawable/post_view_title_under_edge_1dp"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="30dp">
+                <TextView
+                    android:id="@+id/Replied_Target_Name"
+                    android:textSize="15dp"
+                    android:hint="이름"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_margin="5dp"
+                android:layout_below="@id/Replide_Target_Name_Container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/Replied_Text"
+                    android:text="답장 대상 내용"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </TextView>
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
     <RelativeLayout
         android:background="@color/purple_200"
         android:layout_weight="10"

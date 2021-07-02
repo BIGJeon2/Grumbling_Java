@@ -5,20 +5,29 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
+import com.bigjeon.grumbling.adapter.Chat_OnClickListener;
 import com.bigjeon.grumbling.adapter.Chat_rcv_Adapter;
 import com.bigjeon.grumbling.data.Chat_Data;
 import com.example.grumbling.R;
 import com.example.grumbling.databinding.Chat_Binding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -30,6 +39,9 @@ public class Chatting_Activity extends AppCompatActivity {
     private String Content;
     private String My_Uid;
     private String Post_Title;
+    private String Reply_Target_Uid = "NONE";
+    private String Reply_Target_Text = "NONE";
+    private String Chat_Id;
     private Chat_rcv_Adapter adapter;
     private ArrayList<Chat_Data> list = new ArrayList<>();
 
@@ -52,17 +64,45 @@ public class Chatting_Activity extends AppCompatActivity {
         //list뷰 설정
         adapter = new Chat_rcv_Adapter(list, My_Uid, this);
         binding.ChattingListListView.setAdapter(adapter);
+        adapter.Set_Chat_rcv_Adapter(new Chat_OnClickListener() {
+            @Override
+            public void OnItemClicked(RecyclerView.ViewHolder Holder, View v, int pos) {
+                binding.ReplidedEditContainer.setVisibility(View.VISIBLE);
+                Reply_Target_Uid = list.get(pos).getUid();
+                Reply_Target_Text = list.get(pos).getText();
+                binding.RepliedText.setText(Reply_Target_Text);
+                Toast.makeText(Chatting_Activity.this, Reply_Target_Uid, Toast.LENGTH_SHORT).show();
+                Get_Replied_Target_Name(Reply_Target_Uid);
+            }
+        });
         LinearLayoutManager lm = new LinearLayoutManager(this);
         lm.setStackFromEnd(true);
         binding.ChattingListListView.setLayoutManager(lm);
         binding.ChattingListListView.setHasFixedSize(true);
+        binding.ChattingListListView.setNestedScrollingEnabled(false);
 
         DB = FirebaseDatabase.getInstance();
-        reference = DB.getReference("Chats");
-        reference.child(Post_Title).addChildEventListener(Regist_DB_Listener());
+        reference = DB.getReference("Chats").child(Post_Title);
+        reference.addChildEventListener(Regist_DB_Listener());
 
         binding.ChattingSendCIV.setOnClickListener(v -> Send_Message());
 
+    }
+
+    private void Get_Replied_Target_Name(String Uid) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("Users").whereEqualTo("UID", Uid).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()){
+                        binding.RepliedTargetName.setText("@ : " + document.get("Name").toString() + "님 에게 답장");
+                        break;
+                    }
+                }
+            }
+        });
     }
 
     private ChildEventListener Regist_DB_Listener(){
@@ -103,11 +143,14 @@ public class Chatting_Activity extends AppCompatActivity {
         if (Message.length() >= 1){
             Calendar calendar = Calendar.getInstance();
             String Time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
-
-            Chat_Data chat_data = new Chat_Data(My_Uid, Message, Time);
-            reference.child(Post_Title).push().setValue(chat_data);
+            Chat_Id = Time + My_Uid;
+            Chat_Data chat_data = new Chat_Data(My_Uid, Message, Time, Reply_Target_Text, Reply_Target_Uid, Chat_Id);
+            reference.push().setValue(chat_data);
 
             binding.ChattingETV.setText("");
+            binding.ReplidedEditContainer.setVisibility(View.GONE);
+            Reply_Target_Uid = "NONE";
+            Reply_Target_Text = "NONE";
 
         }
     }
@@ -116,5 +159,16 @@ public class Chatting_Activity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         reference.removeEventListener(listener);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (binding.ReplidedEditContainer.getVisibility() == View.VISIBLE){
+            binding.ReplidedEditContainer.setVisibility(View.GONE);
+            Reply_Target_Uid = "NONE";
+            Reply_Target_Text = "NONE";
+        }else{
+            super.onBackPressed();
+        }
     }
 }
