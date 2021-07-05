@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_margin="5dp">
         <RelativeLayout
-            android:layout_weight="5"
-            android:background="@android:color/transparent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </RelativeLayout>
-        <RelativeLayout
             android:layout_weight="4"
-            android:background="@color/Transparent_Black50"
+            android:background="@drawable/my_chat_background"
             android:id="@+id/Chatting_Text_Container"
-            android:layout_marginTop="5dp"
             android:layout_alignParentRight="true"
-            android:layout_margin="10dp"
-            android:layout_width="350dp"
+            android:padding="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content">
             <RelativeLayout
                 android:id="@+id/Chat_Container"
@@ -35,6 +29,7 @@
                         android:text="uid"
                         android:textColor="@color/black"
                         android:textSize="10dp"
+                        android:padding="2dp"
                         android:background="@drawable/post_view_title_under_edge_1dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
@@ -56,7 +51,7 @@
                 <TextView
                     android:id="@+id/Chatting_Text_TV"
                     android:padding="10dp"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="내용입력창입니다."
                     android:textColor="@color/black"
                     android:layout_below="@id/Reply_Containier"
@@ -65,15 +60,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
-                <TextView
-                    android:text="입력시간"
-                    android:id="@+id/Chatting_WriteDate_TV"
-                    android:textSize="7dp"
-                    android:layout_below="@+id/Chatting_Text_TV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                </TextView>
             </RelativeLayout>
         </RelativeLayout>
-    </LinearLayout>
+        <TextView
+            android:text="입력시간"
+            android:id="@+id/Chatting_WriteDate_TV"
+            android:textSize="7dp"
+            android:layout_below="@+id/Chatting_Text_Container"
+            android:layout_alignLeft="@id/Chatting_Text_Container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+    </RelativeLayout>
 </layout>

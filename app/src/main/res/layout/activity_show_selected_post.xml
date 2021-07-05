@@ -17,34 +17,36 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
-            android:layout_weight="7"
+            android:layout_weight="5.5"
             android:id="@+id/Selected_Post_Content_Container"
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="0dp">
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/Transparent_Black30"
+                android:layout_above="@id/Selected_Post_Bottom_Container"
                 android:layout_below="@id/Selected_Post_Title_Container">
-
                 <ImageView
                     android:id="@+id/Selected_Post_Background"
                     android:scaleType="centerCrop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white"></ImageView>
+                    android:background="@android:color/transparent">
+                </ImageView>
             </FrameLayout>
 
             <RelativeLayout
                 android:id="@+id/Selected_Post_Title_Container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/Transparent_White">
+                android:background="@color/white">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Selected_Post_User_Img"
@@ -93,13 +95,13 @@
             <RelativeLayout
                 android:id="@+id/Selected_Post_Bottom_Container"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/gradient_transparentblack_to_blak">
+                android:background="@color/white">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Selected_Post_Enter_Chatting_CIV"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/ic_baseline_chat_24"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
@@ -117,13 +119,37 @@
                 </TextView>
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Selected_Post_Favorite_Circle_CIV"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerInParent="true"
                     android:layout_toLeftOf="@+id/Selected_Post_Favorite_Count_TV"
                     android:background="@drawable/ic_baseline_favorite_border_24">
                 </de.hdodenhof.circleimageview.CircleImageView>
             </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_weight="5"
+            android:background="@drawable/comment_line"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:id="@+id/Selected_Post_None_Chat_TextView"
+                android:visibility="gone"
+                android:text="아직 채팅이 없습니다!"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textColor="@color/Transparent_Black50"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </TextView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Chat_List_Rcv"
+                android:layout_marginTop="20dp"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/other_chatting_item">
+            </androidx.recyclerview.widget.RecyclerView>
         </RelativeLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

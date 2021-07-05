@@ -93,7 +93,7 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            ((My_Repling_Chat_ViewHolder) holder).Replied_User_Name.setText(document.get("Name").toString());
+                            ((My_Repling_Chat_ViewHolder) holder).Replied_User_Name.setText("@ : " + document.get("Name").toString() + "님 에게 답장");
                             break;
                         }
                     }
@@ -119,6 +119,7 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         } else {
             ((Other_Repling_Chat_ViewHolder) holder).Comment.setText(Chat_Datas.get(position).getText());
             ((Other_Repling_Chat_ViewHolder) holder).Write_Date.setText(Chat_Datas.get(position).getWriteDate());
+            ((Other_Repling_Chat_ViewHolder) holder).Replied_Text.setText(Chat_Datas.get(position).getReply_Target_Text());
             db.collection("Users").whereEqualTo("UID", Chat_Datas.get(position).getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
@@ -187,7 +188,7 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             this.binding = binding;
             Write_Date = binding.ChattingWriteDateTV;
             Comment = binding.ChattingTextTV;
-            itemView.setOnClickListener(new View.OnClickListener() {
+            Comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
@@ -212,7 +213,7 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             Comment = binding.ChattingTextTV;
             Replied_Text = binding.RepliedChatTV;
             Replied_User_Name = binding.RepliedName;
-            itemView.setOnClickListener(new View.OnClickListener() {
+            Comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
@@ -235,7 +236,7 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             User_Name = binding.ChattingUserNameTV;
             Write_Date = binding.ChattingWriteDateTV;
             Comment = binding.ChattingTextTV;
-            itemView.setOnClickListener(new View.OnClickListener() {
+            Comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
@@ -261,7 +262,7 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             Comment = binding.ChattingTextTV;
             Replied_Text = binding.RepliedChatTV;
             Replied_User_Name = binding.RepliedName;
-            itemView.setOnClickListener(new View.OnClickListener() {
+            Comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();

@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bigjeon.grumbling.adapter.Chat_rcv_Adapter;
+import com.bigjeon.grumbling.data.Chat_Data;
 import com.bigjeon.grumbling.data.Post_Data;
 import com.bumptech.glide.Glide;
 import com.example.grumbling.R;
@@ -37,12 +40,16 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.ref.Reference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
 
 public class Show_Selected_Post_Activity extends AppCompatActivity {
+
+    private static final String TAG = "확인 시바";
 
     ActivityShowSelectedPostBinding binding;
     private Context mContext = Show_Selected_Post_Activity.this;
@@ -56,6 +63,8 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
     private Boolean Favorite_State;
     private int Favorite_Count;
     private Post_Data Post;
+    private Chat_rcv_Adapter adapter;
+    private ArrayList<Chat_Data> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +79,8 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
 
         Get_Selected_Posts();
         Set_My_Data();
+        Get_Chatting_List();
+
 //        binding.SelectedPostMyUserImgCiv.setOnClickListener(v -> Go_Selected_User_Profile());
         binding.SelectedPostFavoriteCircleCIV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +110,7 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
                 startActivity(Go_Chat);
             }
         });
+
     }
 
     private void Check_Chatting_Room_State() {
@@ -111,7 +123,6 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         My_Name = My_Data.getString("NAME", null);
         My_Uid = My_Data.getString("UID", null);
         My_Img = My_Data.getString("IMG", null);
-        Picasso.get().load(My_Img).into(binding.SelectedPostUserImg);
     }
 
     private void Get_Selected_Posts() {
@@ -210,5 +221,34 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         }else{
             binding.SelectedPostFavoriteCountTV.setText("999+");
         }
+    }
+
+    private void Get_Chatting_List(){
+        binding.SelectedPostNoneChatTextView.setVisibility(View.GONE);
+        adapter = new Chat_rcv_Adapter(list, My_Uid, this);
+        binding.ChatListRcv.setAdapter(adapter);
+        LinearLayoutManager lm = new LinearLayoutManager(this);
+        lm.setStackFromEnd(true);
+        binding.ChatListRcv.setLayoutManager(lm);
+        binding.ChatListRcv.setHasFixedSize(true);
+        binding.ChatListRcv.setNestedScrollingEnabled(false);
+        binding.ChatListRcv.scrollToPosition(0);
+        DatabaseReference Chat_DB = FirebaseDatabase.getInstance().getReference("Chats").child(Post_Title);
+        Chat_DB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()){
+                    Chat_Data chat = data.getValue(Chat_Data.class);
+                    list.add(chat);
+                    Log.d(TAG, list.toString());
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
     }
 }

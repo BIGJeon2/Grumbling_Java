@@ -94,7 +94,6 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         holder.Post_Content.setBackgroundColor(ContextCompat.getColor(mContext, data.getContent_Back_Color()));
         holder.Post_Content.setTextColor(ContextCompat.getColor(mContext, data.getContent_Text_Color()));
         Glide.with(holder.itemView).load(data.getPost_Background()).into(holder.Post_Background_Img);
-        holder.Post_Write_Date.setText(DateChange(data.getPost_Write_Date()));
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("Users").whereEqualTo("UID", data.getUser_Uid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -165,7 +164,6 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         CircleImageView User_Img;
         TextView Post_Content;
         ImageView Post_Background_Img;
-        TextView Post_Write_Date;
         CircleImageView Favorite_Btn;
         TextView Favorite_Count;
 
@@ -175,7 +173,6 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
             User_Name = itemView.findViewById(R.id.Post_View_User_Name);
             Post_Content = itemView.findViewById(R.id.Post_View_Content);
             Post_Background_Img = itemView.findViewById(R.id.Post_View_Background);
-            Post_Write_Date = itemView.findViewById(R.id.Post_View_WriteDate);
             Favorite_Btn = itemView.findViewById(R.id.Post_View_Favorite_Circle_CIV);
             Favorite_Count = itemView.findViewById(R.id.Posting_Favorite_Count_TV);
         }

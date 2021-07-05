@@ -80,6 +80,7 @@ public class Chatting_Activity extends AppCompatActivity {
         binding.ChattingListListView.setLayoutManager(lm);
         binding.ChattingListListView.setHasFixedSize(true);
         binding.ChattingListListView.setNestedScrollingEnabled(false);
+        binding.ChattingListListView.scrollToPosition(0);
 
         DB = FirebaseDatabase.getInstance();
         reference = DB.getReference("Chats").child(Post_Title);

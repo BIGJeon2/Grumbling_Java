@@ -10,26 +10,26 @@
     </data>
 <LinearLayout
     tools:context="com.bigjeon.grumbling.Chatting_Activity"
-    android:background="@color/black"
+    android:background="@color/white"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
         <RelativeLayout
-            android:background="@color/white"
+            android:background="@drawable/post_view_title_under_edge_1dp"
             android:layout_weight="11"
             android:id="@+id/Post_View_Content_Container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
             <TextView
                 android:id="@+id/Chatting_Post_Content_TV"
                 android:text="포스팅 내용"
-                android:textSize="10dp"
+                android:textSize="20dp"
                 android:textColor="@color/black"
+                android:gravity="left"
+                android:layout_marginLeft="5dp"
                 android:layout_centerInParent="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -37,14 +37,12 @@
             </RelativeLayout>
     <RelativeLayout
         android:layout_weight="2"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        android:background="@color/white"
+        android:background="@color/Transparent_Green"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/Chatting_List_ListView"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
             android:divider="@color/white"
@@ -89,10 +87,8 @@
         </RelativeLayout>
     </RelativeLayout>
     <RelativeLayout
-        android:background="@color/purple_200"
-        android:layout_weight="10"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
+        android:background="@drawable/top_edge_black_1dp"
+        android:layout_weight="10.5"
         android:id="@+id/Chatting_Edittext_Container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -100,7 +96,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <RelativeLayout
-            android:background="@color/white"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -108,7 +103,6 @@
                 android:id="@+id/Chatting_Send_CIV"
                 android:layout_centerInParent="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
                 android:src="@drawable/ic_baseline_send_24"
                 android:layout_width="30dp"
                 android:layout_height="30dp">
