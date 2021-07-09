@@ -1,24 +1,32 @@
 package com.bigjeon.grumbling;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
 import com.bigjeon.grumbling.adapter.Post_View_Rcv_Adapter;
 import com.bigjeon.grumbling.data.Post_Data;
-import com.bigjeon.grumbling.data.User_Profile;
 import com.example.grumbling.R;
+import com.example.grumbling.databinding.ActivitySettingMyProfileBinding;
 import com.example.grumbling.databinding.ActivityUserProfileViewBinding;
+import com.example.grumbling.databinding.Profile_Binding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -26,18 +34,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
-public class User_Profile_View_activity extends AppCompatActivity {
+public class Setting_My_Profile_Activity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String User_Uid;
     private DatabaseReference DB;
     private String Get_Post_Key = "나의 게시글";
-    private ActivityUserProfileViewBinding binding;
+    private ActivitySettingMyProfileBinding binding;
     private Post_View_Rcv_Adapter adapter;
     private ArrayList<Post_Data> list = new ArrayList<>();
     private String My_Uid;
@@ -48,17 +62,18 @@ public class User_Profile_View_activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_user_profile_view);
-        binding.setShowUserProfileBinding(this);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_setting_my_profile);
+        binding.setMyProfileSettingBinding(this);
 
         Get_My_Data();
 
         Intent intent = getIntent();
         User_Uid = intent.getStringExtra("UID");
-        if (!User_Uid.equals(My_Uid)) {
+        if (!User_Uid.equals(My_Uid)){
             Set_Users_Data();
+            binding.SettingFragmentSettingBtnsContainer.setVisibility(View.GONE);
             Get_Post_Key = User_Uid;
-        } else {
+        }else{
             Picasso.get().load(My_Img).into(binding.SettingFragmentMyProfileImgCiv);
             binding.SettingFragmentMyNameTv.setText("#." + My_Name);
         }
@@ -66,7 +81,7 @@ public class User_Profile_View_activity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         DB = FirebaseDatabase.getInstance().getReference("Posts");
 
-        RecyclerView rcv = binding.SettingFragmnetUserPostsRCV;
+        RecyclerView rcv = binding.SettingFragmnetMyPostsRCV;
         adapter = new Post_View_Rcv_Adapter(this, list, Get_Post_Key);
         LinearLayoutManager lm = new LinearLayoutManager(this);
         rcv.setLayoutManager(lm);
@@ -74,6 +89,9 @@ public class User_Profile_View_activity extends AppCompatActivity {
         rcv.setHasFixedSize(true);
 
         Get_Users_Posts();
+
+        binding.SettingFragmentSignOutBtn.setOnClickListener(v -> Sign_Out());
+        binding.SettingFragmentChangeProfileBtn.setOnClickListener(v -> Go_Profile_Set_Act());
     }
 
     private void Set_Users_Data() {
@@ -104,5 +122,26 @@ public class User_Profile_View_activity extends AppCompatActivity {
         My_Name = My_Data.getString("NAME", null);
         My_Img = My_Data.getString("IMG", null);
         My_Email = My_Data.getString("EMAIL", null);
+    }
+
+    private void Go_Profile_Set_Act() {
+        Intent Set_Profile_Intent = new Intent(this, Set_User_Profile_Activity.class);
+        Set_Profile_Intent.putExtra("UID", User_Uid);
+        Set_Profile_Intent.putExtra("CODE", "CHANGE_SET");
+        Set_Profile_Intent.putExtra("EMAIL", My_Email);
+        startActivity(Set_Profile_Intent);
+    }
+
+    private void Sign_Out() {
+        SharedPreferences My_Data = getSharedPreferences("My_Data", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = My_Data.edit();
+        editor.clear();
+        editor.commit();
+        Intent Go_Login = new Intent(this, Google_Login_Activity.class);
+        Go_Login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        mAuth.signOut();
+        Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+        startActivity(Go_Login);
+        finish();
     }
 }

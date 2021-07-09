@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <data>
-        <import type="android.view.View">
-        </import>
-        <variable
-            name="Show_User_Profile_Binding"
-            type="com.bigjeon.grumbling.User_Profile_View_activity" />
-    </data>
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto">
+<data>
+    <import type="android.view.View">
+    </import>
+    <variable
+        name="My_Profile_Setting_Binding"
+        type="com.bigjeon.grumbling.Setting_My_Profile_Activity" />
+</data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_margin="5dp"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bigjeon.grumbling.User_Profile_View_activity">
+    tools:context="com.bigjeon.grumbling.Setting_My_Profile_Activity">
     <LinearLayout
         android:orientation="vertical"
         android:background="@color/white"
@@ -23,14 +23,15 @@
         <LinearLayout
             android:background="@color/white"
             android:orientation="vertical"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <RelativeLayout
+                android:layout_weight="5"
                 android:layout_margin="5dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="0dp">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Setting_Fragment_My_Profile_Img_Civ"
                     android:layout_alignParentLeft="true"
@@ -38,8 +39,21 @@
                     app:civ_border_color="@color/Transparent_Black70"
                     app:civ_border_width="2dp"
                     android:layout_width="100dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="100dp">
                 </de.hdodenhof.circleimageview.CircleImageView>
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/Setting_Fragment_My_Name_Tv"
+                    android:text="Big_Jeon"
+                    android:padding="2dp"
+                    android:textSize="15dp"
+                    android:gravity="center"
+                    android:layout_below="@id/Setting_Fragment_My_Profile_Img_Civ"
+                    android:layout_toLeftOf="@+id/Setting_Fragment_User_Profile_Container"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </TextView>
                 <LinearLayout
                     android:id="@+id/Setting_Fragment_User_Profile_Container"
                     android:orientation="vertical"
@@ -47,19 +61,6 @@
                     android:layout_toRightOf="@+id/Setting_Fragment_My_Profile_Img_Civ"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <TextView
-                        android:layout_weight="1"
-                        android:id="@+id/Setting_Fragment_My_Name_Tv"
-                        android:text="Big_Jeon"
-                        android:padding="2dp"
-                        android:textSize="15dp"
-                        android:gravity="center"
-                        android:layout_below="@id/Setting_Fragment_My_Profile_Img_Civ"
-                        android:layout_toLeftOf="@+id/Setting_Fragment_User_Profile_Container"
-                        android:textColor="@color/black"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp">
-                    </TextView>
                     <LinearLayout
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
@@ -91,6 +92,38 @@
                             android:layout_height="wrap_content">
                         </Button>
                     </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/Setting_Fragment_Setting_Btns_Container"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_height="0dp">
+                        <Button
+                            android:id="@+id/Setting_Fragment_Unregister_Btn"
+                            android:layout_weight="1"
+                            android:text="계정 탈퇴"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        </Button>
+                        <Button
+                            android:id="@+id/Setting_Fragment_Change_Profile_Btn"
+                            android:layout_weight="1"
+                            android:text="프로필 수정"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        </Button>
+                        <Button
+                            android:id="@+id/Setting_Fragment_Sign_Out_Btn"
+                            android:layout_weight="1"
+                            android:text="로그아웃"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        </Button>
+                    </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
@@ -99,7 +132,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/Setting_Fragmnet_User_Posts_RCV"
+                android:id="@+id/Setting_Fragmnet_My_Posts_RCV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:listitem="@layout/post_view_item">

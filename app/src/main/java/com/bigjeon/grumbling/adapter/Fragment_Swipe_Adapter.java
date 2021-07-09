@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.bigjeon.grumbling.fragments.Post_View_Favorite_Fragment;
+import com.bigjeon.grumbling.fragments.Chatting_List_Fragment;
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
 import com.bigjeon.grumbling.fragments.TimeLine_Fragment;
 
@@ -24,7 +24,7 @@ public class Fragment_Swipe_Adapter extends FragmentStateAdapter {
 
         if (position == 0) return new TimeLine_Fragment();
         else if (position == 1) return new Post_View_Fragment();
-        else return new Post_View_Favorite_Fragment();
+        else return new Chatting_List_Fragment();
     }
 
     @Override

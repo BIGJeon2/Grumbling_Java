@@ -28,6 +28,7 @@
                 android:text="포스팅 내용"
                 android:textSize="20dp"
                 android:textColor="@color/black"
+                android:fontFamily="@font/uhbeerice"
                 android:gravity="left"
                 android:layout_marginLeft="5dp"
                 android:layout_centerInParent="true"
@@ -66,6 +67,7 @@
                     android:id="@+id/Replied_Target_Name"
                     android:textSize="15dp"
                     android:hint="이름"
+                    android:fontFamily="@font/uhbeerice"
                     android:layout_centerInParent="true"
                     android:layout_alignParentLeft="true"
                     android:layout_width="wrap_content"
@@ -80,6 +82,7 @@
                 <TextView
                     android:id="@+id/Replied_Text"
                     android:text="답장 대상 내용"
+                    android:fontFamily="@font/uhbeerice"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 </TextView>
@@ -115,6 +118,7 @@
                 android:layout_marginLeft="5dp"
                 android:padding="5dp"
                 android:textColor="@color/black"
+                android:fontFamily="@font/uhbeerice"
                 android:textSize="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">

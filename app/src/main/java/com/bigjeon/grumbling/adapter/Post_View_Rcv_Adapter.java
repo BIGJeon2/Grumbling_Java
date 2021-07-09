@@ -7,12 +7,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
 import android.text.Layout;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -29,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bigjeon.grumbling.App_Main_Activity;
 import com.bigjeon.grumbling.Google_Login_Activity;
+import com.bigjeon.grumbling.Setting_My_Profile_Activity;
 import com.bigjeon.grumbling.Show_Selected_Post_Activity;
 import com.bigjeon.grumbling.User_Profile_View_activity;
 import com.bigjeon.grumbling.data.Post_Data;
@@ -65,6 +69,8 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
     private Context mContext;
     private String Get_Post_Key;
     private static final String TAG = "My_Check";
+    private int doubleclickFlag = 0;
+    private int CLICK_DELAY = 300;
     ArrayList<Post_Data> list;
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -118,14 +124,23 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         }else {
             holder.Favorite_Btn.setImageResource(R.drawable.ic_baseline_favorite_border_24);
         }
-        holder.Favorite_Btn.setOnClickListener(new View.OnClickListener() {
+        holder.Post_Background_Img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onFavoriteClicked(database.getReference().child("Posts").child(data.getPost_Title()));
+                doubleclickFlag++;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (doubleclickFlag == 1){
+                            Show_Selected_Post(data);
+                        }else if (doubleclickFlag == 2){
+                            onFavoriteClicked(database.getReference().child("Posts").child(data.getPost_Title()));
+                        }
+                        doubleclickFlag = 0;
+                    }
+                }, 200);
             }
         });
-
-        holder.Post_Background_Img.setOnClickListener(v -> Show_Selected_Post(data));
         holder.User_Img.setOnClickListener(v -> Go_User_Profile_View_Act(data.getUser_Uid()));
     }
 
@@ -136,9 +151,15 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
     }
 
     private void Go_User_Profile_View_Act(String UID) {
-        Intent Go_View_User_Profile_Intent = new Intent(mContext, User_Profile_View_activity.class);
-        Go_View_User_Profile_Intent.putExtra("UID", UID);
-        mContext.startActivity(Go_View_User_Profile_Intent);
+        if (UID.equals(mAuth.getUid())){
+            Intent Go_View_My_Profile_Intent = new Intent(mContext, Setting_My_Profile_Activity.class);
+            Go_View_My_Profile_Intent.putExtra("UID", UID);
+            mContext.startActivity(Go_View_My_Profile_Intent);
+        }else{
+            Intent Go_View_User_Profile_Intent = new Intent(mContext, User_Profile_View_activity.class);
+            Go_View_User_Profile_Intent.putExtra("UID", UID);
+            mContext.startActivity(Go_View_User_Profile_Intent);
+        }
     }
 
     private String DateChange(String date){

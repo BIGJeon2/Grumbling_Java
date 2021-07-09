@@ -98,25 +98,16 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
                 binding.SelectedPostFavoriteCountTV.setText(Integer.toString(Favorite_Count));
             }
         });
-        //채팅방으로 이동
-        binding.SelectedPostEnterChattingCIV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Go_Chat = new Intent(Show_Selected_Post_Activity.this, Chatting_Activity.class);
-                Go_Chat.putExtra("CONTENT", binding.SelectedPostContent.getText().toString());
-                Go_Chat.putExtra("UID", My_Uid);
-                Go_Chat.putExtra("TITLE", Post_Title);
-                Check_Chatting_Room_State();
-                startActivity(Go_Chat);
-            }
-        });
-
+        //채팅방으로 이동(아이템 뷰 클릭시 이동후 바로 답장으로 셋팅(Intent Filter이용))
+        binding.SelectedPostEnterChattingCIV.setOnClickListener(v -> Go_Chat_Intent());
     }
-
-    private void Check_Chatting_Room_State() {
-      //채팅방 상태 확인
+    private void Go_Chat_Intent(){
+        Intent Go_Chat = new Intent(Show_Selected_Post_Activity.this, Chatting_Activity.class);
+        Go_Chat.putExtra("CONTENT", binding.SelectedPostContent.getText().toString());
+        Go_Chat.putExtra("UID", My_Uid);
+        Go_Chat.putExtra("TITLE", Post_Title);
+        startActivity(Go_Chat);
     }
-
     private void Set_My_Data(){
         SharedPreferences My_Data = getSharedPreferences("My_Data", Context.MODE_PRIVATE);
         My_Email = My_Data.getString("EMAIL", null);

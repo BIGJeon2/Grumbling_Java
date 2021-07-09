@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.bigjeon.grumbling.adapter.Chat_OnClickListener;
 import com.bigjeon.grumbling.adapter.Chat_rcv_Adapter;
 import com.bigjeon.grumbling.data.Chat_Data;
+import com.bigjeon.grumbling.data.Chat_User_Uid_Data;
+import com.bigjeon.grumbling.data.Post_Data;
 import com.example.grumbling.R;
 import com.example.grumbling.databinding.Chat_Binding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -41,9 +44,11 @@ public class Chatting_Activity extends AppCompatActivity {
     private String Post_Title;
     private String Reply_Target_Uid = "NONE";
     private String Reply_Target_Text = "NONE";
+    private boolean First_Chat_Status = true;
     private String Chat_Id;
     private Chat_rcv_Adapter adapter;
     private ArrayList<Chat_Data> list = new ArrayList<>();
+    private ArrayList<Chat_User_Uid_Data> Uid_List = new ArrayList<>();
 
     private FirebaseDatabase DB;
     private DatabaseReference reference;

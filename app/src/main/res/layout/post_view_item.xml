@@ -24,11 +24,11 @@
                 android:layout_height="match_parent">
             </ImageView>
         </FrameLayout>
-        <RelativeLayout
-            android:id="@+id/Post_View_Title_Container"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:id="@+id/Post_View_Title_Container"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Post_View_User_Img"
                 android:src="@mipmap/ic_launcher"
@@ -71,10 +71,11 @@
                 android:layout_toLeftOf="@+id/Posting_Favorite_Count_TV"
                 android:background="@drawable/ic_baseline_favorite_border_24">
             </de.hdodenhof.circleimageview.CircleImageView>
-        </RelativeLayout>
+            </RelativeLayout>
         <TextView
             android:id="@+id/Post_View_Content"
             android:layout_centerInParent="true"
+            android:fontFamily="@font/uhbeerice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </TextView>

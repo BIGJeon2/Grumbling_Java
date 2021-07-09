@@ -68,9 +68,9 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
     }
 
     private void Go_User_Profile_View_Act() {
-        Intent Go_View_User_Profile_Intent = new Intent(this, User_Profile_View_activity.class);
-        Go_View_User_Profile_Intent.putExtra("UID", My_Uid);
-        startActivity(Go_View_User_Profile_Intent);
+        Intent Go_View_My_Profile_Intent = new Intent(this, Setting_My_Profile_Activity.class);
+        Go_View_My_Profile_Intent.putExtra("UID", My_Uid);
+        startActivity(Go_View_My_Profile_Intent);
     }
 
     @Override
@@ -121,17 +121,17 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
             case 0 :
                 binding.AppMainTimeLineBtn.setTextColor(getColor(R.color.purple_200));
                 binding.AppMainPostBtn.setTextColor(getColor(R.color.Gray));
-                binding.AppMainSettingBtn.setTextColor(getColor(R.color.Gray));
+                binding.AppMainChattingBtn.setTextColor(getColor(R.color.Gray));
                 break;
             case 1 :
                 binding.AppMainTimeLineBtn.setTextColor(getColor(R.color.Gray));
                 binding.AppMainPostBtn.setTextColor(getColor(R.color.purple_200));
-                binding.AppMainSettingBtn.setTextColor(getColor(R.color.Gray));
+                binding.AppMainChattingBtn.setTextColor(getColor(R.color.Gray));
                 break;
             case 2 :
                 binding.AppMainTimeLineBtn.setTextColor(getColor(R.color.Gray));
                 binding.AppMainPostBtn.setTextColor(getColor(R.color.Gray));
-                binding.AppMainSettingBtn.setTextColor(getColor(R.color.purple_200));
+                binding.AppMainChattingBtn.setTextColor(getColor(R.color.purple_200));
                 break;
         }
     }

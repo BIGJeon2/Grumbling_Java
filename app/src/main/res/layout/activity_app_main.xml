@@ -68,9 +68,9 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_weight="1"
+            android:fontFamily="@font/uhbeerice"
             android:background="@android:color/transparent"
             android:text="타임 피드"
-            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="10dp">
         </Button>
@@ -81,20 +81,20 @@
             android:layout_height="30dp"
             android:layout_weight="1"
             android:text="모든 게시글"
-            android:textStyle="bold"
+            android:fontFamily="@font/uhbeerice"
             android:background="@android:color/transparent"
             android:textColor="@color/purple_200"
             android:textSize="10dp">
         </Button>
 
         <Button
-            android:id="@+id/App_Main_Setting_Btn"
+            android:id="@+id/App_Main_Chatting_Btn"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:text="좋아요 게시글"
-            android:textStyle="bold"
+            android:text="채팅 목록"
+            android:fontFamily="@font/uhbeerice"
             android:textColor="@color/black"
             android:textSize="10dp">
         </Button>

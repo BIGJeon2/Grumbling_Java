@@ -18,6 +18,7 @@
         android:background="@drawable/my_chat_background"
         android:textColor="@color/black"
         android:layout_alignParentRight="true"
+        android:fontFamily="@font/uhbeerice"
         android:textSize="10dp"
         android:padding="10dp"
         android:layout_marginBottom="5dp"

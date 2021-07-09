@@ -74,13 +74,13 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
         }
         //Cirle_Image_Btn 클릭시 갤러리에서 사진 가져오기
         binding.SetUserImgFromGalleryBtn.setOnClickListener(v -> Get_Img_From_Gallery());
-        binding.SetUserImgDefaultBtn.setOnClickListener(v -> Set_Defalt_Img());
+        binding.SetUserImgDefaultBtn.setOnClickListener(v -> Set_Default_Img());
         //FireSotre에 프로필 저장 / 업데이트
         binding.CompleteBtn.setOnClickListener(v -> Upload_User_Profile());
 
     }
 
-    private void Set_Defalt_Img() {
+    private void Set_Default_Img() {
         My_Img = Default_Img;
         Img_Pick_State = false;
         Picasso.get().load(R.drawable.user_profile_default_img).into(binding.UserImg);
