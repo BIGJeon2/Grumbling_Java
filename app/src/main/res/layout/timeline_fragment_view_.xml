@@ -12,13 +12,43 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context="com.bigjeon.grumbling.fragments.TimeLine_Fragment">
-        <TextView
-            android:text="타임라인"
-            android:gravity="center"
-            android:textSize="35dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </TextView>
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/TimeLine_Btns_Container"
+           android:orientation="horizontal"
+           android:layout_width="match_parent"
+            android:padding="5dp"
+           android:layout_height="50dp">
+            <Button
+                android:text="친구 목록"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </Button>
+            <Button
+                android:text="친구 요청"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </Button>
+            <Button
+                android:text="알림"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+            </Button>
+       </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Request_Friend_List_Rcv"
+            android:layout_below="@id/TimeLine_Btns_Container"
+           tools:listitem="@layout/friend_request_item"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+       </androidx.recyclerview.widget.RecyclerView>
+       </RelativeLayout>
     </FrameLayout>
 </layout>

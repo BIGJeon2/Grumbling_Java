@@ -40,7 +40,15 @@
             android:layout_width="100dp"
             android:layout_height="40dp">
         </ImageView>
-
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/App_Main_Notice_Civ"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_toLeftOf="@id/App_Main_User_Img_Circle_Imv"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/ic_baseline_notifications_24">
+        </de.hdodenhof.circleimageview.CircleImageView>
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/App_Main_User_Img_Circle_Imv"
             android:layout_alignParentRight="true"

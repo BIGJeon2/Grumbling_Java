@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.bigjeon.grumbling.adapter.Post_View_Rcv_Adapter;
+import com.bigjeon.grumbling.data.Friend_Request_Data;
 import com.bigjeon.grumbling.data.Post_Data;
 import com.bigjeon.grumbling.data.User_Profile;
 import com.example.grumbling.R;
@@ -21,8 +22,11 @@ import com.example.grumbling.databinding.ActivityUserProfileViewBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -30,13 +34,16 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class User_Profile_View_activity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String User_Uid;
-    private DatabaseReference DB;
+    private DatabaseReference reference;
     private String Get_Post_Key = "나의 게시글";
+    private String Request_Friend_State = "NONE";
     private ActivityUserProfileViewBinding binding;
     private Post_View_Rcv_Adapter adapter;
     private ArrayList<Post_Data> list = new ArrayList<>();
@@ -64,7 +71,6 @@ public class User_Profile_View_activity extends AppCompatActivity {
         }
 
         mAuth = FirebaseAuth.getInstance();
-        DB = FirebaseDatabase.getInstance().getReference("Posts");
 
         RecyclerView rcv = binding.SettingFragmnetUserPostsRCV;
         adapter = new Post_View_Rcv_Adapter(this, list, Get_Post_Key);
@@ -73,7 +79,10 @@ public class User_Profile_View_activity extends AppCompatActivity {
         rcv.setAdapter(adapter);
         rcv.setHasFixedSize(true);
 
+        Check_Friend_State();
         Get_Users_Posts();
+
+        binding.SettingFragmentSendFriendRequestBtn.setOnClickListener(v -> Send_Friend_Request());
     }
 
     private void Set_Users_Data() {
@@ -104,5 +113,44 @@ public class User_Profile_View_activity extends AppCompatActivity {
         My_Name = My_Data.getString("NAME", null);
         My_Img = My_Data.getString("IMG", null);
         My_Email = My_Data.getString("EMAIL", null);
+    }
+
+    private void Send_Friend_Request(){
+
+        SimpleDateFormat simpledate = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date = new Date();
+        String Send_Date = simpledate.format(date);
+
+        Friend_Request_Data request = new Friend_Request_Data("ING", My_Uid, Send_Date);
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Friends").child(My_Uid);
+        reference.setValue(request);
+
+        binding.SettingFragmentSendFriendRequestBtn.setText("요청 응답 대기중...");
+    }
+
+    private void Check_Friend_State(){
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Friends").child(My_Uid);
+        reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()){
+                    Request_Friend_State = "NONE";
+                }else{
+                    Friend_Request_Data request = task.getResult().getValue(Friend_Request_Data.class);
+                    if (request == null){
+                        Request_Friend_State = "NONE";
+                    }else if (request.getState().equals("ING")){
+                        Request_Friend_State = "ING";
+                        binding.SettingFragmentSendFriendRequestBtn.setText("응답 대기중...");
+                    }else if(request.getState().equals("ACCEPT")){
+                        Request_Friend_State = "ACCEPT";
+                        binding.SettingFragmentSendFriendRequestBtn.setVisibility(View.GONE);
+                    }else{
+                        Request_Friend_State = "REJECT";
+                        binding.SettingFragmentSendFriendRequestBtn.setText("거절됨");
+                    }
+                }
+            }
+        });
     }
 }

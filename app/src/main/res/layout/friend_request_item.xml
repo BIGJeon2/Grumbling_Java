@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/Friend_Request_User_Img"
+        android:src="@mipmap/ic_launcher"
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="true"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@color/Transparent_Black70"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp">
+    </de.hdodenhof.circleimageview.CircleImageView>
+    <TextView
+        android:id="@+id/Friend_Request_User_Name"
+        android:text="User_Name님이 친구 요청을 보내셨습니다."
+        android:textSize="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_toRightOf="@+id/Friend_Request_User_Img"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+    <Button
+        android:id="@+id/Friend_Request_Accept_Btn"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:text="수락"
+        android:textSize="10dp"
+        android:background="@color/Transparent_Green"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </Button>
+</RelativeLayout>

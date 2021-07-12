@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
@@ -11,7 +11,6 @@
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_margin="5dp"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.bigjeon.grumbling.User_Profile_View_activity">
@@ -21,8 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
-            android:background="@color/white"
+            android:background="@drawable/post_view_edge_2dp"
             android:orientation="vertical"
+            android:paddingBottom="5dp"
             android:layout_weight="2"
             android:layout_width="match_parent"
             android:layout_height="0dp">
@@ -37,8 +37,8 @@
                     android:src="@drawable/ic_launcher_background"
                     app:civ_border_color="@color/Transparent_Black70"
                     app:civ_border_width="2dp"
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent">
+                    android:layout_width="80dp"
+                    android:layout_height="80dp">
                 </de.hdodenhof.circleimageview.CircleImageView>
                 <LinearLayout
                     android:id="@+id/Setting_Fragment_User_Profile_Container"
@@ -47,55 +47,101 @@
                     android:layout_toRightOf="@+id/Setting_Fragment_My_Profile_Img_Civ"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <TextView
+                    <RelativeLayout
                         android:layout_weight="1"
-                        android:id="@+id/Setting_Fragment_My_Name_Tv"
-                        android:text="Big_Jeon"
-                        android:padding="2dp"
-                        android:textSize="15dp"
-                        android:gravity="center"
                         android:layout_below="@id/Setting_Fragment_My_Profile_Img_Civ"
                         android:layout_toLeftOf="@+id/Setting_Fragment_User_Profile_Container"
-                        android:textColor="@color/black"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp">
-                    </TextView>
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="10dp">
+                        <TextView
+                            android:id="@+id/Setting_Fragment_My_Name_Tv"
+                            android:text="Big_Jeon"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        </TextView>
+                        <Button
+                            android:id="@+id/Setting_Fragment_Send_Friend_Request_Btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textSize="10dp"
+                            android:textColor="@color/black"
+                            android:background="@color/white"
+                            android:layout_alignParentRight="true"
+                            android:text="친구 추가 +">
+                        </Button>
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:visibility="gone"
+                            android:id="@+id/Setting_Fragment_Chatting_Btn"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/personal_chat_btn"
+                            android:gravity="center"
+                            android:rotationX="-1"
+                            android:rotationY="180"
+                            app:civ_border_color="@color/black"
+                            app:civ_border_width="1dp">
+                        </de.hdodenhof.circleimageview.CircleImageView>
+                    </RelativeLayout>
                     <LinearLayout
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
+                        android:paddingRight="80dp"
+                        android:paddingLeft="80dp"
                         android:layout_height="0dp">
-                        <Button
-                            android:id="@+id/Setting_Fragment_Follower_List_Btn"
-                            android:layout_weight="1"
-                            android:text="팔로워"
-                            android:background="@android:color/transparent"
-                            android:layout_width="match_parent"
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/Setting_Fragment_Friend_List_Civ"
+                            android:layout_weight="2"
+                            android:textColor="@color/black"
+                            android:gravity="center"
+                            android:src="@drawable/ic_baseline_group_24"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content">
-                        </Button>
-                        <Button
-                            android:id="@+id/Setting_Fragment_Following_List_Btn"
-                            android:layout_weight="1"
-                            android:text="팔로잉"
-                            android:background="@android:color/transparent"
-                            android:layout_width="match_parent"
+                        </de.hdodenhof.circleimageview.CircleImageView>
+                        <TextView
+                            android:id="@+id/Setting_Fragment_Friend_List_Btn"
+                            android:layout_weight="2"
+                            android:text="20"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:background="@drawable/post_view_edge_2dp"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent">
+                        </TextView>
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/Setting_Fragment_Post_Count_Civ"
+                            android:layout_weight="2"
+                            android:text="게시글: 20"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:src="@drawable/ic_baseline_article_24"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content">
-                        </Button>
-                        <Button
-                            android:id="@+id/Setting_Fragment_Chatting_Btn"
-                            android:layout_weight="1"
-                            android:text="채팅"
-                            android:background="@android:color/transparent"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                        </Button>
+                        </de.hdodenhof.circleimageview.CircleImageView>
+                        <TextView
+                            android:id="@+id/Setting_Fragment_Post_Count_Btn"
+                            android:layout_weight="2"
+                            android:text="67"
+                            android:textColor="@color/black"
+                            android:gravity="center"
+                            android:background="@drawable/post_view_edge_2dp"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent">
+                        </TextView>
                     </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
         <RelativeLayout
-            android:layout_weight="10"
+            android:layout_marginTop="5dp"
+            android:layout_weight="12"
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <androidx.recyclerview.widget.RecyclerView
