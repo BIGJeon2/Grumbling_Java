@@ -13,7 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.bigjeon.grumbling.adapter.Post_View_Rcv_Adapter;
-import com.bigjeon.grumbling.data.Friends_Data;
+import com.bigjeon.grumbling.data.Request_Friends_Data;
 import com.bigjeon.grumbling.data.Post_Data;
 import com.example.grumbling.R;
 import com.example.grumbling.databinding.ActivityUserProfileViewBinding;
@@ -117,11 +117,11 @@ public class User_Profile_View_activity extends AppCompatActivity {
         Date date = new Date();
         String Send_Date = simpledate.format(date);
         //내 DB에 저장
-        Friends_Data request_My = new Friends_Data("ING", User_Uid, Send_Date);
+        Request_Friends_Data request_My = new Request_Friends_Data("ING", User_Uid, Send_Date);
         reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Send_Friends_Request").child(User_Uid);
         reference.setValue(request_My);
         //상대 DB에 저장
-        Friends_Data request = new Friends_Data("ING", My_Uid, Send_Date);
+        Request_Friends_Data request = new Request_Friends_Data("ING", My_Uid, Send_Date);
         reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Receive_Friends_Request").child(My_Uid);
         reference.setValue(request);
         binding.SettingFragmentSendFriendRequestBtn.setText("응답 대기중...");
@@ -135,7 +135,7 @@ public class User_Profile_View_activity extends AppCompatActivity {
                 if (!task.isSuccessful()){
                     Request_Friend_State = "NONE";
                 }else{
-                    Friends_Data request = task.getResult().getValue(Friends_Data.class);
+                    Request_Friends_Data request = task.getResult().getValue(Request_Friends_Data.class);
                     if (request == null){
                         Request_Friend_State = "NONE";
                     }else if (request.getState().equals("ING")){

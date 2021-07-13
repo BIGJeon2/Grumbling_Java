@@ -11,6 +11,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="com.bigjeon.grumbling.App_Main_Activity">
 
     <RelativeLayout
@@ -44,20 +45,11 @@
             android:id="@+id/App_Main_Notice_Civ"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_toLeftOf="@id/App_Main_User_Img_Circle_Imv"
+            android:layout_alignParentRight="true"
+            android:padding="5dp"
             android:layout_centerInParent="true"
             android:layout_marginRight="5dp"
             android:src="@drawable/ic_baseline_notifications_24">
-        </de.hdodenhof.circleimageview.CircleImageView>
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/App_Main_User_Img_Circle_Imv"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:layout_marginRight="5dp"
-            app:civ_border_width="1dp"
-            app:civ_border_color="@color/Transparent_Black70"
-            android:layout_width="40dp"
-            android:layout_height="40dp">
         </de.hdodenhof.circleimageview.CircleImageView>
     </RelativeLayout>
 
@@ -67,46 +59,53 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/white"
+        android:layout_marginTop="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Title">
-
-        <Button
-            android:id="@+id/App_Main_TimeLine_Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
+        <RelativeLayout
+            android:id="@+id/Firend_List_Btn_Container"
             android:layout_weight="1"
-            android:fontFamily="@font/uhbeerice"
-            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/App_Main_Friend_Civ"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/ic_baseline_group_24"
             android:text="타임 피드"
             android:textColor="@color/black"
             android:textSize="10dp">
-        </Button>
-
-        <Button
-            android:id="@+id/App_Main_Post_Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
+        </de.hdodenhof.circleimageview.CircleImageView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/Post_List_Btn_Container"
             android:layout_weight="1"
-            android:text="모든 게시글"
-            android:fontFamily="@font/uhbeerice"
-            android:background="@android:color/transparent"
-            android:textColor="@color/purple_200"
-            android:textSize="10dp">
-        </Button>
-
-        <Button
-            android:id="@+id/App_Main_Chatting_Btn"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/App_Main_Post_Civ"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerInParent="true"
+            android:backgroundTint="@color/purple_200"
+            android:background="@drawable/ic_baseline_article_24">
+        </de.hdodenhof.circleimageview.CircleImageView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/Chatting_List_Btn_Container"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:text="채팅 목록"
-            android:fontFamily="@font/uhbeerice"
-            android:textColor="@color/black"
-            android:textSize="10dp">
-        </Button>
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/App_Main_Chatting_Civ"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/ic_baseline_maps_ugc_24">
+        </de.hdodenhof.circleimageview.CircleImageView>
+        </RelativeLayout>
     </LinearLayout>
 
     <RelativeLayout

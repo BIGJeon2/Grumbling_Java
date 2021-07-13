@@ -8,22 +8,22 @@
             name="post_favorite_view_binding"
             type="com.bigjeon.grumbling.fragments.Chatting_List_Fragment" />
     </data>
-<FrameLayout
-    android:background="@color/white"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.bigjeon.grumbling.fragments.Chatting_List_Fragment">
-    <RelativeLayout
-        android:background="@color/white"
-        android:layout_margin="10dp"
+    <FrameLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/ChatList_View_Fragment_Rcv"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="5dp"
+        tools:context="com.bigjeon.grumbling.fragments.Friend_List_Fragment">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </androidx.recyclerview.widget.RecyclerView>
-    </RelativeLayout>
-</FrameLayout>
+            android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Chatting_List_Rcv"
+                tools:listitem="@layout/chatting_list_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </androidx.recyclerview.widget.RecyclerView>
+        </RelativeLayout>
+    </FrameLayout>
 </layout>

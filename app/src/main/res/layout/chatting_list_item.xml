@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:gravity="center"
+    android:padding="5dp">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/Chatting_List_User_Img_Civ"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@color/black"
+        android:src="@drawable/app_logo"
+        android:layout_width="45dp"
+        android:layout_height="45dp">
+    </de.hdodenhof.circleimageview.CircleImageView>
+    <TextView
+        android:id="@+id/Chatting_List_User_Name_TV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User_Name"
+        android:textColor="@color/black"
+        android:layout_marginLeft="5dp"
+        android:textSize="15dp"
+        android:layout_toRightOf="@+id/Chatting_List_User_Img_Civ">
+    </TextView>
+    <TextView
+        android:id="@+id/Chatting_List_Last_Chat_TV"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="5dp"
+        android:text="마지막 채팅"
+        android:layout_below="@id/Chatting_List_User_Name_TV"
+        android:layout_toRightOf="@id/Chatting_List_User_Img_Civ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TextView>
+    <TextView
+        android:id="@+id/Chatting_List_New_Chat_Count_TV"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:textColor="@android:color/holo_red_light"
+        android:text="10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+        <TextView
+            android:id="@+id/Chatting_List_Last_Chat_Date_TV"
+            android:layout_toLeftOf="@id/Chatting_List_New_Chat_Count_TV"
+            android:layout_alignParentBottom="true"
+            android:text="Last_Chat_Time"
+            android:textColor="@color/Transparent_Black50"
+            android:textSize="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+</RelativeLayout>
+</layout>

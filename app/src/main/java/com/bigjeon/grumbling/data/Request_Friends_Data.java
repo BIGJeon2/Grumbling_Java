@@ -1,15 +1,15 @@
 package com.bigjeon.grumbling.data;
 
-public class Friends_Data {
+public class Request_Friends_Data {
     private String State;
     private String Uid;
     private String Send_Date;
 
-    public Friends_Data(){
+    public Request_Friends_Data(){
 
     }
 
-    public Friends_Data(String state, String uid, String send_Date) {
+    public Request_Friends_Data(String state, String uid, String send_Date) {
         State = state;
         Uid = uid;
         Send_Date = send_Date;

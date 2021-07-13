@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data class=".Notification_Binding">
+        <variable
+            name="Notification_Activity"
+            type="com.bigjeon.grumbling.Notification_Activity" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bigjeon.grumbling.Notification_Activity">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Noti_Request_Friend_List_Rcv"
+        tools:listitem="@layout/request_friends_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

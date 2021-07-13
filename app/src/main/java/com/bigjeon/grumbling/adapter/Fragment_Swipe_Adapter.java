@@ -7,7 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.bigjeon.grumbling.fragments.Chatting_List_Fragment;
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
-import com.bigjeon.grumbling.fragments.TimeLine_Fragment;
+import com.bigjeon.grumbling.fragments.Friend_List_Fragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -22,7 +22,7 @@ public class Fragment_Swipe_Adapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
 
-        if (position == 0) return new TimeLine_Fragment();
+        if (position == 0) return new Friend_List_Fragment();
         else if (position == 1) return new Post_View_Fragment();
         else return new Chatting_List_Fragment();
     }

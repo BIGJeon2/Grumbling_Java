@@ -15,8 +15,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
         <RelativeLayout
-            android:background="@drawable/post_view_title_under_edge_1dp"
             android:layout_weight="11"
+            android:background="@color/Transparent_Black30"
             android:id="@+id/Post_View_Content_Container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -26,11 +26,11 @@
             <TextView
                 android:id="@+id/Chatting_Post_Content_TV"
                 android:text="포스팅 내용"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/uhbeerice"
                 android:gravity="left"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:layout_centerInParent="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -38,10 +38,11 @@
             </RelativeLayout>
     <RelativeLayout
         android:layout_weight="2"
-        android:background="@color/Transparent_Green"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
+            android:padding="5dp"
             android:id="@+id/Chatting_List_ListView"
             android:background="@android:color/transparent"
             android:layout_marginRight="5dp"
@@ -90,7 +91,7 @@
         </RelativeLayout>
     </RelativeLayout>
     <RelativeLayout
-        android:background="@drawable/top_edge_black_1dp"
+        android:background="@color/Transparent_Black30"
         android:layout_weight="10.5"
         android:id="@+id/Chatting_Edittext_Container"
         android:layout_width="match_parent"

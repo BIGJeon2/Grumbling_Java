@@ -1,6 +1,7 @@
 package com.bigjeon.grumbling;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -8,6 +9,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -23,7 +26,7 @@ import com.squareup.picasso.Picasso;
 
 public class App_Main_Activity extends AppCompatActivity implements View.OnCreateContextMenuListener{
     public static Context mcontext;
-    App_Main_Binding binding;
+    private App_Main_Binding binding;
     public String My_Uid;
     public String My_Img;
     public String My_Name;
@@ -61,77 +64,51 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
                 Button_Background_Change(position);
             }
         });
-
-        binding.AppMainUserImgCircleImv.setOnClickListener( v -> Go_User_Profile_View_Act());
-
-        binding.AppMainPostBtn.setOnCreateContextMenuListener(this);
+        binding.AppMainFriendCiv.setOnClickListener(v -> Change_Fragment_OnCLick(0));
+        binding.AppMainPostCiv.setOnClickListener(v -> Change_Fragment_OnCLick(1));
+        binding.AppMainChattingCiv.setOnClickListener(v -> Change_Fragment_OnCLick(2));
+        binding.AppMainNoticeCiv.setOnClickListener(v -> Go_Notification_Activity());
     }
 
-    private void Go_User_Profile_View_Act() {
-        Intent Go_View_My_Profile_Intent = new Intent(this, Setting_My_Profile_Activity.class);
-        Go_View_My_Profile_Intent.putExtra("UID", My_Uid);
-        startActivity(Go_View_My_Profile_Intent);
-    }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        MenuItem All_Post = menu.add(Menu.NONE, R.menu.post_view_grade_menu, 1, "모든 게시글");
-        MenuItem My_Post = menu.add(Menu.NONE, R.menu.post_view_grade_menu, 2, "나의 게시글");
-        MenuItem Favorite_Post = menu.add(Menu.NONE, R.menu.post_view_grade_menu, 3, "좋아요 게시글");
-        All_Post.setOnMenuItemClickListener(OnMenuClicked);
-        My_Post.setOnMenuItemClickListener(OnMenuClicked);
-        Favorite_Post.setOnMenuItemClickListener(OnMenuClicked);
-    }
-
-    private final MenuItem.OnMenuItemClickListener OnMenuClicked = new MenuItem.OnMenuItemClickListener() {
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            switch (item.getOrder()){
-                case 1 :
-                    Show_Grade = "모든 게시글";
-                    binding.AppMainPostBtn.setText(Show_Grade);
-                    //((Post_View_Fragment)getSupportFragmentManager().findFragmentById(R.id.App_Main_Fragment_FrameLayout)).Get_Post(Show_Grade);
-                    return true;
-                case 2 :
-                    Show_Grade = "나의 게시글";
-                    binding.AppMainPostBtn.setText(Show_Grade);
-                    //((Post_View_Fragment)findFragmentByPosition(1)).Get_Post(Show_Grade);
-                    return true;
-                case 3 :
-                    Show_Grade = "좋아요 게시글";
-                    binding.AppMainPostBtn.setText(Show_Grade);
-                    //((Post_View_Fragment)findFragmentByPosition(1)).Get_Post(Show_Grade);
-                    return true;
-            }
-            return false;
+    private void Change_Fragment_OnCLick(int i) {
+        if (i == 0){
+            binding.AppMainViewPager2.setCurrentItem(0, true);
+        }else if (i == 1){
+            binding.AppMainViewPager2.setCurrentItem(1, true);
+        }else{
+            binding.AppMainViewPager2.setCurrentItem(2, true);
         }
-    };
+    }
 
-    private void Set_My_Data(){
+    private void Go_Notification_Activity() {
+        Intent Go_Notifi = new Intent(this, Notification_Activity.class);
+        startActivity(Go_Notifi);
+    }
+
+    public void Set_My_Data(){
         SharedPreferences My_Data = getSharedPreferences("My_Data", MODE_PRIVATE);
         My_Uid = My_Data.getString("UID", null);
         My_Name = My_Data.getString("NAME", null);
         My_Img = My_Data.getString("IMG", null);
         My_Email = My_Data.getString("EMAIL", null);
-        Picasso.get().load(My_Img).into(binding.AppMainUserImgCircleImv);
     }
 
     private void Button_Background_Change(int position){
         switch (position){
             case 0 :
-                binding.AppMainTimeLineBtn.setTextColor(getColor(R.color.purple_200));
-                binding.AppMainPostBtn.setTextColor(getColor(R.color.Gray));
-                binding.AppMainChattingBtn.setTextColor(getColor(R.color.Gray));
+                binding.AppMainFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
+                binding.AppMainPostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                binding.AppMainChattingCiv.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
                 break;
             case 1 :
-                binding.AppMainTimeLineBtn.setTextColor(getColor(R.color.Gray));
-                binding.AppMainPostBtn.setTextColor(getColor(R.color.purple_200));
-                binding.AppMainChattingBtn.setTextColor(getColor(R.color.Gray));
+                binding.AppMainFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                binding.AppMainPostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
+                binding.AppMainChattingCiv.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
                 break;
             case 2 :
-                binding.AppMainTimeLineBtn.setTextColor(getColor(R.color.Gray));
-                binding.AppMainPostBtn.setTextColor(getColor(R.color.Gray));
-                binding.AppMainChattingBtn.setTextColor(getColor(R.color.purple_200));
+                binding.AppMainFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                binding.AppMainPostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                binding.AppMainChattingCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
                 break;
         }
     }
