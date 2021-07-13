@@ -5,7 +5,7 @@
         <import type="android.view.View">
         </import>
         <variable
-            name="my_post_view_binding"
+            name="My_Friends_List_binding"
             type="com.bigjeon.grumbling.fragments.TimeLine_Fragment" />
     </data>
     <FrameLayout
@@ -30,13 +30,13 @@
                 android:layout_height="match_parent">
             </Button>
             <Button
-                android:text="친구 요청"
+                android:text="채팅 방"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
             </Button>
             <Button
-                android:text="알림"
+                android:text="친구 요청"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
@@ -45,9 +45,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/Request_Friend_List_Rcv"
             android:layout_below="@id/TimeLine_Btns_Container"
-           tools:listitem="@layout/friend_request_item"
+           tools:listitem="@layout/friends_item"
            android:layout_width="match_parent"
-           android:layout_height="match_parent">
+           android:layout_height="wrap_content">
        </androidx.recyclerview.widget.RecyclerView>
        </RelativeLayout>
     </FrameLayout>

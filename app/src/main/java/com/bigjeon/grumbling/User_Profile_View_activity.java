@@ -11,22 +11,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.bigjeon.grumbling.adapter.Post_View_Rcv_Adapter;
-import com.bigjeon.grumbling.data.Friend_Request_Data;
+import com.bigjeon.grumbling.data.Friends_Data;
 import com.bigjeon.grumbling.data.Post_Data;
-import com.bigjeon.grumbling.data.User_Profile;
 import com.example.grumbling.R;
 import com.example.grumbling.databinding.ActivityUserProfileViewBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -120,23 +116,26 @@ public class User_Profile_View_activity extends AppCompatActivity {
         SimpleDateFormat simpledate = new SimpleDateFormat("yyyyMMddHHmmss");
         Date date = new Date();
         String Send_Date = simpledate.format(date);
-
-        Friend_Request_Data request = new Friend_Request_Data("ING", My_Uid, Send_Date);
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Friends").child(My_Uid);
+        //내 DB에 저장
+        Friends_Data request_My = new Friends_Data("ING", User_Uid, Send_Date);
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Send_Friends_Request").child(User_Uid);
+        reference.setValue(request_My);
+        //상대 DB에 저장
+        Friends_Data request = new Friends_Data("ING", My_Uid, Send_Date);
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Receive_Friends_Request").child(My_Uid);
         reference.setValue(request);
-
-        binding.SettingFragmentSendFriendRequestBtn.setText("요청 응답 대기중...");
+        binding.SettingFragmentSendFriendRequestBtn.setText("응답 대기중...");
     }
 
     private void Check_Friend_State(){
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Friends").child(My_Uid);
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Receive_Friends_Request").child(My_Uid);
         reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()){
                     Request_Friend_State = "NONE";
                 }else{
-                    Friend_Request_Data request = task.getResult().getValue(Friend_Request_Data.class);
+                    Friends_Data request = task.getResult().getValue(Friends_Data.class);
                     if (request == null){
                         Request_Friend_State = "NONE";
                     }else if (request.getState().equals("ING")){
