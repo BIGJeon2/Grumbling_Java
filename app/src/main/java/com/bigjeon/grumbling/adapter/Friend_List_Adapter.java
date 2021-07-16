@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,8 @@ import com.squareup.picasso.Picasso;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Friend_List_Adapter extends RecyclerView.Adapter<Friend_List_Adapter.Friend_ViewHolder> {
     private Context mContext;
@@ -52,8 +55,8 @@ public class Friend_List_Adapter extends RecyclerView.Adapter<Friend_List_Adapte
             public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        binding.FriendListUserNameTV.setText(document.get("Name").toString());
-                        Picasso.get().load(document.getString("Img")).into(binding.FriendListUserImgCiv);
+                        holder.User_Name.setText(document.get("Name").toString());
+                        Picasso.get().load(document.getString("Img")).into(holder.User_Img);
                     }
                 }
             }
@@ -68,9 +71,15 @@ public class Friend_List_Adapter extends RecyclerView.Adapter<Friend_List_Adapte
 
     public class Friend_ViewHolder extends RecyclerView.ViewHolder {
         public UserListItemBinding binding;
+        private TextView User_Name;
+        private CircleImageView User_Img;
+        private TextView User_StateMessage;
         public Friend_ViewHolder(UserListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            User_Name = binding.FriendListUserNameTV;
+            User_Img = binding.FriendListUserImgCiv;
+            User_StateMessage = binding.FriendListUserMessageTV;
         }
     }
     private void Go_User_Profile_View_Act(String UID) {

@@ -35,6 +35,7 @@ import com.bigjeon.grumbling.Google_Login_Activity;
 import com.bigjeon.grumbling.Setting_My_Profile_Activity;
 import com.bigjeon.grumbling.Show_Selected_Post_Activity;
 import com.bigjeon.grumbling.User_Profile_View_activity;
+import com.bigjeon.grumbling.data.Notification_Data;
 import com.bigjeon.grumbling.data.Post_Data;
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
 import com.bumptech.glide.Glide;
@@ -69,6 +70,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
     private Context mContext;
     private String Get_Post_Key;
     private static final String TAG = "My_Check";
+    private static final String Notification_Favorite_Key = "Add_Favorite";
     private int doubleclickFlag = 0;
     private int CLICK_DELAY = 300;
     ArrayList<Post_Data> list;
@@ -162,19 +164,6 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         }
     }
 
-    private String DateChange(String date){
-        SimpleDateFormat old_format = new SimpleDateFormat("yyyyMMddHHmmss");
-        SimpleDateFormat new_format = new SimpleDateFormat("yy.MM.dd HH:mm");
-        try {
-            Date old_date = old_format.parse(date);
-            String new_date = new_format.format(old_date);
-            return new_date;
-
-        }catch (ParseException e){
-            e.printStackTrace();
-        }
-        return null;
-    }
     @Override
     public int getItemCount() {
         return list.size();
@@ -215,6 +204,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
                 }else{
                     data.setFavorite_Count(data.getFavorite_Count() + 1);
                     data.getFavorite().put(mAuth.getCurrentUser().getUid(), true);
+                    Send_Favorite_Notification(data.getUser_Uid(), data.getPost_Title(), mAuth.getCurrentUser().getUid());
                 }
                 currentData.setValue(data);
                 return Transaction.success(currentData);
@@ -225,6 +215,17 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
 
             }
         });
+    }
+
+    public void Send_Favorite_Notification(String UID, String Title, String My_Uid){
+
+        SimpleDateFormat simpledate = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date = new Date();
+        String Send_Date = simpledate.format(date);
+
+        Notification_Data Favorite_Noti = new Notification_Data(Notification_Favorite_Key, My_Uid, Send_Date, Title);
+        DatabaseReference Other_Reference = FirebaseDatabase.getInstance().getReference("Users").child(UID).child("Notifications");
+        Other_Reference.push().setValue(Favorite_Noti);
     }
 
     public void Get_Post_Child_Listener(){
@@ -282,61 +283,6 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
                     for (DataSnapshot data : snapshot.getChildren()) {
                         Post_Data post = data.getValue(Post_Data.class);
                         if (post.getGrade().equals("모든 사용자")) list.add(0, post);
-                    }
-                    notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                }
-            });
-        }else if (Get_Post_Key.equals("나의 게시글")){
-            DB.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                    list.clear();
-                    for (DataSnapshot data : snapshot.getChildren()) {
-                        Post_Data post = data.getValue(Post_Data.class);
-                        if (post.getUser_Uid().equals(mAuth.getCurrentUser().getUid())){
-                            list.add(0, post);
-                        }
-                    }
-                    notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                }
-            });
-        }else if (Get_Post_Key.equals("좋아요 게시글")){
-            DB.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                    list.clear();
-                    for (DataSnapshot data : snapshot.getChildren()) {
-                        Post_Data post = data.getValue(Post_Data.class);
-                        if (post.getFavorite().containsKey(mAuth.getCurrentUser().getUid())) list.add(0, post);
-                    }
-                    notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                }
-            });
-        }else{
-            DB.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                    list.clear();
-                    for (DataSnapshot data : snapshot.getChildren()) {
-                        Post_Data post = data.getValue(Post_Data.class);
-                        if (post.getUser_Uid().equals(Get_Post_Key)){
-                            list.add(0, post);
-                        }
                     }
                     notifyDataSetChanged();
                 }

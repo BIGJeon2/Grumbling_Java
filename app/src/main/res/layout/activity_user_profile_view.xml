@@ -106,7 +106,7 @@
                             android:layout_height="wrap_content">
                         </de.hdodenhof.circleimageview.CircleImageView>
                         <TextView
-                            android:id="@+id/Setting_Fragment_Friend_List_Btn"
+                            android:id="@+id/Setting_Fragment_Friend_Count_TV"
                             android:layout_weight="2"
                             android:text="20"
                             android:gravity="center"
@@ -126,7 +126,7 @@
                             android:layout_height="wrap_content">
                         </de.hdodenhof.circleimageview.CircleImageView>
                         <TextView
-                            android:id="@+id/Setting_Fragment_Post_Count_Btn"
+                            android:id="@+id/Setting_Fragment_Post_Count_TV"
                             android:layout_weight="2"
                             android:text="67"
                             android:textColor="@color/black"

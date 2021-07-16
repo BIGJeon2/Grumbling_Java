@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,14 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bigjeon.grumbling.Setting_My_Profile_Activity;
-import com.bigjeon.grumbling.User_Profile_View_activity;
 import com.bigjeon.grumbling.adapter.Friend_List_Adapter;
-import com.bigjeon.grumbling.adapter.Request_Friend_List_Adapter;
 import com.bigjeon.grumbling.data.Friend_Data;
-import com.bigjeon.grumbling.data.Request_Friends_Data;
 import com.example.grumbling.R;
 import com.example.grumbling.databinding.FriendListFragmentViewBinding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,19 +52,22 @@ public class Friend_List_Fragment extends Fragment {
 
         Get_My_Profile();
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
-        lm.setStackFromEnd(true);
         Friend_Adapter = new Friend_List_Adapter(getContext(), My_Uid, Friends_List);
         binding.FriendListRcv.setAdapter(Friend_Adapter);
         binding.FriendListRcv.setLayoutManager(lm);
         binding.FriendListRcv.setHasFixedSize(true);
         binding.FriendListRcv.setNestedScrollingEnabled(false);
-        binding.FriendListRcv.scrollToPosition(0);
 
         binding.FriendListMyImgCiv.setOnClickListener(v -> Go_User_Profile_View_Act());
 
-        Get_Friend_List();
-
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Friends_List.clear();
+        Get_Friend_List();
     }
 
     private void Go_User_Profile_View_Act() {
@@ -93,8 +95,8 @@ public class Friend_List_Fragment extends Fragment {
                 for (DataSnapshot data : snapshot.getChildren()) {
                     Friend_Data friend = data.getValue(Friend_Data.class);
                     Friends_List.add(friend);
-                    Friend_Adapter.notifyDataSetChanged();
                 }
+                Friend_Adapter.notifyDataSetChanged();
             }
 
             @Override

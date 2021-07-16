@@ -1,18 +1,20 @@
 package com.bigjeon.grumbling.data;
 
-public class Request_Friends_Data {
+public class Notification_Data {
     private String State;
     private String Uid;
+    private String Post_Title;
     private String Send_Date;
 
-    public Request_Friends_Data(){
+    public Notification_Data(){
 
     }
 
-    public Request_Friends_Data(String state, String uid, String send_Date) {
+    public Notification_Data(String state, String uid, String send_Date, String post_Title) {
         State = state;
         Uid = uid;
         Send_Date = send_Date;
+        Post_Title = post_Title;
     }
 
     public String getState() {
@@ -37,5 +39,13 @@ public class Request_Friends_Data {
 
     public void setSend_Date(String send_Date) {
         Send_Date = send_Date;
+    }
+
+    public String getPost_Title() {
+        return Post_Title;
+    }
+
+    public void setPost_Title(String post_Title) {
+        Post_Title = post_Title;
     }
 }

@@ -29,8 +29,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -110,12 +113,6 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
             }
         });
     }
-    private void Get_Users_Posts() {
-        adapter.Get_Post_Single();
-        adapter.Get_Post_Child_Listener();
-        adapter.notifyDataSetChanged();
-    }
-
     private void Get_My_Data(){
         SharedPreferences My_Data = getSharedPreferences("My_Data", Context.MODE_PRIVATE);
         My_Uid = My_Data.getString("UID", null);
@@ -143,5 +140,32 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
         Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
         startActivity(Go_Login);
         finish();
+    }
+
+    private void Get_Users_Posts() {
+        Get_My_Post();
+        adapter.Get_Post_Child_Listener();
+        adapter.notifyDataSetChanged();
+    }
+
+    private void Get_My_Post(){
+            DB.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    list.clear();
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        Post_Data post = data.getValue(Post_Data.class);
+                        if (post.getUser_Uid().equals(mAuth.getCurrentUser().getUid())){
+                            list.add(0, post);
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
     }
 }
