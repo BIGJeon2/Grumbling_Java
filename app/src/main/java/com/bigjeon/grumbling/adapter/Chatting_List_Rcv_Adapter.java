@@ -78,11 +78,9 @@ public class Chatting_List_Rcv_Adapter extends RecyclerView.Adapter<Chatting_Lis
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 for (DataSnapshot data : snapshot.getChildren()) {
-                    if (holder.Last_Chat_Date.getText() == null) {
                         Chat_Data Last_Chat = data.getValue(Chat_Data.class);
                         holder.Last_Chat_Comment.setText(Last_Chat.getText());
                         holder.Last_Chat_Date.setText(Last_Chat.getWriteDate());
-                    }
                 }
             }
 

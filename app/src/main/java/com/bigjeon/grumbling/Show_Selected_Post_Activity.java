@@ -13,6 +13,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -80,8 +83,11 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         Get_Selected_Posts();
         Set_My_Data();
         Get_Chatting_List();
-
-//        binding.SelectedPostMyUserImgCiv.setOnClickListener(v -> Go_Selected_User_Profile());
+//        목록이 비어있을 경우
+//        if (list == null && list.isEmpty()){
+//            binding.SelectedPostNoneChatTextView.setVisibility(View.VISIBLE);
+//        }
+        binding.SelectedPostUserImg.setOnClickListener(v -> Go_Selected_User_Profile());
         binding.SelectedPostFavoriteCircleCIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +107,13 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         //채팅방으로 이동(아이템 뷰 클릭시 이동후 바로 답장으로 셋팅(Intent Filter이용))
         binding.SelectedPostEnterChattingCIV.setOnClickListener(v -> Go_Chat_Intent());
     }
+
+    private void Go_Selected_User_Profile() {
+        Intent Go_View_My_Profile_Intent = new Intent(this, Setting_My_Profile_Activity.class);
+        Go_View_My_Profile_Intent.putExtra("UID", Post.getUser_Uid());
+        startActivity(Go_View_My_Profile_Intent);
+    }
+
     private void Go_Chat_Intent(){
         Intent Go_Chat = new Intent(Show_Selected_Post_Activity.this, Chatting_Activity.class);
         Go_Chat.putExtra("CONTENT", binding.SelectedPostContent.getText().toString());
@@ -163,22 +176,11 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         });
 
     }
-    private String DateChange(String date){
-        SimpleDateFormat old_format = new SimpleDateFormat("yyyyMMddhhmmss");
-        old_format.setTimeZone(TimeZone.getTimeZone("KST"));
-        SimpleDateFormat new_format = new SimpleDateFormat("yy.MM.dd HH:mm");
-        try {
-            Date old_date = old_format.parse(date);
-            String new_date = new_format.format(old_date);
-            return new_date;
-
-        }catch (ParseException e){
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     private void Data_Adjust(Post_Data post){
+        if (My_Uid.equals(Post.getUser_Uid())){
+            setSupportActionBar(binding.SelectedPostToolbar);
+        }
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Users").whereEqualTo("UID", Post.getUser_Uid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -193,7 +195,6 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
             }
         });
         Glide.with(Show_Selected_Post_Activity.this).load(Post.getPost_Background()).into(binding.SelectedPostBackground);
-        binding.SelectedPostWriteDate.setText(DateChange(Post.getPost_Write_Date()));
         binding.SelectedPostContent.setText(Post.getContent());
         binding.SelectedPostContent.setTextSize(Dimension.DP, Post.getContent_Text_Size());
         binding.SelectedPostContent.setTextColor(ContextCompat.getColor(this, Post.getContent_Text_Color()));
@@ -215,7 +216,6 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
     }
 
     private void Get_Chatting_List(){
-        binding.SelectedPostNoneChatTextView.setVisibility(View.GONE);
         adapter = new Chat_rcv_Adapter(list, My_Uid, this);
         binding.ChatListRcv.setAdapter(adapter);
         LinearLayoutManager lm = new LinearLayoutManager(this);
@@ -241,5 +241,33 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.post_context_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.Change_Post:
+                Intent Go_Post_Write = new Intent(this, Post_Write_Activity.class);
+                Go_Post_Write.putExtra("KEY", "CHANGE");
+                Go_Post_Write.putExtra("TITLE", Post_Title);
+                startActivity(Go_Post_Write);
+                Toast.makeText(mContext, "수정", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.Delete_Post:
+                Toast.makeText(mContext, "삭제", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return true;
+    }
+
+    private void Delete_Posting(){
+
     }
 }

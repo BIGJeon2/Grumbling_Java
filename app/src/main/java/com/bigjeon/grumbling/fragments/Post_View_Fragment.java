@@ -2,6 +2,7 @@ package com.bigjeon.grumbling.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -21,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bigjeon.grumbling.App_Main_Activity;
+import com.bigjeon.grumbling.Post_Write_Activity;
 import com.bigjeon.grumbling.adapter.Post_View_Rcv_Adapter;
 import com.bigjeon.grumbling.data.Post_Data;
 import com.example.grumbling.App_Main_Binding;
@@ -86,13 +88,16 @@ public class Post_View_Fragment extends Fragment {
             }
         });
 
-        binding.PostWritePostStartCircleImg.setOnClickListener(V -> Alert_Post_Write_Dialog());
+        binding.PostWritePostStartCircleImg.setOnClickListener(V -> Go_Post_Write_Act());
         return root;
     }
 
-    private void Alert_Post_Write_Dialog() {
-        Post_Write_Fragment post_write_fragment = Post_Write_Fragment.getInstance();
-        post_write_fragment.show(getParentFragmentManager(), Post_Write_Fragment.TAG_POST_WRITE);
+    private void Go_Post_Write_Act() {
+        Intent Go_Post_Write = new Intent(getContext(), Post_Write_Activity.class);
+        Go_Post_Write.putExtra("KEY", "CREATE");
+        Go_Post_Write.putExtra("TITLE", "NONE");
+        getActivity().startActivity(Go_Post_Write);
+
     }
 
     public void Get_Post() {
@@ -100,4 +105,6 @@ public class Post_View_Fragment extends Fragment {
         adapter.Get_Post_Child_Listener();
         adapter.notifyDataSetChanged();
     }
+
+
 }
