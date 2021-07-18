@@ -258,16 +258,19 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
                 Go_Post_Write.putExtra("KEY", "CHANGE");
                 Go_Post_Write.putExtra("TITLE", Post_Title);
                 startActivity(Go_Post_Write);
-                Toast.makeText(mContext, "수정", Toast.LENGTH_SHORT).show();
+                finish();
                 break;
             case R.id.Delete_Post:
-                Toast.makeText(mContext, "삭제", Toast.LENGTH_SHORT).show();
+                DB = FirebaseDatabase.getInstance().getReference("Posts").child(Post_Title);
+                DB.removeValue();
+                DB = FirebaseDatabase.getInstance().getReference("Chats").child(Post_Title);
+                if (DB != null){
+                    DB.removeValue();
+                }
+                Toast.makeText(mContext, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                finish();
                 break;
         }
         return true;
-    }
-
-    private void Delete_Posting(){
-
     }
 }

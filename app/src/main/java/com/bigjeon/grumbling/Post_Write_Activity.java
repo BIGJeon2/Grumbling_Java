@@ -93,7 +93,9 @@ public class Post_Write_Activity extends AppCompatActivity {
         Intent get_key = getIntent();
         STATE = get_key.getStringExtra("KEY");
         Post_Title = get_key.getStringExtra("TITLE");
-
+        if (STATE.equals("CHANGE")){
+            Get_Selected_Posts();
+        }
         Get_User_Profile();
 
 

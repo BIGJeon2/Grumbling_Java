@@ -96,7 +96,6 @@
                 android:layout_height="40dp"
                 android:layout_alignParentBottom="true"
                 android:background="@color/white">
-
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Selected_Post_Enter_Chatting_CIV"
                     android:layout_width="25dp"
@@ -104,18 +103,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
                     android:layout_marginRight="5dp"
-                    android:src="@drawable/ic_baseline_chat_24"></de.hdodenhof.circleimageview.CircleImageView>
-
-                <TextView
-                    android:id="@+id/Selected_Post_Favorite_Count_TV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_toLeftOf="@+id/Selected_Post_Enter_Chatting_CIV"
-                    android:text="000"
-                    android:textSize="10dp"></TextView>
-
+                    android:src="@drawable/ic_baseline_chat_24">
+                </de.hdodenhof.circleimageview.CircleImageView>
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Selected_Post_Favorite_Circle_CIV"
                     android:layout_width="25dp"
@@ -123,33 +112,42 @@
                     android:layout_marginLeft="5dp"
                     android:layout_centerInParent="true"
                     android:layout_alignParentLeft="true"
-                    android:background="@drawable/ic_baseline_favorite_border_24"></de.hdodenhof.circleimageview.CircleImageView>
+                    android:background="@drawable/ic_baseline_favorite_border_24">
+                </de.hdodenhof.circleimageview.CircleImageView>
+                <TextView
+                    android:id="@+id/Selected_Post_Favorite_Count_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@+id/Selected_Post_Favorite_Circle_CIV"
+                    android:text="000"
+                    android:textSize="10dp"></TextView>
             </RelativeLayout>
         </RelativeLayout>
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5"
+            android:layout_weight="6"
             android:background="@drawable/comment_line">
-
-            <TextView
-                android:id="@+id/Selected_Post_None_Chat_TextView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="아직 채팅이 없습니다"
-                android:textColor="@color/Transparent_Black50"
-                android:textSize="20dp"
-                android:visibility="gone"></TextView>
-
+<!--            <TextView-->
+<!--                android:id="@+id/Selected_Post_None_Chat_TextView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:gravity="center"-->
+<!--                android:text="아직 채팅이 없습니다"-->
+<!--                android:textColor="@color/Transparent_Black50"-->
+<!--                android:textSize="20dp"-->
+<!--                android:visibility="gone">-->
+<!--            </TextView>-->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Chat_List_Rcv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:padding="5dp"
-                tools:listitem="@layout/other_chatting_item"></androidx.recyclerview.widget.RecyclerView>
+                tools:listitem="@layout/other_chatting_item">
+            </androidx.recyclerview.widget.RecyclerView>
         </RelativeLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

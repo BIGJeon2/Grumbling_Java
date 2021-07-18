@@ -253,13 +253,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
 
             @Override
             public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
-                Post_Data post = snapshot.getValue(Post_Data.class);
-                for (int i = 0; i < list.size(); i++){
-                    if (list.get(i).getPost_Title().equals(post.getPost_Title())){
-                        list.set(i, post);
-                    }
-                }
-                notifyDataSetChanged();
+                Get_Post_Single();
             }
 
             @Override
