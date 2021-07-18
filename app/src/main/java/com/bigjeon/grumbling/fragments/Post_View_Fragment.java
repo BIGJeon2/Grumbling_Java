@@ -60,7 +60,6 @@ public class Post_View_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_view, container, false);
         View root = binding.getRoot();
-        View v = inflater.inflate(R.layout.fragment_post_view, container, false);
 
         mcontext = this.getContext();
         mAuth = FirebaseAuth.getInstance();
@@ -69,8 +68,8 @@ public class Post_View_Fragment extends Fragment {
         My_Uid = mAuth.getCurrentUser().getUid();
 
         RecyclerView rcv = binding.PostRecyclerView;
-        adapter = new Post_View_Rcv_Adapter(getContext(), list, Get_Content_Grade);
-        LinearLayoutManager lm = new LinearLayoutManager(v.getContext());
+        adapter = new Post_View_Rcv_Adapter(mcontext, list, Get_Content_Grade);
+        LinearLayoutManager lm = new LinearLayoutManager(mcontext);
         rcv.setLayoutManager(lm);
         rcv.setAdapter(adapter);
         rcv.setHasFixedSize(true);

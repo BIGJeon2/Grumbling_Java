@@ -1,6 +1,7 @@
 package com.bigjeon.grumbling.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bigjeon.grumbling.User_Profile_View_activity;
 import com.bigjeon.grumbling.data.Chat_Data;
 import com.example.grumbling.R;
 import com.example.grumbling.databinding.MyChattingItemBinding;
@@ -116,6 +118,9 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     }
                 }
             });
+            //상대방 프로필 사진 클릭시 유저 프로필로 이동
+            ((Other_Chat_ViewHolder) holder).User_Img.setOnClickListener(v -> Intent_To_User_Profile(Chat_Datas.get(position).getUid()));
+
         } else {
             ((Other_Repling_Chat_ViewHolder) holder).Comment.setText(Chat_Datas.get(position).getText());
             ((Other_Repling_Chat_ViewHolder) holder).Write_Date.setText(Chat_Datas.get(position).getWriteDate());
@@ -143,14 +148,21 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     }
                 }
             });
+            ((Other_Repling_Chat_ViewHolder) holder).User_Img.setOnClickListener(v -> Intent_To_User_Profile(Chat_Datas.get(position).getUid()));
         }
+    }
+
+    private void Intent_To_User_Profile(String uid) {
+        Intent Go_User_Profile = new Intent(mContext, User_Profile_View_activity.class);
+        Go_User_Profile.putExtra("UID", uid);
+        mContext.startActivity(Go_User_Profile);
     }
 
     @Override
     public int getItemCount() {
         return Chat_Datas.size();
     }
-///////
+
     @Override
     public int getItemViewType(int position) {
         if (Chat_Datas.get(position).getUid().equals(My_Uid)){

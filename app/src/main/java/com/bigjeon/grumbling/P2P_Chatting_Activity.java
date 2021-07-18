@@ -17,9 +17,8 @@ import com.bigjeon.grumbling.adapter.Chat_OnClickListener;
 import com.bigjeon.grumbling.adapter.Chat_rcv_Adapter;
 import com.bigjeon.grumbling.data.Chat_Data;
 import com.bigjeon.grumbling.data.Chat_User_Uid_Data;
-import com.bigjeon.grumbling.data.Post_Data;
 import com.example.grumbling.R;
-import com.example.grumbling.databinding.Chat_Binding;
+import com.example.grumbling.databinding.P2P_Chat_Binding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
@@ -27,7 +26,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -36,12 +34,15 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
-public class Chatting_Activity extends AppCompatActivity {
-    Chat_Binding binding;
-    private String Content;
+public class P2P_Chatting_Activity extends AppCompatActivity {
+    P2P_Chat_Binding binding;
     private String My_Uid;
-    private String Post_Title;
+    private String User_Uid;
+    private String Chatting_Room_ID;
     private String Reply_Target_Uid = "NONE";
     private String Reply_Target_Text = "NONE";
     private boolean First_Chat_Status = true;
@@ -52,18 +53,22 @@ public class Chatting_Activity extends AppCompatActivity {
     private FirebaseDatabase DB;
     private DatabaseReference reference;
     private ChildEventListener listener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_chatting);
-        binding.setChatActivity(this);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_p2p_chatting);
+        binding.setP2PChatActivity(this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
+        //인테트를 통해 유저 UID, 내 UID 받아옴
         Intent Get_Data = getIntent();
-        Content = Get_Data.getStringExtra("CONTENT");
-        My_Uid = Get_Data.getStringExtra("UID");
-        Post_Title = Get_Data.getStringExtra("TITLE");
-        binding.ChattingPostContentTV.setText(Content);
+        My_Uid = Get_Data.getStringExtra("MY_UID");
+        User_Uid = Get_Data.getStringExtra("USER_UID");
+
+        Set_Chatting_Room_ID();
+        Check_Chatting_State();
+        binding.ChattingPostContentTV.setText(User_Uid);
 
         //list뷰 설정
         adapter = new Chat_rcv_Adapter(list, My_Uid, this);
@@ -75,7 +80,7 @@ public class Chatting_Activity extends AppCompatActivity {
                 Reply_Target_Uid = list.get(pos).getUid();
                 Reply_Target_Text = list.get(pos).getText();
                 binding.RepliedText.setText(Reply_Target_Text);
-                Toast.makeText(Chatting_Activity.this, Reply_Target_Uid, Toast.LENGTH_SHORT).show();
+                Toast.makeText(P2P_Chatting_Activity.this, Reply_Target_Uid, Toast.LENGTH_SHORT).show();
                 Get_Replied_Target_Name(Reply_Target_Uid);
             }
         });
@@ -87,7 +92,7 @@ public class Chatting_Activity extends AppCompatActivity {
         binding.ChattingListListView.scrollToPosition(0);
 
         DB = FirebaseDatabase.getInstance();
-        reference = DB.getReference("Chats").child(Post_Title);
+        reference = DB.getReference("Chat_Room").child(Chatting_Room_ID);
         reference.addChildEventListener(Regist_DB_Listener());
 
         binding.ChattingSendCIV.setOnClickListener(v -> Send_Message());
@@ -174,6 +179,56 @@ public class Chatting_Activity extends AppCompatActivity {
             Reply_Target_Text = "NONE";
         }else{
             super.onBackPressed();
+        }
+    }
+
+    private void Set_Chatting_Room_ID(){
+        ArrayList<String> UID = new ArrayList<>();
+        UID.add(0, My_Uid);
+        UID.add(1, User_Uid);
+
+        Comparator<String> comparator = new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        };
+
+        Collections.sort(UID, comparator);
+
+        Chatting_Room_ID = UID.get(0) + UID.get(1);
+    }
+
+    private void Check_Chatting_State(){
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
+        reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()){
+                    First_Chat_Status = true;
+                }else{
+                    Chat_User_Uid_Data chat_data = task.getResult().getValue(Chat_User_Uid_Data.class);
+                    if (chat_data == null){
+                        First_Chat_Status = true;
+                    }else{
+                        First_Chat_Status = false;
+                    }
+                }
+            }
+        });
+        Add_Chatting_Room_To_Profile();
+    }
+
+    private void Add_Chatting_Room_To_Profile(){
+        if (First_Chat_Status == true){
+            Chat_User_Uid_Data My_data = new Chat_User_Uid_Data(User_Uid, Chatting_Room_ID);
+            reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
+            reference.setValue(My_data);
+            Chat_User_Uid_Data User_data = new Chat_User_Uid_Data(My_Uid, Chatting_Room_ID);
+            reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
+            reference.setValue(User_data);
+
+            First_Chat_Status = false;
         }
     }
 }

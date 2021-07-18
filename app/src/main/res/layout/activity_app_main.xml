@@ -17,7 +17,7 @@
     <RelativeLayout
         android:id="@+id/Title"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,8 +43,8 @@
         </ImageView>
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/App_Main_Notice_Civ"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:padding="5dp"
             android:layout_centerInParent="true"

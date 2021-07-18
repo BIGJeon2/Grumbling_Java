@@ -2,6 +2,7 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/User_List_Container"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
@@ -29,7 +30,7 @@
             android:layout_toRightOf="@+id/Friend_List_User_Img_Civ">
         </TextView>
         <TextView
-            android:id="@+id/Friend_List_User_Message_TV"
+            android:id="@+id/Friend_List_User_Uid_TV"
             android:text="상태 메세지입니다."
             android:layout_marginTop="3dp"
             android:textSize="10dp"

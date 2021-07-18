@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -57,11 +58,12 @@ public class Friend_List_Adapter extends RecyclerView.Adapter<Friend_List_Adapte
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         holder.User_Name.setText(document.get("Name").toString());
                         Picasso.get().load(document.getString("Img")).into(holder.User_Img);
+                        holder.User_UID.setText("#" + document.getString("UID"));
                     }
                 }
             }
         });
-        binding.FriendListUserImgCiv.setOnClickListener(v -> Go_User_Profile_View_Act(Friends_List.get(position).getUid()));
+        holder.Container.setOnClickListener(v -> Go_User_Profile_View_Act(Friends_List.get(position).getUid()));
     }
 
     @Override
@@ -71,15 +73,17 @@ public class Friend_List_Adapter extends RecyclerView.Adapter<Friend_List_Adapte
 
     public class Friend_ViewHolder extends RecyclerView.ViewHolder {
         public UserListItemBinding binding;
+        private RelativeLayout Container;
         private TextView User_Name;
         private CircleImageView User_Img;
-        private TextView User_StateMessage;
+        private TextView User_UID;
         public Friend_ViewHolder(UserListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            Container = binding.UserListContainer;
             User_Name = binding.FriendListUserNameTV;
             User_Img = binding.FriendListUserImgCiv;
-            User_StateMessage = binding.FriendListUserMessageTV;
+            User_UID = binding.FriendListUserUidTV;
         }
     }
     private void Go_User_Profile_View_Act(String UID) {

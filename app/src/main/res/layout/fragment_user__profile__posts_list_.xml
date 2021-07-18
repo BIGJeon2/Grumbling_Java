@@ -1,0 +1,23 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View">
+        </import>
+        <variable
+            name="User_Posts_List_binding"
+            type="com.bigjeon.grumbling.fragments.User_Profile_PostsList_Fragment" />
+    </data>
+<FrameLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bigjeon.grumbling.fragments.User_Profile_PostsList_Fragment">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/User_PostList_Fragment_RCV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/post_view_item">
+    </androidx.recyclerview.widget.RecyclerView>
+</FrameLayout>
+</layout>

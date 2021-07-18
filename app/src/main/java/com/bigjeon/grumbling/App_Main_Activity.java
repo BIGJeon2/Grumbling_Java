@@ -31,8 +31,6 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
     public String My_Img;
     public String My_Name;
     public String My_Email;
-    private String Show_Grade = "모든 게시글";
-    private Post_View_Fragment frag = new Post_View_Fragment();
     private FragmentStateAdapter ViewPager_Adapter;
 
     @Override

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 <RelativeLayout
+    android:id="@+id/Chatting_List_Container"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_marginTop="5dp"
     android:layout_width="match_parent"

@@ -5,18 +5,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bigjeon.grumbling.adapter.Fragment_Swipe_Adapter;
 import com.bigjeon.grumbling.adapter.Post_View_Rcv_Adapter;
+import com.bigjeon.grumbling.adapter.User_Profile_Frgment_Swipe_Adapter;
 import com.bigjeon.grumbling.data.Friend_Data;
 import com.bigjeon.grumbling.data.Notification_Data;
 import com.bigjeon.grumbling.data.Post_Data;
+import com.bigjeon.grumbling.fragments.User_Profile_FriendsList_Fragment;
+import com.bigjeon.grumbling.fragments.User_Profile_PostsList_Fragment;
 import com.example.grumbling.R;
 import com.example.grumbling.databinding.ActivityUserProfileViewBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,19 +46,16 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class User_Profile_View_activity extends AppCompatActivity {
-    private FirebaseAuth mAuth;
-    private String User_Uid;
-    private DatabaseReference reference;
-    private String Get_Post_Key = "유저 게시글";
-    private String Friend_State = "NONE";
-    private String Notification_Key = "Add_Friend";
-    private ActivityUserProfileViewBinding binding;
-    private Post_View_Rcv_Adapter adapter;
-    private ArrayList<Post_Data> list = new ArrayList<>();
+
     private String My_Uid;
     private String My_Name;
     private String My_Img;
-    private String My_Email;
+    public String User_Uid;
+    private DatabaseReference reference;
+    private String Friend_State = "NONE";
+    private String Notification_Key = "Add_Friend";
+    private ActivityUserProfileViewBinding binding;
+    private User_Profile_Frgment_Swipe_Adapter User_Profile_ViewPager_Adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,35 +65,71 @@ public class User_Profile_View_activity extends AppCompatActivity {
 
         Get_My_Data();
 
+        User_Profile_ViewPager_Adapter = new User_Profile_Frgment_Swipe_Adapter(this);
+        binding.UserProfileViewPager2.setAdapter(User_Profile_ViewPager_Adapter);
+        binding.UserProfileViewPager2.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+        binding.UserProfileViewPager2.setCurrentItem(0, true);
+        binding.UserProfileViewPager2.setOffscreenPageLimit(1);
+
+        binding.UserProfileViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                if (positionOffsetPixels == 0){
+                    binding.UserProfileViewPager2.setCurrentItem(position);
+                }
+            }
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                Button_Background_Change(position);
+            }
+        });
+
         Intent intent = getIntent();
         User_Uid = intent.getStringExtra("UID");
         if (!User_Uid.equals(My_Uid)) {
             Set_Users_Data();
-            Get_Post_Key = User_Uid;
         } else {
             Picasso.get().load(My_Img).into(binding.SettingFragmentMyProfileImgCiv);
             binding.SettingFragmentMyNameTv.setText("#." + My_Name);
         }
 
-        mAuth = FirebaseAuth.getInstance();
-
-        RecyclerView rcv = binding.SettingFragmnetUserPostsRCV;
-        adapter = new Post_View_Rcv_Adapter(this, list, Get_Post_Key);
-        LinearLayoutManager lm = new LinearLayoutManager(this);
-        rcv.setLayoutManager(lm);
-        rcv.setAdapter(adapter);
-        rcv.setHasFixedSize(true);
-
         Check_My_Friend_State();
-        Get_Users_Posts();
+
+        binding.SettingFragmentChattingCiv.setOnClickListener(v -> Intent_To_P2P_Chatting());
 
         binding.SettingFragmentSendFriendRequestBtn.setOnClickListener(v -> Send_Friend_Request());
-        binding.SettingFragmentPostCountCiv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(User_Profile_View_activity.this, Integer.toString(adapter.getItemCount()), Toast.LENGTH_SHORT).show();
-            }
-        });
+        binding.UserProfilePostCiv.setOnClickListener(v -> Change_Fragment_OnCLick(0));
+        binding.UserProfileFriendCiv.setOnClickListener(v -> Change_Fragment_OnCLick(1));
+    }
+
+    private void Intent_To_P2P_Chatting() {
+        Intent GO_P2P_Chat = new Intent(this, P2P_Chatting_Activity.class);
+        GO_P2P_Chat.putExtra("USER_UID", User_Uid);
+        GO_P2P_Chat.putExtra("MY_UID", My_Uid);
+        startActivity(GO_P2P_Chat);
+    }
+
+    private void Change_Fragment_OnCLick(int i) {
+        if (i == 0) {
+            binding.UserProfileViewPager2.setCurrentItem(0, true);
+        } else{
+            binding.UserProfileViewPager2.setCurrentItem(1, true);
+        }
+    }
+
+    private void Button_Background_Change(int position) {
+        switch (position) {
+            case 0:
+                binding.UserProfilePostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
+                binding.UserProfileFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                break;
+            case 1:
+                binding.UserProfilePostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                binding.UserProfileFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
+                break;
+        }
     }
 
     private void Set_Users_Data() {
@@ -108,18 +148,12 @@ public class User_Profile_View_activity extends AppCompatActivity {
             }
         });
     }
-    private void Get_Users_Posts() {
-        Get_Post();
-        adapter.Get_Post_Child_Listener();
-        adapter.notifyDataSetChanged();
-    }
 
     private void Get_My_Data(){
         SharedPreferences My_Data = getSharedPreferences("My_Data", Context.MODE_PRIVATE);
         My_Uid = My_Data.getString("UID", null);
         My_Name = My_Data.getString("NAME", null);
         My_Img = My_Data.getString("IMG", null);
-        My_Email = My_Data.getString("EMAIL", null);
     }
 
     private void Send_Friend_Request(){
@@ -158,29 +192,8 @@ public class User_Profile_View_activity extends AppCompatActivity {
             }
         });
     }
-    /*
-    유저 포스트중 모든 보안이 모든 사용자일 경우만 보여줌
-     */
-    private void Get_Post(){
-        reference = FirebaseDatabase.getInstance().getReference("Posts");
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                    list.clear();
-                    for (DataSnapshot data : snapshot.getChildren()) {
-                        Post_Data post = data.getValue(Post_Data.class);
-                        if (post.getUser_Uid().equals(User_Uid) && post.getGrade().equals("모든 사용자")){
-                            list.add(0, post);
-                        }
-                    }
-                    binding.SettingFragmentPostCountTV.setText(Integer.toString(adapter.getItemCount()));
-                    adapter.notifyDataSetChanged();
-                }
 
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                }
-            });
+    public String SendData(){
+        return User_Uid;
     }
 }
