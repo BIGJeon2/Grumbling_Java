@@ -28,17 +28,6 @@
             tools:listitem="@layout/post_view_item">
         </androidx.recyclerview.widget.RecyclerView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/Post_Write_Post_Start_CircleImg"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:backgroundTint="@color/white"
-        app:fabCustomSize="50dp"
-        android:src="@drawable/ic_baseline_post_add_24"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="30dp">
-    </com.google.android.material.floatingactionbutton.FloatingActionButton></RelativeLayout>
+    </RelativeLayout>
 </FrameLayout>
 </layout>

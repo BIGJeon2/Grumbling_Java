@@ -45,11 +45,19 @@
             android:id="@+id/App_Main_Notice_Civ"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignParentRight="true"
             android:padding="5dp"
+            android:layout_toLeftOf="@id/App_Main_Write_Post_CIV"
             android:layout_centerInParent="true"
-            android:layout_marginRight="5dp"
             android:src="@drawable/ic_baseline_notifications_24">
+        </de.hdodenhof.circleimageview.CircleImageView>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/App_Main_Write_Post_CIV"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_baseline_post_add_24"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true">
         </de.hdodenhof.circleimageview.CircleImageView>
     </RelativeLayout>
 

@@ -66,6 +66,7 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         binding.AppMainPostCiv.setOnClickListener(v -> Change_Fragment_OnCLick(1));
         binding.AppMainChattingCiv.setOnClickListener(v -> Change_Fragment_OnCLick(2));
         binding.AppMainNoticeCiv.setOnClickListener(v -> Go_Notification_Activity());
+        binding.AppMainWritePostCIV.setOnClickListener(v -> Go_Post_Write_Act());
     }
 
     private void Change_Fragment_OnCLick(int i) {
@@ -109,5 +110,13 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
                 binding.AppMainChattingCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
                 break;
         }
+    }
+
+    private void Go_Post_Write_Act() {
+        Intent Go_Post_Write = new Intent(this, Post_Write_Activity.class);
+        Go_Post_Write.putExtra("KEY", "CREATE");
+        Go_Post_Write.putExtra("TITLE", "NONE");
+        startActivity(Go_Post_Write);
+
     }
 }

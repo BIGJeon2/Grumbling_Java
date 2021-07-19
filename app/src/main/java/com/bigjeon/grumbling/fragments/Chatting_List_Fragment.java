@@ -72,6 +72,7 @@ public class Chatting_List_Fragment extends Fragment {
                     Chat_User_Uid_Data chat = data.getValue(Chat_User_Uid_Data.class);
                     chat_list.add(chat);
                 }
+
                 adapter.notifyDataSetChanged();
             }
 

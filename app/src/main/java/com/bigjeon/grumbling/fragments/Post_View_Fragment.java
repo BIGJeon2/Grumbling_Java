@@ -88,16 +88,7 @@ public class Post_View_Fragment extends Fragment {
             }
         });
 
-        binding.PostWritePostStartCircleImg.setOnClickListener(V -> Go_Post_Write_Act());
         return root;
-    }
-
-    private void Go_Post_Write_Act() {
-        Intent Go_Post_Write = new Intent(getContext(), Post_Write_Activity.class);
-        Go_Post_Write.putExtra("KEY", "CREATE");
-        Go_Post_Write.putExtra("TITLE", "NONE");
-        getActivity().startActivity(Go_Post_Write);
-
     }
 
     public void Get_Post() {
