@@ -9,6 +9,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +31,8 @@ import com.bigjeon.grumbling.adapter.DB_Posting_Bacground_GIF_Adapter;
 import com.bigjeon.grumbling.adapter.Gif_OnClikListener;
 import com.bigjeon.grumbling.data.DB_Posting_Background_GIF;
 import com.bigjeon.grumbling.data.Post_Data;
+import com.bigjeon.grumbling.factory.Post_Write_VM_Factory;
+import com.bigjeon.grumbling.viewmodel.Post_Write_ViewModel;
 import com.bumptech.glide.Glide;
 import com.example.grumbling.R;
 import com.example.grumbling.databinding.ActivityPostWriteBinding;
@@ -84,6 +88,7 @@ public class Post_Write_Activity extends AppCompatActivity {
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference reference = database.getReference("Posts");
+    private Post_Write_ViewModel VM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +102,9 @@ public class Post_Write_Activity extends AppCompatActivity {
             Get_Selected_Posts();
         }
         Get_User_Profile();
-
+//        //뷰모델 호출 / 데이터 변경 이벤트시 데이터 바로 적용
+//        VM = new ViewModelProvider(this, new Post_Write_VM_Factory()).get(Post_Write_ViewModel.class);
+//        Observer<Post_Data> Post = post_data -> Data_Adjust(post_data);
 
         //글자 크기==============================================
         binding.DialogPostingContentTextSizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

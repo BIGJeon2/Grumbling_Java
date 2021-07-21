@@ -10,7 +10,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         type="com.bigjeon.grumbling.Setting_My_Profile_Activity" />
 </data>
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_margin="5dp"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,82 +22,58 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         <LinearLayout
             android:background="@color/white"
             android:orientation="vertical"
-            android:layout_weight="3"
+            android:layout_weight="1.5"
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <RelativeLayout
-                android:layout_weight="5"
                 android:layout_margin="5dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="match_parent">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Setting_Fragment_My_Profile_Img_Civ"
                     android:layout_alignParentLeft="true"
                     android:src="@drawable/ic_launcher_background"
                     app:civ_border_color="@color/Transparent_Black70"
                     app:civ_border_width="2dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
+                    android:layout_width="65dp"
+                    android:layout_height="65dp">
                 </de.hdodenhof.circleimageview.CircleImageView>
-                <TextView
-                    android:layout_weight="1"
-                    android:id="@+id/Setting_Fragment_My_Name_Tv"
-                    android:text="Big_Jeon"
-                    android:padding="2dp"
-                    android:textSize="15dp"
-                    android:gravity="center"
-                    android:layout_below="@id/Setting_Fragment_My_Profile_Img_Civ"
-                    android:layout_toLeftOf="@+id/Setting_Fragment_User_Profile_Container"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </TextView>
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/Setting_Fragment_User_Profile_Container"
                     android:orientation="vertical"
                     android:padding="5dp"
                     android:layout_toRightOf="@+id/Setting_Fragment_My_Profile_Img_Civ"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <LinearLayout
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
                         android:layout_weight="1"
+                        android:id="@+id/Setting_Fragment_My_Name_Tv"
+                        android:text="Big_Jeon"
+                        android:padding="2dp"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </TextView>
+                    <TextView
+                        android:id="@+id/My_Profile_activity_User_UID_TV"
+                        android:layout_below="@id/Setting_Fragment_My_Name_Tv"
+                        android:textSize="10dp"
+                        android:padding="2dp"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp">
-                        <Button
-                            android:id="@+id/Setting_Fragment_Follower_List_Btn"
-                            android:layout_weight="1"
-                            android:text="팔로워"
-                            android:background="@android:color/transparent"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                        </Button>
-                        <Button
-                            android:id="@+id/Setting_Fragment_Following_List_Btn"
-                            android:layout_weight="1"
-                            android:text="팔로잉"
-                            android:background="@android:color/transparent"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                        </Button>
-                        <Button
-                            android:id="@+id/Setting_Fragment_Chatting_Btn"
-                            android:layout_weight="1"
-                            android:text="채팅"
-                            android:background="@android:color/transparent"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                        </Button>
-                    </LinearLayout>
+                        android:layout_height="wrap_content">
+                    </TextView>
                     <LinearLayout
                         android:id="@+id/Setting_Fragment_Setting_Btns_Container"
-                        android:layout_weight="1"
+                        android:layout_below="@id/My_Profile_activity_User_UID_TV"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:gravity="center_vertical"
-                        android:layout_height="0dp">
+                        android:layout_height="wrap_content">
                         <Button
                             android:id="@+id/Setting_Fragment_Unregister_Btn"
                             android:layout_weight="1"
@@ -124,7 +99,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                             android:layout_height="wrap_content">
                         </Button>
                     </LinearLayout>
-                </LinearLayout>
+                </RelativeLayout>
             </RelativeLayout>
         </LinearLayout>
         <RelativeLayout

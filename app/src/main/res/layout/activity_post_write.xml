@@ -9,12 +9,11 @@
             name="post_write_activity_binding"
             type="com.bigjeon.grumbling.Post_Write_Activity" />
     </data>
-
     <RelativeLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <RelativeLayout
             android:id="@+id/Top_Bar"
             android:layout_width="match_parent"
@@ -55,6 +54,7 @@
             android:layout_height="350dp"
             android:layout_below="@+id/Top_Bar">
             <FrameLayout
+                android:background="@color/Transparent_Black30"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <ImageView
@@ -84,7 +84,8 @@
                 android:id="@+id/Dialog_Posting_Set_Img"
                 android:layout_marginLeft="10dp"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/ic_baseline_insert_photo_24"
+                android:backgroundTint="@color/purple_200"
+                android:background="@drawable/ic_baseline_insert_photo_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </de.hdodenhof.circleimageview.CircleImageView>

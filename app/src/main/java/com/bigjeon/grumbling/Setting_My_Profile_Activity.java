@@ -78,7 +78,8 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
             Get_Post_Key = User_Uid;
         }else{
             Picasso.get().load(My_Img).into(binding.SettingFragmentMyProfileImgCiv);
-            binding.SettingFragmentMyNameTv.setText("#." + My_Name);
+            binding.SettingFragmentMyNameTv.setText(My_Name);
+            binding.MyProfileActivityUserUIDTV.setText("#" + My_Uid);
         }
 
         mAuth = FirebaseAuth.getInstance();

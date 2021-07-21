@@ -65,7 +65,7 @@ public class Chatting_List_Rcv_Adapter extends RecyclerView.Adapter<Chatting_Lis
             @Override
             public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) { 
+                    for (QueryDocumentSnapshot document : task.getResult()) {
                         holder.User_Name.setText(document.getString("Name"));
                         Picasso.get().load(document.getString("Img")).into(holder.User_Img);
                         break;

@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -51,6 +52,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
     private ArrayList<Chat_Data> list = new ArrayList<>();
 
     private FirebaseDatabase DB;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DatabaseReference reference;
     private ChildEventListener listener;
 
@@ -66,9 +68,9 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
         My_Uid = Get_Data.getStringExtra("MY_UID");
         User_Uid = Get_Data.getStringExtra("USER_UID");
 
+        Get_User_Data();
         Set_Chatting_Room_ID();
         Check_Chatting_State();
-        binding.ChattingPostContentTV.setText(User_Uid);
 
         //list뷰 설정
         adapter = new Chat_rcv_Adapter(list, My_Uid, this);
@@ -99,9 +101,21 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
 
     }
 
-    private void Get_Replied_Target_Name(String Uid) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private void Get_User_Data() {
+        db.collection("Users").whereEqualTo("UID", User_Uid).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        binding.ChattingPostContentTV.setText(document.getString("Name"));
+                        break;
+                    }
+                }
+            }
+        });
+    }
 
+    private void Get_Replied_Target_Name(String Uid) {
         db.collection("Users").whereEqualTo("UID", Uid).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
