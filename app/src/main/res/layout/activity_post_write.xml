@@ -79,7 +79,7 @@
             android:id="@+id/Dialog_Posting_Setting_Container"
             android:layout_below="@+id/Dialog_Posting_Content_Container"
             android:layout_width="match_parent"
-            android:layout_height="150dp">
+            android:layout_height="match_parent">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Dialog_Posting_Set_Img"
                 android:layout_marginLeft="10dp"
@@ -93,7 +93,7 @@
                 android:id="@+id/Dialog_Posting_Set_Text"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/Dialog_Posting_Set_Img"
-                android:src="@drawable/ic_baseline_text_format_24"
+                android:background="@drawable/ic_baseline_text_format_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </de.hdodenhof.circleimageview.CircleImageView>
@@ -110,112 +110,17 @@
                 android:layout_height="35dp">
             </Button>
             <RelativeLayout
-                android:id="@+id/Dialog_Posting_Background_Container"
-                android:visibility="visible"
-                android:layout_below="@id/Dialog_Posting_Set_Text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/Dialog_Posting_Background_Gallery"
-                    android:background="@drawable/ic_baseline_insert_photo_24"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginRight="5dp"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp">
-                </de.hdodenhof.circleimageview.CircleImageView>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/Dialog_Posting_Background_DB_Rcv"
-                    android:layout_centerInParent="true"
-                    tools:listitem="@layout/db_gif_img_item"
-                    android:layout_toLeftOf="@+id/Dialog_Posting_Background_Gallery"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginRight="10dp">
-                </androidx.recyclerview.widget.RecyclerView>
-            </RelativeLayout>
-            <LinearLayout
-                android:id="@+id/Dialog_Posting_Text_Set_Container"
-                android:layout_below="@id/Dialog_Posting_Set_Text"
-                android:visibility="invisible"
-                android:orientation="vertical"
+                android:layout_below="@id/Dialog_Posting_Set_Img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <RelativeLayout
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
-                    <TextView
-                        android:id="@+id/Dialog_Posting_Content_Text_Size"
-                        android:textColor="@color/black"
-                        android:text="글자 크기"
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                    </TextView>
-                    <SeekBar
-                        android:id="@+id/Dialog_Posting_Content_Text_Size_SeekBar"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:max="60"
-                        android:min="30"
-                        android:progress="45"
-                        android:layout_toRightOf="@id/Dialog_Posting_Content_Text_Size"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                    </SeekBar>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
-                    <TextView
-                        android:id="@+id/Dialog_Posting_Content_Text_Color"
-                        android:text="글자 색상"
-                        android:textColor="@color/black"
-                        android:gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
-                    </TextView>
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/Dialog_Posting_Content_Text_Color_Rcv"
-                        android:layout_toRightOf="@+id/Dialog_Posting_Content_Text_Color"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginLeft="20dp"
-                        tools:listitem="@layout/color_item">
-                    </androidx.recyclerview.widget.RecyclerView>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
-                    <TextView
-                        android:id="@+id/Dialog_Posting_Content_Text_BackColor"
-                        android:text="배경 색상"
-                        android:textColor="@color/black"
-                        android:gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
-                    </TextView>
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/Dialog_Posting_Content_Text_BackColor_Rcv"
-                        android:layout_toRightOf="@+id/Dialog_Posting_Content_Text_BackColor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginLeft="20dp"
-                        tools:listitem="@layout/color_item">
-                    </androidx.recyclerview.widget.RecyclerView>
-                </RelativeLayout>
-            </LinearLayout>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/Post_Write_ViewPager2"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </androidx.viewpager2.widget.ViewPager2>
+            </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>
 </layout>

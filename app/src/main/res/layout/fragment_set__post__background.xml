@@ -1,0 +1,34 @@
+<layout>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.bigjeon.grumbling.fragments.Set_Post_Background_Fragment">
+    <RelativeLayout
+        android:id="@+id/Dialog_Posting_Background_Container"
+        android:visibility="visible"
+        android:layout_below="@id/Dialog_Posting_Set_Text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/Dialog_Posting_Background_Gallery"
+            android:background="@drawable/ic_baseline_insert_photo_24"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="5dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp">
+        </de.hdodenhof.circleimageview.CircleImageView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Dialog_Posting_Background_DB_Rcv"
+            android:layout_centerInParent="true"
+            tools:listitem="@layout/db_gif_img_item"
+            android:layout_toLeftOf="@+id/Dialog_Posting_Background_Gallery"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginRight="10dp">
+        </androidx.recyclerview.widget.RecyclerView>
+    </RelativeLayout>
+</FrameLayout>
+</layout>
