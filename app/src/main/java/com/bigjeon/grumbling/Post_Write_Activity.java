@@ -69,6 +69,7 @@ public class Post_Write_Activity extends AppCompatActivity {
     private ActivityPostWriteBinding binding;
     private Post_Write_ViewPager2_Adapter ViewPager_Adapter;
     private String STATE = "CREATE";
+    private int key = 0;
     private Post_Data post_data;
     private String Grade_All = "모든 사용자";
     private String Grade_Friends = "친구 공개";
@@ -100,9 +101,9 @@ public class Post_Write_Activity extends AppCompatActivity {
         }else{
             Set_First_State();
         }
-
-        Observer<Post_Data> post = post_data -> Data_Adjust(post_data);
-        VM.Get_Post().observe(this, post);
+        VM.get_Post().observe(this, post -> Data_Adjust(post_data));
+        VM.getIMG_String().observe(this, img -> Glide.with(this).load(img).into(binding.DialogPostingBackground));
+        VM.getIMG_URI().observe(this, img -> Glide.with(this).load(img).into(binding.DialogPostingBackground));
 
         //ViewPager2
         ViewPager_Adapter = new Post_Write_ViewPager2_Adapter(this);
@@ -164,7 +165,7 @@ public class Post_Write_Activity extends AppCompatActivity {
                     String Title = data.getValue(Post_Data.class).getPost_Title();
                     if (Title.equals(Post_Title)){
                         post_data = data.getValue(Post_Data.class);
-                        VM.Get_Post().setValue(post_data);
+                        VM.set_Post(post_data);
                     }
                 }
             }
@@ -183,20 +184,20 @@ public class Post_Write_Activity extends AppCompatActivity {
         User_Uid = sharedPreferences.getString("UID", null);
         binding.DialogPostingUserName.setText(User_Name);
         Picasso.get().load(sharedPreferences.getString("IMG", null)).into(binding.DialogPostingUserImg);
-        post_data = new Post_Data("NONE",
+        post_data = new Post_Data(null,
                 User_Uid,
-                "NONE",
+                null,
                 "모든 사용자",
                 45,
                 R.color.black,
                 R.color.Transparent_Black30,
-                "NONE",
-                "NONE",
+                null,
+                null,
                 0,
                 0,
                 Favorite);
-        VM.Get_Post().setValue(post_data);
-        VM.setIMG_Status("STRING");
+        VM.set_Post(post_data);
+        VM.setIMG_State("NONE");
     }
     //수정일시 데이터 적용시켜줌
     private void Data_Adjust(Post_Data post) {
@@ -204,11 +205,17 @@ public class Post_Write_Activity extends AppCompatActivity {
         binding.DialogPostingContent.setTextSize(Dimension.DP, post.getContent_Text_Size());
         binding.DialogPostingContent.setBackgroundColor(ContextCompat.getColor(this, post.getContent_Back_Color()));
         binding.DialogPostingContent.setTextColor(ContextCompat.getColor(this, post.getContent_Text_Color()));
-        Glide.with(this).load(post.getPost_Background()).into(binding.DialogPostingBackground);
         binding.DialogPostingSetGrade.setText(post.getGrade());
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+        if (post.getPost_Background() != null && key == 0){
+            if (VM.getIMG_State().equals("String")){
+                Glide.with(this).load(VM.IMG_String).into(binding.DialogPostingBackground);
+                key++;
+            }else{
+                Glide.with(this).load(VM.IMG_URI).into(binding.DialogPostingBackground);
+                key++;
+            }
+        }
         db.collection("Users").whereEqualTo("UID", post.getUser_Uid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
@@ -229,7 +236,8 @@ public class Post_Write_Activity extends AppCompatActivity {
         builder.setTitle("공개 범위 설정").setItems(Grade, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                VM.Post.getValue().setGrade(Grade[which]);
+                post_data.setGrade(Grade[which]);
+                VM.set_Post(post_data);
                 Toast.makeText(Post_Write_Activity.this, "공개 범위 : " + Posting_Grade, Toast.LENGTH_SHORT).show();
             }
         });
@@ -247,27 +255,28 @@ public class Post_Write_Activity extends AppCompatActivity {
             VM.Post.getValue().setPost_Title(Posting_Write_Date + User_Uid);
         }
         //작성글이 있을 경우에만 저장
-        if (VM.Get_Post().getValue().getContent().length() > 2) {
-            if (VM.IMG_Status.equals("Uri")){
+        if (VM.get_Post().getValue().getContent().length() > 2) {
+            if (VM.getIMG_State().equals("Uri")){
                 String File_Name = Posting_Write_Date + User_Uid + ".png";
                 FirebaseStorage storage = FirebaseStorage.getInstance();
                 final StorageReference Post_Img_Ref = storage.getReference("Posting_Images/" + File_Name);
                 //개인 사진 등록했으니 바로 경로 가져와줌
-                UploadTask uploadTask = Post_Img_Ref.putFile(VM.IMG_URI.getValue());
+                UploadTask uploadTask = Post_Img_Ref.putFile(VM.getIMG_URI().getValue());
                 uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Post_Img_Ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                VM.Post.getValue().setPost_Background(uri.toString());
-                                reference.child(Post_Title).setValue(VM.Post);
+                                VM.get_Post().getValue().setPost_Background(uri.toString());
+                                reference.child(Post_Title).setValue(VM.get_Post().getValue());
                             }
                         });
                     }
                 });
-            }else{
-                reference.child(VM.Get_Post().getValue().getPost_Title()).setValue(VM.Get_Post());
+            }else {
+                VM.get_Post().getValue().setPost_Background(VM.getIMG_String().getValue());
+                reference.child(VM.get_Post().getValue().getPost_Title()).setValue(VM.get_Post().getValue());
             }
             Toast.makeText(Post_Write_Activity.this, "게시글이 정상적으로 등록되었습니다!", Toast.LENGTH_SHORT).show();
             finish();

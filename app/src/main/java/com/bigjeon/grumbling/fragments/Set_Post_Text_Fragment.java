@@ -43,7 +43,7 @@ public class Set_Post_Text_Fragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set__post__text, container, false);
         View root = binding.getRoot();
 
-        VM = new ViewModelProvider(this, new Post_Write_VM_Factory()).get(Post_Write_ViewModel.class);
+        VM = new ViewModelProvider(requireActivity(), new Post_Write_VM_Factory()).get(Post_Write_ViewModel.class);
 
         Set_Content_Back_Color();
         Set_Content_Color();
@@ -51,7 +51,8 @@ public class Set_Post_Text_Fragment extends Fragment {
         binding.DialogPostingContentTextSizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                VM.Post.getValue().setContent_Text_Size(seekBar.getProgress());
+                VM.get_Post().getValue().setContent_Text_Size(seekBar.getProgress());
+                VM.set_Post(VM.get_Post().getValue());
             }
 
             @Override
@@ -60,7 +61,8 @@ public class Set_Post_Text_Fragment extends Fragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                VM.Post.getValue().setContent_Text_Size(seekBar.getProgress());
+                VM.get_Post().getValue().setContent_Text_Size(seekBar.getProgress());
+                VM.set_Post(VM.get_Post().getValue());
             }
         });
 
@@ -75,7 +77,8 @@ public class Set_Post_Text_Fragment extends Fragment {
             @Override
             public void onItemClick(Color_Select_Rcv_Adapter.Holder_Color holder_color, View v, int pos) {
                 Posting_Content_BackColor = color_adapter.Get_Color(pos);
-                VM.Post.getValue().setContent_Back_Color(Posting_Content_BackColor);
+                VM.get_Post().getValue().setContent_Back_Color(Posting_Content_BackColor);
+                VM.set_Post(VM.get_Post().getValue());
             }
         });
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
@@ -92,7 +95,8 @@ public class Set_Post_Text_Fragment extends Fragment {
         color_adapter.setOnClickListener(new Color_Adapter_OnClickListener() {
             @Override
             public void onItemClick(Color_Select_Rcv_Adapter.Holder_Color holder_color, View v, int pos) {
-                VM.Post.getValue().setContent_Text_Color(color_adapter.Get_Color(pos));
+                VM.get_Post().getValue().setContent_Text_Color(color_adapter.Get_Color(pos));
+                VM.set_Post(VM.get_Post().getValue());
             }
         });
         LinearLayoutManager lm = new LinearLayoutManager(getContext());

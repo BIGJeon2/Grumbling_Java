@@ -45,7 +45,7 @@ public class Set_Post_Background_Fragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set__post__background, container, false);
         View root = binding.getRoot();
 
-        VM = new ViewModelProvider(this, new Post_Write_VM_Factory()).get(Post_Write_ViewModel.class);
+        VM = new ViewModelProvider(requireActivity(), new Post_Write_VM_Factory()).get(Post_Write_ViewModel.class);
 
         Get_Gif_In_raw();
         binding.DialogPostingBackgroundGallery.setOnClickListener(v -> Get_Img_In_Gallery());
@@ -61,8 +61,8 @@ public class Set_Post_Background_Fragment extends Fragment {
         adapter.setOnClickListener(new Gif_OnClikListener() {
             @Override
             public void onItemClcick(DB_Posting_Bacground_GIF_Adapter.Holder_Gif holder_gif, View view, int position) {
-                VM.setIMG_Status("STRING");
-                VM.IMG_String.setValue(adapter.Get_Gif(position).getGIF());
+                VM.setIMG_State("String");
+                VM.setIMG_String(adapter.Get_Gif(position).getGIF());
             }
         });
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
@@ -82,8 +82,8 @@ public class Set_Post_Background_Fragment extends Fragment {
             new ActivityResultCallback<Uri>() {
                 @Override
                 public void onActivityResult(Uri result) {
-                    VM.IMG_URI.setValue(result);
-                    VM.setIMG_Status("URI");
+                    VM.setIMG_URI(result);
+                    VM.setIMG_State("Uri");
                 }
             });
 

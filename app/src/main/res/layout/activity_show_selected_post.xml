@@ -9,11 +9,10 @@
             name="select_post_view"
             type="com.bigjeon.grumbling.Show_Selected_Post_Activity" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.bigjeon.grumbling.Show_Selected_Post_Activity">
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/Selected_Post_Toolbar"
         android:layout_width="match_parent"
@@ -25,7 +24,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white">
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Selected_Post_User_Img"
                 android:layout_width="30dp"
@@ -38,7 +36,6 @@
                 app:civ_border_color="@color/Transparent_Black70"
                 app:civ_border_width="1dp">
             </de.hdodenhof.circleimageview.CircleImageView>
-
             <TextView
                 android:id="@+id/Selected_Post_User_Name"
                 android:layout_width="wrap_content"
@@ -53,20 +50,18 @@
                 android:textStyle="bold"></TextView>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
-
     <LinearLayout
+        android:layout_below="@id/Selected_Post_Toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/Selected_Post_Toolbar">
-
         <RelativeLayout
             android:id="@+id/Selected_Post_Content_Container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="5.5"
             android:background="@color/white">
-
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -128,27 +123,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6"
-            android:background="@drawable/comment_line">
-<!--            <TextView-->
-<!--                android:id="@+id/Selected_Post_None_Chat_TextView"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:gravity="center"-->
-<!--                android:text="아직 채팅이 없습니다"-->
-<!--                android:textColor="@color/Transparent_Black50"-->
-<!--                android:textSize="20dp"-->
-<!--                android:visibility="gone">-->
-<!--            </TextView>-->
+            android:layout_weight="6">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Chat_List_Rcv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:padding="5dp"
                 tools:listitem="@layout/other_chatting_item">
             </androidx.recyclerview.widget.RecyclerView>
         </RelativeLayout>
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
 </layout>
