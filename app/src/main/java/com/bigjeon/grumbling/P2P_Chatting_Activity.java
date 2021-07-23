@@ -136,7 +136,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
                 Chat_Data chat_data = snapshot.getValue(Chat_Data.class);
                 list.add(chat_data);
                 adapter.notifyDataSetChanged();
-                binding.ChattingListListView.scrollToPosition(list.size() - 1);
+                binding.ChattingListListView.scrollToPosition(list.size());
             }
 
             @Override
@@ -170,12 +170,11 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
             Chat_Id = Time + My_Uid;
             Chat_Data chat_data = new Chat_Data(My_Uid, Message, Time, Reply_Target_Text, Reply_Target_Uid, Chat_Id);
             reference.push().setValue(chat_data);
-
             binding.ChattingETV.setText("");
             binding.ReplidedEditContainer.setVisibility(View.GONE);
             Reply_Target_Uid = "NONE";
             Reply_Target_Text = "NONE";
-
+            Set_Last_Chat_Time(Time);
         }
     }
 
@@ -235,14 +234,23 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
 
     private void Add_Chatting_Room_To_Profile(){
         if (First_Chat_Status == true){
-            Chat_User_Uid_Data My_data = new Chat_User_Uid_Data(User_Uid, Chatting_Room_ID);
+            Chat_User_Uid_Data My_data = new Chat_User_Uid_Data(User_Uid, Chatting_Room_ID, null);
             reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
             reference.setValue(My_data);
-            Chat_User_Uid_Data User_data = new Chat_User_Uid_Data(My_Uid, Chatting_Room_ID);
+            Chat_User_Uid_Data User_data = new Chat_User_Uid_Data(My_Uid, Chatting_Room_ID, null);
             reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
             reference.setValue(User_data);
 
             First_Chat_Status = false;
         }
+    }
+
+    private void Set_Last_Chat_Time(String time){
+        Chat_User_Uid_Data My_data = new Chat_User_Uid_Data(User_Uid, Chatting_Room_ID, time);
+        DatabaseReference My_ref = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
+        reference.setValue(My_data);
+        Chat_User_Uid_Data User_data = new Chat_User_Uid_Data(My_Uid, Chatting_Room_ID, time);
+        DatabaseReference Other_ref = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
+        reference.setValue(User_data);
     }
 }

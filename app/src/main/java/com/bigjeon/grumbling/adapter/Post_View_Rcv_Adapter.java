@@ -227,45 +227,54 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         DatabaseReference Other_Reference = FirebaseDatabase.getInstance().getReference("Users").child(UID).child("Notifications");
         Other_Reference.push().setValue(Favorite_Noti);
     }
+    //Child리스너 등록
+    public void Get_Post_Child_Listener() {
+        DB.addChildEventListener(Post_Child_Listener());
+    }
+    //Child리스너 해제
+    public void Remove_Post_Child_Listener() {
+        DB.removeEventListener(Post_Child_Listener());
+    }
 
-    public void Get_Post_Child_Listener(){
-        DB.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-                Post_Data post = snapshot.getValue(Post_Data.class);
-                if (post.getUser_Uid().equals(mAuth.getCurrentUser().getUid())){
+    public ChildEventListener Post_Child_Listener(){
+            ChildEventListener Post_ChildListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+                    Post_Data post = snapshot.getValue(Post_Data.class);
+                    if (post.getUser_Uid().equals(mAuth.getCurrentUser().getUid())) {
+                        Get_Post_Single();
+                    }
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+                    Post_Data post = snapshot.getValue(Post_Data.class);
+                    for (int i = 0; i < list.size(); i++) {
+                        if (list.get(i).getPost_Title().equals(post.getPost_Title())) {
+                            list.set(i, post);
+                            Log.d(TAG, "@@@@@@@@@@@@2" + list.get(i).getContent());
+                        }
+                    }
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
                     Get_Post_Single();
                 }
-                notifyDataSetChanged();
-            }
 
-            @Override
-            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-                Post_Data post = snapshot.getValue(Post_Data.class);
-                for (int i = 0; i < list.size(); i++){
-                    if (list.get(i).getPost_Title().equals(post.getPost_Title())){
-                        list.set(i, post);
-                        Log.d(TAG, "@@@@@@@@@@@@2" + list.get(i).getContent());
-                    }
+                @Override
+                public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
                 }
-                notifyDataSetChanged();
-            }
 
-            @Override
-            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
-                Get_Post_Single();
-            }
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-            @Override
-            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
+                }
+            };
+            return Post_ChildListener;
     }
 
     public void Get_Post_Single(){

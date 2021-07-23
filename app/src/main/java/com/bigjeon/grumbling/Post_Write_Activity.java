@@ -99,6 +99,7 @@ public class Post_Write_Activity extends AppCompatActivity {
         if (STATE.equals("CHANGE")){
             Get_Selected_Posts();
         }else{
+            Toast.makeText(this, STATE, Toast.LENGTH_SHORT).show();
             Set_First_State();
         }
         VM.get_Post().observe(this, post -> Data_Adjust(post_data));
@@ -166,6 +167,11 @@ public class Post_Write_Activity extends AppCompatActivity {
                     if (Title.equals(Post_Title)){
                         post_data = data.getValue(Post_Data.class);
                         VM.set_Post(post_data);
+                        binding.DialogPostingContent.setText(post_data.getContent());
+                        if (post_data.getPost_Background() != null){
+                            VM.setIMG_State("String");
+                            VM.setIMG_String(post_data.getPost_Background());
+                        }
                     }
                 }
             }
@@ -201,19 +207,20 @@ public class Post_Write_Activity extends AppCompatActivity {
     }
     //수정일시 데이터 적용시켜줌
     private void Data_Adjust(Post_Data post) {
-        binding.DialogPostingContent.setText(post.getContent());
+//        binding.DialogPostingContent.setText(post.getContent());
         binding.DialogPostingContent.setTextSize(Dimension.DP, post.getContent_Text_Size());
         binding.DialogPostingContent.setBackgroundColor(ContextCompat.getColor(this, post.getContent_Back_Color()));
         binding.DialogPostingContent.setTextColor(ContextCompat.getColor(this, post.getContent_Text_Color()));
         binding.DialogPostingSetGrade.setText(post.getGrade());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         if (post.getPost_Background() != null && key == 0){
-            if (VM.getIMG_State().equals("String")){
-                Glide.with(this).load(VM.IMG_String).into(binding.DialogPostingBackground);
-                key++;
+            Glide.with(this).load(post.getPost_Background()).into(binding.DialogPostingBackground);
+            key++;
+        }else if (post.getPost_Background() != null){
+            if (VM.IMG_State.getValue().equals("String")){
+                Glide.with(this).load(VM.getIMG_String().getValue()).into(binding.DialogPostingBackground);
             }else{
-                Glide.with(this).load(VM.IMG_URI).into(binding.DialogPostingBackground);
-                key++;
+                Glide.with(this).load(VM.getIMG_URI().getValue()).into(binding.DialogPostingBackground);
             }
         }
         db.collection("Users").whereEqualTo("UID", post.getUser_Uid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

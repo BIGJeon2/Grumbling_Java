@@ -169,4 +169,10 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
                 }
             });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Get_Users_Posts();
+    }
 }

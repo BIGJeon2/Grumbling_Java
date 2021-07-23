@@ -97,5 +97,15 @@ public class Post_View_Fragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        adapter.Remove_Post_Child_Listener();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.Get_Post_Child_Listener();
+    }
 }

@@ -80,6 +80,7 @@ public class Chatting_List_Rcv_Adapter extends RecyclerView.Adapter<Chatting_Lis
                 for (DataSnapshot data : snapshot.getChildren()) {
                         Chat_Data Last_Chat = data.getValue(Chat_Data.class);
                         holder.Last_Chat_Comment.setText(Last_Chat.getText());
+                        Chatting_Room_List.get(position).setLast_Date(Last_Chat.getWriteDate());
                         holder.Last_Chat_Date.setText(Last_Chat.getWriteDate());
                 }
             }
