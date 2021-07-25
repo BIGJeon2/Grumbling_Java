@@ -51,7 +51,7 @@ public class Chatting_Activity extends AppCompatActivity {
 
     private FirebaseDatabase DB;
     private DatabaseReference reference;
-    private ChildEventListener listener;
+    private ValueEventListener listener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +88,7 @@ public class Chatting_Activity extends AppCompatActivity {
 
         DB = FirebaseDatabase.getInstance();
         reference = DB.getReference("Chats").child(Post_Title);
-        reference.addChildEventListener(Regist_DB_Listener());
+        reference.addValueEventListener(Regist_DB_Listener());
 
         binding.ChattingSendCIV.setOnClickListener(v -> Send_Message());
 
@@ -110,36 +110,23 @@ public class Chatting_Activity extends AppCompatActivity {
         });
     }
 
-    private ChildEventListener Regist_DB_Listener(){
-        listener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-                Chat_Data chat_data = snapshot.getValue(Chat_Data.class);
-                list.add(chat_data);
-                adapter.notifyDataSetChanged();
-                binding.ChattingListListView.scrollToPosition(list.size() - 1);
-            }
+    private ValueEventListener Regist_DB_Listener(){
+       listener = new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+               list.clear();
+               for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                   list.add(dataSnapshot.getValue(Chat_Data.class));
+               }
+               adapter.notifyDataSetChanged();
+               binding.ChattingListListView.smoothScrollToPosition(adapter.getItemCount() - 1);
+           }
 
-            @Override
-            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+           @Override
+           public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        };
+           }
+       };
         return listener;
     }
 
@@ -151,7 +138,6 @@ public class Chatting_Activity extends AppCompatActivity {
             Chat_Id = Time + My_Uid;
             Chat_Data chat_data = new Chat_Data(My_Uid, Message, Time, Reply_Target_Text, Reply_Target_Uid, Chat_Id);
             reference.push().setValue(chat_data);
-
             binding.ChattingETV.setText("");
             binding.ReplidedEditContainer.setVisibility(View.GONE);
             Reply_Target_Uid = "NONE";
@@ -172,6 +158,7 @@ public class Chatting_Activity extends AppCompatActivity {
             binding.ReplidedEditContainer.setVisibility(View.GONE);
             Reply_Target_Uid = "NONE";
             Reply_Target_Text = "NONE";
+            binding.ChattingListListView.scrollToPosition(list.size() - 1);
         }else{
             super.onBackPressed();
         }

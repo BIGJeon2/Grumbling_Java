@@ -26,6 +26,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -54,7 +55,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
     private FirebaseDatabase DB;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DatabaseReference reference;
-    private ChildEventListener listener;
+    private ValueEventListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
                 Reply_Target_Uid = list.get(pos).getUid();
                 Reply_Target_Text = list.get(pos).getText();
                 binding.RepliedText.setText(Reply_Target_Text);
-                Toast.makeText(P2P_Chatting_Activity.this, Reply_Target_Uid, Toast.LENGTH_SHORT).show();
+                Toast.makeText(P2P_Chatting_Activity.this, pos, Toast.LENGTH_SHORT).show();
                 Get_Replied_Target_Name(Reply_Target_Uid);
             }
         });
@@ -91,11 +92,10 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
         binding.ChattingListListView.setLayoutManager(lm);
         binding.ChattingListListView.setHasFixedSize(true);
         binding.ChattingListListView.setNestedScrollingEnabled(false);
-        binding.ChattingListListView.scrollToPosition(0);
 
         DB = FirebaseDatabase.getInstance();
         reference = DB.getReference("Chat_Room").child(Chatting_Room_ID);
-        reference.addChildEventListener(Regist_DB_Listener());
+        reference.addValueEventListener(Regist_DB_Listener());
 
         binding.ChattingSendCIV.setOnClickListener(v -> Send_Message());
 
@@ -129,29 +129,16 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
         });
     }
 
-    private ChildEventListener Regist_DB_Listener(){
-        listener = new ChildEventListener() {
+    private ValueEventListener Regist_DB_Listener(){
+        listener = new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-                Chat_Data chat_data = snapshot.getValue(Chat_Data.class);
-                list.add(chat_data);
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                list.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    list.add(dataSnapshot.getValue(Chat_Data.class));
+                }
                 adapter.notifyDataSetChanged();
-                binding.ChattingListListView.scrollToPosition(list.size());
-            }
-
-            @Override
-            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-
+                binding.ChattingListListView.smoothScrollToPosition(adapter.getItemCount() - 1);
             }
 
             @Override
@@ -169,12 +156,13 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
             String Time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
             Chat_Id = Time + My_Uid;
             Chat_Data chat_data = new Chat_Data(My_Uid, Message, Time, Reply_Target_Text, Reply_Target_Uid, Chat_Id);
+            Add_Chatting_Room_To_Profile(Time, Message);
+            reference = DB.getReference("Chat_Room").child(Chatting_Room_ID);
             reference.push().setValue(chat_data);
             binding.ChattingETV.setText("");
             binding.ReplidedEditContainer.setVisibility(View.GONE);
             Reply_Target_Uid = "NONE";
             Reply_Target_Text = "NONE";
-            Set_Last_Chat_Time(Time);
         }
     }
 
@@ -229,28 +217,16 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
                 }
             }
         });
-        Add_Chatting_Room_To_Profile();
     }
 
-    private void Add_Chatting_Room_To_Profile(){
-        if (First_Chat_Status == true){
-            Chat_User_Uid_Data My_data = new Chat_User_Uid_Data(User_Uid, Chatting_Room_ID, null);
+    private void Add_Chatting_Room_To_Profile(String Last_Chat, String Write_Date){
+            Chat_User_Uid_Data My_data = new Chat_User_Uid_Data(User_Uid, Chatting_Room_ID, Last_Chat, Write_Date);
             reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
             reference.setValue(My_data);
-            Chat_User_Uid_Data User_data = new Chat_User_Uid_Data(My_Uid, Chatting_Room_ID, null);
+            Chat_User_Uid_Data User_data = new Chat_User_Uid_Data(My_Uid, Chatting_Room_ID, Last_Chat, Write_Date);
             reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
             reference.setValue(User_data);
 
             First_Chat_Status = false;
         }
-    }
-
-    private void Set_Last_Chat_Time(String time){
-        Chat_User_Uid_Data My_data = new Chat_User_Uid_Data(User_Uid, Chatting_Room_ID, time);
-        DatabaseReference My_ref = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
-        reference.setValue(My_data);
-        Chat_User_Uid_Data User_data = new Chat_User_Uid_Data(My_Uid, Chatting_Room_ID, time);
-        DatabaseReference Other_ref = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
-        reference.setValue(User_data);
-    }
 }

@@ -68,29 +68,13 @@ public class Chatting_List_Rcv_Adapter extends RecyclerView.Adapter<Chatting_Lis
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         holder.User_Name.setText(document.getString("Name"));
                         Picasso.get().load(document.getString("Img")).into(holder.User_Img);
+                        holder.Last_Chat_Date.setText(Chatting_Room_List.get(position).getLast_Date());
+                        holder.Last_Chat_Comment.setText(Chatting_Room_List.get(position).getLast_Content());
                         break;
                     }
                 }
             }
         });
-        reference = FirebaseDatabase.getInstance().getReference("Chat_Room").child(Chatting_Room_List.get(position).getChat_Room_Id());
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                for (DataSnapshot data : snapshot.getChildren()) {
-                        Chat_Data Last_Chat = data.getValue(Chat_Data.class);
-                        holder.Last_Chat_Comment.setText(Last_Chat.getText());
-                        Chatting_Room_List.get(position).setLast_Date(Last_Chat.getWriteDate());
-                        holder.Last_Chat_Date.setText(Last_Chat.getWriteDate());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
-
         holder.itemview.setOnClickListener(v -> Go_P2PChat(My_Uid, Chatting_Room_List.get(position).getUser_Uid()));
     }
 

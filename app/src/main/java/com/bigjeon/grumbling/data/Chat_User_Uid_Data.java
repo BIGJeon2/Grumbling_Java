@@ -4,15 +4,17 @@ public class Chat_User_Uid_Data {
     private String User_Uid;
     private String Chat_Room_Id;
     private String Last_Date;
+    private String Last_Content;
 
     public Chat_User_Uid_Data(){
 
     }
 
-    public Chat_User_Uid_Data(String user_Uid, String chat_Room_Id, String last_Date) {
+    public Chat_User_Uid_Data(String user_Uid, String chat_Room_Id, String last_Date, String last_Content) {
         User_Uid = user_Uid;
         Chat_Room_Id = chat_Room_Id;
         Last_Date = last_Date;
+        Last_Content = last_Content;
     }
 
     public String getUser_Uid() {
@@ -37,5 +39,13 @@ public class Chat_User_Uid_Data {
 
     public void setLast_Date(String last_Date) {
         Last_Date = last_Date;
+    }
+
+    public String getLast_Content() {
+        return Last_Content;
+    }
+
+    public void setLast_Content(String last_Content) {
+        Last_Content = last_Content;
     }
 }

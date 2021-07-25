@@ -47,7 +47,8 @@
                 android:text="User_Name"
                 android:textColor="@color/black"
                 android:textSize="10dp"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold">
+            </TextView>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
     <LinearLayout
@@ -123,12 +124,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:padding="5dp"
             android:layout_weight="6">
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Chat_List_Rcv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:divider="@color/white"
+                android:descendantFocusability="blocksDescendants"
                 tools:listitem="@layout/other_chatting_item">
             </androidx.recyclerview.widget.RecyclerView>
         </RelativeLayout>

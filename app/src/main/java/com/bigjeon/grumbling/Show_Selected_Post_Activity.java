@@ -223,7 +223,6 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         binding.ChatListRcv.setLayoutManager(lm);
         binding.ChatListRcv.setHasFixedSize(true);
         binding.ChatListRcv.setNestedScrollingEnabled(false);
-        binding.ChatListRcv.scrollToPosition(0);
         DatabaseReference Chat_DB = FirebaseDatabase.getInstance().getReference("Chats").child(Post_Title);
         Chat_DB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -241,6 +240,7 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
 
             }
         });
+        binding.ChatListRcv.scrollToPosition(list.size() - 1);
     }
 
     @Override

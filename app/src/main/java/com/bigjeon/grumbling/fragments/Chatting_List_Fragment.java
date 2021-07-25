@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.bigjeon.grumbling.adapter.Chatting_List_Rcv_Adapter;
 import com.bigjeon.grumbling.adapter.Notification_List_Adapter;
+import com.bigjeon.grumbling.data.Chat_Data;
 import com.bigjeon.grumbling.data.Chat_User_Uid_Data;
 import com.bigjeon.grumbling.data.Notification_Data;
 import com.bigjeon.grumbling.data.Post_Data;
@@ -90,11 +91,11 @@ public class Chatting_List_Fragment extends Fragment {
         ChildEventListener Chat_Listener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-                 Chat_User_Uid_Data chat_room = snapshot.getValue(Chat_User_Uid_Data.class);
+                 Chat_User_Uid_Data Chat_Room = snapshot.getValue(Chat_User_Uid_Data.class);
                  for (int i = 0; i < chat_list.size(); i++){
-                     if (chat_list.get(i).getChat_Room_Id().equals(chat_room.getChat_Room_Id())){
+                     if (chat_list.get(i).getChat_Room_Id().equals(Chat_Room.getChat_Room_Id())){
                          chat_list.remove(i);
-                         chat_list.add(0, chat_room);
+                         chat_list.add(0, Chat_Room);
                      }
                  }
                 adapter.notifyDataSetChanged();
@@ -102,7 +103,14 @@ public class Chatting_List_Fragment extends Fragment {
 
             @Override
             public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-
+                Chat_User_Uid_Data Chat_Room = snapshot.getValue(Chat_User_Uid_Data.class);
+                for (int i = 0; i < chat_list.size(); i++){
+                    if (chat_list.get(i).getChat_Room_Id().equals(Chat_Room.getChat_Room_Id())){
+                        chat_list.remove(i);
+                        chat_list.add(0, Chat_Room);
+                    }
+                }
+                adapter.notifyDataSetChanged();
             }
 
             @Override

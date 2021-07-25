@@ -20,6 +20,7 @@ import com.example.grumbling.databinding.OtherChattingItemBinding;
 import com.example.grumbling.databinding.OtherChattingReplyBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -38,14 +39,14 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private OtherChattingReplyBinding Other_Repling_binding;
     private MyChattingReplyBinding My_Repling_binding;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    ArrayList<Chat_Data> Chat_Datas;
-    String My_Uid;
-    Chat_OnClickListener listener;
+    private ArrayList<Chat_Data> Chat_Datas;
+    private String My_Uid;
+    private Chat_OnClickListener listener;
     private Context mContext;
 
     public Chat_rcv_Adapter(ArrayList<Chat_Data> chat_Datas, String my_Uid, Context mContext) {
-        Chat_Datas = chat_Datas;
-        My_Uid = my_Uid;
+        this.Chat_Datas = chat_Datas;
+        this.My_Uid = my_Uid;
         this.mContext = mContext;
     }
 
@@ -163,6 +164,7 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return Chat_Datas.size();
     }
 
+    //이것이 문제입니다
     @Override
     public int getItemViewType(int position) {
         if (Chat_Datas.get(position).getUid().equals(My_Uid)){
@@ -183,6 +185,8 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void Set_Chat_rcv_Adapter(Chat_OnClickListener listener) {
         this.listener = listener;
     }
+
+
 
     @Override
     public void OnItemClicked(RecyclerView.ViewHolder Holder, View v, int pos) {
@@ -285,4 +289,5 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             });
         }
     }
+
 }

@@ -42,6 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <androidx.recyclerview.widget.RecyclerView
+                android:descendantFocusability="blocksDescendants"
                 android:padding="5dp"
                 android:id="@+id/Chatting_List_ListView"
                 android:background="@android:color/transparent"
