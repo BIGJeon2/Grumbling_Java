@@ -63,31 +63,31 @@ public class Chatting_List_Fragment extends Fragment {
     public void onResume() {
         super.onResume();
         chat_list.clear();
-        Get_Chatting_Room();
+        //Get_Chatting_Room();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List");
         reference.addChildEventListener(Chat_Child_Listener());
     }
     //이게문제임
-    private void Get_Chatting_Room(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List");
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                chat_list.clear();
-                for (DataSnapshot data : snapshot.getChildren()) {
-                    Chat_User_Uid_Data chat = data.getValue(Chat_User_Uid_Data.class);
-                    chat_list.add(chat);
-                }
-                //채팅방 최신순으로 정렬 해줌, 해당 채팅 내부 안읽은 메세지 갯수 설정
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
-    }
+//    private void Get_Chatting_Room(){
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List");
+//        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//                chat_list.clear();
+//                for (DataSnapshot data : snapshot.getChildren()) {
+//                    Chat_User_Uid_Data chat = data.getValue(Chat_User_Uid_Data.class);
+//                    chat_list.add(chat);
+//                }
+//                //채팅방 최신순으로 정렬 해줌, 해당 채팅 내부 안읽은 메세지 갯수 설정
+//                adapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
     private ChildEventListener Chat_Child_Listener(){
         ChildEventListener Chat_Listener = new ChildEventListener() {
             @Override
