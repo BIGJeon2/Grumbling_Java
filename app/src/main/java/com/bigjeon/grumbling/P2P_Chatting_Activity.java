@@ -34,11 +34,15 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class P2P_Chatting_Activity extends AppCompatActivity {
     P2P_Chat_Binding binding;
@@ -69,12 +73,13 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
         My_Uid = Get_Data.getStringExtra("MY_UID");
         User_Uid = Get_Data.getStringExtra("USER_UID");
 
+
         Get_User_Data();
         Set_Chatting_Room_ID();
         Check_Chatting_State();
 
         //list뷰 설정
-        adapter = new Chat_rcv_Adapter(list, My_Uid, this);
+        adapter = new Chat_rcv_Adapter(list, My_Uid, this, true);
         binding.ChattingListListView.setAdapter(adapter);
         adapter.Set_Chat_rcv_Adapter(new Chat_OnClickListener() {
             @Override
@@ -83,15 +88,12 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
                 Reply_Target_Uid = list.get(pos).getUid();
                 Reply_Target_Text = list.get(pos).getText();
                 binding.RepliedText.setText(Reply_Target_Text);
-                Toast.makeText(P2P_Chatting_Activity.this, pos, Toast.LENGTH_SHORT).show();
                 Get_Replied_Target_Name(Reply_Target_Uid);
             }
         });
         LinearLayoutManager lm = new LinearLayoutManager(this);
-        lm.setStackFromEnd(true);
         binding.ChattingListListView.setLayoutManager(lm);
         binding.ChattingListListView.setHasFixedSize(true);
-        binding.ChattingListListView.setNestedScrollingEnabled(false);
 
         DB = FirebaseDatabase.getInstance();
         reference = DB.getReference("Chat_Room").child(Chatting_Room_ID);
@@ -131,14 +133,20 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
 
     private ValueEventListener Regist_DB_Listener(){
         listener = new ValueEventListener() {
+            Map<String, Object> Read_Users = new HashMap<>();
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 list.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    list.add(dataSnapshot.getValue(Chat_Data.class));
+                    Chat_Data data = dataSnapshot.getValue(Chat_Data.class);
+                    if (!data.getUid().equals(My_Uid) && !data.getRead_Users().containsKey(My_Uid)){
+                        data.getRead_Users().put(My_Uid, true);
+                        reference.child(data.getChat_ID()).setValue(data);
+                    }
+                    list.add(data);
                 }
                 adapter.notifyDataSetChanged();
-                binding.ChattingListListView.smoothScrollToPosition(adapter.getItemCount() - 1);
+                binding.ChattingListListView.scrollToPosition(adapter.getItemCount() - 1);
             }
 
             @Override
@@ -152,13 +160,19 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
     private void Send_Message(){
         String Message = binding.ChattingETV.getText().toString();
         if (Message.length() >= 1){
-            Calendar calendar = Calendar.getInstance();
-            String Time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
+            long now = System.currentTimeMillis();
+            Date date = new Date(now);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSSS");
+            String Time = simpleDateFormat.format(date);
+//            Calendar calendar = Calendar.getInstance();
+//            String Time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
             Chat_Id = Time + My_Uid;
-            Chat_Data chat_data = new Chat_Data(My_Uid, Message, Time, Reply_Target_Text, Reply_Target_Uid, Chat_Id);
+            HashMap<String, Boolean> Read_Users = new HashMap<>();
+            Read_Users.put(My_Uid, true);
+            Chat_Data chat_data = new Chat_Data(My_Uid, Message, Time, Reply_Target_Text, Reply_Target_Uid, Read_Users, Chat_Id);
             Add_Chatting_Room_To_Profile(Time, Message);
-            reference = DB.getReference("Chat_Room").child(Chatting_Room_ID);
-            reference.push().setValue(chat_data);
+            reference = DB.getReference("Chat_Room").child(Chatting_Room_ID).child(Chat_Id);
+            reference.setValue(chat_data);
             binding.ChattingETV.setText("");
             binding.ReplidedEditContainer.setVisibility(View.GONE);
             Reply_Target_Uid = "NONE";
@@ -226,7 +240,6 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
             Chat_User_Uid_Data User_data = new Chat_User_Uid_Data(My_Uid, Chatting_Room_ID, Last_Chat, Write_Date);
             reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
             reference.setValue(User_data);
-
             First_Chat_Status = false;
         }
 }

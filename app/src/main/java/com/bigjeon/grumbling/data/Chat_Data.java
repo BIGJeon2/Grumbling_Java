@@ -1,11 +1,15 @@
 package com.bigjeon.grumbling.data;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Chat_Data {
     private String Uid;
     private String Text;
     private String WriteDate;
     private String Reply_Target_Text;
     private String Reply_Target_User_Uid;
+    private HashMap<String, Boolean> Read_Users;
     private String Chat_ID;
 
     public String getWriteDate() {
@@ -56,16 +60,25 @@ public class Chat_Data {
         Chat_ID = chat_ID;
     }
 
+    public HashMap<String, Boolean> getRead_Users() {
+        return Read_Users;
+    }
+
+    public void setRead_Users(HashMap<String, Boolean> read_Users) {
+        Read_Users = read_Users;
+    }
+
     public Chat_Data(){
 
     }
 
-    public Chat_Data(String uid, String text, String writeDate, String reply_Target_Text, String reply_Target_User_Uid, String chat_ID) {
-        this.Uid = uid;
-        this.Text = text;
-        this.WriteDate = writeDate;
-        this.Reply_Target_Text = reply_Target_Text;
-        this.Reply_Target_User_Uid = reply_Target_User_Uid;
-        this.Chat_ID = chat_ID;
+    public Chat_Data(String uid, String text, String writeDate, String reply_Target_Text, String reply_Target_User_Uid, HashMap<String, Boolean> read_Users, String chat_ID) {
+        Uid = uid;
+        Text = text;
+        WriteDate = writeDate;
+        Reply_Target_Text = reply_Target_Text;
+        Reply_Target_User_Uid = reply_Target_User_Uid;
+        Read_Users = read_Users;
+        Chat_ID = chat_ID;
     }
 }

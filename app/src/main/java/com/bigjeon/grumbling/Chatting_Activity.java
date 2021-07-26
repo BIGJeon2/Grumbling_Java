@@ -34,8 +34,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
 
 public class Chatting_Activity extends AppCompatActivity {
     Chat_Binding binding;
@@ -66,7 +69,7 @@ public class Chatting_Activity extends AppCompatActivity {
         binding.ChattingPostContentTV.setText(Content);
 
         //list뷰 설정
-        adapter = new Chat_rcv_Adapter(list, My_Uid, this);
+        adapter = new Chat_rcv_Adapter(list, My_Uid, this, false);
         binding.ChattingListListView.setAdapter(adapter);
         adapter.Set_Chat_rcv_Adapter(new Chat_OnClickListener() {
             @Override
@@ -75,16 +78,12 @@ public class Chatting_Activity extends AppCompatActivity {
                 Reply_Target_Uid = list.get(pos).getUid();
                 Reply_Target_Text = list.get(pos).getText();
                 binding.RepliedText.setText(Reply_Target_Text);
-                Toast.makeText(Chatting_Activity.this, Reply_Target_Uid, Toast.LENGTH_SHORT).show();
                 Get_Replied_Target_Name(Reply_Target_Uid);
             }
         });
         LinearLayoutManager lm = new LinearLayoutManager(this);
-        lm.setStackFromEnd(true);
         binding.ChattingListListView.setLayoutManager(lm);
         binding.ChattingListListView.setHasFixedSize(true);
-        binding.ChattingListListView.setNestedScrollingEnabled(false);
-        binding.ChattingListListView.scrollToPosition(0);
 
         DB = FirebaseDatabase.getInstance();
         reference = DB.getReference("Chats").child(Post_Title);
@@ -119,7 +118,7 @@ public class Chatting_Activity extends AppCompatActivity {
                    list.add(dataSnapshot.getValue(Chat_Data.class));
                }
                adapter.notifyDataSetChanged();
-               binding.ChattingListListView.smoothScrollToPosition(adapter.getItemCount() - 1);
+               binding.ChattingListListView.scrollToPosition(adapter.getItemCount() - 1);
            }
 
            @Override
@@ -133,10 +132,14 @@ public class Chatting_Activity extends AppCompatActivity {
     private void Send_Message(){
         String Message = binding.ChattingETV.getText().toString();
         if (Message.length() >= 1){
-            Calendar calendar = Calendar.getInstance();
-            String Time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
+            long now = System.currentTimeMillis();
+            Date date = new Date(now);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSSS");
+            String Time = simpleDateFormat.format(date);
+//            Calendar calendar = Calendar.getInstance();
+//            String Time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
             Chat_Id = Time + My_Uid;
-            Chat_Data chat_data = new Chat_Data(My_Uid, Message, Time, Reply_Target_Text, Reply_Target_Uid, Chat_Id);
+            Chat_Data chat_data = new Chat_Data(My_Uid, Message, Time, Reply_Target_Text, Reply_Target_Uid, null, Chat_Id);
             reference.push().setValue(chat_data);
             binding.ChattingETV.setText("");
             binding.ReplidedEditContainer.setVisibility(View.GONE);

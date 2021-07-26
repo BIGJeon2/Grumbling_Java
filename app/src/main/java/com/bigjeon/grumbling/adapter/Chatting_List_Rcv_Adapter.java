@@ -31,7 +31,10 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -68,7 +71,7 @@ public class Chatting_List_Rcv_Adapter extends RecyclerView.Adapter<Chatting_Lis
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         holder.User_Name.setText(document.getString("Name"));
                         Picasso.get().load(document.getString("Img")).into(holder.User_Img);
-                        holder.Last_Chat_Date.setText(Chatting_Room_List.get(position).getLast_Date());
+                        holder.Last_Chat_Date.setText(Change_Date(Chatting_Room_List.get(position).getLast_Date()));
                         holder.Last_Chat_Comment.setText(Chatting_Room_List.get(position).getLast_Content());
                         break;
                     }
@@ -84,7 +87,19 @@ public class Chatting_List_Rcv_Adapter extends RecyclerView.Adapter<Chatting_Lis
         Go_P2P_Chatting.putExtra("MY_UID", my_uid);
         mcontext.startActivity(Go_P2P_Chatting);
     }
-
+    private String Change_Date(String write_date){
+        String new_writedate = "0000";
+        try{
+            SimpleDateFormat before = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSSS");
+            SimpleDateFormat after = new SimpleDateFormat("MM-dd hh:mm");
+            Date dt_format = before.parse(write_date);
+            new_writedate = after.format(dt_format);
+            return new_writedate;
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        return new_writedate;
+    }
     @Override
     public int getItemCount() {
         return Chatting_Room_List.size();

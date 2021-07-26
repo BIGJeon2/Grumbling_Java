@@ -216,7 +216,7 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
     }
 
     private void Get_Chatting_List(){
-        adapter = new Chat_rcv_Adapter(list, My_Uid, this);
+        adapter = new Chat_rcv_Adapter(list, My_Uid, this, false);
         binding.ChatListRcv.setAdapter(adapter);
         LinearLayoutManager lm = new LinearLayoutManager(this);
         lm.setStackFromEnd(true);

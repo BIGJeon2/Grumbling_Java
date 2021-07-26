@@ -29,7 +29,10 @@ import com.squareup.picasso.Picasso;
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Text;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -38,16 +41,18 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private OtherChattingItemBinding Other_binding;
     private OtherChattingReplyBinding Other_Repling_binding;
     private MyChattingReplyBinding My_Repling_binding;
+    private Boolean Read_Check_State = false;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ArrayList<Chat_Data> Chat_Datas;
     private String My_Uid;
     private Chat_OnClickListener listener;
     private Context mContext;
 
-    public Chat_rcv_Adapter(ArrayList<Chat_Data> chat_Datas, String my_Uid, Context mContext) {
+    public Chat_rcv_Adapter(ArrayList<Chat_Data> chat_Datas, String my_Uid, Context mContext, boolean Read_Check_State) {
         this.Chat_Datas = chat_Datas;
         this.My_Uid = my_Uid;
         this.mContext = mContext;
+        this.Read_Check_State = Read_Check_State;
     }
 
     @NonNull
@@ -84,12 +89,22 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if(holder instanceof My_Chat_ViewHolder) {
 
             ((My_Chat_ViewHolder) holder).Comment.setText(Chat_Datas.get(position).getText());
-            ((My_Chat_ViewHolder) holder).Write_Date.setText(Chat_Datas.get(position).getWriteDate());
+            ((My_Chat_ViewHolder) holder).Write_Date.setText(Change_Date(Chat_Datas.get(position).getWriteDate()));
+            if (Read_Check_State == true && Chat_Datas.get(position).getRead_Users().size() == 1){
+                ((My_Chat_ViewHolder) holder).Read_Check.setVisibility(View.VISIBLE);
+            }else{
+                ((My_Chat_ViewHolder) holder).Read_Check.setVisibility(View.GONE);
+            }
 
         }else if (holder instanceof My_Repling_Chat_ViewHolder){
 
+            if (Read_Check_State == true && Chat_Datas.get(position).getRead_Users().size() == 1){
+                ((My_Repling_Chat_ViewHolder) holder).Read_Check.setVisibility(View.VISIBLE);
+            }else{
+                ((My_Repling_Chat_ViewHolder) holder).Read_Check.setVisibility(View.GONE);
+            }
             ((My_Repling_Chat_ViewHolder) holder).Comment.setText(Chat_Datas.get(position).getText());
-            ((My_Repling_Chat_ViewHolder) holder).Write_Date.setText(Chat_Datas.get(position).getWriteDate());
+            ((My_Repling_Chat_ViewHolder) holder).Write_Date.setText(Change_Date(Chat_Datas.get(position).getWriteDate()));
             ((My_Repling_Chat_ViewHolder) holder).Replied_Text.setText(Chat_Datas.get(position).getReply_Target_Text());
             db.collection("Users").whereEqualTo("UID", Chat_Datas.get(position).getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
@@ -105,7 +120,7 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         } else if (holder instanceof Other_Chat_ViewHolder) {
 
             ((Other_Chat_ViewHolder) holder).Comment.setText(Chat_Datas.get(position).getText());
-            ((Other_Chat_ViewHolder) holder).Write_Date.setText(Chat_Datas.get(position).getWriteDate());
+            ((Other_Chat_ViewHolder) holder).Write_Date.setText(Change_Date(Chat_Datas.get(position).getWriteDate()));
 
             db.collection("Users").whereEqualTo("UID", Chat_Datas.get(position).getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
@@ -124,7 +139,7 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         } else {
             ((Other_Repling_Chat_ViewHolder) holder).Comment.setText(Chat_Datas.get(position).getText());
-            ((Other_Repling_Chat_ViewHolder) holder).Write_Date.setText(Chat_Datas.get(position).getWriteDate());
+            ((Other_Repling_Chat_ViewHolder) holder).Write_Date.setText(Change_Date(Chat_Datas.get(position).getWriteDate()));
             ((Other_Repling_Chat_ViewHolder) holder).Replied_Text.setText(Chat_Datas.get(position).getReply_Target_Text());
             db.collection("Users").whereEqualTo("UID", Chat_Datas.get(position).getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
@@ -151,6 +166,20 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             });
             ((Other_Repling_Chat_ViewHolder) holder).User_Img.setOnClickListener(v -> Intent_To_User_Profile(Chat_Datas.get(position).getUid()));
         }
+    }
+
+    private String Change_Date(String write_date){
+        String new_writedate = "0000";
+        try{
+            SimpleDateFormat before = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSSS");
+            SimpleDateFormat after = new SimpleDateFormat("MM-dd hh:mm");
+            Date dt_format = before.parse(write_date);
+            new_writedate = after.format(dt_format);
+            return new_writedate;
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        return new_writedate;
     }
 
     private void Intent_To_User_Profile(String uid) {
@@ -199,10 +228,12 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         public MyChattingItemBinding binding;
         TextView Write_Date;
         TextView Comment;
+        TextView Read_Check;
         public My_Chat_ViewHolder(MyChattingItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
             Write_Date = binding.ChattingWriteDateTV;
+            Read_Check = binding.ReadCheckerTV;
             Comment = binding.ChattingTextTV;
             Comment.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -222,11 +253,13 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         TextView Comment;
         TextView Replied_User_Name;
         TextView Replied_Text;
+        TextView Read_Check;
         public My_Repling_Chat_ViewHolder(MyChattingReplyBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
             Write_Date = binding.ChattingWriteDateTV;
             Comment = binding.ChattingTextTV;
+            Read_Check = binding.ReadCheckerTV;
             Replied_Text = binding.RepliedChatTV;
             Replied_User_Name = binding.RepliedName;
             Comment.setOnClickListener(new View.OnClickListener() {
