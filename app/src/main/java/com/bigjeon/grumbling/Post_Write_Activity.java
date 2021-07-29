@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +25,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
@@ -126,10 +128,10 @@ public class Post_Write_Activity extends AppCompatActivity {
                 Button_Background_Change(position);
             }
         });
-        //백그라운드 이미지 버튼==========================================
-        binding.DialogPostingSetImg.setOnClickListener(v -> Change_Fragment_OnCLick(0));
         //텍스트 설정 창 버튼============================================
-        binding.DialogPostingSetText.setOnClickListener(v -> Change_Fragment_OnCLick(1));
+        binding.DialogPostingSetText.setOnClickListener(v -> Change_Fragment_OnCLick(0));
+        //백그라운드 이미지 버튼==========================================
+        binding.DialogPostingSetImg.setOnClickListener(v -> Change_Fragment_OnCLick(1));
 
         //보안 등급 설정 버튼===========================================
         binding.DialogPostingSetGrade.setOnClickListener(v -> Set_Posting_Grade());
@@ -148,12 +150,12 @@ public class Post_Write_Activity extends AppCompatActivity {
     private void Button_Background_Change(int position){
         switch (position){
             case 0 :
-                binding.DialogPostingSetText.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
-                binding.DialogPostingSetImg.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
-                break;
-            case 1 :
                 binding.DialogPostingSetText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
                 binding.DialogPostingSetImg.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                break;
+            case 1 :
+                binding.DialogPostingSetText.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                binding.DialogPostingSetImg.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
                 break;
         }
     }
@@ -207,7 +209,6 @@ public class Post_Write_Activity extends AppCompatActivity {
     }
     //수정일시 데이터 적용시켜줌
     private void Data_Adjust(Post_Data post) {
-//        binding.DialogPostingContent.setText(post.getContent());
         binding.DialogPostingContent.setTextSize(Dimension.DP, post.getContent_Text_Size());
         binding.DialogPostingContent.setBackgroundColor(ContextCompat.getColor(this, post.getContent_Back_Color()));
         binding.DialogPostingContent.setTextColor(ContextCompat.getColor(this, post.getContent_Text_Color()));
@@ -263,7 +264,7 @@ public class Post_Write_Activity extends AppCompatActivity {
         }
         //작성글이 있을 경우에만 저장
         if (VM.get_Post().getValue().getContent().length() > 2) {
-            if (VM.getIMG_State().equals("Uri")){
+            if (VM.getIMG_State().getValue().equals("Uri")){
                 String File_Name = Posting_Write_Date + User_Uid + ".png";
                 FirebaseStorage storage = FirebaseStorage.getInstance();
                 final StorageReference Post_Img_Ref = storage.getReference("Posting_Images/" + File_Name);
@@ -277,6 +278,8 @@ public class Post_Write_Activity extends AppCompatActivity {
                             public void onSuccess(Uri uri) {
                                 VM.get_Post().getValue().setPost_Background(uri.toString());
                                 reference.child(Post_Title).setValue(VM.get_Post().getValue());
+                                Toast.makeText(Post_Write_Activity.this, "게시글이 정상적으로 등록되었습니다!", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
                         });
                     }
@@ -284,9 +287,11 @@ public class Post_Write_Activity extends AppCompatActivity {
             }else {
                 VM.get_Post().getValue().setPost_Background(VM.getIMG_String().getValue());
                 reference.child(VM.get_Post().getValue().getPost_Title()).setValue(VM.get_Post().getValue());
+                Toast.makeText(Post_Write_Activity.this, "게시글이 정상적으로 등록되었습니다!", Toast.LENGTH_SHORT).show();
+                finish();
             }
-            Toast.makeText(Post_Write_Activity.this, "게시글이 정상적으로 등록되었습니다!", Toast.LENGTH_SHORT).show();
-            finish();
+//            Toast.makeText(Post_Write_Activity.this, "게시글이 정상적으로 등록되었습니다!", Toast.LENGTH_SHORT).show();
+//            finish();
         }else {
             Toast.makeText(Post_Write_Activity.this, "최소 3글자 이상 입력해 주세요!", Toast.LENGTH_SHORT).show();
         }

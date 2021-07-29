@@ -18,17 +18,6 @@ public class Post_Write_ViewModel extends ViewModel {
     public MutableLiveData<Uri> IMG_URI = new MutableLiveData<>();
     public MutableLiveData<String> IMG_String = new MutableLiveData<>();
     public MutableLiveData<String> IMG_State = new MutableLiveData<>();
-//    public MutableLiveData<String> CONTENT = new MutableLiveData<>();
-//    public MutableLiveData<String> TITLE = new MutableLiveData<>();
-//    public MutableLiveData<String> UID = new MutableLiveData<>();
-//    public MutableLiveData<String> GRADE = new MutableLiveData<>();
-//    public MutableLiveData<Integer> COTENT_SIZE = new MutableLiveData<>();
-//    public MutableLiveData<Integer> CONTENT_COLOR = new MutableLiveData<>();
-//    public MutableLiveData<Integer> FAVORITE_COUNT = new MutableLiveData<>();
-//    public MutableLiveData<String> WRITE_DATE = new MutableLiveData<>();
-//    public MutableLiveData<String> POST_BACK_IMG = new MutableLiveData<>();
-//    public MutableLiveData<HashMap<String, Boolean>> FAVORITE = new MutableLiveData<>();
-//    public MutableLiveData<Integer> DECLARED_COUNT = new MutableLiveData<>();
 
     public LiveData<Post_Data> get_Post(){
         return Post;
@@ -61,11 +50,4 @@ public class Post_Write_ViewModel extends ViewModel {
         this.IMG_State.setValue(IMG_State);
     }
 
-//    public LiveData<String> get_Content() {
-//        return CONTENT;
-//    }
-//
-//    public void set_Content(String content) {
-//        this.CONTENT.setValue(content);
-//    }
 }

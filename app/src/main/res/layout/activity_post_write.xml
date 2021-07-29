@@ -18,7 +18,6 @@
             android:id="@+id/Top_Bar"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/post_view_title_under_edge_1dp"
             android:layout_alignParentTop="true">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Dialog_Posting_User_Img"
@@ -38,15 +37,17 @@
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="5dp">
             </TextView>
-            <de.hdodenhof.circleimageview.CircleImageView
+            <Button
                 android:id="@+id/Dialog_Posting_Complete_CIV"
+                android:text="완료"
+                android:textSize="15dp"
+                android:background="@android:color/transparent"
+                android:textColor="@color/black"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_baseline_send_24"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-            </de.hdodenhof.circleimageview.CircleImageView>
+            </Button>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/Dialog_Posting_Content_Container"
@@ -70,30 +71,32 @@
                 android:background="#50000000"
                 android:hint="텍스트"
                 android:fontFamily="@font/uhbeerice"
+                android:gravity="center"
                 android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </EditText>
         </RelativeLayout>
         <RelativeLayout
+            android:background="@color/white"
             android:id="@+id/Dialog_Posting_Setting_Container"
             android:layout_below="@+id/Dialog_Posting_Content_Container"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/Dialog_Posting_Set_Img"
+                android:id="@+id/Dialog_Posting_Set_Text"
                 android:layout_marginLeft="10dp"
                 android:layout_alignParentLeft="true"
                 android:backgroundTint="@color/purple_200"
-                android:background="@drawable/ic_baseline_insert_photo_24"
+                android:background="@drawable/ic_baseline_text_format_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </de.hdodenhof.circleimageview.CircleImageView>
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/Dialog_Posting_Set_Text"
+                android:id="@+id/Dialog_Posting_Set_Img"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/Dialog_Posting_Set_Img"
-                android:background="@drawable/ic_baseline_text_format_24"
+                android:layout_toRightOf="@+id/Dialog_Posting_Set_Text"
+                android:background="@drawable/ic_baseline_insert_photo_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </de.hdodenhof.circleimageview.CircleImageView>

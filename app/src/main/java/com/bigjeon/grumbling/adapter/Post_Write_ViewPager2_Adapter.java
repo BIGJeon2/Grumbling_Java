@@ -22,8 +22,8 @@ public class Post_Write_ViewPager2_Adapter extends FragmentStateAdapter {
     @NotNull
     @Override
     public Fragment createFragment(int position) {
-        if (position == 0) return new Set_Post_Background_Fragment();
-        else return new Set_Post_Text_Fragment();
+        if (position == 0) return new Set_Post_Text_Fragment();
+        else return new Set_Post_Background_Fragment();
     }
 
     @Override

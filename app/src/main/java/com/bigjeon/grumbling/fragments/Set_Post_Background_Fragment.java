@@ -82,8 +82,8 @@ public class Set_Post_Background_Fragment extends Fragment {
             new ActivityResultCallback<Uri>() {
                 @Override
                 public void onActivityResult(Uri result) {
-                    VM.setIMG_URI(result);
                     VM.setIMG_State("Uri");
+                    VM.setIMG_URI(result);
                 }
             });
 

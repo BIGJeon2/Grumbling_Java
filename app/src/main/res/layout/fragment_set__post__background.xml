@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
     tools:context="com.bigjeon.grumbling.fragments.Set_Post_Background_Fragment">
     <RelativeLayout
         android:id="@+id/Dialog_Posting_Background_Container"
-        android:visibility="visible"
         android:layout_below="@id/Dialog_Posting_Set_Text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
