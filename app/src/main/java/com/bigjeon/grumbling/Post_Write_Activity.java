@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,6 +40,7 @@ import com.bigjeon.grumbling.adapter.Gif_OnClikListener;
 import com.bigjeon.grumbling.adapter.Post_Write_ViewPager2_Adapter;
 import com.bigjeon.grumbling.data.DB_Posting_Background_GIF;
 import com.bigjeon.grumbling.data.Post_Data;
+import com.bigjeon.grumbling.dialogs.Post_Write_Loading_ProgressDialog;
 import com.bigjeon.grumbling.factory.Post_Write_VM_Factory;
 import com.bigjeon.grumbling.viewmodel.Post_Write_ViewModel;
 import com.bumptech.glide.Glide;
@@ -70,6 +72,7 @@ import java.util.HashMap;
 public class Post_Write_Activity extends AppCompatActivity {
     private ActivityPostWriteBinding binding;
     private Post_Write_ViewPager2_Adapter ViewPager_Adapter;
+    private Post_Write_Loading_ProgressDialog progressDialog;
     private String STATE = "CREATE";
     private int key = 0;
     private Post_Data post_data;
@@ -91,6 +94,9 @@ public class Post_Write_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_post_write);
         binding.setPostWriteActivityBinding(this);
+
+        progressDialog = new Post_Write_Loading_ProgressDialog(this);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         //뷰모델 호출 / 데이터 변경 이벤트시 데이터 바로 적용
         VM = new ViewModelProvider(this, new Post_Write_VM_Factory()).get(Post_Write_ViewModel.class);
@@ -264,6 +270,8 @@ public class Post_Write_Activity extends AppCompatActivity {
         }
         //작성글이 있을 경우에만 저장
         if (VM.get_Post().getValue().getContent().length() > 2) {
+            progressDialog.show();
+            progressDialog.setCancelable(false);
             if (VM.getIMG_State().getValue().equals("Uri")){
                 String File_Name = Posting_Write_Date + User_Uid + ".png";
                 FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -278,6 +286,7 @@ public class Post_Write_Activity extends AppCompatActivity {
                             public void onSuccess(Uri uri) {
                                 VM.get_Post().getValue().setPost_Background(uri.toString());
                                 reference.child(Post_Title).setValue(VM.get_Post().getValue());
+                                progressDialog.dismiss();
                                 Toast.makeText(Post_Write_Activity.this, "게시글이 정상적으로 등록되었습니다!", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
@@ -287,6 +296,7 @@ public class Post_Write_Activity extends AppCompatActivity {
             }else {
                 VM.get_Post().getValue().setPost_Background(VM.getIMG_String().getValue());
                 reference.child(VM.get_Post().getValue().getPost_Title()).setValue(VM.get_Post().getValue());
+                progressDialog.dismiss();
                 Toast.makeText(Post_Write_Activity.this, "게시글이 정상적으로 등록되었습니다!", Toast.LENGTH_SHORT).show();
                 finish();
             }
