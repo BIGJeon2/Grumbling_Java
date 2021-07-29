@@ -162,7 +162,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
         if (Message.length() >= 1){
             long now = System.currentTimeMillis();
             Date date = new Date(now);
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSSS");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd k:mm:ss:SSSS");
             String Time = simpleDateFormat.format(date);
 //            Calendar calendar = Calendar.getInstance();
 //            String Time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
@@ -234,10 +234,10 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
     }
 
     private void Add_Chatting_Room_To_Profile(String Last_Chat, String Write_Date){
-            Chat_User_Uid_Data My_data = new Chat_User_Uid_Data(User_Uid, Chatting_Room_ID, Last_Chat, Write_Date);
+            Chat_User_Uid_Data My_data = new Chat_User_Uid_Data(User_Uid, Chatting_Room_ID, Last_Chat, Write_Date, 0);
             reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
             reference.setValue(My_data);
-            Chat_User_Uid_Data User_data = new Chat_User_Uid_Data(My_Uid, Chatting_Room_ID, Last_Chat, Write_Date);
+            Chat_User_Uid_Data User_data = new Chat_User_Uid_Data(My_Uid, Chatting_Room_ID, Last_Chat, Write_Date, 0);
             reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
             reference.setValue(User_data);
             First_Chat_Status = false;

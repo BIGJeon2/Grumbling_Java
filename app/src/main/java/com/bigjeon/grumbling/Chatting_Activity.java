@@ -134,7 +134,7 @@ public class Chatting_Activity extends AppCompatActivity {
         if (Message.length() >= 1){
             long now = System.currentTimeMillis();
             Date date = new Date(now);
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSSS");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd k:mm:ss:SSSS");
             String Time = simpleDateFormat.format(date);
 //            Calendar calendar = Calendar.getInstance();
 //            String Time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);

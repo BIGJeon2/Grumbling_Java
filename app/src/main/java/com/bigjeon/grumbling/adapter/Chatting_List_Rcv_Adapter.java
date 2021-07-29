@@ -73,14 +73,44 @@ public class Chatting_List_Rcv_Adapter extends RecyclerView.Adapter<Chatting_Lis
                         Picasso.get().load(document.getString("Img")).into(holder.User_Img);
                         holder.Last_Chat_Date.setText(Change_Date(Chatting_Room_List.get(position).getLast_Date()));
                         holder.Last_Chat_Comment.setText(Chatting_Room_List.get(position).getLast_Content());
-                        break;
+                        if (Chatting_Room_List.get(position).getNew_Chat_Count() != 0){
+                            holder.New_Chat_Count.setText(Integer.toString(Chatting_Room_List.get(position).getNew_Chat_Count()));
+                        }else{
+                            holder.New_Chat_Count.setText("");
+                        }
                     }
                 }
             }
         });
-        holder.itemview.setOnClickListener(v -> Go_P2PChat(My_Uid, Chatting_Room_List.get(position).getUser_Uid()));
+        holder.itemview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Chatting_Room_List.get(position).setNew_Chat_Count(0);
+                Go_P2PChat(My_Uid, Chatting_Room_List.get(position).getUser_Uid());
+            }
+        });
     }
+    public void Add_List(int position, Chat_User_Uid_Data Room){
+        FirebaseDatabase.getInstance().getReference("Chat_Room").child(Room.getChat_Room_Id()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                int Count = 0;
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    Chat_Data chat = data.getValue(Chat_Data.class);
+                    if (!chat.getRead_Users().containsKey(My_Uid)){
+                        Count++;
+                    }
+                }
+                Room.setNew_Chat_Count(Count);
+            }
 
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+        Chatting_Room_List.add(position, Room);
+    }
     private void Go_P2PChat(String my_uid, String user_uid) {
         Intent Go_P2P_Chatting = new Intent(mcontext, P2P_Chatting_Activity.class);
         Go_P2P_Chatting.putExtra("USER_UID", user_uid);
@@ -90,7 +120,7 @@ public class Chatting_List_Rcv_Adapter extends RecyclerView.Adapter<Chatting_Lis
     private String Change_Date(String write_date){
         String new_writedate = "0000";
         try{
-            SimpleDateFormat before = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSSS");
+            SimpleDateFormat before = new SimpleDateFormat("yyyy-MM-dd k:mm:ss:SSSS");
             SimpleDateFormat after = new SimpleDateFormat("MM-dd hh:mm");
             Date dt_format = before.parse(write_date);
             new_writedate = after.format(dt_format);

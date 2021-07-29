@@ -32,6 +32,9 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Chatting_List_Fragment extends Fragment {
 
@@ -63,37 +66,23 @@ public class Chatting_List_Fragment extends Fragment {
     public void onResume() {
         super.onResume();
         chat_list.clear();
-        //Get_Chatting_Room();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List");
         reference.addChildEventListener(Chat_Child_Listener());
     }
-    //이게문제임
-//    private void Get_Chatting_Room(){
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List");
-//        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//                chat_list.clear();
-//                for (DataSnapshot data : snapshot.getChildren()) {
-//                    Chat_User_Uid_Data chat = data.getValue(Chat_User_Uid_Data.class);
-//                    chat_list.add(chat);
-//                }
-//                //채팅방 최신순으로 정렬 해줌, 해당 채팅 내부 안읽은 메세지 갯수 설정
-//                adapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
+
     private ChildEventListener Chat_Child_Listener(){
         ChildEventListener Chat_Listener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
                  Chat_User_Uid_Data Chat_Room = snapshot.getValue(Chat_User_Uid_Data.class);
-                 chat_list.add(0, Chat_Room);
+                 adapter.Add_List(0, Chat_Room);
+                    Collections.sort(chat_list, new Comparator<Chat_User_Uid_Data>() {
+                        @Override
+                        public int compare(Chat_User_Uid_Data o1, Chat_User_Uid_Data o2) {
+                            return o1.getLast_Date().compareTo(o2.getLast_Date());
+                        }
+                    });
+                    Collections.reverse(chat_list);
                  adapter.notifyDataSetChanged();
             }
 
@@ -103,7 +92,7 @@ public class Chatting_List_Fragment extends Fragment {
                 for (int i = 0; i < chat_list.size(); i++){
                     if (chat_list.get(i).getChat_Room_Id().equals(Chat_Room.getChat_Room_Id())){
                         chat_list.remove(i);
-                        chat_list.add(0, Chat_Room);
+                        adapter.Add_List(0, Chat_Room);
                     }
                 }
                 adapter.notifyDataSetChanged();
@@ -128,10 +117,20 @@ public class Chatting_List_Fragment extends Fragment {
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        chat_list.clear();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List");
+        reference.removeEventListener(Chat_Child_Listener());
+    }
+
+
+    @Override
     public void onPause() {
         super.onPause();
         chat_list.clear();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List");
         reference.removeEventListener(Chat_Child_Listener());
     }
+
 }
