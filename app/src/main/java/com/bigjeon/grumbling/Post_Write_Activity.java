@@ -286,7 +286,7 @@ public class Post_Write_Activity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri uri) {
                                 VM.get_Post().getValue().setPost_Background(uri.toString());
-                                reference.child(Post_Title).setValue(VM.get_Post().getValue());
+                                reference.child(VM.get_Post().getValue().getPost_Title()).setValue(VM.get_Post().getValue());
                                 progressDialog.dismiss();
                                 Toast.makeText(Post_Write_Activity.this, "게시글이 정상적으로 등록되었습니다!", Toast.LENGTH_SHORT).show();
                                 finish();
