@@ -1,5 +1,8 @@
 package com.bigjeon.grumbling;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
@@ -16,12 +19,18 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bigjeon.grumbling.adapter.Fragment_Swipe_Adapter;
 import com.bigjeon.grumbling.adapter.Post_View_Rcv_Adapter;
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
 import com.example.grumbling.App_Main_Binding;
 import com.example.grumbling.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
 
 public class App_Main_Activity extends AppCompatActivity implements View.OnCreateContextMenuListener{
@@ -31,6 +40,8 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
     public String My_Img;
     public String My_Name;
     public String My_Email;
+    public String My_Token;
+    private DatabaseReference reference;
     private FragmentStateAdapter ViewPager_Adapter;
 
     @Override
@@ -41,6 +52,20 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
 
         mcontext = this;
         Set_My_Data();
+
+        //토큰 가져오기
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if (!task.isSuccessful()){
+                    Toast.makeText(mcontext, "토큰 불러오기 실패", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                My_Token = task.getResult();
+                reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Token");
+                reference.setValue(My_Token);
+            }
+        });
 
         ViewPager_Adapter = new Fragment_Swipe_Adapter(this);
         binding.AppMainViewPager2.setAdapter(ViewPager_Adapter);
@@ -117,6 +142,6 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         Go_Post_Write.putExtra("KEY", "CREATE");
         Go_Post_Write.putExtra("TITLE", "NONE");
         startActivity(Go_Post_Write);
-
     }
+
 }

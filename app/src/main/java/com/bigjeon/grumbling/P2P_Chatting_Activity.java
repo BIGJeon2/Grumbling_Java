@@ -8,17 +8,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.bigjeon.grumbling.Model.Api;
+import com.bigjeon.grumbling.Model.ApiCLient;
+import com.bigjeon.grumbling.Model.Model;
+import com.bigjeon.grumbling.Model.NotificationModel;
 import com.bigjeon.grumbling.adapter.Chat_OnClickListener;
 import com.bigjeon.grumbling.adapter.Chat_rcv_Adapter;
 import com.bigjeon.grumbling.data.Chat_Data;
 import com.bigjeon.grumbling.data.Chat_User_Uid_Data;
 import com.example.grumbling.R;
 import com.example.grumbling.databinding.P2P_Chat_Binding;
+import com.google.android.gms.common.api.GoogleApi;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
@@ -30,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.auth.Token;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
@@ -44,10 +53,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class P2P_Chatting_Activity extends AppCompatActivity {
     P2P_Chat_Binding binding;
     private String My_Uid;
+    private String My_Name;
     private String User_Uid;
+    private String User_Token;
     private String Chatting_Room_ID;
     private String Reply_Target_Uid = "NONE";
     private String Reply_Target_Text = "NONE";
@@ -73,6 +89,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
         My_Uid = Get_Data.getStringExtra("MY_UID");
         User_Uid = Get_Data.getStringExtra("USER_UID");
 
+        My_Name = getSharedPreferences("My_Data", MODE_PRIVATE).getString("NAME", null);
 
         Get_User_Data();
         Set_Chatting_Room_ID();
@@ -113,6 +130,13 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
                         break;
                     }
                 }
+            }
+        });
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Token");
+        reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                User_Token = task.getResult().getValue().toString();
             }
         });
     }
@@ -173,6 +197,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
             Add_Chatting_Room_To_Profile(Time, Message);
             reference = DB.getReference("Chat_Room").child(Chatting_Room_ID).child(Chat_Id);
             reference.setValue(chat_data);
+            Send_Noti_To_User(Message);
             binding.ChattingETV.setText("");
             binding.ReplidedEditContainer.setVisibility(View.GONE);
             Reply_Target_Uid = "NONE";
@@ -241,5 +266,24 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
             reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
             reference.setValue(User_data);
             First_Chat_Status = false;
+        }
+
+        private void Send_Noti_To_User(String message){
+
+            Model model = new Model(User_Token, new NotificationModel( My_Name + "님이 메세지를 보냈습니다.", message));
+            Api apiService = ApiCLient.getClient().create(Api.class);
+            retrofit2.Call<ResponseBody> responseBodyCall = apiService.sendNotification(model);
+
+            responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    Log.d("서버 통신!!", "성공" + User_Token);
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.d("서버 통신!!", "실패");
+                }
+            });
         }
 }

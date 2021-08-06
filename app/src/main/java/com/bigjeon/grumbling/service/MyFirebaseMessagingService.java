@@ -1,14 +1,17 @@
 package com.bigjeon.grumbling.service;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import androidx.core.app.NotificationCompat;
@@ -20,57 +23,60 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
-    public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
-        if (remoteMessage.getData().size() > 0) {
-            showNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
-        }
+    private static final String TAG = "FirebaseMessage";
+
+    @Override
+    public void onMessageReceived(RemoteMessage remoteMessage) {
+        Log.d(TAG, "onMessageReceived: ");
 
         if (remoteMessage.getNotification() != null) {
-            showNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
+            Log.d(TAG, "onMessageReceived: 1");
+            sendNotification(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle());
+        } else if (remoteMessage.getData().size() > 0) {
+            Log.d(TAG, "onMessageReceived: 2");
+            String tittle = remoteMessage.getData().get("tittle");
+            String text = remoteMessage.getData().get("text");
+            sendNotification(tittle, text);
         }
     }
 
-    private RemoteViews getCustomDesign(String title, String message) {
-        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification);
-        remoteViews.setTextViewText(R.id.noti_title, title);
-        remoteViews.setTextViewText(R.id.noti_message, message);
-        remoteViews.setImageViewResource(R.id.noti_icon, R.drawable.app_logo);
-        return remoteViews;
-    }
 
-    private void showNotification(String title, String message) {
+
+    public void sendNotification(String tittle, String text) {
+        Log.d(TAG, "sendNotification: ");
         Intent intent = new Intent(this, App_Main_Activity.class);
-        String channel_id = "channel";
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), channel_id)
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+        String channelId = getString(R.string.default_notification_channel_id);
+
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher_background))
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setSound(uri)
+                .setContentTitle(tittle)
+                .setContentText(text)
                 .setAutoCancel(true)
-                .setVibrate(new long[] {1000, 1000, 1000, 1000, 1000})
-                .setOnlyAlertOnce(true)
+                .setSound(defaultSoundUri)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setContentIntent(pendingIntent);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
-        {
-            builder = builder.setContent(getCustomDesign(title, message));
-        }
-        else
-        {
-            builder = builder.setContentTitle(title)
-                    .setContentText(message)
-                    .setSmallIcon(R.mipmap.ic_launcher);
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(channelId,
+                    "Channel human readable title",
+                    NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(channel);
         }
 
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        {
-            NotificationChannel notificationChannel = new NotificationChannel(channel_id, "web_app", NotificationManager.IMPORTANCE_HIGH);
-            notificationChannel.setSound(uri, null);
-            notificationManager.createNotificationChannel(notificationChannel);
-        }
-
-        notificationManager.notify(0, builder.build());
+        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
+
+
 }
