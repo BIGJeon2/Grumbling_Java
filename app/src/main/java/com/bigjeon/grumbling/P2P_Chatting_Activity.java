@@ -270,7 +270,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
 
         private void Send_Noti_To_User(String message){
 
-            Model model = new Model(User_Token, new NotificationModel( My_Name + "님이 메세지를 보냈습니다.", message));
+            Model model = new Model(User_Token, new NotificationModel( My_Name + "님이 메세지를 보냈습니다.", message, "Chat_Noti"));
             Api apiService = ApiCLient.getClient().create(Api.class);
             retrofit2.Call<ResponseBody> responseBodyCall = apiService.sendNotification(model);
 
