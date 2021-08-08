@@ -41,6 +41,8 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
     public String My_Name;
     public String My_Email;
     public String My_Token;
+    public String Get_Noti_State;
+    public String Get_Noti_Data;
     private DatabaseReference reference;
     private FragmentStateAdapter ViewPager_Adapter;
 
@@ -52,6 +54,16 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
 
         mcontext = this;
         Set_My_Data();
+
+        Intent get_noti = getIntent();
+        Get_Noti_State = get_noti.getStringExtra("Noti_State");
+        Get_Noti_Data = get_noti.getStringExtra("Data");
+
+        if (Get_Noti_State != null && Get_Noti_State.equals("Chat")){
+            Intent Go_P2P = new Intent(this, P2P_Chatting_Activity.class);
+            Go_P2P.putExtra("USER_UID", Get_Noti_Data);
+            startActivity(Go_P2P);
+        }
 
         //토큰 가져오기
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {

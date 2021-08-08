@@ -84,9 +84,11 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
         binding.setP2PChatActivity(this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-        //인테트를 통해 유저 UID, 내 UID 받아옴
+        //인테트, Sharepreference를 통해 유저 UID, 내 UID 받아옴
+        SharedPreferences My_Data = getSharedPreferences("My_Data", MODE_PRIVATE);
+        My_Uid = My_Data.getString("UID", null);
+
         Intent Get_Data = getIntent();
-        My_Uid = Get_Data.getStringExtra("MY_UID");
         User_Uid = Get_Data.getStringExtra("USER_UID");
 
         My_Name = getSharedPreferences("My_Data", MODE_PRIVATE).getString("NAME", null);
@@ -269,8 +271,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
         }
 
         private void Send_Noti_To_User(String message){
-
-            Model model = new Model(User_Token, new NotificationModel( My_Name + "님이 메세지를 보냈습니다.", message, "Chat_Noti"));
+            Model model = new Model(User_Token, new NotificationModel( My_Name + "님이 메세지를 보냈습니다.", message, "chat", My_Uid));
             Api apiService = ApiCLient.getClient().create(Api.class);
             retrofit2.Call<ResponseBody> responseBodyCall = apiService.sendNotification(model);
 

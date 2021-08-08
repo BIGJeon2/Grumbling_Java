@@ -4,11 +4,13 @@ public class NotificationModel {
     private String title;
     private String body;
     private String tag;
+    private String data;
 
-    public NotificationModel(String title, String body, String tag) {
+    public NotificationModel(String title, String body, String tag, String data) {
         this.title = title;
         this.body = body;
         this.tag = tag;
+        this.data = data;
     }
 
     public String getTitle() {
@@ -33,5 +35,13 @@ public class NotificationModel {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }
