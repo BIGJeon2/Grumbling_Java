@@ -17,8 +17,12 @@ import android.widget.RemoteViews;
 import androidx.core.app.NotificationCompat;
 
 import com.bigjeon.grumbling.App_Main_Activity;
+import com.bigjeon.grumbling.MainActivity;
+import com.bigjeon.grumbling.Model.Data;
 import com.bigjeon.grumbling.P2P_Chatting_Activity;
 import com.bigjeon.grumbling.Show_Selected_Post_Activity;
+import com.bigjeon.grumbling.data.Chat_Noti;
+import com.bigjeon.grumbling.data.Favorite_Noti;
 import com.example.grumbling.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -33,23 +37,32 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "onMessageReceived: 1");
-            //sendNotification(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle());
+            String tag = remoteMessage.getNotification().getTag();
+            if (tag.equals("Chat")){
+                sendNotification_Chat(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getTag(), remoteMessage.getData().get("data"));
+            }else if (tag.equals("Favorite")){
+                sendNotification_Favorite(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getTag(), remoteMessage.getData().get("data"));
+            }
         } else if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "onMessageReceived: 2");
             String tittle = remoteMessage.getData().get("tittle");
             String text = remoteMessage.getData().get("text");
             String tag = remoteMessage.getData().get("tag");
             String data = remoteMessage.getData().get("data");
-            sendNotification(tittle, text, tag, data);
+            if (tag.equals("Chat")){
+                sendNotification_Chat(tittle, text, tag, data);
+            }else if (tag.equals("Favorite")){
+                sendNotification_Favorite(tittle, text, tag, data);
+            }
         }
     }
 
 
 
-    public void sendNotification(String tittle, String text, String tag, String data) {
+    public void sendNotification_Chat(String tittle, String text, String tag, String data) {
         Log.d(TAG, "sendNotification: ");
-            Intent intent = new Intent(this, App_Main_Activity.class);
-            intent.putExtra("Noti_State", "Chat");
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("Noti_State", tag);
             intent.putExtra("Data", data);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -82,6 +95,43 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             }
 
             notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    }
+    public void sendNotification_Favorite(String tittle, String text, String tag, String data) {
+        Log.d(TAG, "sendNotification: ");
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("Noti_State", tag);
+        intent.putExtra("Data", data);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+        String channelId = getString(R.string.default_notification_channel_id);
+
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher_background))
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(tittle)
+                .setContentText(text)
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setDefaults(Notification.DEFAULT_VIBRATE)
+                .setContentIntent(pendingIntent);
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(channelId,
+                    "Channel human readable title",
+                    NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 
 }

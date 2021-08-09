@@ -43,6 +43,8 @@ public class Google_Login_Activity extends AppCompatActivity {
     private static final String TAG = "GoogleActivity";
     private GoogleSignInClient mGoogleSignInClient;
     private static int Sign_In_Code = 1001;
+    private String Get_Noti_State;
+    private String Get_Noti_Data;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @Override
@@ -50,6 +52,10 @@ public class Google_Login_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_google_login);
         binding.setLoginActivity(this);
+
+        Intent get_noti = getIntent();
+        Get_Noti_State = get_noti.getStringExtra("Noti_State");
+        Get_Noti_Data = get_noti.getStringExtra("Data");
 
         //구글 로그인 옵션 설정
         GoogleSignInOptions gso = new GoogleSignInOptions
@@ -152,7 +158,10 @@ public class Google_Login_Activity extends AppCompatActivity {
     }
 
     private void Intent_To_App_Main(){
+        Toast.makeText(this, Get_Noti_Data, Toast.LENGTH_SHORT).show();
         Intent Go_Main = new Intent(this, App_Main_Activity.class);
+        Go_Main.putExtra("Noti_State", Get_Noti_State);
+        Go_Main.putExtra("Data", Get_Noti_Data);
         startActivity(Go_Main);
         finish();
     }

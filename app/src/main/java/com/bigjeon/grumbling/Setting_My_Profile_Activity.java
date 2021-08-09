@@ -86,7 +86,7 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
         DB = FirebaseDatabase.getInstance().getReference("Posts");
 
         RecyclerView rcv = binding.SettingFragmnetMyPostsRCV;
-        adapter = new Post_View_Rcv_Adapter(this, list, Get_Post_Key);
+        adapter = new Post_View_Rcv_Adapter(this, list, Get_Post_Key, My_Name);
         LinearLayoutManager lm = new LinearLayoutManager(this);
         rcv.setLayoutManager(lm);
         rcv.setAdapter(adapter);

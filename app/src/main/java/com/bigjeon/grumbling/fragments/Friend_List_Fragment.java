@@ -84,6 +84,7 @@ public class Friend_List_Fragment extends Fragment {
 
         Picasso.get().load(My_Img).into(binding.FriendListMyImgCiv);
         binding.FriendListMyNameTV.setText(My_Name);
+        binding.FriendListFragmentMyUid.setText("#" + My_Uid);
     }
 
     private void Get_Friend_List(){
@@ -97,6 +98,7 @@ public class Friend_List_Fragment extends Fragment {
                     Friends_List.add(friend);
                 }
                 Friend_Adapter.notifyDataSetChanged();
+                binding.TV2.setText("- 친구 " + Friend_Adapter.getItemCount());
             }
 
             @Override

@@ -4,6 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/HOME/StudioProjects/Grumbling_Java/app/src/main/res/layout/activity_post_write.xml" value="0.17806484295845998" />
+        <entry key="app/src/main/res/layout/activity_app_main.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/layout/activity_google_login.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/layout/fragment_chatting_list_view.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/layout/fragment_set__post__background.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/layout/fragment_set__post__text.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/layout/fragment_user__profile__friends_list_.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/layout/fragment_user__profile__posts_list_.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/layout/friend_list_fragment_view_.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/notification.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/layout/user_list_item.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/menu/post_view_grade_menu.xml" value="0.21666666666666667" />
       </map>
     </option>
   </component>

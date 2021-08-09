@@ -9,9 +9,13 @@ public class Model {
     @SerializedName("notification")
     private NotificationModel notification;
 
-    public Model(String token, NotificationModel notification) {
+    @SerializedName("data")
+    private Data data;
+
+    public Model(String token, NotificationModel notification, Data data) {
         this.token = token;
         this.notification = notification;
+        this.data = data;
     }
 
     public String getToken() {
@@ -30,4 +34,11 @@ public class Model {
         this.notification = notification;
     }
 
+    public Data getData() {
+        return data;
+    }
+
+    public void setData(Data data) {
+        this.data = data;
+    }
 }

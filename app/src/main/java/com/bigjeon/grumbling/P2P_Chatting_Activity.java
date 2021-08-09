@@ -17,12 +17,15 @@ import android.widget.Toast;
 
 import com.bigjeon.grumbling.Model.Api;
 import com.bigjeon.grumbling.Model.ApiCLient;
+import com.bigjeon.grumbling.Model.Data;
 import com.bigjeon.grumbling.Model.Model;
 import com.bigjeon.grumbling.Model.NotificationModel;
 import com.bigjeon.grumbling.adapter.Chat_OnClickListener;
 import com.bigjeon.grumbling.adapter.Chat_rcv_Adapter;
 import com.bigjeon.grumbling.data.Chat_Data;
+import com.bigjeon.grumbling.data.Chat_Noti;
 import com.bigjeon.grumbling.data.Chat_User_Uid_Data;
+import com.bigjeon.grumbling.data.Notification_Data;
 import com.example.grumbling.R;
 import com.example.grumbling.databinding.P2P_Chat_Binding;
 import com.google.android.gms.common.api.GoogleApi;
@@ -271,7 +274,8 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
         }
 
         private void Send_Noti_To_User(String message){
-            Model model = new Model(User_Token, new NotificationModel( My_Name + "님이 메세지를 보냈습니다.", message, "chat", My_Uid));
+            Data data = new Data(My_Uid);
+            Model model = new Model(User_Token, new NotificationModel( My_Name + "님이 메세지를 보냈습니다.", message, "Chat", My_Uid), data);
             Api apiService = ApiCLient.getClient().create(Api.class);
             retrofit2.Call<ResponseBody> responseBodyCall = apiService.sendNotification(model);
 

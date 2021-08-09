@@ -19,19 +19,51 @@
             android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <RelativeLayout
+                android:id="@+id/RL1"
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/TV1"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:text="친구">
+            </TextView>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/TV3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/RL1"
+                android:padding="2dp"
+                android:paddingBottom="5dp"
+                android:text="- 내 프로필"
+                android:textColor="@color/black"
+                android:textSize="10dp"
+                android:textStyle="bold"></TextView>
         <RelativeLayout
             android:id="@+id/Friend_List_My_Profile_Container"
-            android:paddingBottom="10dp"
+            android:layout_below="@id/TV3"
+            android:layout_marginTop="3dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Friend_List_My_Img_Civ"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/ic_launcher_background"
+                android:layout_centerInParent="true"
+                android:src="@drawable/app_logo"
                 app:civ_border_color="@color/Transparent_Green"
                 app:civ_border_width="1dp"
-                android:layout_width="40dp"
-                android:layout_height="40dp">
+                android:layout_width="50dp"
+                android:layout_height="50dp">
             </de.hdodenhof.circleimageview.CircleImageView>
             <TextView
                 android:id="@+id/Friend_List_My_Name_TV"
@@ -39,9 +71,21 @@
                 android:textSize="15dp"
                 android:text="내이름"
                 android:gravity="center"
-                android:layout_centerInParent="true"
                 android:textColor="@color/black"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+            <TextView
+                android:id="@+id/Friend_List_Fragment_My_Uid"
+                android:textSize="10dp"
+                android:text="내 UID"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/Friend_List_My_Img_Civ"
+                android:layout_below="@id/Friend_List_My_Name_TV"
+                android:textColor="@color/Transparent_Black50"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </TextView>
@@ -50,7 +94,20 @@
             android:layout_below="@id/Friend_List_My_Profile_Container"
            android:layout_width="match_parent"
            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/TV2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text="- 친구"
+                android:textColor="@color/black"
+                android:textSize="10dp"
+                android:textStyle="bold"></TextView>
            <RelativeLayout
+               android:layout_below="@id/TV2"
                android:layout_width="match_parent"
                android:layout_height="match_parent">
                <FrameLayout

@@ -196,4 +196,5 @@ public class User_Profile_View_activity extends AppCompatActivity {
     public String SendData(){
         return User_Uid;
     }
+    
 }

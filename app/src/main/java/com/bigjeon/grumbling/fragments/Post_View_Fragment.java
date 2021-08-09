@@ -43,6 +43,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -54,6 +55,7 @@ public class Post_View_Fragment extends Fragment {
     private FragmentPostViewBinding binding;
     private FirebaseAuth mAuth;
     private DatabaseReference DB;
+    private String My_Name;
     private Post_View_Rcv_Adapter adapter;
     private String Get_Content_Grade = "모든 게시글";
     ArrayList<Post_Data> list = new ArrayList<>();
@@ -67,15 +69,17 @@ public class Post_View_Fragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         DB = FirebaseDatabase.getInstance().getReference("Posts");
 
+        SharedPreferences Get_My_Data = this.getActivity().getSharedPreferences("My_Data", Context.MODE_PRIVATE);
+        My_Name = Get_My_Data.getString("NAME", null);
+
         My_Uid = mAuth.getCurrentUser().getUid();
 
         RecyclerView rcv = binding.PostRecyclerView;
-        adapter = new Post_View_Rcv_Adapter(mcontext, list, Get_Content_Grade);
+        adapter = new Post_View_Rcv_Adapter(mcontext, list, Get_Content_Grade, My_Name);
         LinearLayoutManager lm = new LinearLayoutManager(mcontext);
         rcv.setLayoutManager(lm);
         rcv.setAdapter(adapter);
         rcv.setHasFixedSize(true);
-
         Get_Post();
 
         binding.PostSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

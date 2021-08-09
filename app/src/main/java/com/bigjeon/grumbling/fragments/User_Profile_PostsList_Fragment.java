@@ -1,6 +1,7 @@
 package com.bigjeon.grumbling.fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -36,6 +37,7 @@ public class User_Profile_PostsList_Fragment extends Fragment {
     private User_Profile_View_activity Parent_Act;
     private FragmentUserProfilePostsListBinding binding;
     private String User_Uid = "?";
+    private String My_Name;
     private DatabaseReference reference;
     private String Get_Post_Key = "유저 게시글";
     private ArrayList<Post_Data> list = new ArrayList<>();
@@ -50,8 +52,11 @@ public class User_Profile_PostsList_Fragment extends Fragment {
         Parent_Act = (User_Profile_View_activity)getActivity();
         User_Uid = Parent_Act.SendData();
 
+        SharedPreferences Get_My_Data = this.getActivity().getSharedPreferences("My_Data", Context.MODE_PRIVATE);
+        My_Name = Get_My_Data.getString("NAME", null);
+
         RecyclerView rcv = binding.UserPostListFragmentRCV;
-        adapter = new Post_View_Rcv_Adapter(getContext(), list, Get_Post_Key);
+        adapter = new Post_View_Rcv_Adapter(getContext(), list, Get_Post_Key, My_Name);
         LinearLayoutManager lm = new LinearLayoutManager(v.getContext());
         rcv.setLayoutManager(lm);
         rcv.setAdapter(adapter);
@@ -91,4 +96,6 @@ public class User_Profile_PostsList_Fragment extends Fragment {
             }
         });
     }
+
+
 }

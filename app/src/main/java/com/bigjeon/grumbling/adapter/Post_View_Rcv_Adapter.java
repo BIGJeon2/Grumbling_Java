@@ -32,9 +32,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bigjeon.grumbling.App_Main_Activity;
 import com.bigjeon.grumbling.Google_Login_Activity;
+import com.bigjeon.grumbling.Model.Api;
+import com.bigjeon.grumbling.Model.ApiCLient;
+import com.bigjeon.grumbling.Model.Data;
+import com.bigjeon.grumbling.Model.Model;
+import com.bigjeon.grumbling.Model.NotificationModel;
 import com.bigjeon.grumbling.Setting_My_Profile_Activity;
 import com.bigjeon.grumbling.Show_Selected_Post_Activity;
 import com.bigjeon.grumbling.User_Profile_View_activity;
+import com.bigjeon.grumbling.data.Chat_Noti;
 import com.bigjeon.grumbling.data.Notification_Data;
 import com.bigjeon.grumbling.data.Post_Data;
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
@@ -65,10 +71,15 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Adapter.Holder>{
     private Context mContext;
     private String Get_Post_Key;
+    private String My_Name;
     private static final String TAG = "My_Check";
     private static final String Notification_Favorite_Key = "Add_Favorite";
     private int doubleclickFlag = 0;
@@ -78,10 +89,11 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference DB = FirebaseDatabase.getInstance().getReference("Posts");
-    public Post_View_Rcv_Adapter(Context context, ArrayList<Post_Data> list, String Key){
+    public Post_View_Rcv_Adapter(Context context, ArrayList<Post_Data> list, String Key, String my_name){
         this.mContext = context;
         this.list = list;
         this.Get_Post_Key = Key;
+        this.My_Name = my_name;
     }
 
     @NonNull
@@ -226,6 +238,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         Notification_Data Favorite_Noti = new Notification_Data(Notification_Favorite_Key, My_Uid, Send_Date, Title);
         DatabaseReference Other_Reference = FirebaseDatabase.getInstance().getReference("Users").child(UID).child("Notifications");
         Other_Reference.push().setValue(Favorite_Noti);
+        Send_Noti_To_User(Title, UID);
     }
     //Child리스너 등록
     public void Get_Post_Child_Listener() {
@@ -296,5 +309,31 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
                 }
             });
         }
+    }
+
+    private void Send_Noti_To_User(String Title, String User_Uid){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Token");
+        reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                Data data = new Data(Title);
+                String User_Token = task.getResult().getValue().toString();
+                Model model = new Model(User_Token, new NotificationModel( My_Name + "님이 해당 게시글을 좋아합니다!", null, "Favorite", Title), data);
+                Api apiService = ApiCLient.getClient().create(Api.class);
+                retrofit2.Call<ResponseBody> responseBodyCall = apiService.sendNotification(model);
+
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Log.d("서버 통신!!", "성공" + User_Token);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.d("서버 통신!!", "실패");
+                    }
+                });
+            }
+        });
     }
 }

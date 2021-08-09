@@ -61,63 +61,9 @@
         </de.hdodenhof.circleimageview.CircleImageView>
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:layout_marginTop="3dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Title">
-        <RelativeLayout
-            android:id="@+id/Firend_List_Btn_Container"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/App_Main_Friend_Civ"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/ic_baseline_group_24"
-            android:text="타임 피드"
-            android:textColor="@color/black"
-            android:textSize="10dp">
-        </de.hdodenhof.circleimageview.CircleImageView>
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/Post_List_Btn_Container"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/App_Main_Post_Civ"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_centerInParent="true"
-            android:backgroundTint="@color/purple_200"
-            android:background="@drawable/ic_baseline_article_24">
-        </de.hdodenhof.circleimageview.CircleImageView>
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/Chatting_List_Btn_Container"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/App_Main_Chatting_Civ"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/ic_baseline_maps_ugc_24">
-        </de.hdodenhof.circleimageview.CircleImageView>
-        </RelativeLayout>
-    </LinearLayout>
-
     <RelativeLayout
         android:id="@+id/Google_AdMob"
+        android:background="@color/purple_200"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -127,15 +73,69 @@
         android:id="@+id/App_Main_Fragment_FrameLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/Google_AdMob"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/Title">
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/App_Main_ViewPager2"
-            android:clipToPadding="false"
-            android:clipChildren="false"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </androidx.viewpager2.widget.ViewPager2>
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"></androidx.viewpager2.widget.ViewPager2>
     </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/Google_AdMob">
+
+        <RelativeLayout
+            android:id="@+id/Firend_List_Btn_Container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/App_Main_Friend_Civ"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_baseline_group_24"
+                android:text="타임 피드"
+                android:textColor="@color/black"
+                android:textSize="10dp"></de.hdodenhof.circleimageview.CircleImageView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/Post_List_Btn_Container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/App_Main_Post_Civ"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_baseline_article_24"
+                android:backgroundTint="@color/purple_200"></de.hdodenhof.circleimageview.CircleImageView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/Chatting_List_Btn_Container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/App_Main_Chatting_Civ"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_baseline_maps_ugc_24"></de.hdodenhof.circleimageview.CircleImageView>
+        </RelativeLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

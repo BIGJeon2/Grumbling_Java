@@ -56,13 +56,20 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         Set_My_Data();
 
         Intent get_noti = getIntent();
-        Get_Noti_State = get_noti.getStringExtra("Noti_State");
-        Get_Noti_Data = get_noti.getStringExtra("Data");
-
-        if (Get_Noti_State != null && Get_Noti_State.equals("Chat")){
-            Intent Go_P2P = new Intent(this, P2P_Chatting_Activity.class);
-            Go_P2P.putExtra("USER_UID", Get_Noti_Data);
-            startActivity(Go_P2P);
+        if (get_noti != null) {
+            Get_Noti_State = get_noti.getStringExtra("Noti_State");
+            Get_Noti_Data = get_noti.getStringExtra("Data");
+            if (Get_Noti_State != null && Get_Noti_State.equals("Chat")){
+                Intent Go_P2P = new Intent(this, P2P_Chatting_Activity.class);
+                Go_P2P.putExtra("USER_UID", Get_Noti_Data);
+                startActivity(Go_P2P);
+            }else if (Get_Noti_State != null && Get_Noti_State.equals("Favorite")){
+                Intent Go_Post = new Intent(this, Show_Selected_Post_Activity.class);
+                Go_Post.putExtra("TITLE", Get_Noti_Data);
+                startActivity(Go_Post);
+            }
+        }else{
+            Toast.makeText(mcontext, Get_Noti_State, Toast.LENGTH_SHORT).show();
         }
 
         //토큰 가져오기

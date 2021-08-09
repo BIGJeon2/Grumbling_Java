@@ -10,12 +10,12 @@
         android:padding="5dp">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/Friend_List_User_Img_Civ"
+            app:civ_border_color="@color/purple_200"
             app:civ_border_width="1dp"
-            app:civ_border_color="@color/Transparent_Black50"
             android:layout_alignParentLeft="true"
             android:src="@drawable/app_logo"
-            android:layout_width="30dp"
-            android:layout_height="30dp">
+            android:layout_width="40dp"
+            android:layout_height="40dp">
         </de.hdodenhof.circleimageview.CircleImageView>
         <TextView
             android:id="@+id/Friend_List_User_Name_TV"
@@ -25,7 +25,7 @@
             android:textColor="@color/black"
             android:layout_marginLeft="5dp"
             android:layout_centerInParent="true"
-            android:textSize="10dp"
+            android:textSize="15dp"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/Friend_List_User_Img_Civ">
         </TextView>

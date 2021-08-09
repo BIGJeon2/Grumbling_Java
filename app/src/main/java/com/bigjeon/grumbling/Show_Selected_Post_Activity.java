@@ -19,8 +19,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bigjeon.grumbling.Model.Api;
+import com.bigjeon.grumbling.Model.ApiCLient;
+import com.bigjeon.grumbling.Model.Data;
+import com.bigjeon.grumbling.Model.Model;
+import com.bigjeon.grumbling.Model.NotificationModel;
 import com.bigjeon.grumbling.adapter.Chat_rcv_Adapter;
 import com.bigjeon.grumbling.data.Chat_Data;
+import com.bigjeon.grumbling.data.Chat_Noti;
 import com.bigjeon.grumbling.data.Post_Data;
 import com.bumptech.glide.Glide;
 import com.example.grumbling.R;
@@ -49,6 +55,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Show_Selected_Post_Activity extends AppCompatActivity {
 
@@ -164,6 +175,7 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
                 }else{
                     data.setFavorite_Count(data.getFavorite_Count() + 1);
                     data.getFavorite().put(mAuth.getCurrentUser().getUid(), true);
+                    Send_Noti_To_User(Post.getPost_Title(), Post.getUser_Uid());
                 }
                 currentData.setValue(data);
                 return Transaction.success(currentData);
@@ -272,5 +284,31 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    private void Send_Noti_To_User(String Title, String User_Uid){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Token");
+        reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                Data data = new Data(Title);
+                String User_Token = task.getResult().getValue().toString();
+                Model model = new Model(User_Token, new NotificationModel( My_Name + "님이 해당 게시글을 좋아합니다!", null, "Favorite", Title), data);
+                Api apiService = ApiCLient.getClient().create(Api.class);
+                retrofit2.Call<ResponseBody> responseBodyCall = apiService.sendNotification(model);
+
+                responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Log.d("서버 통신!!", "성공" + User_Token);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.d("서버 통신!!", "실패");
+                    }
+                });
+            }
+        });
     }
 }

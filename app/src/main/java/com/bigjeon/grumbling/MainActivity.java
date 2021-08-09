@@ -15,6 +15,8 @@ import com.example.grumbling.R;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView Loading_View;
+    private String Get_Noti_State = "None";
+    private String Get_Noti_Data = "None";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,13 @@ public class MainActivity extends AppCompatActivity {
         Loading_View = findViewById(R.id.Loading_GIF);
         Glide.with(this).asGif().load(R.drawable.loading).into(Loading_View);
 
+        Intent get_noti = getIntent();
+        if (get_noti != null){
+            Get_Noti_State = get_noti.getStringExtra("Noti_State");
+            Get_Noti_Data = get_noti.getStringExtra("Data");
+        }
+
+
         SharedPreferences My_Data = getSharedPreferences("My_Data", MODE_PRIVATE);
         //3초간 대기후 작동
         Handler handler = new Handler();
@@ -32,13 +41,16 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 if (My_Data.getString("UID", null) == null){
                     //백그라운드 작업으로 파이어 베이스에서 회원 정보 가져오기
+                    //첫 사용자일시 구글 로그인 화면으로 이동
                     Intent Go_Google_Login = new Intent(MainActivity.this, Google_Login_Activity.class);
                     startActivity(Go_Google_Login);
                     finish();
                 }else{
-                    //첫 사용자일시 구글 로그인 화면으로 이동
+                    //기존 유저일시 바로 App_Main으로 이동
                     Toast.makeText(MainActivity.this, My_Data.getString("NAME", null) + "님 환영합니다.", Toast.LENGTH_SHORT).show();
                     Intent Go_App_Main = new Intent(MainActivity.this, App_Main_Activity.class);
+                    Go_App_Main.putExtra("Noti_State", Get_Noti_State);
+                    Go_App_Main.putExtra("Data", Get_Noti_Data);
                     startActivity(Go_App_Main);
                     finish();
                 }
