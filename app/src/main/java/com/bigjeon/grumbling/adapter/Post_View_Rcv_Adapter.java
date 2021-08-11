@@ -48,6 +48,7 @@ import com.bumptech.glide.Glide;
 import com.example.grumbling.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -216,7 +217,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
                 }else{
                     data.setFavorite_Count(data.getFavorite_Count() + 1);
                     data.getFavorite().put(mAuth.getCurrentUser().getUid(), true);
-                    Send_Favorite_Notification(data.getUser_Uid(), data.getPost_Title(), mAuth.getCurrentUser().getUid());
+                    Send_Favorite_Notification(data.getUser_Uid(), data.getPost_Title(), mAuth.getCurrentUser().getUid(), data.getPost_Background());
                 }
                 currentData.setValue(data);
                 return Transaction.success(currentData);
@@ -229,7 +230,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         });
     }
 
-    public void Send_Favorite_Notification(String UID, String Title, String My_Uid){
+    public void Send_Favorite_Notification(String UID, String Title, String My_Uid, String IMG){
 
         SimpleDateFormat simpledate = new SimpleDateFormat("yyyyMMddHHmmss");
         Date date = new Date();
@@ -238,7 +239,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         Notification_Data Favorite_Noti = new Notification_Data(Notification_Favorite_Key, My_Uid, Send_Date, Title);
         DatabaseReference Other_Reference = FirebaseDatabase.getInstance().getReference("Users").child(UID).child("Notifications");
         Other_Reference.push().setValue(Favorite_Noti);
-        Send_Noti_To_User(Title, UID);
+        Send_Noti_To_User(Title, UID, IMG);
     }
     //Child리스너 등록
     public void Get_Post_Child_Listener() {
@@ -311,14 +312,13 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         }
     }
 
-    private void Send_Noti_To_User(String Title, String User_Uid){
+    private void Send_Noti_To_User(String Title, String User_Uid, String IMG){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Token");
         reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                Data data = new Data(Title);
                 String User_Token = task.getResult().getValue().toString();
-                Model model = new Model(User_Token, new NotificationModel( My_Name + "님이 해당 게시글을 좋아합니다!", null, "Favorite", Title), data);
+                Model model = new Model(User_Token, null, new Data(My_Name + "님이 해당 게시글을 좋아합니다!", null, Title, ".Post", Title, IMG));
                 Api apiService = ApiCLient.getClient().create(Api.class);
                 retrofit2.Call<ResponseBody> responseBodyCall = apiService.sendNotification(model);
 

@@ -188,8 +188,6 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
 
     private void Go_App_Main(){
         Intent Go_App_Main = new Intent(this, App_Main_Activity.class);
-        Go_App_Main.putExtra("Noti_State", "NONE");
-        Go_App_Main.putExtra("Data", "NONE");
         startActivity(Go_App_Main);
         finish();
     }

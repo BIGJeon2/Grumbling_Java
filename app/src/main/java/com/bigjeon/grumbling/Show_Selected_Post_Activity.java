@@ -33,6 +33,7 @@ import com.example.grumbling.R;
 import com.example.grumbling.databinding.ActivityShowSelectedPostBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -87,7 +88,14 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         binding.setSelectPostView(this);
 
         Intent Get_Post_Title = getIntent();
-        Post_Title = Get_Post_Title.getStringExtra("TITLE");
+        if (Get_Post_Title == null) {
+            Bundle bundle = getIntent().getExtras();
+            if (bundle != null) {
+                Post_Title = bundle.getString("TITLE");
+            }
+        }else{
+            Post_Title = Get_Post_Title.getStringExtra("TITLE");
+        }
         mAuth = FirebaseAuth.getInstance();
         DB = FirebaseDatabase.getInstance().getReference("Posts");
 
@@ -291,9 +299,8 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                Data data = new Data(Title);
                 String User_Token = task.getResult().getValue().toString();
-                Model model = new Model(User_Token, new NotificationModel( My_Name + "님이 해당 게시글을 좋아합니다!", null, "Favorite", Title), data);
+                Model model = new Model(User_Token, null, new Data(My_Name + "님이 해당 게시글을 좋아합니다!", null, Title, ".Post", Title, Post.getPost_Background()));
                 Api apiService = ApiCLient.getClient().create(Api.class);
                 retrofit2.Call<ResponseBody> responseBodyCall = apiService.sendNotification(model);
 

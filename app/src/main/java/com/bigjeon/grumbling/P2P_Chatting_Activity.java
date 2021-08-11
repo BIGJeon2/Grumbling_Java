@@ -65,6 +65,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
     P2P_Chat_Binding binding;
     private String My_Uid;
     private String My_Name;
+    private String My_Img;
     private String User_Uid;
     private String User_Token;
     private String Chatting_Room_ID;
@@ -90,9 +91,18 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
         //인테트, Sharepreference를 통해 유저 UID, 내 UID 받아옴
         SharedPreferences My_Data = getSharedPreferences("My_Data", MODE_PRIVATE);
         My_Uid = My_Data.getString("UID", null);
+        My_Img = My_Data.getString("IMG", null);
 
         Intent Get_Data = getIntent();
-        User_Uid = Get_Data.getStringExtra("USER_UID");
+        if (Get_Data == null) {
+            Bundle bundle = getIntent().getExtras();
+            if (bundle != null) {
+               User_Uid = bundle.getString("tag");
+            }
+        }else{
+            User_Uid = Get_Data.getStringExtra("USER_UID");
+        }
+
 
         My_Name = getSharedPreferences("My_Data", MODE_PRIVATE).getString("NAME", null);
 
@@ -274,8 +284,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
         }
 
         private void Send_Noti_To_User(String message){
-            Data data = new Data(My_Uid);
-            Model model = new Model(User_Token, new NotificationModel( My_Name + "님이 메세지를 보냈습니다.", message, "Chat", My_Uid), data);
+            Model model = new Model(User_Token, null, new Data(My_Name + "님이 메세지를 보냈습니다.", message, Chatting_Room_ID, ".P2P", My_Uid, My_Img));
             Api apiService = ApiCLient.getClient().create(Api.class);
             retrofit2.Call<ResponseBody> responseBodyCall = apiService.sendNotification(model);
 

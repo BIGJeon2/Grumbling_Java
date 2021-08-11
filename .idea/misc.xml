@@ -3,7 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/HOME/StudioProjects/Grumbling_Java/app/src/main/res/layout/activity_notification.xml" value="0.33469202898550726" />
         <entry key="..\:/Users/HOME/StudioProjects/Grumbling_Java/app/src/main/res/layout/activity_post_write.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/HOME/StudioProjects/Grumbling_Java/app/src/main/res/layout/friend_list_fragment_view_.xml" value="0.33469202898550726" />
+        <entry key="..\:/Users/HOME/StudioProjects/Grumbling_Java/app/src/main/res/layout/notification.xml" value="0.33469202898550726" />
+        <entry key="..\:/Users/HOME/StudioProjects/Grumbling_Java/app/src/main/res/layout/notification_item.xml" value="0.33469202898550726" />
+        <entry key="..\:/Users/HOME/StudioProjects/Grumbling_Java/app/src/main/res/menu/post_context_menu.xml" value="0.22777777777777777" />
+        <entry key="..\:/Users/HOME/StudioProjects/Grumbling_Java/app/src/main/res/menu/post_view_grade_menu.xml" value="0.22777777777777777" />
         <entry key="app/src/main/res/layout/activity_app_main.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/activity_google_login.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/fragment_chatting_list_view.xml" value="0.21666666666666667" />

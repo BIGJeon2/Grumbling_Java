@@ -3,14 +3,10 @@ package com.bigjeon.grumbling.Model;
 public class NotificationModel {
     private String title;
     private String body;
-    private String tag;
-    private String data;
 
-    public NotificationModel(String title, String body, String tag, String data) {
+    public NotificationModel(String title, String body) {
         this.title = title;
         this.body = body;
-        this.tag = tag;
-        this.data = data;
     }
 
     public String getTitle() {
@@ -29,19 +25,4 @@ public class NotificationModel {
         this.body = body;
     }
 
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
 }

@@ -15,8 +15,6 @@ import com.example.grumbling.R;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView Loading_View;
-    private String Get_Noti_State = "None";
-    private String Get_Noti_Data = "None";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         Loading_View = findViewById(R.id.Loading_GIF);
         Glide.with(this).asGif().load(R.drawable.loading).into(Loading_View);
-
-        Intent get_noti = getIntent();
-        if (get_noti != null){
-            Get_Noti_State = get_noti.getStringExtra("Noti_State");
-            Get_Noti_Data = get_noti.getStringExtra("Data");
-        }
-
 
         SharedPreferences My_Data = getSharedPreferences("My_Data", MODE_PRIVATE);
         //3초간 대기후 작동
@@ -49,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
                     //기존 유저일시 바로 App_Main으로 이동
                     Toast.makeText(MainActivity.this, My_Data.getString("NAME", null) + "님 환영합니다.", Toast.LENGTH_SHORT).show();
                     Intent Go_App_Main = new Intent(MainActivity.this, App_Main_Activity.class);
-                    Go_App_Main.putExtra("Noti_State", Get_Noti_State);
-                    Go_App_Main.putExtra("Data", Get_Noti_Data);
                     startActivity(Go_App_Main);
                     finish();
                 }
