@@ -75,6 +75,7 @@ public class Chatting_Activity extends AppCompatActivity {
             @Override
             public void OnItemClicked(RecyclerView.ViewHolder Holder, View v, int pos) {
                 binding.ReplidedEditContainer.setVisibility(View.VISIBLE);
+                binding.ReplyImg.setVisibility(View.VISIBLE);
                 Reply_Target_Uid = list.get(pos).getUid();
                 Reply_Target_Text = list.get(pos).getText();
                 binding.RepliedText.setText(Reply_Target_Text);
@@ -84,6 +85,8 @@ public class Chatting_Activity extends AppCompatActivity {
         LinearLayoutManager lm = new LinearLayoutManager(this);
         binding.ChattingListListView.setLayoutManager(lm);
         binding.ChattingListListView.setHasFixedSize(true);
+
+        binding.BackPressBtn.setOnClickListener( v -> onBackPressed());
 
         DB = FirebaseDatabase.getInstance();
         reference = DB.getReference("Chats").child(Post_Title);
@@ -143,6 +146,7 @@ public class Chatting_Activity extends AppCompatActivity {
             reference.push().setValue(chat_data);
             binding.ChattingETV.setText("");
             binding.ReplidedEditContainer.setVisibility(View.GONE);
+            binding.ReplyImg.setVisibility(View.GONE);
             Reply_Target_Uid = "NONE";
             Reply_Target_Text = "NONE";
 
@@ -159,6 +163,7 @@ public class Chatting_Activity extends AppCompatActivity {
     public void onBackPressed() {
         if (binding.ReplidedEditContainer.getVisibility() == View.VISIBLE){
             binding.ReplidedEditContainer.setVisibility(View.GONE);
+            binding.ReplyImg.setVisibility(View.GONE);
             Reply_Target_Uid = "NONE";
             Reply_Target_Text = "NONE";
             binding.ChattingListListView.scrollToPosition(list.size() - 1);

@@ -17,8 +17,39 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/Post_View_Category_Container"
+            android:paddingBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:paddingTop="5dp"
+                android:id="@+id/Category_Result_TV"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:text="카테고리"
+                android:textStyle="bold"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp">
+            </TextView>
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/Category_RCV"
+               android:paddingLeft="10dp"
+               android:paddingRight="10dp"
+               android:layout_centerInParent="true"
+               android:layout_below="@id/Category_Result_TV"
+               tools:listitem="@layout/category_item"
+               android:layout_width="match_parent"
+               android:layout_height="40dp">
+           </androidx.recyclerview.widget.RecyclerView>
+        </RelativeLayout>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/Post_Swipe_Refresh_Layout"
+        android:layout_below="@id/Post_View_Category_Container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView

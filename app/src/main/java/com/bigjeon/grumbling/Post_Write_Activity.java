@@ -77,9 +77,7 @@ public class Post_Write_Activity extends AppCompatActivity {
     private String STATE = "CREATE";
     private int key = 0;
     private Post_Data post_data;
-    private String Grade_All = "모든 사용자";
-    private String Grade_Friends = "친구 공개";
-    private String Grade_Secret = "비공개";
+    private String Grade_All = "잡담";
     private String User_Name;
     private String User_Uid;
     private String Post_Title;
@@ -202,7 +200,7 @@ public class Post_Write_Activity extends AppCompatActivity {
         post_data = new Post_Data(null,
                 User_Uid,
                 null,
-                "모든 사용자",
+                "잡담",
                 45,
                 R.color.black,
                 R.color.Transparent_Black30,
@@ -246,9 +244,9 @@ public class Post_Write_Activity extends AppCompatActivity {
     }
     //보안 등급 설정
     private void Set_Posting_Grade() {
-        String[] Grade = {Grade_All, Grade_Friends, Grade_Secret};
+        String[] Grade = {"모임", "게임", "고민", "자랑", "잡담"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("공개 범위 설정").setItems(Grade, new DialogInterface.OnClickListener() {
+        builder.setTitle("카테고리 설정").setItems(Grade, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 post_data.setGrade(Grade[which]);

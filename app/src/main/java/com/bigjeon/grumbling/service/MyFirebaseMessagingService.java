@@ -88,8 +88,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             remoteViews.setTextViewText(R.id.noti_message, text);
 
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId)
-                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.app_logo))
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_custom))
+                    .setSmallIcon(R.mipmap.ic_launcher_custom)
                     .setContent(remoteViews)
                     .setContentTitle(tittle)
                     .setContentText(text)

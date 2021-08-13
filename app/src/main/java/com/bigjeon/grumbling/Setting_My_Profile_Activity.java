@@ -53,7 +53,7 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String User_Uid;
     private DatabaseReference DB;
-    private String Get_Post_Key = "나의 게시글";
+    private String Get_Post_Key = "모든 게시글";
     private ActivitySettingMyProfileBinding binding;
     private Post_View_Rcv_Adapter adapter;
     private ArrayList<Post_Data> list = new ArrayList<>();

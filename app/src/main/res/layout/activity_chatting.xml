@@ -15,7 +15,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
         <RelativeLayout
-            android:layout_weight="11"
+            android:layout_weight="11.5"
             android:background="@color/Transparent_Black30"
             android:id="@+id/Post_View_Content_Container"
             android:layout_width="match_parent"
@@ -23,12 +23,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/BackPress_Btn"
+                android:background="@drawable/ic_baseline_navigate_before_24"
+                android:layout_centerInParent="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </ImageView>
             <TextView
                 android:id="@+id/Chatting_Post_Content_TV"
                 android:text="포스팅 내용"
                 android:textSize="15dp"
+                android:layout_toRightOf="@id/BackPress_Btn"
                 android:textColor="@color/black"
-                android:fontFamily="@font/uhbeerice"
                 android:gravity="left"
                 android:layout_marginLeft="10dp"
                 android:layout_centerInParent="true"
@@ -49,13 +58,14 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
             android:divider="@color/white"
+            android:layout_above="@id/Replided_Edit_Container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
         </androidx.recyclerview.widget.RecyclerView>
         <RelativeLayout
             android:id="@+id/Replided_Edit_Container"
             android:visibility="gone"
-            android:background="@color/Transparent_Black70"
+            android:background="@color/Transparent_Black30"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="100dp">
@@ -69,7 +79,7 @@
                     android:id="@+id/Replied_Target_Name"
                     android:textSize="15dp"
                     android:hint="이름"
-                    android:fontFamily="@font/uhbeerice"
+                    android:textColor="@color/black"
                     android:layout_centerInParent="true"
                     android:layout_alignParentLeft="true"
                     android:layout_width="wrap_content"
@@ -83,8 +93,8 @@
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/Replied_Text"
+                    android:textColor="@color/black"
                     android:text="답장 대상 내용"
-                    android:fontFamily="@font/uhbeerice"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 </TextView>
@@ -93,7 +103,7 @@
     </RelativeLayout>
     <RelativeLayout
         android:background="@color/Transparent_Black30"
-        android:layout_weight="10.5"
+        android:layout_weight="11.5"
         android:id="@+id/Chatting_Edittext_Container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -112,10 +122,21 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp">
             </de.hdodenhof.circleimageview.CircleImageView>
+            <ImageView
+                android:id="@+id/Reply_Img"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/ic_baseline_reply_24"
+                android:rotationX="180"
+                android:rotationY="180"></ImageView>
             <EditText
                 android:id="@+id/Chatting_ETV"
                 android:layout_toLeftOf="@id/Chatting_Send_CIV"
                 android:hint="내용을 입력하세요."
+                android:layout_toRightOf="@id/Reply_Img"
                 android:layout_marginRight="5dp"
                 android:layout_marginLeft="5dp"
                 android:padding="5dp"

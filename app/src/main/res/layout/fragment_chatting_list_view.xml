@@ -18,8 +18,26 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <RelativeLayout
+                android:id="@+id/Chatting_List_Title_Container"
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:paddingTop="5dp"
+                    android:textSize="20dp"
+                    android:text="채팅 목록"
+                    android:layout_marginLeft="5dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+            </RelativeLayout>
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_below="@id/Chatting_List_Title_Container"
                 android:id="@+id/Chatting_List_Rcv"
+                android:layout_marginTop="5dp"
                 tools:listitem="@layout/chatting_list_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

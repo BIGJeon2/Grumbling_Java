@@ -159,6 +159,10 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         holder.User_Img.setOnClickListener(v -> Go_User_Profile_View_Act(data.getUser_Uid()));
     }
 
+    public void Set_Grade(String Grade){
+        Get_Post_Key = Grade;
+    }
+
     private void Show_Selected_Post(Post_Data data) {
         Intent Go_Show_Selected_Post = new Intent(mContext, Show_Selected_Post_Activity.class);
         Go_Show_Selected_Post.putExtra("TITLE", data.getPost_Title());
@@ -291,7 +295,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
             return Post_ChildListener;
     }
 
-    public void Get_Post_Single(){
+    public void Get_Post_Single() {
         if (Get_Post_Key.equals("모든 게시글")) {
             DB.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -299,7 +303,24 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
                     list.clear();
                     for (DataSnapshot data : snapshot.getChildren()) {
                         Post_Data post = data.getValue(Post_Data.class);
-                        if (post.getGrade().equals("모든 사용자")) list.add(0, post);
+                        list.add(0, post);
+                    }
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+        } else {
+            DB.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    list.clear();
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        Post_Data post = data.getValue(Post_Data.class);
+                        if (post.getGrade().equals(Get_Post_Key)) list.add(0, post);
                     }
                     notifyDataSetChanged();
                 }

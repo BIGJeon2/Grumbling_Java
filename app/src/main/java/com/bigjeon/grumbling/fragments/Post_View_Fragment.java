@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,8 @@ import android.widget.Toast;
 
 import com.bigjeon.grumbling.App_Main_Activity;
 import com.bigjeon.grumbling.Post_Write_Activity;
+import com.bigjeon.grumbling.adapter.Category_OnClick;
+import com.bigjeon.grumbling.adapter.Category_Rcv_Adapter;
 import com.bigjeon.grumbling.adapter.Post_View_Rcv_Adapter;
 import com.bigjeon.grumbling.data.Post_Data;
 import com.example.grumbling.App_Main_Binding;
@@ -57,6 +60,8 @@ public class Post_View_Fragment extends Fragment {
     private DatabaseReference DB;
     private String My_Name;
     private Post_View_Rcv_Adapter adapter;
+    private Category_Rcv_Adapter Category_Adapter;
+    private ArrayList<String> category = new ArrayList<>();
     private String Get_Content_Grade = "모든 게시글";
     ArrayList<Post_Data> list = new ArrayList<>();
 
@@ -73,6 +78,25 @@ public class Post_View_Fragment extends Fragment {
         My_Name = Get_My_Data.getString("NAME", null);
 
         My_Uid = mAuth.getCurrentUser().getUid();
+
+        Category_Adapter = new Category_Rcv_Adapter(category, mcontext);
+        Category_Adapter.setOnClickListener(new Category_OnClick() {
+            @Override
+            public void OnItemClicked(RecyclerView.ViewHolder Holder, View v, int pos) {
+                if (!Get_Content_Grade.equals(Category_Adapter.Get_Category(pos))){
+                    Get_Content_Grade = Category_Adapter.Get_Category(pos);
+                    binding.CategoryResultTV.setText("#." + Get_Content_Grade);
+                    adapter.Set_Grade(Get_Content_Grade);
+                    Get_Post();
+                }
+            }
+        });
+        LinearLayoutManager Cate_lm = new LinearLayoutManager(mcontext);
+        Cate_lm.setOrientation(RecyclerView.HORIZONTAL);
+        binding.CategoryRCV.setLayoutManager(Cate_lm);
+        binding.CategoryRCV.setAdapter(Category_Adapter);
+        binding.CategoryRCV.setHasFixedSize(true);
+        Add_Category();
 
         RecyclerView rcv = binding.PostRecyclerView;
         adapter = new Post_View_Rcv_Adapter(mcontext, list, Get_Content_Grade, My_Name);
@@ -111,5 +135,16 @@ public class Post_View_Fragment extends Fragment {
     public void onResume() {
         super.onResume();
         adapter.Get_Post_Child_Listener();
+    }
+
+    private void Add_Category(){
+        category.clear();
+        category.add("모든 게시글");
+        category.add("모임");
+        category.add("게임");
+        category.add("고민");
+        category.add("자랑");
+        category.add("잡담");
+        Category_Adapter.notifyDataSetChanged();
     }
 }

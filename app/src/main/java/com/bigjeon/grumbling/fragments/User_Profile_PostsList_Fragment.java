@@ -39,7 +39,7 @@ public class User_Profile_PostsList_Fragment extends Fragment {
     private String User_Uid = "?";
     private String My_Name;
     private DatabaseReference reference;
-    private String Get_Post_Key = "유저 게시글";
+    private String Get_Post_Key = "모든 게시글";
     private ArrayList<Post_Data> list = new ArrayList<>();
     private Post_View_Rcv_Adapter adapter;
 
@@ -83,7 +83,7 @@ public class User_Profile_PostsList_Fragment extends Fragment {
                 list.clear();
                 for (DataSnapshot data : snapshot.getChildren()) {
                     Post_Data post = data.getValue(Post_Data.class);
-                    if (post.getUser_Uid().equals(User_Uid) && post.getGrade().equals("모든 사용자")){
+                    if (post.getUser_Uid().equals(User_Uid)){
                         list.add(0, post);
                     }
                 }

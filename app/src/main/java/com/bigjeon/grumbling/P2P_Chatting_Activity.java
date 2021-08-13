@@ -103,7 +103,12 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
             User_Uid = Get_Data.getStringExtra("USER_UID");
         }
 
-
+        binding.BackPressBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         My_Name = getSharedPreferences("My_Data", MODE_PRIVATE).getString("NAME", null);
 
         Get_User_Data();
@@ -117,6 +122,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
             @Override
             public void OnItemClicked(RecyclerView.ViewHolder Holder, View v, int pos) {
                 binding.ReplidedEditContainer.setVisibility(View.VISIBLE);
+                binding.ReplyImg.setVisibility(View.VISIBLE);
                 Reply_Target_Uid = list.get(pos).getUid();
                 Reply_Target_Text = list.get(pos).getText();
                 binding.RepliedText.setText(Reply_Target_Text);
@@ -215,6 +221,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
             Send_Noti_To_User(Message);
             binding.ChattingETV.setText("");
             binding.ReplidedEditContainer.setVisibility(View.GONE);
+            binding.ReplyImg.setVisibility(View.GONE);
             Reply_Target_Uid = "NONE";
             Reply_Target_Text = "NONE";
         }
@@ -230,6 +237,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
     public void onBackPressed() {
         if (binding.ReplidedEditContainer.getVisibility() == View.VISIBLE){
             binding.ReplidedEditContainer.setVisibility(View.GONE);
+            binding.ReplyImg.setVisibility(View.GONE);
             Reply_Target_Uid = "NONE";
             Reply_Target_Text = "NONE";
         }else{

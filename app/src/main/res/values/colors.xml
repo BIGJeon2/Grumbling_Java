@@ -16,4 +16,6 @@
     <color name="Transparent_Black80">#80000000</color>
     <color name="Transparent_White">#50FFFFFF</color>
     <color name="Transparent_Green">#804B9A4E</color>
+
+    <color name="Chatting_Titile_Color">#60BD38</color>
 </resources>
