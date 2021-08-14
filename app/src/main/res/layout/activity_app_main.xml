@@ -73,8 +73,9 @@
         android:id="@+id/App_Main_Fragment_FrameLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/Title">
+        app:layout_constraintBottom_toTopOf="@+id/Google_AdMob"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/App_Main_ViewPager2"
             android:layout_width="match_parent"
@@ -85,17 +86,18 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:background="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/Google_AdMob">
+        app:layout_constraintTop_toBottomOf="@+id/Title">
 
         <RelativeLayout
             android:id="@+id/Firend_List_Btn_Container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@android:color/transparent">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/App_Main_Friend_Civ"
@@ -112,7 +114,8 @@
             android:id="@+id/Post_List_Btn_Container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@android:color/transparent">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/App_Main_Post_Civ"
@@ -127,7 +130,8 @@
             android:id="@+id/Chatting_List_Btn_Container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@android:color/transparent">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/App_Main_Chatting_Civ"

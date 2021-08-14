@@ -2,6 +2,7 @@ package com.bigjeon.grumbling;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -165,7 +166,9 @@ public class User_Profile_View_activity extends AppCompatActivity {
             Friend_Data My_Friend = new Friend_Data(User_Uid, Send_Date);
             reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Friends").child(User_Uid);
             reference.setValue(My_Friend);
+            binding.SettingFragmentSendFriendRequestBtn.setBackgroundResource(R.drawable.round_shape);
             binding.SettingFragmentSendFriendRequestBtn.setText("친구");
+            binding.SettingFragmentSendFriendRequestBtn.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.Transparent_Green));
 
             Notification_Data Noti = new Notification_Data(Notification_Key, My_Uid, "NONE", Send_Date);
             reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Notifications");
@@ -186,6 +189,8 @@ public class User_Profile_View_activity extends AppCompatActivity {
                         Friend_State = "NONE";
                     }else if (Friends.getUid().equals(User_Uid)){
                         Friend_State = "Friend";
+                        binding.SettingFragmentSendFriendRequestBtn.setBackgroundResource(R.drawable.round_shape);
+                        binding.SettingFragmentSendFriendRequestBtn.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.Transparent_Green));
                         binding.SettingFragmentSendFriendRequestBtn.setText("친구");
                     }
                 }
