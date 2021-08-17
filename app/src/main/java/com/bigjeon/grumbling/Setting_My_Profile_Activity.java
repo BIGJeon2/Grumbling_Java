@@ -53,7 +53,7 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String User_Uid;
     private DatabaseReference DB;
-    private String Get_Post_Key = "모든 게시글";
+    private String Get_Post_Key = "유저 게시글";
     private ActivitySettingMyProfileBinding binding;
     private Post_View_Rcv_Adapter adapter;
     private ArrayList<Post_Data> list = new ArrayList<>();
@@ -86,16 +86,17 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
         DB = FirebaseDatabase.getInstance().getReference("Posts");
 
         RecyclerView rcv = binding.SettingFragmnetMyPostsRCV;
-        adapter = new Post_View_Rcv_Adapter(this, list, Get_Post_Key, My_Name);
+        adapter = new Post_View_Rcv_Adapter(this, list, Get_Post_Key, My_Name, User_Uid);
         LinearLayoutManager lm = new LinearLayoutManager(this);
         rcv.setLayoutManager(lm);
         rcv.setAdapter(adapter);
         rcv.setHasFixedSize(true);
 
         Get_Users_Posts();
-
+        binding.MyProfileBackIMV.setOnClickListener(v -> onBackPressed());
         binding.SettingFragmentSignOutBtn.setOnClickListener(v -> Sign_Out());
         binding.SettingFragmentChangeProfileBtn.setOnClickListener(v -> Go_Profile_Set_Act());
+        binding.SettingFragmentUnregisterBtn.setOnClickListener( v -> Toast.makeText(this, "회원 탈퇴 기능은 베타버전에선 지원되지 않습니다. 추후 정식버전 출시시 이전 데이터들은 모두 일괄 삭제되오니, 참고 바랍니다!", Toast.LENGTH_SHORT).show());
     }
 
     private void Set_Users_Data() {

@@ -87,7 +87,7 @@ public class Post_View_Fragment extends Fragment {
         binding.CategoryTVGrung.setOnClickListener(v -> Category_Color_Change_On(6));
 
         RecyclerView rcv = binding.PostRecyclerView;
-        adapter = new Post_View_Rcv_Adapter(mcontext, list, Get_Content_Grade, My_Name);
+        adapter = new Post_View_Rcv_Adapter(mcontext, list, Get_Content_Grade, My_Name, null);
         LinearLayoutManager lm = new LinearLayoutManager(mcontext);
         rcv.setLayoutManager(lm);
         rcv.setAdapter(adapter);

@@ -143,6 +143,8 @@ public class Post_Write_Activity extends AppCompatActivity {
         //포스팅 완료 버튼==============================================
         binding.DialogPostingCompleteCIV.setOnClickListener(v -> Upload_Post());
 
+        binding.PostWriteBackPressImv.setOnClickListener( v -> onBackPressed());
+
     }
     //ViewPager2
     private void Change_Fragment_OnCLick(int i) {
@@ -299,10 +301,28 @@ public class Post_Write_Activity extends AppCompatActivity {
                 Toast.makeText(Post_Write_Activity.this, "게시글이 정상적으로 등록되었습니다!", Toast.LENGTH_SHORT).show();
                 finish();
             }
-//            Toast.makeText(Post_Write_Activity.this, "게시글이 정상적으로 등록되었습니다!", Toast.LENGTH_SHORT).show();
-//            finish();
         }else {
             Toast.makeText(Post_Write_Activity.this, "최소 3글자 이상 입력해 주세요!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("*주의*");
+        dialog.setMessage("이페이지에서 나가면 작성하신 내용이 삭제됩니다.");
+        dialog.setPositiveButton("머무르기", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setNegativeButton("나가기", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Post_Write_Activity.super.onBackPressed();
+            }
+        });
+        dialog.show();
     }
 }

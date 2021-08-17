@@ -35,7 +35,7 @@
                 android:layout_centerInParent="true"
                 android:layout_alignParentLeft="true"
                 app:civ_border_width="1dp"
-                app:civ_border_color="@color/Transparent_Black70"
+                app:civ_border_color="@color/Transparent_Green"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"

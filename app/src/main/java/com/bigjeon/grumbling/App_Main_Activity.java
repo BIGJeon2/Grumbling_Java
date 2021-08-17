@@ -73,7 +73,7 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         binding.AppMainViewPager2.setAdapter(ViewPager_Adapter);
         binding.AppMainViewPager2.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         binding.AppMainViewPager2.setCurrentItem(1, false);
-        binding.AppMainViewPager2.setOffscreenPageLimit(1);
+        binding.AppMainViewPager2.setOffscreenPageLimit(3);
 
         binding.AppMainViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override

@@ -18,10 +18,34 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/User_Profile_Back_IMV"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_baseline_navigate_before_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </ImageView>
+            <TextView
+                android:layout_centerInParent="true"
+                android:text="- 프로필 -"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+        </RelativeLayout>
         <LinearLayout
             android:orientation="vertical"
             android:paddingBottom="5dp"
-            android:layout_weight="1.5"
+            android:layout_weight="4"
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <RelativeLayout
@@ -56,7 +80,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
                         </TextView>
-                        <TextView
+
+                    <TextView
                             android:id="@+id/Setting_Fragment_Send_Friend_Request_Btn"
                             android:layout_marginRight="5dp"
                             android:padding="4dp"
@@ -69,21 +94,33 @@
                             android:text="친구 추가 +">
                         </TextView>
                 </LinearLayout>
-                <de.hdodenhof.circleimageview.CircleImageView
+
+                <ImageView
                     android:id="@+id/Setting_Fragment_Chatting_Civ"
-                    android:layout_marginRight="5dp"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:background="@drawable/ic_baseline_maps_ugc_24"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/ic_baseline_chat_bubble_outline_24"
+                    android:backgroundTint="@color/black">
+                </ImageView>
+                <TextView
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/Setting_Fragment_Chatting_Civ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1:1 채팅"
+                    android:textSize="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="5dp"
                     android:textColor="@color/black">
-                </de.hdodenhof.circleimageview.CircleImageView>
+                </TextView>
             </RelativeLayout>
         </LinearLayout>
         <RelativeLayout
             android:layout_marginTop="5dp"
-            android:layout_weight="12"
+            android:layout_weight="25"
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <LinearLayout

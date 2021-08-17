@@ -1,6 +1,12 @@
 package com.bigjeon.grumbling;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -66,29 +72,28 @@ public class Google_Login_Activity extends AppCompatActivity {
 
     private void SignIn() {
         Intent Sign_In_Intent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(Sign_In_Intent, Sign_In_Code);
+        startActivityResult.launch(Sign_In_Intent);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
-            case 1001:
-                Log.e("RESULT", Auth.GoogleSignInApi.getSignInResultFromIntent(data).getStatus().toString());
-                if(resultCode == RESULT_OK){
-                    Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-                    try {
-                        GoogleSignInAccount account = task.getResult(ApiException.class);
-                        Toast.makeText(Google_Login_Activity.this, "구글 로그인 성공!", Toast.LENGTH_SHORT).show();
-                        firebasseAuthWithGoogle(account.getIdToken());
-                    }catch (ApiException e){
-                        e.printStackTrace();
+    ActivityResultLauncher<Intent> startActivityResult = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == RESULT_OK){
+                        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
+                        try {
+                            GoogleSignInAccount account = task.getResult(ApiException.class);
+                            Toast.makeText(Google_Login_Activity.this, "구글 로그인 성공!", Toast.LENGTH_SHORT).show();
+                            firebasseAuthWithGoogle(account.getIdToken());
+                        }catch (ApiException e){
+                            e.printStackTrace();
+                        }
+                    }else {
+                        Toast.makeText(Google_Login_Activity.this, "구글 로그인 실패!" + result.getResultCode(), Toast.LENGTH_SHORT).show();
                     }
-                }else {
-                    Toast.makeText(Google_Login_Activity.this, "구글 로그인 실패!" + resultCode, Toast.LENGTH_SHORT).show();
-                }break;
-        }
-    }
+                }
+            }
+    );
 
     private void firebasseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);

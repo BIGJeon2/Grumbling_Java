@@ -12,9 +12,9 @@
         android:allowBackup="false"
         android:hardwareAccelerated="true"
         android:largeHeap="true"
-        android:icon="@mipmap/ic_launcher_custom"
+        android:icon="@mipmap/main_app_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_custom_round"
+        android:roundIcon="@mipmap/main_app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name="com.bigjeon.grumbling.Post_Write_Activity"
@@ -30,7 +30,12 @@
         <activity
             android:name="com.bigjeon.grumbling.Chatting_Activity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name="com.bigjeon.grumbling.User_Profile_View_activity" />
+        <activity android:name="com.bigjeon.grumbling.User_Profile_View_activity">
+            <intent-filter>
+                <action android:name=".Friend"></action>
+                <category android:name="android.intent.category.DEFAULT"></category>
+            </intent-filter>
+        </activity>
         <activity android:name="com.bigjeon.grumbling.Show_Selected_Post_Activity">
             <intent-filter>
                 <action android:name=".Post"></action>

@@ -83,6 +83,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
     private String My_Name;
     private static final String TAG = "My_Check";
     private static final String Notification_Favorite_Key = "Add_Favorite";
+    private String User_Uid;
     private int doubleclickFlag = 0;
     private int CLICK_DELAY = 300;
     ArrayList<Post_Data> list;
@@ -90,11 +91,12 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference DB = FirebaseDatabase.getInstance().getReference("Posts");
-    public Post_View_Rcv_Adapter(Context context, ArrayList<Post_Data> list, String Key, String my_name){
+    public Post_View_Rcv_Adapter(Context context, ArrayList<Post_Data> list, String Key, String my_name, String user_uid){
         this.mContext = context;
         this.list = list;
         this.Get_Post_Key = Key;
         this.My_Name = my_name;
+        this.User_Uid = user_uid;
     }
 
     @NonNull
@@ -235,15 +237,16 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
     }
 
     public void Send_Favorite_Notification(String UID, String Title, String My_Uid, String IMG){
+        if (!UID.equals(My_Uid)){
+            SimpleDateFormat simpledate = new SimpleDateFormat("yyyyMMddHHmmss");
+            Date date = new Date();
+            String Send_Date = simpledate.format(date);
 
-        SimpleDateFormat simpledate = new SimpleDateFormat("yyyyMMddHHmmss");
-        Date date = new Date();
-        String Send_Date = simpledate.format(date);
-
-        Notification_Data Favorite_Noti = new Notification_Data(Notification_Favorite_Key, My_Uid, Send_Date, Title);
-        DatabaseReference Other_Reference = FirebaseDatabase.getInstance().getReference("Users").child(UID).child("Notifications");
-        Other_Reference.push().setValue(Favorite_Noti);
-        Send_Noti_To_User(Title, UID, IMG);
+            Notification_Data Favorite_Noti = new Notification_Data(Notification_Favorite_Key, My_Uid, Send_Date, Title);
+            DatabaseReference Other_Reference = FirebaseDatabase.getInstance().getReference("Users").child(UID).child("Notifications");
+            Other_Reference.push().setValue(Favorite_Noti);
+            Send_Noti_To_User(Title, UID, IMG);
+        }
     }
     //Child리스너 등록
     public void Get_Post_Child_Listener() {
@@ -296,7 +299,26 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
     }
 
     public void Get_Post_Single() {
-        if (Get_Post_Key.equals("모든 게시글")) {
+        if (Get_Post_Key.equals("유저 게시글")){
+            DB.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    list.clear();
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        Post_Data post = data.getValue(Post_Data.class);
+                        if (post.getUser_Uid().equals(User_Uid)){
+                            list.add(0, post);
+                        }
+                    }
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+        }else if (Get_Post_Key.equals("모든 게시글")) {
             DB.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {

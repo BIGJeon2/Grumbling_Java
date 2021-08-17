@@ -68,7 +68,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
     private String My_Img;
     private String User_Uid;
     private String User_Token;
-    private Boolean User_State;
+    private Boolean User_State = false;
     private String Chatting_Room_ID;
     private String Reply_Target_Uid = "NONE";
     private String Reply_Target_Text = "NONE";
@@ -217,6 +217,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
     private void Send_Message(){
         String Message = binding.ChattingETV.getText().toString();
         if (Message.length() >= 1){
+            Check_User_State(Message);
             long now = System.currentTimeMillis();
             Date date = new Date(now);
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd k:mm:ss:SSSS");
@@ -230,9 +231,6 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
             Add_Chatting_Room_To_Profile(Time, Message);
             reference = DB.getReference("Chat_Room").child(Chatting_Room_ID).child(Chat_Id);
             reference.setValue(chat_data);
-            if (Check_User_State() == false){
-                Send_Noti_To_User(Message);
-            }
             binding.ChattingETV.setText("");
             binding.ReplidedEditContainer.setVisibility(View.GONE);
             binding.ReplyImg.setVisibility(View.GONE);
@@ -324,17 +322,16 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
             });
         }
 
-        private Boolean Check_User_State(){
+        private Boolean Check_User_State(String Message){
             reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("State");
             reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (task == null){
-                        User_State = false;
-                    }else if (Chatting_Room_ID.equals(task.getResult().toString())){
-                        User_State = true;
+                    if (Chatting_Room_ID.equals(task.getResult().getValue())){
+                    }else if (task.getResult().getValue() == null){
+                        Send_Noti_To_User(Message);
                     }else{
-                        User_State = false;
+                        Send_Noti_To_User(Message);
                     }
                 }
             });

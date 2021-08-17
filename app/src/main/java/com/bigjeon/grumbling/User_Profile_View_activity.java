@@ -14,9 +14,14 @@ import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bigjeon.grumbling.Model.Api;
+import com.bigjeon.grumbling.Model.ApiCLient;
+import com.bigjeon.grumbling.Model.Data;
+import com.bigjeon.grumbling.Model.Model;
 import com.bigjeon.grumbling.adapter.Fragment_Swipe_Adapter;
 import com.bigjeon.grumbling.adapter.Post_View_Rcv_Adapter;
 import com.bigjeon.grumbling.adapter.User_Profile_Frgment_Swipe_Adapter;
@@ -46,12 +51,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class User_Profile_View_activity extends AppCompatActivity {
 
     private String My_Uid;
     private String My_Name;
     private String My_Img;
     public String User_Uid;
+    public String User_Token;
     private DatabaseReference reference;
     private String Friend_State = "NONE";
     private String Notification_Key = "Add_Friend";
@@ -88,12 +99,14 @@ public class User_Profile_View_activity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        User_Uid = intent.getStringExtra("UID");
-        if (!User_Uid.equals(My_Uid)) {
+        if (intent.getStringExtra("UID") == null){
+            User_Uid = intent.getStringExtra("USER_UID");
             Set_Users_Data();
-        } else {
-            Picasso.get().load(My_Img).into(binding.SettingFragmentMyProfileImgCiv);
-            binding.SettingFragmentMyNameTv.setText("#." + My_Name);
+            Get_User_Token();
+        }else{
+            User_Uid = intent.getStringExtra("UID");
+            Set_Users_Data();
+            Get_User_Token();
         }
 
         Check_My_Friend_State();
@@ -103,6 +116,7 @@ public class User_Profile_View_activity extends AppCompatActivity {
         binding.SettingFragmentSendFriendRequestBtn.setOnClickListener(v -> Send_Friend_Request());
         binding.UserProfilePostCiv.setOnClickListener(v -> Change_Fragment_OnCLick(0));
         binding.UserProfileFriendCiv.setOnClickListener(v -> Change_Fragment_OnCLick(1));
+        binding.UserProfileBackIMV.setOnClickListener(v -> onBackPressed());
     }
 
     private void Intent_To_P2P_Chatting() {
@@ -150,11 +164,39 @@ public class User_Profile_View_activity extends AppCompatActivity {
         });
     }
 
+    private void Get_User_Token(){
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Token");
+        reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                User_Token = task.getResult().getValue().toString();
+            }
+        });
+    }
+
     private void Get_My_Data(){
         SharedPreferences My_Data = getSharedPreferences("My_Data", Context.MODE_PRIVATE);
         My_Uid = My_Data.getString("UID", null);
         My_Name = My_Data.getString("NAME", null);
         My_Img = My_Data.getString("IMG", null);
+    }
+
+    private void Send_Noti_To_User(){
+        Model model = new Model(User_Token, null, new Data(My_Name + "님이 회원님을 친구추가 하였습니다.", null, User_Uid + My_Uid, ".Friend", My_Uid, My_Img));
+        Api apiService = ApiCLient.getClient().create(Api.class);
+        retrofit2.Call<ResponseBody> responseBodyCall = apiService.sendNotification(model);
+
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("서버 통신!!", "성공" + User_Token);
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("서버 통신!!", "실패");
+            }
+        });
     }
 
     private void Send_Friend_Request(){
@@ -169,10 +211,11 @@ public class User_Profile_View_activity extends AppCompatActivity {
             binding.SettingFragmentSendFriendRequestBtn.setBackgroundResource(R.drawable.round_shape);
             binding.SettingFragmentSendFriendRequestBtn.setText("친구");
             binding.SettingFragmentSendFriendRequestBtn.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.Transparent_Green));
+            Send_Noti_To_User();
 
             Notification_Data Noti = new Notification_Data(Notification_Key, My_Uid, Send_Date, "None");
-            reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Notifications");
-            reference.push().setValue(Noti);
+            reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Notifications").child(Notification_Key + My_Uid);
+            reference.setValue(Noti);
         }
     }
 

@@ -24,11 +24,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white">
+            <ImageView
+                android:id="@+id/Post_View_BackPress_Imv"
+                android:layout_marginLeft="3dp"
+                android:background="@drawable/ic_baseline_navigate_before_24"
+                android:layout_centerInParent="true"
+                android:layout_alignParentLeft="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp">
+            </ImageView>
             <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_toRightOf="@id/Post_View_BackPress_Imv"
                 android:id="@+id/Selected_Post_User_Img"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_alignParentLeft="true"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"

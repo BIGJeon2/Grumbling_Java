@@ -23,6 +23,7 @@ import com.bigjeon.grumbling.App_Main_Activity;
 import com.bigjeon.grumbling.MainActivity;
 import com.bigjeon.grumbling.P2P_Chatting_Activity;
 import com.bigjeon.grumbling.Show_Selected_Post_Activity;
+import com.bigjeon.grumbling.User_Profile_View_activity;
 import com.bigjeon.grumbling.data.Chat_Noti;
 import com.bigjeon.grumbling.data.Favorite_Noti;
 import com.bumptech.glide.Glide;
@@ -64,6 +65,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 sendNotification_Chat(title, body, data, tag, img);
             }else if (click_action.equals(".Post")){
                 sendNotification_Favorite(title, body, data, tag, img);
+            }else if (click_action.equals(".Friend")){
+                sendNotification_Friend(title, body, data, tag, img);
             }
         }
     }
@@ -73,7 +76,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void sendNotification_Chat(String tittle, String text, String data, String tag, String img) {
         Log.d(TAG, "sendNotification: ");
             Intent intent = new Intent(this, P2P_Chatting_Activity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("USER_UID", data);
 
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
@@ -118,7 +121,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void sendNotification_Favorite(String tittle, String text, String data, String tag, String img) {
         Log.d(TAG, "sendNotification: ");
         Intent intent = new Intent(this, Show_Selected_Post_Activity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("TITLE", data);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
@@ -150,6 +153,52 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
 
         notificationManager.notify(tag, 0 /* ID of notification */, notificationBuilder.build());
+    }
+
+    public void sendNotification_Friend(String tittle, String text, String data, String tag, String img) {
+        Log.d(TAG, "sendNotification: ");
+        Intent intent = new Intent(this, User_Profile_View_activity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("USER_UID", data);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+        String channelId = getString(R.string.default_notification_channel_id);
+
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification);
+        remoteViews.setTextViewText(R.id.noti_title, tittle);
+        remoteViews.setTextViewText(R.id.noti_message, text);
+
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_custom))
+                .setSmallIcon(R.mipmap.ic_launcher_custom)
+                .setContent(remoteViews)
+                .setContentTitle(tittle)
+                .setContentText(text)
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setDefaults(Notification.DEFAULT_VIBRATE)
+                .setContentIntent(pendingIntent);
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(channelId,
+                    "Channel human readable title",
+                    NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        NotificationTarget notificationTarget = new NotificationTarget(this.getApplicationContext(), R.id.noti_icon, remoteViews, notificationBuilder.build(), 0, tag);
+
+        Glide.with(this.getApplicationContext()).asBitmap().circleCrop().load(Uri.parse(img)).into(notificationTarget);
+
+        //notificationManager.notify(tag, 0 /* ID of notification */, notificationBuilder.build());
     }
 
 }

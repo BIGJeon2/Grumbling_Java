@@ -45,18 +45,18 @@ public class Notification_Activity extends AppCompatActivity {
         Get_My_Profile();
 
         LinearLayoutManager lm_request = new LinearLayoutManager(this);
-        Notification_Adapter = new Notification_List_Adapter(this, Notification_List);
+        Notification_Adapter = new Notification_List_Adapter(this, Notification_List, My_Uid);
         binding.NotiRequestFriendListRcv.setAdapter(Notification_Adapter);
         binding.NotiRequestFriendListRcv.setLayoutManager(lm_request);
         binding.NotiRequestFriendListRcv.setHasFixedSize(true);
-        binding.NotiRequestFriendListRcv.setNestedScrollingEnabled(false);
-        Get_All_Notification();
+        Notification_Adapter.Get_All_Notification();
 
         binding.NotificationSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 Notification_List.clear();
-                Get_All_Notification();
+                Notification_Adapter.Get_All_Notification();
+                Notification_Adapter.notifyDataSetChanged();
                 binding.NotificationSwipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -71,25 +71,4 @@ public class Notification_Activity extends AppCompatActivity {
         My_Img = Get_My_Data.getString("IMG", null);
     }
 
-    private void Get_All_Notification(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Notifications");
-
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                for (DataSnapshot data : snapshot.getChildren()) {
-                    Notification_Data Noti = data.getValue(Notification_Data.class);
-                    if (!Noti.getUid().equals(My_Uid)){
-                        Notification_List.add(Noti);
-                        Notification_Adapter.notifyDataSetChanged();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
-    }
 }

@@ -39,7 +39,7 @@ public class User_Profile_PostsList_Fragment extends Fragment {
     private String User_Uid = "?";
     private String My_Name;
     private DatabaseReference reference;
-    private String Get_Post_Key = "모든 게시글";
+    private String Get_Post_Key = "유저 게시글";
     private ArrayList<Post_Data> list = new ArrayList<>();
     private Post_View_Rcv_Adapter adapter;
 
@@ -56,7 +56,7 @@ public class User_Profile_PostsList_Fragment extends Fragment {
         My_Name = Get_My_Data.getString("NAME", null);
 
         RecyclerView rcv = binding.UserPostListFragmentRCV;
-        adapter = new Post_View_Rcv_Adapter(getContext(), list, Get_Post_Key, My_Name);
+        adapter = new Post_View_Rcv_Adapter(getContext(), list, Get_Post_Key, My_Name, User_Uid);
         LinearLayoutManager lm = new LinearLayoutManager(v.getContext());
         rcv.setLayoutManager(lm);
         rcv.setAdapter(adapter);
@@ -72,9 +72,6 @@ public class User_Profile_PostsList_Fragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
-    /*
-    유저 포스트중 모든 보안이 모든 사용자일 경우만 보여줌
-     */
     private void Get_Post(){
         reference = FirebaseDatabase.getInstance().getReference("Posts");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {

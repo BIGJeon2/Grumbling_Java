@@ -125,6 +125,7 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         });
         //채팅방으로 이동(아이템 뷰 클릭시 이동후 바로 답장으로 셋팅(Intent Filter이용))
         binding.SelectedPostEnterChattingCIV.setOnClickListener(v -> Go_Chat_Intent());
+        binding.PostViewBackPressImv.setOnClickListener( v -> onBackPressed());
     }
 
     private void Go_Selected_User_Profile() {
