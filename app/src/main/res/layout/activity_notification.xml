@@ -13,11 +13,38 @@
     android:layout_height="match_parent"
     tools:context="com.bigjeon.grumbling.Notification_Activity">
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:text="타임 피드"
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+        <ImageView
+            android:id="@+id/Notification_Back_IMV"
+            android:layout_marginLeft="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/ic_baseline_navigate_before_24"
+            android:layout_width="35dp"
+            android:layout_height="35dp">
+        </ImageView>
+    </RelativeLayout>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/Notification_Swipe_RefreshLayout"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/Noti_Request_Friend_List_Rcv"
             android:layout_width="match_parent"

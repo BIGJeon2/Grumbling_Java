@@ -60,6 +60,8 @@ public class Notification_Activity extends AppCompatActivity {
                 binding.NotificationSwipeRefreshLayout.setRefreshing(false);
             }
         });
+
+        binding.NotificationBackIMV.setOnClickListener(v -> onBackPressed());
     }
 
     private void Get_My_Profile(){

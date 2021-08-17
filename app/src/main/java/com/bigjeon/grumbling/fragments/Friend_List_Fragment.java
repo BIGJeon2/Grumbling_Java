@@ -58,7 +58,7 @@ public class Friend_List_Fragment extends Fragment {
         binding.FriendListRcv.setHasFixedSize(true);
         binding.FriendListRcv.setNestedScrollingEnabled(false);
 
-        binding.FriendListMyImgCiv.setOnClickListener(v -> Go_User_Profile_View_Act());
+        binding.FriendListMyProfileContainer.setOnClickListener(v -> Go_User_Profile_View_Act());
 
         return root;
     }

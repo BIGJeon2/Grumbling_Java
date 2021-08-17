@@ -159,7 +159,7 @@ public class User_Profile_View_activity extends AppCompatActivity {
 
     private void Send_Friend_Request(){
         if(!Friend_State.equals("Accept")){
-            SimpleDateFormat simpledate = new SimpleDateFormat("yyyyMMddHHmmss");
+            SimpleDateFormat simpledate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = new Date();
             String Send_Date = simpledate.format(date);
             //내 DB에 저장
@@ -170,7 +170,7 @@ public class User_Profile_View_activity extends AppCompatActivity {
             binding.SettingFragmentSendFriendRequestBtn.setText("친구");
             binding.SettingFragmentSendFriendRequestBtn.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.Transparent_Green));
 
-            Notification_Data Noti = new Notification_Data(Notification_Key, My_Uid, "NONE", Send_Date);
+            Notification_Data Noti = new Notification_Data(Notification_Key, My_Uid, Send_Date, "None");
             reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Notifications");
             reference.push().setValue(Noti);
         }

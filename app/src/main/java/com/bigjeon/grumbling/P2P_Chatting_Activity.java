@@ -68,6 +68,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
     private String My_Img;
     private String User_Uid;
     private String User_Token;
+    private Boolean User_State;
     private String Chatting_Room_ID;
     private String Reply_Target_Uid = "NONE";
     private String Reply_Target_Text = "NONE";
@@ -114,7 +115,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
         Get_User_Data();
         Set_Chatting_Room_ID();
         Check_Chatting_State();
-
+        Set_User_State(My_Uid, true);
         //list뷰 설정
         adapter = new Chat_rcv_Adapter(list, My_Uid, this, true);
         binding.ChattingListListView.setAdapter(adapter);
@@ -160,6 +161,17 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
                 User_Token = task.getResult().getValue().toString();
             }
         });
+
+    }
+
+    private void Set_User_State(String My_Uid, Boolean state){
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("State");
+        if (state == true){
+            reference.setValue(Chatting_Room_ID);
+        }else{
+            reference.setValue("NONE");
+        }
+
     }
 
     private void Get_Replied_Target_Name(String Uid) {
@@ -218,7 +230,9 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
             Add_Chatting_Room_To_Profile(Time, Message);
             reference = DB.getReference("Chat_Room").child(Chatting_Room_ID).child(Chat_Id);
             reference.setValue(chat_data);
-            Send_Noti_To_User(Message);
+            if (Check_User_State() == false){
+                Send_Noti_To_User(Message);
+            }
             binding.ChattingETV.setText("");
             binding.ReplidedEditContainer.setVisibility(View.GONE);
             binding.ReplyImg.setVisibility(View.GONE);
@@ -230,6 +244,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Set_User_State(My_Uid, false);
         reference.removeEventListener(listener);
     }
 
@@ -307,5 +322,22 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
                     Log.d("서버 통신!!", "실패");
                 }
             });
+        }
+
+        private Boolean Check_User_State(){
+            reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("State");
+            reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (task == null){
+                        User_State = false;
+                    }else if (Chatting_Room_ID.equals(task.getResult().toString())){
+                        User_State = true;
+                    }else{
+                        User_State = false;
+                    }
+                }
+            });
+            return User_State;
         }
 }

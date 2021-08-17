@@ -2,6 +2,7 @@ package com.bigjeon.grumbling.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bigjeon.grumbling.Show_Selected_Post_Activity;
 import com.bigjeon.grumbling.User_Profile_View_activity;
 import com.bigjeon.grumbling.data.Friend_Data;
 import com.bigjeon.grumbling.data.Notification_Data;
+import com.example.grumbling.R;
 import com.example.grumbling.databinding.NotificationItemBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -44,7 +47,7 @@ public class Notification_List_Adapter extends RecyclerView.Adapter<Notification
     private String My_Uid;
     private String Notification_Key_Friend = "Add_Friend";
     private String Notification_Key_Favorite = "Add_Favorite";
-    ArrayList<Notification_Data> Notification_Data;
+    private ArrayList<Notification_Data> Notification_Data;
 
     public Notification_List_Adapter(Context mContext, ArrayList<Notification_Data> friend_List) {
         this.mContext = mContext;
@@ -63,27 +66,75 @@ public class Notification_List_Adapter extends RecyclerView.Adapter<Notification
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull Notification_Holder holder, int position) {
+        Notification_Data noti = Notification_Data.get(position);
         My_Uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         FirebaseFirestore Store = FirebaseFirestore.getInstance();
-        Store.collection("Users").whereEqualTo("UID", Notification_Data.get(position).getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        Store.collection("Users").whereEqualTo("UID", noti.getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (Notification_Data.get(position).getState().equals(Notification_Key_Friend)){
-                            Chaeck_Friend_State(position, holder);
+                        if (noti.getState().equals(Notification_Key_Friend)){
+                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Friends");
+
+                            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                    for (DataSnapshot data : snapshot.getChildren()) {
+                                        Friend_Data Friend = data.getValue(Friend_Data.class);
+                                        if (Friend.getUid().equals(noti.getUid())){
+                                            holder.Accepted_Btn.setText("친구");
+                                            holder.binding.NotificationFriendAddBtn.setBackgroundResource(R.drawable.round_shape);
+                                            holder.binding.NotificationFriendAddBtn.setTextColor(ContextCompat.getColor(mContext.getApplicationContext(), R.color.Transparent_Green));
+                                            holder.binding.NotificationFriendAddBtn.setVisibility(View.VISIBLE);
+                                        }else{
+                                            holder.binding.NotificationFriendAddBtn.setBackgroundResource(R.drawable.round_shape_off);
+                                            holder.binding.NotificationFriendAddBtn.setTextColor(ContextCompat.getColor(mContext.getApplicationContext(), R.color.Transparent_Black80));
+                                            holder.binding.NotificationFriendAddBtn.setVisibility(View.VISIBLE);
+                                            holder.Accepted_Btn.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    SimpleDateFormat simpledate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                                    Date date = new Date();
+                                                    String Set_Friend_Date = simpledate.format(date);
+
+                                                    String Target_Uid = noti.getUid();
+
+                                                    Set_Friends(Target_Uid);
+
+                                                    Friend_Data My_Friend = new Friend_Data(noti.getUid(), Set_Friend_Date);
+                                                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Friends").child(noti.getUid());
+                                                    reference.setValue(My_Friend);
+
+                                                    holder.Accepted_Btn.setText("친구");
+                                                    holder.binding.NotificationFriendAddBtn.setBackgroundResource(R.drawable.round_shape);
+                                                    holder.binding.NotificationFriendAddBtn.setTextColor(ContextCompat.getColor(mContext.getApplicationContext(), R.color.Transparent_Green));
+                                                    notifyDataSetChanged();
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                                }
+                            });
                             holder.User_Name.setText(document.get("Name").toString() + "님이 친구추가 하였습니다.");
                             Picasso.get().load(document.getString("Img")).into(holder.User_Img);
-                        }else if (Notification_Data.get(position).getState().equals(Notification_Key_Favorite)){
+                            holder.binding.NotificationSendDate.setText(noti.getSend_Date());
+                        }else if (noti.getState().equals(Notification_Key_Favorite)){
                             holder.User_Name.setText(document.get("Name").toString() + "님이 해당 게시글에 좋아요을 눌렀습니다.");
                             Picasso.get().load(document.getString("Img")).into(holder.User_Img);
+                            holder.binding.NotificationSendDate.setText(noti.getSend_Date());
                         }
                     }
                 }
             }
         });
-        holder.ItemView_Container.setOnClickListener(v -> Intent_To_Post(Notification_Data.get(position).getState(), Notification_Data.get(position).getPost_Title(), Notification_Data.get(position).getUid()));
+        holder.ItemView_Container.setOnClickListener(v -> Intent_To_Post(noti.getState(), noti.getPost_Title(), noti.getUid()));
     }
 
     private void Intent_To_Post(String state, String TITLE, String UID) {
@@ -135,45 +186,4 @@ public class Notification_List_Adapter extends RecyclerView.Adapter<Notification
         Other_Reference.setValue(Other_Friend);
     }
 
-    private void Chaeck_Friend_State(int position, Notification_Holder holder){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Friends");
-
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                for (DataSnapshot data : snapshot.getChildren()) {
-                    Friend_Data Friend = data.getValue(Friend_Data.class);
-                    if (Friend.getUid().equals(Notification_Data.get(position).getUid())){
-                        holder.Accepted_Btn.setText("친구");
-                        holder.binding.NotificationFriendAddBtn.setVisibility(View.VISIBLE);
-                    }else{
-                        holder.Accepted_Btn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                SimpleDateFormat simpledate = new SimpleDateFormat("yyyyMMddHHmmss");
-                                Date date = new Date();
-                                String Set_Friend_Date = simpledate.format(date);
-
-                                String Target_Uid = Notification_Data.get(position).getUid();
-
-                                Set_Friends(Target_Uid);
-
-                                Friend_Data My_Friend = new Friend_Data(Notification_Data.get(position).getUid(), Set_Friend_Date);
-                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Friends").child(Notification_Data.get(position).getUid());
-                                reference.setValue(My_Friend);
-
-                                holder.Accepted_Btn.setText("친구");
-                                notifyDataSetChanged();
-                            }
-                        });
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
-    }
 }

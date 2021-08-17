@@ -25,21 +25,37 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_toRightOf="@+id/Notification_User_Img"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </TextView>
     <Button
         android:id="@+id/Notification_Friend_Add_Btn"
-        android:visibility="gone"
+        android:visibility="invisible"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:text="수락"
-        android:textSize="10dp"
-        android:background="@color/Transparent_Green"
+        android:textColor="@color/Transparent_Black70"
+        android:padding="3dp"
+        android:textSize="7dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/round_shape_off"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="40dp">
     </Button>
+    <TextView
+        android:id="@+id/Notification_Send_Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:textSize="7dp"
+        android:text="send_Date"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/Transparent_Black80"
+        android:layout_toRightOf="@id/Notification_User_Img"
+        android:layout_below="@id/Notification_User_Name">
+    </TextView>
 </RelativeLayout>
 </layout>

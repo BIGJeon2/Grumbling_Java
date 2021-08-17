@@ -9,20 +9,25 @@
         <entry key="app/src/main/res/drawable/ic_baseline_reply_24.xml" value="0.2518518518518518" />
         <entry key="app/src/main/res/drawable/ic_launcher_custom_background.xml" value="0.2518518518518518" />
         <entry key="app/src/main/res/drawable/round_shape.xml" value="0.1921875" />
+        <entry key="app/src/main/res/drawable/round_shape_off.xml" value="0.1921875" />
         <entry key="app/src/main/res/drawable/top_edge_black_1dp.xml" value="0.2518518518518518" />
         <entry key="app/src/main/res/layout/activity_app_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_chatting.xml" value="0.2111111111111111" />
         <entry key="app/src/main/res/layout/activity_google_login.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/layout/activity_notification.xml" value="0.13072916666666667" />
         <entry key="app/src/main/res/layout/activity_p2p_chatting.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_setting_my_profile.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_user_profile_view.xml" value="0.335" />
         <entry key="app/src/main/res/layout/category_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_chatting_list_view.xml" value="0.21666666666666667" />
-        <entry key="app/src/main/res/layout/fragment_post_view.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_post_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_set__post__background.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/fragment_set__post__text.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/fragment_user__profile__friends_list_.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/fragment_user__profile__posts_list_.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/friend_list_fragment_view_.xml" value="0.335" />
         <entry key="app/src/main/res/layout/notification.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/layout/notification_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/user_list_item.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/menu/post_view_grade_menu.xml" value="0.21666666666666667" />
       </map>
