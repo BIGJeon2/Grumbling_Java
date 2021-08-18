@@ -17,7 +17,7 @@
     <color name="Transparent_White">#50FFFFFF</color>
     <color name="Transparent_Green">#804B9A4E</color>
 
-    <color name="Notify_TitleColor">#FF000000</color>
+    <color name="Notify_TitleColor">#FFFFFFFF</color>
 
     <color name="Chatting_Titile_Color">#60BD38</color>
 </resources>

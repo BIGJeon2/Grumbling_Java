@@ -59,6 +59,12 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+        <service
+            android:name="com.bigjeon.grumbling.service.MyService"
+            android:exported="false"
+            android:enabled="true"
+            android:stopWithTask="false">
+        </service>
     </application>
 
 </manifest>

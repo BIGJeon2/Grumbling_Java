@@ -200,7 +200,7 @@ public class User_Profile_View_activity extends AppCompatActivity {
     }
 
     private void Send_Friend_Request(){
-        if(!Friend_State.equals("Accept")){
+        if(!Friend_State.equals("Friend")){
             SimpleDateFormat simpledate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = new Date();
             String Send_Date = simpledate.format(date);

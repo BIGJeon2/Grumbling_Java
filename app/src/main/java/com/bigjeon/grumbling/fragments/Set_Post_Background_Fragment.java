@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -22,11 +23,17 @@ import com.bigjeon.grumbling.Post_Write_Activity;
 import com.bigjeon.grumbling.adapter.DB_Posting_Bacground_GIF_Adapter;
 import com.bigjeon.grumbling.adapter.Gif_OnClikListener;
 import com.bigjeon.grumbling.data.DB_Posting_Background_GIF;
+import com.bigjeon.grumbling.data.Post_Data;
 import com.bigjeon.grumbling.factory.Post_Write_VM_Factory;
 import com.bigjeon.grumbling.viewmodel.Post_Write_ViewModel;
 import com.bumptech.glide.Glide;
 import com.example.grumbling.R;
 import com.example.grumbling.databinding.FragmentSetPostBackgroundBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class Set_Post_Background_Fragment extends Fragment {
@@ -54,10 +61,8 @@ public class Set_Post_Background_Fragment extends Fragment {
 
     private void Get_Gif_In_raw() {
         adapter = new DB_Posting_Bacground_GIF_Adapter();
-        adapter.Add_Gif(new DB_Posting_Background_GIF("https://firebasestorage.googleapis.com/v0/b/grumber-9d1b9.appspot.com/o/Background_Images_GIF%2FTwinkleLED.gif?alt=media&token=8f32a89f-63cd-4927-bc93-a542af5be96d", "1번 배경"));
-        adapter.Add_Gif(new DB_Posting_Background_GIF("https://firebasestorage.googleapis.com/v0/b/grumber-9d1b9.appspot.com/o/Background_Images_GIF%2Fmulti_colred_motion.gif?alt=media&token=f08c3e46-fa42-4a9d-9773-a6b491106a49", "2번 배경"));
-
         binding.DialogPostingBackgroundDBRcv.setAdapter(adapter);
+        adapter.Add_Gif();
         adapter.setOnClickListener(new Gif_OnClikListener() {
             @Override
             public void onItemClcick(DB_Posting_Bacground_GIF_Adapter.Holder_Gif holder_gif, View view, int position) {

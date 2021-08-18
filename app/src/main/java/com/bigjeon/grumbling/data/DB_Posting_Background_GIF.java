@@ -9,6 +9,9 @@ public class DB_Posting_Background_GIF {
         this.GIF_Name = GIF_Name;
     }
 
+    public DB_Posting_Background_GIF() {
+    }
+
     public String getGIF() {
         return GIF;
     }

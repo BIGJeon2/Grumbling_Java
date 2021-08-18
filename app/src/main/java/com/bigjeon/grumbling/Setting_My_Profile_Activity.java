@@ -25,6 +25,10 @@ import com.example.grumbling.R;
 import com.example.grumbling.databinding.ActivitySettingMyProfileBinding;
 import com.example.grumbling.databinding.ActivityUserProfileViewBinding;
 import com.example.grumbling.databinding.Profile_Binding;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -136,9 +140,14 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
         SharedPreferences.Editor editor = My_Data.edit();
         editor.clear();
         editor.commit();
+
         Intent Go_Login = new Intent(this, Google_Login_Activity.class);
         Go_Login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         mAuth.signOut();
+        GoogleSignInOptions option = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build();
+        GoogleSignInClient client = GoogleSignIn.getClient(this, option);
+        client.signOut();
+        client.revokeAccess();
         Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
         startActivity(Go_Login);
         finish();
@@ -176,4 +185,6 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
         super.onResume();
         Get_Users_Posts();
     }
+
+
 }

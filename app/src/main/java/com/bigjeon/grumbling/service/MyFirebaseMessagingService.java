@@ -91,8 +91,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             remoteViews.setTextViewText(R.id.noti_message, text);
 
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId)
-                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_custom))
-                    .setSmallIcon(R.mipmap.ic_launcher_custom)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.main_app_icon))
+                    .setSmallIcon(R.mipmap.main_app_icon)
                     .setContent(remoteViews)
                     .setContentTitle(tittle)
                     .setContentText(text)
@@ -132,8 +132,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher_background))
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.main_app_icon))
+                .setSmallIcon(R.mipmap.main_app_icon)
                 .setContentTitle(tittle)
                 .setContentText(text)
                 .setAutoCancel(true)
@@ -173,8 +173,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         remoteViews.setTextViewText(R.id.noti_message, text);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_custom))
-                .setSmallIcon(R.mipmap.ic_launcher_custom)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.main_app_icon))
+                .setSmallIcon(R.mipmap.main_app_icon)
                 .setContent(remoteViews)
                 .setContentTitle(tittle)
                 .setContentText(text)

@@ -12,6 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bigjeon.grumbling.data.DB_Posting_Background_GIF;
 import com.bumptech.glide.Glide;
 import com.example.grumbling.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -80,7 +85,23 @@ public class DB_Posting_Bacground_GIF_Adapter extends RecyclerView.Adapter<DB_Po
     public DB_Posting_Background_GIF Get_Gif(int position){
         return Gif_List.get(position);
     }
-    public void Add_Gif(DB_Posting_Background_GIF item){
-        Gif_List.add(item);
+    public void Add_Gif(){
+        Gif_List.clear();
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("GIF");
+        db.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    DB_Posting_Background_GIF gif = data.getValue(DB_Posting_Background_GIF.class);
+                    Gif_List.add(gif);
+                    notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

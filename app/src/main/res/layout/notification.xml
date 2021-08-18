@@ -44,8 +44,10 @@
                 android:id="@+id/noti_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:paddingBottom="3dp"
                 android:text="Title"
-                android:textColor="@color/Transparent_Black50"
+                android:textColor="@color/Notify_TitleColor"
                 android:textStyle="bold" />
 
             <TextView
@@ -53,9 +55,9 @@
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/Transparent_Black50"
+                android:textColor="@color/Notify_TitleColor"
                 android:text="Message"
-                android:textSize="15sp" />
+                android:textSize="10sp" />
         </LinearLayout>
 
     </LinearLayout>

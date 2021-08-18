@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.bigjeon.grumbling.adapter.Fragment_Swipe_Adapter;
 import com.bigjeon.grumbling.adapter.Post_View_Rcv_Adapter;
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
+import com.bigjeon.grumbling.service.MyService;
 import com.example.grumbling.App_Main_Binding;
 import com.example.grumbling.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -51,6 +52,8 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_app_main);
         binding.setAppMainActivity(this);
+
+        startService(new Intent(this, MyService.class));
 
         mcontext = this;
         Set_My_Data();
