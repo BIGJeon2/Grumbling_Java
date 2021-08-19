@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="purple_100">#80C49BF6</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -17,7 +18,39 @@
     <color name="Transparent_White">#50FFFFFF</color>
     <color name="Transparent_Green">#804B9A4E</color>
 
-    <color name="Notify_TitleColor">#FFFFFFFF</color>
+    <color name="dark_black">#FF000000</color>
+    <color name="light_Gray">#474646</color>
+    <color name="light_purple">#FFBB86FC</color>
+    <color name="purple">#FF6200EE</color>
+    <color name="light_pink">#ED58DE</color>
+    <color name="pink">#FD04F9</color>
+    <color name="light_red">#F84242</color>
+    <color name="red">#FF0000</color>
+    <color name="light_blue">#4578F8</color>
+    <color name="blue">#0046F8</color>
+    <color name="blue_purple">#FF3700B3</color>
+    <color name="mint">#FF03DAC5</color>
+    <color name="dark_mint">#FF018786</color>
+    <color name="light_white">#FFFFFFFF</color>
 
+
+    <color name="trans_light_purple">#30BB86FC</color>
+    <color name="trans_purple">#106200EE</color>
+    <color name="trans_light_pink">#30ED58DE</color>
+    <color name="trans_pink">#10FD04F9</color>
+    <color name="trans_light_red">#30F84242</color>
+    <color name="trans_red">#10FF0000</color>
+    <color name="trans_light_blue">#304578F8</color>
+    <color name="trans_blue">#300046F8</color>
+    <color name="trans_blue_purple">#103700B3</color>
+    <color name="trans_mint">#3003DAC5</color>
+    <color name="trans_dark_mint">#10018786</color>
+    <color name="trans_dark_black">#10000000</color>
+    <color name="trans_light_white">#30FFFFFF</color>
+    <color name="trans_light_Gray">#30474646</color>
+
+    <color name="Notify_TitleColor">#FFFFFFFF</color>
+    <color name="My_Chat_Color">#5086EF29</color>
+    <color name="Chatting_Container_Color">#20000000</color>
     <color name="Chatting_Titile_Color">#60BD38</color>
 </resources>

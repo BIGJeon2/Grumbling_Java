@@ -9,6 +9,7 @@
         <RelativeLayout
             android:layout_weight="4"
             android:background="@drawable/my_chat_background"
+            android:backgroundTint="@color/My_Chat_Color"
             android:id="@+id/Chatting_Text_Container"
             android:layout_alignParentRight="true"
             android:padding="5dp"
@@ -30,7 +31,6 @@
                         android:textColor="@color/black"
                         android:textSize="10dp"
                         android:padding="2dp"
-                        android:fontFamily="@font/uhbeerice"
                         android:background="@drawable/post_view_title_under_edge_1dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
@@ -45,7 +45,6 @@
                         android:layout_centerInParent="true"
                         android:layout_below="@+id/Replied_Name"
                         android:text="답장칸"
-                        android:fontFamily="@font/uhbeerice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                     </TextView>
@@ -56,7 +55,6 @@
                     android:gravity="left"
                     android:text="내용입력창입니다."
                     android:textColor="@color/black"
-                    android:fontFamily="@font/uhbeerice"
                     android:layout_below="@id/Reply_Containier"
                     android:layout_alignParentRight="true"
                     android:textSize="10dp"

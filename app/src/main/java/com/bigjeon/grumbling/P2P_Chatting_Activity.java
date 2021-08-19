@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -122,12 +123,17 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
         adapter.Set_Chat_rcv_Adapter(new Chat_OnClickListener() {
             @Override
             public void OnItemClicked(RecyclerView.ViewHolder Holder, View v, int pos) {
-                binding.ReplidedEditContainer.setVisibility(View.VISIBLE);
-                binding.ReplyImg.setVisibility(View.VISIBLE);
-                Reply_Target_Uid = list.get(pos).getUid();
-                Reply_Target_Text = list.get(pos).getText();
-                binding.RepliedText.setText(Reply_Target_Text);
-                Get_Replied_Target_Name(Reply_Target_Uid);
+                if (list.get(pos).getText().contains("https:")){
+                    Intent browseIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(list.get(pos).getText()));
+                    startActivity(browseIntent);
+                }else{
+                    binding.ReplidedEditContainer.setVisibility(View.VISIBLE);
+                    binding.ReplyImg.setVisibility(View.VISIBLE);
+                    Reply_Target_Uid = list.get(pos).getUid();
+                    Reply_Target_Text = list.get(pos).getText();
+                    binding.RepliedText.setText(Reply_Target_Text);
+                    Get_Replied_Target_Name(Reply_Target_Uid);
+                }
             }
         });
         LinearLayoutManager lm = new LinearLayoutManager(this);
@@ -222,8 +228,6 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
             Date date = new Date(now);
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd k:mm:ss:SSSS");
             String Time = simpleDateFormat.format(date);
-//            Calendar calendar = Calendar.getInstance();
-//            String Time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
             Chat_Id = Time + My_Uid;
             HashMap<String, Boolean> Read_Users = new HashMap<>();
             Read_Users.put(My_Uid, true);

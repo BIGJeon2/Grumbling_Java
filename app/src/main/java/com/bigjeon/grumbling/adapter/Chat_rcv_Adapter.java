@@ -2,6 +2,7 @@ package com.bigjeon.grumbling.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bigjeon.grumbling.User_Profile_View_activity;
@@ -89,6 +91,9 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if(holder instanceof My_Chat_ViewHolder) {
 
             ((My_Chat_ViewHolder) holder).Comment.setText(Chat_Datas.get(position).getText());
+            if (Chat_Datas.get(position).getText().contains("https:")){
+                ((My_Chat_ViewHolder) holder).Comment.setTextColor(ContextCompat.getColor(mContext, R.color.purple_500));
+            }
             ((My_Chat_ViewHolder) holder).Write_Date.setText(Change_Date(Chat_Datas.get(position).getWriteDate()));
             if (Read_Check_State == true && Chat_Datas.get(position).getRead_Users().size() == 1){
                 ((My_Chat_ViewHolder) holder).Read_Check.setVisibility(View.VISIBLE);
@@ -104,9 +109,12 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((My_Repling_Chat_ViewHolder) holder).Read_Check.setVisibility(View.GONE);
             }
             ((My_Repling_Chat_ViewHolder) holder).Comment.setText(Chat_Datas.get(position).getText());
+            if (Chat_Datas.get(position).getText().contains("https:")){
+                ((My_Chat_ViewHolder) holder).Comment.setTextColor(ContextCompat.getColor(mContext, R.color.purple_500));
+            }
             ((My_Repling_Chat_ViewHolder) holder).Write_Date.setText(Change_Date(Chat_Datas.get(position).getWriteDate()));
             ((My_Repling_Chat_ViewHolder) holder).Replied_Text.setText(Chat_Datas.get(position).getReply_Target_Text());
-            db.collection("Users").whereEqualTo("UID", Chat_Datas.get(position).getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            db.collection("Users").whereEqualTo("UID", Chat_Datas.get(position).getReply_Target_User_Uid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful()) {
@@ -120,6 +128,9 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         } else if (holder instanceof Other_Chat_ViewHolder) {
 
             ((Other_Chat_ViewHolder) holder).Comment.setText(Chat_Datas.get(position).getText());
+            if (Chat_Datas.get(position).getText().contains("https:")){
+                ((My_Chat_ViewHolder) holder).Comment.setTextColor(ContextCompat.getColor(mContext, R.color.purple_500));
+            }
             ((Other_Chat_ViewHolder) holder).Write_Date.setText(Change_Date(Chat_Datas.get(position).getWriteDate()));
 
             db.collection("Users").whereEqualTo("UID", Chat_Datas.get(position).getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -139,6 +150,9 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         } else {
             ((Other_Repling_Chat_ViewHolder) holder).Comment.setText(Chat_Datas.get(position).getText());
+            if (Chat_Datas.get(position).getText().contains("https:")){
+                ((My_Chat_ViewHolder) holder).Comment.setTextColor(ContextCompat.getColor(mContext, R.color.purple_500));
+            }
             ((Other_Repling_Chat_ViewHolder) holder).Write_Date.setText(Change_Date(Chat_Datas.get(position).getWriteDate()));
             ((Other_Repling_Chat_ViewHolder) holder).Replied_Text.setText(Chat_Datas.get(position).getReply_Target_Text());
             db.collection("Users").whereEqualTo("UID", Chat_Datas.get(position).getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

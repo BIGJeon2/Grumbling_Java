@@ -63,19 +63,21 @@
         </de.hdodenhof.circleimageview.CircleImageView>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/Google_AdMob"
-        android:background="@color/purple_200"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="parent">
-    </RelativeLayout>
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViewBanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:adSize="BANNER"
+        app:adUnitId="@string/banner_ad_unit_id_for_test"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
 
     <FrameLayout
         android:id="@+id/App_Main_Fragment_FrameLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/Google_AdMob"
+        app:layout_constraintBottom_toTopOf="@+id/adViewBanner"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <androidx.viewpager2.widget.ViewPager2

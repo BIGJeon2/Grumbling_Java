@@ -27,6 +27,12 @@ import com.bigjeon.grumbling.fragments.Post_View_Fragment;
 import com.bigjeon.grumbling.service.MyService;
 import com.example.grumbling.App_Main_Binding;
 import com.example.grumbling.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
@@ -55,6 +61,17 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
 
         startService(new Intent(this, MyService.class));
 
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
+
+            }
+        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+        binding.adViewBanner.loadAd(adRequest);
+        AdView adview = new AdView(this);
+        adview.setAdSize(AdSize.BANNER);
+        adview.setAdUnitId("\n" + R.string.banner_ad_unit_id_for_test);
         mcontext = this;
         Set_My_Data();
 

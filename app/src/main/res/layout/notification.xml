@@ -3,12 +3,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="15dp"
+    android:paddingTop="5dp"
     android:paddingBottom="15dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp">
+        <ImageView
+            android:background="@mipmap/main_app_icon_round"
+            android:layout_width="15dp"
+            android:layout_height="15dp">
+        </ImageView>
+        <TextView
+            android:textSize="13dp"
+            android:layout_marginLeft="5dp"
+            android:text="그렁"
+            android:textColor="@color/Notify_TitleColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"

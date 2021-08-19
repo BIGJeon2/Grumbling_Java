@@ -32,8 +32,10 @@
                 android:id="@+id/Dialog_Posting_User_Img"
                 android:layout_toRightOf="@id/Post_Write_BackPress_Imv"
                 android:src="@mipmap/ic_launcher"
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
+                app:civ_border_width="1dp"
+                app:civ_border_color="@color/Transparent_Green"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="5dp">
             </de.hdodenhof.circleimageview.CircleImageView>
@@ -48,14 +50,15 @@
             </TextView>
             <Button
                 android:id="@+id/Dialog_Posting_Complete_CIV"
-                android:text="완료"
+                android:text="게시"
                 android:textSize="15dp"
-                android:background="@android:color/transparent"
+                android:background="@drawable/round_shape_off"
                 android:textColor="@color/black"
                 android:layout_centerInParent="true"
                 android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_marginRight="5dp"
+                android:layout_width="50dp"
+                android:layout_height="30dp">
             </Button>
         </RelativeLayout>
         <RelativeLayout
@@ -79,59 +82,64 @@
                 android:id="@+id/Dialog_Posting_Content"
                 android:background="#50000000"
                 android:hint="텍스트"
-                android:fontFamily="@font/uhbeerice"
                 android:gravity="center"
                 android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </EditText>
         </RelativeLayout>
+
         <RelativeLayout
-            android:background="@color/white"
             android:id="@+id/Dialog_Posting_Setting_Container"
-            android:layout_below="@+id/Dialog_Posting_Content_Container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/Dialog_Posting_Content_Container"
+            android:background="@color/white">
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Dialog_Posting_Set_Text"
-                android:layout_marginLeft="10dp"
-                android:layout_alignParentLeft="true"
-                android:backgroundTint="@color/purple_200"
-                android:background="@drawable/ic_baseline_text_format_24"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="3dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </de.hdodenhof.circleimageview.CircleImageView>
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/ic_baseline_text_format_24"
+                android:backgroundTint="@color/purple_200"></de.hdodenhof.circleimageview.CircleImageView>
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Dialog_Posting_Set_Img"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/Dialog_Posting_Set_Text"
-                android:background="@drawable/ic_baseline_insert_photo_24"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </de.hdodenhof.circleimageview.CircleImageView>
+                android:background="@drawable/ic_baseline_insert_photo_24"></de.hdodenhof.circleimageview.CircleImageView>
+
             <Button
                 android:id="@+id/Dialog_Posting_Set_Grade"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/round_shape_off"
                 android:text="모든 사용자"
                 android:textColor="@color/black"
-                android:textSize="10dp"
-                android:fontFamily="@font/uhbeerice"
-                android:background="@android:color/transparent"
-                android:layout_marginRight="10dp"
-                android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp">
-            </Button>
+                android:textSize="10dp"></Button>
+
             <RelativeLayout
-                android:layout_below="@id/Dialog_Posting_Set_Img"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/Post_Write_ViewPager2"
-                android:clipToPadding="false"
-                android:clipChildren="false"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </androidx.viewpager2.widget.ViewPager2>
+                android:layout_height="match_parent"
+                android:layout_below="@id/Dialog_Posting_Set_Img">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/Post_Write_ViewPager2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"></androidx.viewpager2.widget.ViewPager2>
             </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>

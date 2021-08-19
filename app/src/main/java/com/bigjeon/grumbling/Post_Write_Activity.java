@@ -270,7 +270,7 @@ public class Post_Write_Activity extends AppCompatActivity {
             VM.Post.getValue().setPost_Title(Posting_Write_Date + User_Uid);
         }
         //작성글이 있을 경우에만 저장
-        if (VM.get_Post().getValue().getContent().length() > 2) {
+        if (VM.get_Post().getValue().getContent().length() >= 2) {
             progressDialog.show();
             progressDialog.setCancelable(false);
             if (VM.getIMG_State().getValue().equals("Uri")){

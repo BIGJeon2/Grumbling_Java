@@ -13,7 +13,7 @@
                 android:id="@+id/Chatting_User_Img_CIV"
                 android:src="@drawable/app_logo"
                 app:civ_border_width="1dp"
-                app:civ_border_color="@color/black"
+                app:civ_border_color="@color/purple_200"
                 android:layout_marginLeft="5dp"
                 android:layout_width="35dp"
                 android:layout_height="35dp">
@@ -23,7 +23,6 @@
                 android:id="@+id/Chatting_User_Name_TV"
                 android:textSize="10dp"
                 android:text="유저 이름"
-                android:fontFamily="@font/uhbeerice"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@+id/Chatting_User_Img_CIV"
@@ -33,6 +32,7 @@
             </TextView>
             <RelativeLayout
                 android:id="@+id/Chatting_Text_Container"
+                android:backgroundTint="@color/purple_100"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/other_chat_background"
                 android:layout_toRightOf="@+id/Chatting_User_Img_CIV"
@@ -53,7 +53,6 @@
                         android:textColor="@color/black"
                         android:textSize="10dp"
                         android:gravity="left"
-                        android:fontFamily="@font/uhbeerice"
                         android:background="@drawable/post_view_title_under_edge_1dp"
                         android:layout_alignParentTop="true"
                         android:layout_width="match_parent"
@@ -67,7 +66,6 @@
                         android:layout_centerInParent="true"
                         android:layout_below="@+id/Replied_Name"
                         android:text="답장칸"
-                        android:fontFamily="@font/uhbeerice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                     </TextView>
@@ -79,7 +77,6 @@
                     android:padding="10dp"
                     android:text="내용입력창입니다."
                     android:textColor="@color/black"
-                    android:fontFamily="@font/uhbeerice"
                     android:textSize="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">

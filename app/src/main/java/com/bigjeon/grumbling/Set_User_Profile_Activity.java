@@ -105,8 +105,8 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
 
     private void Upload_User_Profile() {
         My_Name = binding.UserName.getText().toString();
-        if(My_Name.length() < 2){
-            Toast.makeText(this, "사용하실 이름을 작성해 주세요(2글자 이상)", Toast.LENGTH_SHORT).show();
+        if(My_Name.length() < 2 || My_Name.length() > 7){
+            Toast.makeText(this, "사용하실 이름을 작성해 주세요(2글자 이상 6글자 이하)", Toast.LENGTH_SHORT).show();
         } else {
             new Handler().postDelayed(new Runnable() {
                 @Override

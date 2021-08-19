@@ -8,11 +8,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.bigjeon.grumbling.Model.Api;
+import com.bigjeon.grumbling.Model.ApiCLient;
+import com.bigjeon.grumbling.Model.Data;
+import com.bigjeon.grumbling.Model.Model;
 import com.bigjeon.grumbling.adapter.Chat_OnClickListener;
 import com.bigjeon.grumbling.adapter.Chat_rcv_Adapter;
 import com.bigjeon.grumbling.data.Chat_Data;
@@ -40,11 +47,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class Chatting_Activity extends AppCompatActivity {
     Chat_Binding binding;
     private String Content;
     private String My_Uid;
+    private String My_Name;
     private String Post_Title;
+    private String Post_User_Uid;
+    private String User_Token;
+    private String My_Img;
     private String Reply_Target_Uid = "NONE";
     private String Reply_Target_Text = "NONE";
     private boolean First_Chat_Status = true;
@@ -63,10 +79,19 @@ public class Chatting_Activity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         Intent Get_Data = getIntent();
-        Content = Get_Data.getStringExtra("CONTENT");
-        My_Uid = Get_Data.getStringExtra("UID");
-        Post_Title = Get_Data.getStringExtra("TITLE");
-        binding.ChattingPostContentTV.setText(Content);
+        if (Get_Data == null) {
+            Bundle bundle = getIntent().getExtras();
+            if (bundle != null) {
+                Post_Title = bundle.getString("TITLE");
+            }
+        }else{
+            Post_Title = Get_Data.getStringExtra("TITLE");
+        }
+        Get_Post_User_Uid();
+        SharedPreferences My_Data = getSharedPreferences("My_Data", MODE_PRIVATE);
+        My_Uid = My_Data.getString("UID", null);
+        My_Img = My_Data.getString("IMG", null);
+        My_Name = My_Data.getString("NAME", null);
 
         //list뷰 설정
         adapter = new Chat_rcv_Adapter(list, My_Uid, this, false);
@@ -74,12 +99,17 @@ public class Chatting_Activity extends AppCompatActivity {
         adapter.Set_Chat_rcv_Adapter(new Chat_OnClickListener() {
             @Override
             public void OnItemClicked(RecyclerView.ViewHolder Holder, View v, int pos) {
-                binding.ReplidedEditContainer.setVisibility(View.VISIBLE);
-                binding.ReplyImg.setVisibility(View.VISIBLE);
-                Reply_Target_Uid = list.get(pos).getUid();
-                Reply_Target_Text = list.get(pos).getText();
-                binding.RepliedText.setText(Reply_Target_Text);
-                Get_Replied_Target_Name(Reply_Target_Uid);
+                if (list.get(pos).getText().contains("https:")){
+                    Intent browseIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(list.get(pos).getText()));
+                    startActivity(browseIntent);
+                }else{
+                    binding.ReplidedEditContainer.setVisibility(View.VISIBLE);
+                    binding.ReplyImg.setVisibility(View.VISIBLE);
+                    Reply_Target_Uid = list.get(pos).getUid();
+                    Reply_Target_Text = list.get(pos).getText();
+                    binding.RepliedText.setText(Reply_Target_Text);
+                    Get_Replied_Target_Name(Reply_Target_Uid);
+                }
             }
         });
         LinearLayoutManager lm = new LinearLayoutManager(this);
@@ -87,13 +117,37 @@ public class Chatting_Activity extends AppCompatActivity {
         binding.ChattingListListView.setHasFixedSize(true);
 
         binding.BackPressBtn.setOnClickListener( v -> onBackPressed());
-
+        Set_My_State(true);
         DB = FirebaseDatabase.getInstance();
         reference = DB.getReference("Chats").child(Post_Title);
         reference.addValueEventListener(Regist_DB_Listener());
 
         binding.ChattingSendCIV.setOnClickListener(v -> Send_Message());
 
+    }
+
+    private void Get_Post_User_Uid(){
+        reference = FirebaseDatabase.getInstance().getReference("Posts").child(Post_Title);
+        reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                Post_Data post = task.getResult().getValue(Post_Data.class);
+                Post_User_Uid = post.getUser_Uid();
+                Content = post.getContent();
+                binding.ChattingPostContentTV.setText(Content);
+            }
+        });
+
+    }
+
+    private void Set_My_State(Boolean bool){
+        if (bool == true){
+            reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("State");
+            reference.setValue(Post_Title);
+        }else{
+            reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("State");
+            reference.setValue("NONE");
+        }
     }
 
     private void Get_Replied_Target_Name(String Uid) {
@@ -139,12 +193,17 @@ public class Chatting_Activity extends AppCompatActivity {
             Date date = new Date(now);
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd k:mm:ss:SSSS");
             String Time = simpleDateFormat.format(date);
-//            Calendar calendar = Calendar.getInstance();
-//            String Time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
             Chat_Id = Time + My_Uid;
             Chat_Data chat_data = new Chat_Data(My_Uid, Message, Time, Reply_Target_Text, Reply_Target_Uid, null, Chat_Id);
+            Toast.makeText(this, chat_data.getText(), Toast.LENGTH_SHORT).show();
+            reference = DB.getReference("Chats").child(Post_Title);
             reference.push().setValue(chat_data);
             binding.ChattingETV.setText("");
+            if (binding.ReplidedEditContainer.getVisibility() == View.VISIBLE){
+                Check_User_State(Message, Reply_Target_Uid);
+            }else{
+                Check_User_State(Message, Post_User_Uid);
+            }
             binding.ReplidedEditContainer.setVisibility(View.GONE);
             binding.ReplyImg.setVisibility(View.GONE);
             Reply_Target_Uid = "NONE";
@@ -156,6 +215,7 @@ public class Chatting_Activity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Set_My_State(false);
         reference.removeEventListener(listener);
     }
 
@@ -170,5 +230,47 @@ public class Chatting_Activity extends AppCompatActivity {
         }else{
             super.onBackPressed();
         }
+    }
+
+    private void Send_Noti_To_User(String message, String User_Token, String tag){
+        Model model = new Model(User_Token, null, new Data(My_Name + "님이 코멘트를 작성하였습니다.", message, tag, ".Chatting", Post_Title, My_Img));
+        Api apiService = ApiCLient.getClient().create(Api.class);
+        retrofit2.Call<ResponseBody> responseBodyCall = apiService.sendNotification(model);
+
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("서버 통신!!", "성공" + User_Token);
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("서버 통신!!", "실패");
+            }
+        });
+    }
+
+    private void Check_User_State(String Message, String User_Uid){
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Token");
+        reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                User_Token = task.getResult().getValue().toString();
+            }
+        });
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("State");
+        reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (Post_Title.equals(task.getResult().getValue()) || User_Uid.equals(My_Uid)){
+                }else{
+                    if (User_Uid.equals(Post_User_Uid)){
+                        Send_Noti_To_User(Message, User_Token, Post_Title + "Chat");
+                    }else{
+                        Send_Noti_To_User(Message, User_Token, Post_Title + My_Uid + User_Uid);
+                    }
+                }
+            }
+        });
     }
 }

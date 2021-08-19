@@ -136,8 +136,6 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
 
     private void Go_Chat_Intent(){
         Intent Go_Chat = new Intent(Show_Selected_Post_Activity.this, Chatting_Activity.class);
-        Go_Chat.putExtra("CONTENT", binding.SelectedPostContent.getText().toString());
-        Go_Chat.putExtra("UID", My_Uid);
         Go_Chat.putExtra("TITLE", Post_Title);
         startActivity(Go_Chat);
     }

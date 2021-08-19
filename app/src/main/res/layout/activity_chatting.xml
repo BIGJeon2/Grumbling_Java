@@ -16,7 +16,9 @@
     android:layout_height="match_parent">
         <RelativeLayout
             android:layout_weight="11.5"
-            android:background="@color/Transparent_Black30"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/post_view_title_under_edge_1dp"
             android:id="@+id/Post_View_Content_Container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -37,6 +39,8 @@
                 android:text="포스팅 내용"
                 android:textSize="15dp"
                 android:layout_toRightOf="@id/BackPress_Btn"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textColor="@color/black"
                 android:gravity="left"
                 android:layout_marginLeft="10dp"
@@ -102,7 +106,7 @@
         </RelativeLayout>
     </RelativeLayout>
     <RelativeLayout
-        android:background="@color/Transparent_Black30"
+        android:background="@color/Chatting_Container_Color"
         android:layout_weight="11.5"
         android:id="@+id/Chatting_Edittext_Container"
         android:layout_width="match_parent"
