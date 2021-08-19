@@ -8,6 +8,51 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:347089977816:android:cb743385851810066fb2ad",
+        "android_client_info": {
+          "package_name": "com.bigjeon.grumbling"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "347089977816-qvdidk4fq52ou3q00ugs17ck0vrkkgq0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bigjeon.grumbling",
+            "certificate_hash": "2ce1162046675751d5be41adacf786a2a8993a7f"
+          }
+        },
+        {
+          "client_id": "347089977816-tfihh9ba2aeio60a464pl5l925enfthl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bigjeon.grumbling",
+            "certificate_hash": "9729c4bfe3d1130cc5617d896ffa3f5527cc2e1c"
+          }
+        },
+        {
+          "client_id": "347089977816-9lis4suvohu33nc0a1j7rg06knfrsgu9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-usJVcqQxiUI_kWYl4dg2dzu2M68hh4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "347089977816-9lis4suvohu33nc0a1j7rg06knfrsgu9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:347089977816:android:dca1bb765e1d40cf6fb2ad",
         "android_client_info": {
           "package_name": "com.example.grumbling"
