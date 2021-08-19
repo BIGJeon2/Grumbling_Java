@@ -71,7 +71,7 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         binding.adViewBanner.loadAd(adRequest);
         AdView adview = new AdView(this);
         adview.setAdSize(AdSize.BANNER);
-        adview.setAdUnitId("\n" + R.string.banner_ad_unit_id_for_test);
+        adview.setAdUnitId("\n" + R.string.banner_ad_unit_id);
         mcontext = this;
         Set_My_Data();
 

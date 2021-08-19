@@ -33,9 +33,10 @@
         <entry key="app/src/main/res/layout/activity_google_login.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/activity_notification.xml" value="0.13072916666666667" />
         <entry key="app/src/main/res/layout/activity_p2p_chatting.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_post_write.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_post_write.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_set_user_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_setting_my_profile.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_show_selected_post.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_user_profile_view.xml" value="0.335" />
         <entry key="app/src/main/res/layout/category_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_chatting_list_view.xml" value="0.21666666666666667" />

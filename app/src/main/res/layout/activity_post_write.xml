@@ -116,7 +116,6 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/Dialog_Posting_Set_Text"
                 android:background="@drawable/ic_baseline_insert_photo_24"></de.hdodenhof.circleimageview.CircleImageView>
-
             <Button
                 android:id="@+id/Dialog_Posting_Set_Grade"
                 android:layout_width="wrap_content"
@@ -125,7 +124,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/round_shape_off"
-                android:text="모든 사용자"
+                android:text="잡담"
                 android:textColor="@color/black"
                 android:textSize="10dp"></Button>
 

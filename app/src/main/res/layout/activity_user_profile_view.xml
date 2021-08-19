@@ -106,6 +106,7 @@
                     android:backgroundTint="@color/black">
                 </ImageView>
                 <TextView
+                    android:id="@+id/P2P_Chat_TV"
                     android:layout_alignParentRight="true"
                     android:layout_below="@id/Setting_Fragment_Chatting_Civ"
                     android:layout_width="wrap_content"

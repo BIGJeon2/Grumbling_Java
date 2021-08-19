@@ -106,7 +106,6 @@ public class Post_Write_Activity extends AppCompatActivity {
         if (STATE.equals("CHANGE")){
             Get_Selected_Posts();
         }else{
-            Toast.makeText(this, STATE, Toast.LENGTH_SHORT).show();
             Set_First_State();
         }
         VM.get_Post().observe(this, post -> Data_Adjust(post_data));
@@ -253,7 +252,7 @@ public class Post_Write_Activity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 post_data.setGrade(Grade[which]);
                 VM.set_Post(post_data);
-                Toast.makeText(Post_Write_Activity.this, "공개 범위 : " + Posting_Grade, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Post_Write_Activity.this, "카테고리 : " + Posting_Grade, Toast.LENGTH_SHORT).show();
             }
         });
         builder.show();

@@ -211,6 +211,8 @@ public class User_Profile_View_activity extends AppCompatActivity {
             binding.SettingFragmentSendFriendRequestBtn.setBackgroundResource(R.drawable.round_shape);
             binding.SettingFragmentSendFriendRequestBtn.setText("친구");
             binding.SettingFragmentSendFriendRequestBtn.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.Transparent_Green));
+            binding.SettingFragmentChattingCiv.setVisibility(View.VISIBLE);
+            binding.P2PChatTV.setVisibility(View.VISIBLE);
             Send_Noti_To_User();
 
             Notification_Data Noti = new Notification_Data(Notification_Key, My_Uid, Send_Date, "None");
@@ -226,10 +228,14 @@ public class User_Profile_View_activity extends AppCompatActivity {
             public void onComplete(@NonNull @NotNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()){
                     Friend_State = "NONE";
+                    binding.SettingFragmentChattingCiv.setVisibility(View.GONE);
+                    binding.P2PChatTV.setVisibility(View.GONE);
                 }else{
                     Friend_Data Friends = task.getResult().getValue(Friend_Data.class);
                     if (Friends == null){
                         Friend_State = "NONE";
+                        binding.SettingFragmentChattingCiv.setVisibility(View.GONE);
+                        binding.P2PChatTV.setVisibility(View.GONE);
                     }else if (Friends.getUid().equals(User_Uid)){
                         Friend_State = "Friend";
                         binding.SettingFragmentSendFriendRequestBtn.setBackgroundResource(R.drawable.round_shape);
