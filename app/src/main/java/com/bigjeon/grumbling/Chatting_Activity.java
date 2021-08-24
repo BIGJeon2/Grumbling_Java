@@ -195,7 +195,6 @@ public class Chatting_Activity extends AppCompatActivity {
             String Time = simpleDateFormat.format(date);
             Chat_Id = Time + My_Uid;
             Chat_Data chat_data = new Chat_Data(My_Uid, Message, Time, Reply_Target_Text, Reply_Target_Uid, null, Chat_Id);
-            Toast.makeText(this, chat_data.getText(), Toast.LENGTH_SHORT).show();
             reference = DB.getReference("Chats").child(Post_Title);
             reference.push().setValue(chat_data);
             binding.ChattingETV.setText("");

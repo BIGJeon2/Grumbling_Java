@@ -129,9 +129,16 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
     }
 
     private void Go_Selected_User_Profile() {
-        Intent Go_View_My_Profile_Intent = new Intent(this, Setting_My_Profile_Activity.class);
-        Go_View_My_Profile_Intent.putExtra("UID", Post.getUser_Uid());
-        startActivity(Go_View_My_Profile_Intent);
+        if (Post.getUser_Uid().equals(My_Uid)){
+            Intent Go_View_My_Profile_Intent = new Intent(this, Setting_My_Profile_Activity.class);
+            Go_View_My_Profile_Intent.putExtra("UID", Post.getUser_Uid());
+            startActivity(Go_View_My_Profile_Intent);
+        }else{
+            Intent Go_View_User_Profile_Intent = new Intent(this, User_Profile_View_activity.class);
+            Go_View_User_Profile_Intent.putExtra("UID", Post.getUser_Uid());
+            startActivity(Go_View_User_Profile_Intent);
+        }
+
     }
 
     private void Go_Chat_Intent(){
