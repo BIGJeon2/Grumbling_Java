@@ -16,7 +16,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bigjeon.grumbling.data.User_Profile;
@@ -39,7 +41,7 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
     public static final String CODE_FIRST_SET = "FIRST_SET";
     public static final String CODE_CHANGE_SET = "CHANGE_SET";
     private static final String TAG = "My_Post_Check";
-    private ProgressDialog dialog;
+    private ProgressBar progressBar;
     Profile_Binding binding;
     private Uri Img_Uri = null;
     private String My_Uid;
@@ -111,10 +113,12 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    dialog = new ProgressDialog(Set_User_Profile_Activity.this);
-                    dialog.setIndeterminate(true);
-                    dialog.setMessage("잠시만 기다려 주세요");
-                    dialog.show();
+                    progressBar = new ProgressBar(Set_User_Profile_Activity.this, null, android.R.attr.progressBarStyleLarge);
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100, 100);
+                    params.addRule(RelativeLayout.CENTER_IN_PARENT);
+                    binding.SetUserProfileProgreesBar.addView(progressBar, params);
+                    Toast.makeText(Set_User_Profile_Activity.this, "잠시만 기다려 주세요", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.VISIBLE);
                 }
             }, 300);
             if (Img_Pick_State == true){
@@ -150,7 +154,7 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
                                                 editor.putString("NAME", My_Name);
                                                 editor.putString("IMG", My_Img);
                                                 editor.commit();
-                                                dialog.dismiss();
+                                                progressBar.setVisibility(View.INVISIBLE);
                                                 Go_App_Main();
                                             }
                                         });
@@ -178,7 +182,7 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
                                 editor.putString("NAME", My_Name);
                                 editor.putString("IMG", My_Img);
                                 editor.commit();
-                                dialog.dismiss();
+                                progressBar.setVisibility(View.INVISIBLE);
                                 Go_App_Main();
                             }
                         });

@@ -78,7 +78,7 @@ public class Chatting_List_Rcv_Adapter extends RecyclerView.Adapter<Chatting_Lis
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         holder.User_Name.setText(document.getString("Name"));
                         Picasso.get().load(document.getString("Img")).into(holder.User_Img);
-                        holder.Last_Chat_Date.setText(Change_Date(Chatting_Room_List.get(holder.getAdapterPosition()).getLast_Date()));
+                        holder.Last_Chat_Date.setText(Chatting_Room_List.get(holder.getAdapterPosition()).getLast_Date());
                         holder.Last_Chat_Comment.setText(Chatting_Room_List.get(holder.getAdapterPosition()).getLast_Content());
                         if (Chatting_Room_List.get(holder.getAdapterPosition()).getNew_Chat_Count() != 0){
                             holder.New_Chat_Count.setText(Integer.toString(Chatting_Room_List.get(holder.getAdapterPosition()).getNew_Chat_Count()));
@@ -116,19 +116,6 @@ public class Chatting_List_Rcv_Adapter extends RecyclerView.Adapter<Chatting_Lis
         Go_P2P_Chatting.putExtra("USER_UID", user_uid);
         Go_P2P_Chatting.putExtra("MY_UID", my_uid);
         mcontext.startActivity(Go_P2P_Chatting);
-    }
-    private String Change_Date(String write_date){
-        String new_writedate = "0000";
-        try{
-            SimpleDateFormat before = new SimpleDateFormat("yyyy-MM-dd k:mm:ss:SSSS");
-            SimpleDateFormat after = new SimpleDateFormat("MM-dd hh:mm");
-            Date dt_format = before.parse(write_date);
-            new_writedate = after.format(dt_format);
-            return new_writedate;
-        }catch (ParseException e){
-            e.printStackTrace();
-        }
-        return new_writedate;
     }
     @Override
     public int getItemCount() {

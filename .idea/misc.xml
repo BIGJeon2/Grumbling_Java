@@ -29,10 +29,10 @@
         <entry key="app/src/main/res/drawable/round_shape_off.xml" value="0.1921875" />
         <entry key="app/src/main/res/drawable/top_edge_black_1dp.xml" value="0.2518518518518518" />
         <entry key="app/src/main/res/layout/activity_app_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_chatting.xml" value="0.2111111111111111" />
+        <entry key="app/src/main/res/layout/activity_chatting.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_google_login.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/activity_notification.xml" value="0.13072916666666667" />
-        <entry key="app/src/main/res/layout/activity_p2p_chatting.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_p2p_chatting.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_post_write.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_set_user_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_setting_my_profile.xml" value="0.25" />

@@ -9,6 +9,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="Gray">#474646</color>
+    <color name="Transparent_light_Green">#8071D675</color>
 
     <color name="Transparent_Black30">#30000000</color>
     <color name="Transparent_Black40">#40000000</color>

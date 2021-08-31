@@ -9,6 +9,7 @@
             type="com.bigjeon.grumbling.Set_User_Profile_Activity"/>
     </data>
 <RelativeLayout
+    android:id="@+id/Set_User_Profile_ProgreesBar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"

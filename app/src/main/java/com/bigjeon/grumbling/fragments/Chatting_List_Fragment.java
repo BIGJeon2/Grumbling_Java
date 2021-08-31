@@ -31,10 +31,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 
 public class Chatting_List_Fragment extends Fragment {
 
@@ -75,6 +78,7 @@ public class Chatting_List_Fragment extends Fragment {
             @Override
             public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
                  Chat_User_Uid_Data Chat_Room = snapshot.getValue(Chat_User_Uid_Data.class);
+                 Chat_Room.setLast_Date(Change_Date(Chat_Room.getLast_Date()));
                  adapter.Add_List(0, Chat_Room);
                     Collections.sort(chat_list, new Comparator<Chat_User_Uid_Data>() {
                         @Override
@@ -114,6 +118,20 @@ public class Chatting_List_Fragment extends Fragment {
             }
         };
         return Chat_Listener;
+    }
+
+    private String Change_Date(String write_date){
+        String new_writedate = "0000";
+        try{
+            SimpleDateFormat before = new SimpleDateFormat("yyyy-MM-dd k:mm:ss:SSSS");
+            SimpleDateFormat after = new SimpleDateFormat("MM-dd hh:mm");
+            Date dt_format = before.parse(write_date);
+            new_writedate = after.format(dt_format);
+            return new_writedate;
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        return new_writedate;
     }
 
     @Override

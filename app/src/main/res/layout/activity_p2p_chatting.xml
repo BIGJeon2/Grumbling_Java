@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
-            android:layout_weight="11.5"
+            android:layout_weight="12"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
             android:background="@drawable/post_view_title_under_edge_1dp"
@@ -41,6 +41,7 @@
                 android:layout_toRightOf="@id/BackPress_Btn"
                 android:textColor="@color/black"
                 android:gravity="left"
+                android:textStyle="bold"
                 android:layout_marginLeft="10dp"
                 android:layout_centerInParent="true"
                 android:layout_width="match_parent"
@@ -105,7 +106,7 @@
             </RelativeLayout>
         </RelativeLayout>
         <RelativeLayout
-            android:background="@color/Chatting_Container_Color"
+            android:background="@color/Transparent_light_Green"
             android:layout_weight="11.5"
             android:id="@+id/Chatting_Edittext_Container"
             android:layout_width="match_parent"
@@ -138,16 +139,19 @@
                     android:rotationY="180"></ImageView>
                 <EditText
                     android:layout_toRightOf="@id/Reply_Img"
+                    android:background="@drawable/round_shape"
+                    android:paddingLeft="5dp"
                     android:id="@+id/Chatting_ETV"
                     android:layout_toLeftOf="@id/Chatting_Send_CIV"
                     android:hint="내용을 입력하세요."
                     android:layout_marginRight="5dp"
                     android:layout_marginLeft="5dp"
-                    android:padding="5dp"
                     android:textColor="@color/black"
                     android:textSize="13dp"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="40dp">
                 </EditText>
             </RelativeLayout>
         </RelativeLayout>

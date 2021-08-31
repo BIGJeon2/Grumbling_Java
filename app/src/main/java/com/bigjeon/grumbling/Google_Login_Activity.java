@@ -123,7 +123,6 @@ public class Google_Login_Activity extends AppCompatActivity {
                 public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                     if (task.isSuccessful()){
                         for (QueryDocumentSnapshot document : task.getResult()){
-                            Toast.makeText(Google_Login_Activity.this, document.get("EMAIL").toString(), Toast.LENGTH_SHORT).show();
                             SharedPreferences My_Data = getSharedPreferences("My_Data", MODE_PRIVATE);
                             SharedPreferences.Editor editor = My_Data.edit();
                             editor.putString("EMAIL", document.get("EMAIL").toString());
