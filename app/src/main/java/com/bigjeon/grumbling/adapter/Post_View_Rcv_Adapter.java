@@ -238,12 +238,12 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
 
     public void Send_Favorite_Notification(String UID, String Title, String My_Uid, String IMG){
         if (!UID.equals(My_Uid)){
-            SimpleDateFormat simpledate = new SimpleDateFormat("yyyyMMddHHmmss");
+            SimpleDateFormat simpledate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = new Date();
             String Send_Date = simpledate.format(date);
 
             Notification_Data Favorite_Noti = new Notification_Data(Notification_Favorite_Key, My_Uid, Send_Date, Title);
-            DatabaseReference Other_Reference = FirebaseDatabase.getInstance().getReference("Users").child(UID).child("Notifications");
+            DatabaseReference Other_Reference = FirebaseDatabase.getInstance().getReference("Users").child(UID).child("Notifications").child("Post_Timepeed");
             Other_Reference.push().setValue(Favorite_Noti);
             Send_Noti_To_User(Title, UID, IMG);
         }

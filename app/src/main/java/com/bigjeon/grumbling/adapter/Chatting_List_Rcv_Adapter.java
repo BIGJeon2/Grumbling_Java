@@ -1,6 +1,7 @@
 package com.bigjeon.grumbling.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +10,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bigjeon.grumbling.P2P_Chatting_Activity;
+import com.bigjeon.grumbling.Post_Write_Activity;
 import com.bigjeon.grumbling.data.Chat_Data;
 import com.bigjeon.grumbling.data.Chat_User_Uid_Data;
 import com.bigjeon.grumbling.data.Post_Data;
@@ -139,6 +142,34 @@ public class Chatting_List_Rcv_Adapter extends RecyclerView.Adapter<Chatting_Lis
             User_Name = binding.ChattingListUserNameTV;
             User_Img = binding.ChattingListUserImgCiv;
             New_Chat_Count = binding.ChattingListNewChatCountTV;
+
+            itemview.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION){
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(mcontext);
+                        dialog.setTitle("해당 채팅방을 나가시겠습니까?");
+                        dialog.setMessage("해당 채팅방을 나가도 채팅 내역은 저장되어, 추후 재 확인이 가능합니다.");
+                        dialog.setPositiveButton("나가기", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                DatabaseReference DB = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List").child(Chatting_Room_List.get(pos).getChat_Room_Id());
+                                DB.removeValue();
+                                Chatting_Room_List.remove(pos);
+                                notifyDataSetChanged();
+                            }
+                        });
+                        dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                        dialog.show();
+                    }
+                    return false;
+                }
+            });
         }
     }
 }

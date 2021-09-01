@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -145,12 +147,15 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
         Go_Login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         mAuth.signOut();
         GoogleSignInOptions option = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build();
+        Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
         GoogleSignInClient client = GoogleSignIn.getClient(this, option);
         client.signOut();
-        client.revokeAccess();
-        Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
-        startActivity(Go_Login);
-        finish();
+        client.revokeAccess().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                restart(getApplicationContext());
+            }
+        });
     }
 
     private void Get_Users_Posts() {
@@ -184,6 +189,15 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Get_Users_Posts();
+    }
+
+    private void restart(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        Intent intent = packageManager.getLaunchIntentForPackage(context.getPackageName());
+        ComponentName componentName = intent.getComponent();
+        Intent mainIntent = Intent.makeRestartActivityTask(componentName);
+        context.startActivity(mainIntent);
+        Runtime.getRuntime().exit(0);
     }
 
 

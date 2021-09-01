@@ -14,11 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bigjeon.grumbling.adapter.Chatting_List_Rcv_Adapter;
-import com.bigjeon.grumbling.adapter.Notification_List_Adapter;
-import com.bigjeon.grumbling.data.Chat_Data;
 import com.bigjeon.grumbling.data.Chat_User_Uid_Data;
-import com.bigjeon.grumbling.data.Notification_Data;
-import com.bigjeon.grumbling.data.Post_Data;
 import com.example.grumbling.R;
 import com.example.grumbling.databinding.FragmentChattingListViewBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,14 +23,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;

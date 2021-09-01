@@ -216,7 +216,7 @@ public class User_Profile_View_activity extends AppCompatActivity {
             Send_Noti_To_User();
 
             Notification_Data Noti = new Notification_Data(Notification_Key, My_Uid, Send_Date, "None");
-            reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Notifications").child(Notification_Key + My_Uid);
+            reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Notifications").child("Firend_Timepeed").child(Notification_Key + My_Uid);
             reference.setValue(Noti);
         }
     }

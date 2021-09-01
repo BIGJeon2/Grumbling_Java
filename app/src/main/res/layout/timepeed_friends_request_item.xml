@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_height="60dp">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/Timepeed_Friends_User_CIV"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="3dp"
+        android:src="@drawable/app_main_title"
+        app:civ_border_color="@color/purple_200"
+        app:civ_border_width="1dp">
+    </de.hdodenhof.circleimageview.CircleImageView>
+    <TextView
+        android:id="@+id/Timepeed_Friends_Text"
+        android:text="친구추가하였습니다."
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="12dp"
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@+id/Timepeed_Friends_User_CIV"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <Button
+        android:id="@+id/Timepeed_Friends_Add_Btn"
+        android:background="@drawable/round_shape_off"
+        android:layout_alignParentRight="true"
+        android:text="친구 추가"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp">
+    </Button>
+</RelativeLayout>
+</layout>

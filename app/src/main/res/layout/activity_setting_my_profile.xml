@@ -75,7 +75,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                         android:id="@+id/Setting_Fragment_My_Name_Tv"
                         android:text="User_Name"
                         android:padding="2dp"
-                        android:textSize="20dp"
+                        android:textSize="15dp"
                         android:textStyle="bold"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
@@ -93,18 +93,19 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     </TextView>
                     <LinearLayout
                         android:id="@+id/Setting_Fragment_Setting_Btns_Container"
+                        android:background="@drawable/round_shape_off"
                         android:layout_below="@id/My_Profile_activity_User_UID_TV"
                         android:orientation="horizontal"
                         android:layout_marginTop="3dp"
                         android:layout_width="match_parent"
                         android:gravity="center_vertical"
-                        android:layout_height="wrap_content">
+                        android:layout_height="25dp">
                         <Button
                             android:id="@+id/Setting_Fragment_Unregister_Btn"
                             android:layout_weight="1"
                             android:layout_marginRight="3dp"
                             android:text="계정 탈퇴"
-                            android:background="@drawable/round_shape"
+                            android:background="@drawable/edge_right_1dp_black"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                         </Button>
@@ -114,16 +115,15 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                             android:layout_marginRight="3dp"
                             android:layout_weight="1"
                             android:text="프로필 수정"
-                            android:background="@drawable/round_shape"
+                            android:background="@drawable/edge_right_1dp_black"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                         </Button>
                         <Button
                             android:id="@+id/Setting_Fragment_Sign_Out_Btn"
                             android:layout_weight="1"
-                            android:layout_marginLeft="3dp"
                             android:text="로그아웃"
-                            android:background="@drawable/round_shape"
+                            android:background="@android:color/transparent"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                         </Button>

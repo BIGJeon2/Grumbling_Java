@@ -136,7 +136,6 @@ public class Google_Login_Activity extends AppCompatActivity {
                     }
                 }
             });
-                Toast.makeText(Google_Login_Activity.this, "이메일 없음", Toast.LENGTH_SHORT).show();
                 String My_Uid = user.getUid();
                 String My_Email = user.getEmail();
                 Intent_To_Set_Profile(My_Uid, My_Email);

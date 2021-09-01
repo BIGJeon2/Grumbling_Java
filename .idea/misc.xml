@@ -20,9 +20,22 @@
         <entry key="..\:/Users/HOME/StudioProjects/Grumbling_Java/app/src/main/res/layout/other_chatting_reply.xml" value="0.3120471014492754" />
         <entry key="..\:/Users/HOME/StudioProjects/Grumbling_Java/app/src/main/res/layout/post_view_item.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/HOME/StudioProjects/Grumbling_Java/app/src/main/res/layout/post_write_loading_dialog.xml" value="0.3120471014492754" />
+        <entry key="app/src/main/res/drawable/edge_right_1dp_black.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/drawable/gradient_transparentblack_to_blak.xml" value="0.2518518518518518" />
         <entry key="app/src/main/res/drawable/gradient_white_to_transparentblack.xml" value="0.2518518518518518" />
+        <entry key="app/src/main/res/drawable/ic_baseline_chat_24.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/drawable/ic_baseline_chat_bubble_outline_24.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/drawable/ic_baseline_eco_24.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/drawable/ic_baseline_format_bold_24.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/drawable/ic_baseline_insert_photo_24.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/drawable/ic_baseline_maps_ugc_24.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/drawable/ic_baseline_mode_comment_24.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/drawable/ic_baseline_navigate_before_24.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/drawable/ic_baseline_reply_24.xml" value="0.2518518518518518" />
+        <entry key="app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/drawable/ic_baseline_text_format_24.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/drawable/ic_launcher_custom_background.xml" value="0.2518518518518518" />
         <entry key="app/src/main/res/drawable/post_view_title_under_edge_1dp.xml" value="0.26614583333333336" />
         <entry key="app/src/main/res/drawable/round_shape.xml" value="0.1921875" />
@@ -31,21 +44,28 @@
         <entry key="app/src/main/res/layout/activity_app_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_chatting.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_google_login.xml" value="0.21666666666666667" />
-        <entry key="app/src/main/res/layout/activity_notification.xml" value="0.13072916666666667" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25052083333333336" />
+        <entry key="app/src/main/res/layout/activity_notification.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_p2p_chatting.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_post_write.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_set_user_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_setting_my_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_show_selected_post.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_user_profile_view.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_user_profile_view.xml" value="0.45" />
         <entry key="app/src/main/res/layout/category_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/db_gif_img_item.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/fragment_chatting_list_view.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/layout/fragment_frament_post.xml" value="0.23645833333333333" />
         <entry key="app/src/main/res/layout/fragment_post_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_set__post__background.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/fragment_set__post__text.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/layout/fragment_timepeed_firends.xml" value="0.25052083333333336" />
+        <entry key="app/src/main/res/layout/fragment_timepeed_friends.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_timepeed_post.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/fragment_user__profile__friends_list_.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/fragment_user__profile__posts_list_.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/friend_list_fragment_view_.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/friends_request_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/my_chatting_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/my_chatting_reply.xml" value="0.25" />
         <entry key="app/src/main/res/layout/notification.xml" value="0.335" />
@@ -53,6 +73,8 @@
         <entry key="app/src/main/res/layout/other_chatting_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/other_chatting_reply.xml" value="0.25" />
         <entry key="app/src/main/res/layout/post_view_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/timepeed_friends_request_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/timepeed_post_item.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/user_list_item.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/menu/post_view_grade_menu.xml" value="0.21666666666666667" />
       </map>

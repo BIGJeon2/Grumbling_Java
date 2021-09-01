@@ -27,6 +27,7 @@ import com.bigjeon.grumbling.Model.NotificationModel;
 import com.bigjeon.grumbling.adapter.Chat_rcv_Adapter;
 import com.bigjeon.grumbling.data.Chat_Data;
 import com.bigjeon.grumbling.data.Chat_Noti;
+import com.bigjeon.grumbling.data.Notification_Data;
 import com.bigjeon.grumbling.data.Post_Data;
 import com.bumptech.glide.Glide;
 import com.example.grumbling.R;
@@ -77,6 +78,7 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
     private String My_Img;
     private Boolean Favorite_State;
     private int Favorite_Count;
+    private String Notification_Favorite_Key = "Add_Favorite";
     private Post_Data Post;
     private Chat_rcv_Adapter adapter;
     private ArrayList<Chat_Data> list = new ArrayList<>();
@@ -190,6 +192,7 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
                     data.setFavorite_Count(data.getFavorite_Count() + 1);
                     data.getFavorite().put(mAuth.getCurrentUser().getUid(), true);
                     Send_Noti_To_User(Post.getPost_Title(), Post.getUser_Uid());
+                    Send_Favorite_Notification(data.getUser_Uid(), data.getPost_Title(), My_Uid);
                 }
                 currentData.setValue(data);
                 return Transaction.success(currentData);
@@ -298,6 +301,18 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    public void Send_Favorite_Notification(String UID, String Title, String My_Uid){
+        if (!UID.equals(My_Uid)){
+            SimpleDateFormat simpledate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = new Date();
+            String Send_Date = simpledate.format(date);
+
+            Notification_Data Favorite_Noti = new Notification_Data(Notification_Favorite_Key, My_Uid, Send_Date, Title);
+            DatabaseReference Other_Reference = FirebaseDatabase.getInstance().getReference("Users").child(UID).child("Notifications").child("Post_Timepeed");
+            Other_Reference.push().setValue(Favorite_Noti);
+        }
     }
 
     private void Send_Noti_To_User(String Title, String User_Uid){
