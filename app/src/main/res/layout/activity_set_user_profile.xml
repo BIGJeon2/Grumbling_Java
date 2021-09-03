@@ -13,11 +13,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:background="@color/white"
+    android:background="@drawable/post_chatting_background"
     tools:context="com.bigjeon.grumbling.Set_User_Profile_Activity">
     <RelativeLayout
         android:id="@+id/App_Title_Container"
-        android:background="@color/white"
+        android:background="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentTop="true">
@@ -31,21 +31,12 @@
             android:layout_height="wrap_content">
         </TextView>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:background="@drawable/app_logo"
-            android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </de.hdodenhof.circleimageview.CircleImageView>
-
         <Button
             android:id="@+id/Complete_Btn"
             android:textStyle="bold"
-            android:background="@android:color/transparent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:background="@drawable/round_shape_off"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:text="완료"></Button>
     </RelativeLayout>
@@ -64,7 +55,8 @@
                 android:layout_centerInParent="true"
                 app:civ_border_width="2dp"
                 app:civ_border_color="@color/Transparent_Black70"
-                android:src="@drawable/user_profile_default_img"
+                android:padding="5dp"
+                android:src="@mipmap/main_app_icon_round"
                 android:layout_width="150dp"
                 android:layout_height="150dp">
             </de.hdodenhof.circleimageview.CircleImageView>
@@ -79,10 +71,10 @@
                     android:id="@+id/Set_User_Img_Default_Btn"
                     android:text="기본 프로필"
                     android:textStyle="bold"
+                    android:background="@drawable/round_shape_off"
                     android:textSize="15dp"
                     android:layout_marginRight="5dp"
                     android:textColor="@color/black"
-                    android:background="@drawable/round_shape_off"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent">

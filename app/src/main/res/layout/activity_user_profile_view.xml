@@ -12,15 +12,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/post_chatting_background"
     tools:context="com.bigjeon.grumbling.User_Profile_View_activity">
     <LinearLayout
         android:orientation="vertical"
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
             android:layout_weight="1"
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
@@ -49,6 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <RelativeLayout
+                android:padding="3dp"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:orientation="horizontal"
@@ -74,6 +74,7 @@
                             android:id="@+id/Setting_Fragment_My_Name_Tv"
                             android:text="Big_Jeon"
                             android:textSize="20dp"
+                            android:layout_marginLeft="3dp"
                             android:textStyle="bold"
                             android:layout_centerInParent="true"
                             android:textColor="@color/black"
@@ -86,12 +87,13 @@
                             android:id="@+id/Setting_Fragment_Send_Friend_Request_Btn"
                             android:layout_marginRight="5dp"
                             android:padding="4dp"
+                        android:layout_marginLeft="3dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="10dp"
                             android:textColor="@color/black"
                             android:background="@drawable/round_shape_off"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="7dp"
                             android:text="친구 추가 +">
                         </TextView>
                 </LinearLayout>
@@ -128,7 +130,8 @@
                 android:id="@+id/User_Profile_Btns_Container"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="35dp">
+                android:layout_marginTop="5dp"
+                android:layout_height="30dp">
                 <LinearLayout
                     android:gravity="center_horizontal"
                     android:layout_weight="1"

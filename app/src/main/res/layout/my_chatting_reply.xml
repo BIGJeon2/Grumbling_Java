@@ -9,7 +9,6 @@
         <RelativeLayout
             android:layout_weight="4"
             android:background="@drawable/my_chat_background"
-            android:backgroundTint="@color/My_Chat_Color"
             android:id="@+id/Chatting_Text_Container"
             android:layout_alignParentRight="true"
             android:padding="5dp"

@@ -10,15 +10,13 @@
     </data>
     <LinearLayout
         tools:context="com.bigjeon.grumbling.P2P_Chatting_Activity"
-        android:background="@color/white"
+        android:background="@drawable/post_chatting_background"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
             android:layout_weight="12"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/post_view_title_under_edge_1dp"
+            android:background="@color/Transparent_Black30"
             android:id="@+id/Post_View_Content_Container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -50,7 +48,6 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_weight="2"
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <androidx.recyclerview.widget.RecyclerView
@@ -106,7 +103,7 @@
             </RelativeLayout>
         </RelativeLayout>
         <RelativeLayout
-            android:background="@color/Transparent_light_Green"
+            android:background="@color/Transparent_Black30"
             android:layout_weight="11.5"
             android:id="@+id/Chatting_Edittext_Container"
             android:layout_width="match_parent"
@@ -139,7 +136,7 @@
                     android:rotationY="180"></ImageView>
                 <EditText
                     android:layout_toRightOf="@id/Reply_Img"
-                    android:background="@drawable/round_shape"
+                    android:background="@drawable/round_shape_off"
                     android:paddingLeft="5dp"
                     android:id="@+id/Chatting_ETV"
                     android:layout_toLeftOf="@id/Chatting_Send_CIV"

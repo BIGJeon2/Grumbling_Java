@@ -74,7 +74,7 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         adview.setAdUnitId("\n" + R.string.banner_ad_unit_id);
         mcontext = this;
         Set_My_Data();
-
+        binding.AppMainMyImg.setOnClickListener(v -> Go_User_Profile_View_Act());
         //토큰 가져오기
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
             @Override
@@ -137,6 +137,7 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         My_Name = My_Data.getString("NAME", null);
         My_Img = My_Data.getString("IMG", null);
         My_Email = My_Data.getString("EMAIL", null);
+        Picasso.get().load(My_Img).into(binding.AppMainMyImg);
     }
 
     private void Button_Background_Change(int position){
@@ -164,6 +165,12 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         Go_Post_Write.putExtra("KEY", "CREATE");
         Go_Post_Write.putExtra("TITLE", "NONE");
         startActivity(Go_Post_Write);
+    }
+
+    private void Go_User_Profile_View_Act() {
+        Intent Go_View_My_Profile_Intent = new Intent(App_Main_Activity.this, Setting_My_Profile_Activity.class);
+        Go_View_My_Profile_Intent.putExtra("UID", My_Uid);
+        startActivity(Go_View_My_Profile_Intent);
     }
 
 }

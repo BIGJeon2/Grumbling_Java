@@ -104,10 +104,7 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         Get_Selected_Posts();
         Set_My_Data();
         Get_Chatting_List();
-//        목록이 비어있을 경우
-//        if (list == null && list.isEmpty()){
-//            binding.SelectedPostNoneChatTextView.setVisibility(View.VISIBLE);
-//        }
+
         binding.SelectedPostUserImg.setOnClickListener(v -> Go_Selected_User_Profile());
         binding.SelectedPostFavoriteCircleCIV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,21 +239,34 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         }else{
             binding.SelectedPostFavoriteCountTV.setText("999+");
         }
+        binding.ShowSelectedPostWhriteDateTv.setText(Change_Date(Post.getPost_Write_Date()));
+    }
+
+    private String Change_Date(String write_date){
+        String new_writedate = "0000";
+        try{
+            SimpleDateFormat before = new SimpleDateFormat("yyyyMMddHHmmss");
+            SimpleDateFormat after = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+            Date dt_format = before.parse(write_date);
+            new_writedate = after.format(dt_format);
+            return new_writedate;
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        return new_writedate;
     }
 
     private void Get_Chatting_List(){
         adapter = new Chat_rcv_Adapter(list, My_Uid, this, false);
         binding.ChatListRcv.setAdapter(adapter);
-        LinearLayoutManager lm = new LinearLayoutManager(this);
-        lm.setStackFromEnd(true);
-        binding.ChatListRcv.setLayoutManager(lm);
-        binding.ChatListRcv.setHasFixedSize(true);
-        binding.ChatListRcv.setNestedScrollingEnabled(false);
         DatabaseReference Chat_DB = FirebaseDatabase.getInstance().getReference("Chats").child(Post_Title);
         Chat_DB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 for (DataSnapshot data : snapshot.getChildren()){
+                    if (data != null){
+                        binding.ShowSelectedPostNoneChatTV.setVisibility(View.INVISIBLE);
+                    }
                     Chat_Data chat = data.getValue(Chat_Data.class);
                     list.add(chat);
                     Log.d(TAG, list.toString());
@@ -269,7 +279,11 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
 
             }
         });
+        LinearLayoutManager lm = new LinearLayoutManager(this);
+        binding.ChatListRcv.setLayoutManager(lm);
+        binding.ChatListRcv.setHasFixedSize(true);
         binding.ChatListRcv.scrollToPosition(list.size() - 1);
+
     }
 
     @Override
@@ -315,28 +329,30 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         }
     }
 
-    private void Send_Noti_To_User(String Title, String User_Uid){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Token");
-        reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                String User_Token = task.getResult().getValue().toString();
-                Model model = new Model(User_Token, null, new Data(My_Name + "님이 해당 게시글을 좋아합니다!", null, Title, ".Post", Title, Post.getPost_Background()));
-                Api apiService = ApiCLient.getClient().create(Api.class);
-                retrofit2.Call<ResponseBody> responseBodyCall = apiService.sendNotification(model);
+    private void Send_Noti_To_User(String Title, String User_Uid) {
+        if (!User_Uid.equals(My_Uid)) {
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Token");
+            reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    String User_Token = task.getResult().getValue().toString();
+                    Model model = new Model(User_Token, null, new Data(My_Name + "님이 해당 게시글을 좋아합니다!", null, Title, ".Post", Title, Post.getPost_Background()));
+                    Api apiService = ApiCLient.getClient().create(Api.class);
+                    retrofit2.Call<ResponseBody> responseBodyCall = apiService.sendNotification(model);
 
-                responseBodyCall.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        Log.d("서버 통신!!", "성공" + User_Token);
-                    }
+                    responseBodyCall.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            Log.d("서버 통신!!", "성공" + User_Token);
+                        }
 
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Log.d("서버 통신!!", "실패");
-                    }
-                });
-            }
-        });
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Log.d("서버 통신!!", "실패");
+                        }
+                    });
+                }
+            });
+        }
     }
 }

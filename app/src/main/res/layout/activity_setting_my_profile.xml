@@ -11,17 +11,16 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/post_chatting_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.bigjeon.grumbling.Setting_My_Profile_Activity">
     <LinearLayout
         android:orientation="vertical"
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
             android:layout_weight="1"
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
@@ -44,7 +43,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             </TextView>
         </RelativeLayout>
         <LinearLayout
-            android:background="@color/white"
             android:orientation="vertical"
             android:layout_weight="4"
             android:layout_width="match_parent"
@@ -83,17 +81,17 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                     </TextView>
+
                     <TextView
                         android:id="@+id/My_Profile_activity_User_UID_TV"
-                        android:layout_below="@id/Setting_Fragment_My_Name_Tv"
-                        android:textSize="10dp"
-                        android:padding="2dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                    </TextView>
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/Setting_Fragment_My_Name_Tv"
+                        android:padding="2dp"
+                        android:textSize="10dp"></TextView>
                     <LinearLayout
                         android:id="@+id/Setting_Fragment_Setting_Btns_Container"
-                        android:background="@drawable/round_shape_off"
+                        android:background="@drawable/transparent_round_shape"
                         android:layout_below="@id/My_Profile_activity_User_UID_TV"
                         android:orientation="horizontal"
                         android:layout_marginTop="3dp"
@@ -105,6 +103,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                             android:layout_weight="1"
                             android:layout_marginRight="3dp"
                             android:text="계정 탈퇴"
+                            android:textSize="12dp"
+                            android:textStyle="bold"
                             android:background="@drawable/edge_right_1dp_black"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -114,6 +114,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                             android:layout_marginLeft="3dp"
                             android:layout_marginRight="3dp"
                             android:layout_weight="1"
+                            android:textSize="12dp"
+                            android:textStyle="bold"
                             android:text="프로필 수정"
                             android:background="@drawable/edge_right_1dp_black"
                             android:layout_width="match_parent"
@@ -123,6 +125,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                             android:id="@+id/Setting_Fragment_Sign_Out_Btn"
                             android:layout_weight="1"
                             android:text="로그아웃"
+                            android:textSize="12dp"
+                            android:textStyle="bold"
                             android:background="@android:color/transparent"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">

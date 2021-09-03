@@ -43,7 +43,6 @@
             android:gravity="left"
             android:padding="10dp"
             android:text="내용입력창입니다."
-            android:backgroundTint="@color/purple_100"
             android:textColor="@color/black"
             android:textSize="10dp"
             android:layout_marginBottom="5dp"

@@ -32,7 +32,6 @@
             </TextView>
             <RelativeLayout
                 android:id="@+id/Chatting_Text_Container"
-                android:backgroundTint="@color/purple_100"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/other_chat_background"
                 android:layout_toRightOf="@+id/Chatting_User_Img_CIV"

@@ -117,6 +117,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         holder.Post_Content.setBackgroundColor(ContextCompat.getColor(mContext, data.getContent_Back_Color()));
         holder.Post_Content.setTextColor(ContextCompat.getColor(mContext, data.getContent_Text_Color()));
         Glide.with(holder.itemView).load(data.getPost_Background()).into(holder.Post_Background_Img);
+        holder.WriteDate.setText(Change_Date(data.getPost_Write_Date()));
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("Users").whereEqualTo("UID", data.getUser_Uid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -161,6 +162,20 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         holder.User_Img.setOnClickListener(v -> Go_User_Profile_View_Act(data.getUser_Uid()));
     }
 
+    private String Change_Date(String write_date){
+        String new_writedate = "0000";
+        try{
+            SimpleDateFormat before = new SimpleDateFormat("yyyyMMddHHmmss");
+            SimpleDateFormat after = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+            Date dt_format = before.parse(write_date);
+            new_writedate = after.format(dt_format);
+            return new_writedate;
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        return new_writedate;
+    }
+
     public void Set_Grade(String Grade){
         Get_Post_Key = Grade;
     }
@@ -195,7 +210,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         ImageView Post_Background_Img;
         CircleImageView Favorite_Btn;
         TextView Favorite_Count;
-
+        TextView WriteDate;
         public Holder(@NonNull @NotNull View itemView) {
             super(itemView);
             User_Img = itemView.findViewById(R.id.Post_View_User_Img);
@@ -204,6 +219,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
             Post_Background_Img = itemView.findViewById(R.id.Post_View_Background);
             Favorite_Btn = itemView.findViewById(R.id.Post_View_Favorite_Circle_CIV);
             Favorite_Count = itemView.findViewById(R.id.Posting_Favorite_Count_TV);
+            WriteDate = itemView.findViewById(R.id.Post_Write_Date);
         }
     }
 

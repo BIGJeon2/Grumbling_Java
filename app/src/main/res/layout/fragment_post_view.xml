@@ -10,11 +10,13 @@
     </data>
 <FrameLayout
     xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="5dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/transparent"
     tools:context="com.bigjeon.grumbling.fragments.Post_View_Fragment">
     <RelativeLayout
-        android:background="@color/white"
+        android:background="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -29,7 +31,7 @@
            <TextView
                android:id="@+id/Category_TV_All"
                android:gravity="center"
-               android:text="#.모든 게시글"
+               android:text="#모든 게시글"
                android:textSize="12dp"
                android:padding="3dp"
                android:background="@drawable/round_shape"
@@ -41,7 +43,7 @@
            </TextView>
             <TextView
                 android:id="@+id/Category_TV_Talk"
-                android:text="#.잡담"
+                android:text="#잡담"
                 android:gravity="center"
                 android:textSize="12dp"
                 android:background="@drawable/round_shape_off"
@@ -54,7 +56,7 @@
             </TextView>
             <TextView
                 android:id="@+id/Category_TV_Meet"
-                android:text="#.모임"
+                android:text="#모임"
                 android:gravity="center"
                 android:padding="3dp"
                 android:background="@drawable/round_shape_off"
@@ -67,7 +69,7 @@
             </TextView>
             <TextView
                 android:id="@+id/Category_TV_Game"
-                android:text="#.게임"
+                android:text="#게임"
                 android:gravity="center"
                 android:textSize="12dp"
                 android:background="@drawable/round_shape_off"
@@ -80,7 +82,7 @@
             </TextView>
             <TextView
                 android:id="@+id/Category_TV_Pride"
-                android:text="#.자랑"
+                android:text="#자랑"
                 android:gravity="center"
                 android:textSize="12dp"
                 android:textStyle="bold"
@@ -93,7 +95,7 @@
             </TextView>
             <TextView
                 android:id="@+id/Category_TV_Grung"
-                android:text="#.고민"
+                android:text="#고민"
                 android:gravity="center"
                 android:textSize="12dp"
                 android:background="@drawable/round_shape_off"
