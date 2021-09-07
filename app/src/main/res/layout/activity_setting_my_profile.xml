@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto">
 <data>
     <import type="android.view.View">
@@ -10,8 +10,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         type="com.bigjeon.grumbling.Setting_My_Profile_Activity" />
 </data>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/post_chatting_background"
+    android:background="@drawable/my_profile_view_activity_background_img"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.bigjeon.grumbling.Setting_My_Profile_Activity">
@@ -32,15 +31,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </ImageView>
-            <TextView
-                android:layout_centerInParent="true"
-                android:text="- 내 프로필 -"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
         </RelativeLayout>
         <LinearLayout
             android:orientation="vertical"
@@ -92,7 +82,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     <LinearLayout
                         android:id="@+id/Setting_Fragment_Setting_Btns_Container"
                         android:background="@drawable/transparent_round_shape"
-                        android:layout_below="@id/My_Profile_activity_User_UID_TV"
+                        android:layout_alignParentBottom="true"
                         android:orientation="horizontal"
                         android:layout_marginTop="3dp"
                         android:layout_width="match_parent"

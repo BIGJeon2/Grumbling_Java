@@ -12,11 +12,12 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/post_chatting_background"
+    android:background="@drawable/none_effect_background_img"
+    android:backgroundTint="@android:color/transparent"
     tools:context="com.bigjeon.grumbling.Show_Selected_Post_Activity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/Selected_Post_Toolbar"
-        android:background="@color/white"
+        android:background="@drawable/none_effect_background_img"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:contentInsetStart="0dp"
@@ -25,18 +26,9 @@
             android:id="@+id/Selected_Post_Title_Container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white">
-            <ImageView
-                android:id="@+id/Post_View_BackPress_Imv"
-                android:layout_marginLeft="3dp"
-                android:background="@drawable/ic_baseline_navigate_before_24"
-                android:layout_centerInParent="true"
-                android:layout_alignParentLeft="true"
-                android:layout_width="30dp"
-                android:layout_height="30dp">
-            </ImageView>
+            android:background="@android:color/transparent">
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_toRightOf="@id/Post_View_BackPress_Imv"
+                android:layout_alignParentLeft="true"
                 android:id="@+id/Selected_Post_User_Img"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
@@ -44,7 +36,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:src="@mipmap/ic_launcher"
-                app:civ_border_color="@color/Transparent_Black70"
+                app:civ_border_color="@color/Transparent_light_Green"
                 app:civ_border_width="1dp">
             </de.hdodenhof.circleimageview.CircleImageView>
             <TextView
@@ -66,26 +58,26 @@
         android:layout_below="@id/Selected_Post_Toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/Transparent_Black50"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/Selected_Post_Toolbar">
         <RelativeLayout
             android:id="@+id/Selected_Post_Content_Container"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5.5"
-            android:background="@android:color/transparent">
+            android:layout_height="match_parent"
+            android:background="#20000000">
             <FrameLayout
+                android:id="@+id/Show_Selected_Post_FrameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@id/Selected_Post_Bottom_Container"
-                android:background="@color/Transparent_Black30">
-
+                android:backgroundTint="@android:color/transparent">
                 <ImageView
                     android:id="@+id/Selected_Post_Background"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
-                    android:scaleType="centerCrop"></ImageView>
+                    android:scaleType="fitCenter">
+                </ImageView>
             </FrameLayout>
 
             <TextView
@@ -101,29 +93,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_alignParentBottom="true"
-                android:background="@android:color/transparent">
+                android:background="@color/Transparent_Black70">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Selected_Post_Enter_Chatting_CIV"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="5dp"
                     android:padding="3dp"
                     android:layout_centerInParent="true"
-                    android:layout_toRightOf="@id/Selected_Post_Favorite_Count_TV"
-                    android:background="@drawable/chatting_btn">
+                    android:layout_alignParentRight="true"
+                    android:backgroundTint="@color/white"
+                    android:background="@drawable/ic_baseline_question_answer_24">
                 </de.hdodenhof.circleimageview.CircleImageView>
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Selected_Post_Favorite_Circle_CIV"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_centerInParent="true"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentLeft="true"
-                    android:background="@drawable/ic_baseline_favorite_border_24">
-                </de.hdodenhof.circleimageview.CircleImageView>
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="5dp"
+                    android:backgroundTint="@color/trans_80_light_white"
+                    android:background="@drawable/ic_baseline_favorite_border_24"></de.hdodenhof.circleimageview.CircleImageView>
                 <TextView
                     android:id="@+id/Selected_Post_Favorite_Count_TV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/trans_80_light_white"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="5dp"
                     android:layout_toRightOf="@+id/Selected_Post_Favorite_Circle_CIV"
@@ -133,11 +129,12 @@
                 <TextView
                     android:id="@+id/Show_Selected_Post_Whrite_Date_Tv"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
                     android:layout_marginRight="5dp"
-                    android:layout_marginBottom="3dp"
-                    android:textSize="10dp"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"
+                    android:textSize="12dp"
                     android:textStyle="bold"
+                    android:text="whrite_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
@@ -147,6 +144,7 @@
             android:id="@+id/Show_Selected_Post_Chat_Container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:background="@android:color/transparent"
             android:layout_weight="3">
             <TextView

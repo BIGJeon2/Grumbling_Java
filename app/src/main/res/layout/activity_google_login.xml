@@ -11,7 +11,7 @@ xmlns:tools="http://schemas.android.com/tools">
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mainactivity_background"
+    android:background="@drawable/main_activity_background_img"
     tools:context="com.bigjeon.grumbling.Google_Login_Activity">
 
     <com.google.android.gms.common.SignInButton

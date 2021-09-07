@@ -10,12 +10,15 @@
     <color name="white">#FFFFFFFF</color>
     <color name="Gray">#474646</color>
     <color name="Transparent_light_Green">#8071D675</color>
+    <color name="trans_60_light_white">#70FFFFFF</color>
 
+    <color name="Transparent_Black10">#10000000</color>
     <color name="Transparent_Black30">#30000000</color>
     <color name="Transparent_Black40">#40000000</color>
     <color name="Transparent_Black50">#50000000</color>
     <color name="Transparent_Black70">#70000000</color>
     <color name="Transparent_Black80">#80000000</color>
+    <color name="Transparent_Black90">#90000000</color>
     <color name="Transparent_White">#50FFFFFF</color>
     <color name="Transparent_Green">#804B9A4E</color>
 

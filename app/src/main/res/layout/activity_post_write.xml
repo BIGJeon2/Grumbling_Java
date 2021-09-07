@@ -11,7 +11,7 @@
     </data>
     <RelativeLayout
         xmlns:tools="http://schemas.android.com/tools"
-        android:background="@drawable/post_chatting_background"
+        android:background="@drawable/selected__post_view_activity_background_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
@@ -38,7 +38,7 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_centerInParent="true"
-                android:layout_marginLeft="5dp">
+                android:layout_marginLeft="2dp">
             </de.hdodenhof.circleimageview.CircleImageView>
             <TextView
                 android:id="@+id/Dialog_Posting_User_Name"

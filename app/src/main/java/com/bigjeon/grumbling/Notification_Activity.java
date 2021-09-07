@@ -77,12 +77,12 @@ public class Notification_Activity extends AppCompatActivity {
     private void Button_Background_Change(int position){
         switch (position){
             case 0 :
-                binding.TimepeedTVPost.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
-                binding.TimepeedTVFriends.setTextColor(ColorStateList.valueOf(Color.GRAY));
+                binding.TimepeedTVPost.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#80ED58DE")));
+                binding.TimepeedTVFriends.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
                 break;
             case 1 :
-                binding.TimepeedTVPost.setTextColor(ColorStateList.valueOf(Color.GRAY));
-                binding.TimepeedTVFriends.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
+                binding.TimepeedTVPost.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#30ED58DE")));
+                binding.TimepeedTVFriends.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
                 break;
         }
     }

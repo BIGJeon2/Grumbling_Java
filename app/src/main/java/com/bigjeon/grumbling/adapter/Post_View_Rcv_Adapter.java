@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
@@ -138,9 +139,10 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
             holder.Favorite_Count.setText("999+");
         }
         if (data.getFavorite().containsKey(mAuth.getCurrentUser().getUid())){
-            holder.Favorite_Btn.setImageResource(R.drawable.ic_baseline_favorite_24);
+            holder.Favorite_Btn.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+            holder.Favorite_Btn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#80FFFFFF")));
         }else {
-            holder.Favorite_Btn.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+            holder.Favorite_Btn.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
         }
         holder.Post_Background_Img.setOnClickListener(new View.OnClickListener() {
             @Override

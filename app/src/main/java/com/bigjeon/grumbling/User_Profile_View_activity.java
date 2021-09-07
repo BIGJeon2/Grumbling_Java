@@ -137,12 +137,12 @@ public class User_Profile_View_activity extends AppCompatActivity {
     private void Button_Background_Change(int position) {
         switch (position) {
             case 0:
-                binding.UserProfilePostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
-                binding.UserProfileFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                binding.UserProfilePostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
+                binding.UserProfileFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
                 break;
             case 1:
-                binding.UserProfilePostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
-                binding.UserProfileFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
+                binding.UserProfilePostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
+                binding.UserProfileFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
                 break;
         }
     }

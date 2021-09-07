@@ -48,8 +48,6 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
     public String My_Name;
     public String My_Email;
     public String My_Token;
-    public String Get_Noti_State;
-    public String Get_Noti_Data;
     private DatabaseReference reference;
     private FragmentStateAdapter ViewPager_Adapter;
 
@@ -143,19 +141,19 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
     private void Button_Background_Change(int position){
         switch (position){
             case 0 :
-                binding.AppMainFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
-                binding.AppMainPostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
-                binding.AppMainChattingCiv.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                binding.AppMainFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
+                binding.AppMainPostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
+                binding.AppMainChattingCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
                 break;
             case 1 :
-                binding.AppMainFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
-                binding.AppMainPostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
-                binding.AppMainChattingCiv.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                binding.AppMainFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
+                binding.AppMainPostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
+                binding.AppMainChattingCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
                 break;
             case 2 :
-                binding.AppMainFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
-                binding.AppMainPostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
-                binding.AppMainChattingCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
+                binding.AppMainFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
+                binding.AppMainPostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
+                binding.AppMainChattingCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
                 break;
         }
     }

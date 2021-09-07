@@ -12,7 +12,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/post_chatting_background"
+    android:background="@drawable/user_profile_view_activity_background_img"
     tools:context="com.bigjeon.grumbling.User_Profile_View_activity">
     <LinearLayout
         android:orientation="vertical"
@@ -31,15 +31,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </ImageView>
-            <TextView
-                android:layout_centerInParent="true"
-                android:text="- 프로필 -"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </TextView>
         </RelativeLayout>
         <LinearLayout
             android:orientation="vertical"
@@ -142,7 +133,7 @@
                         android:padding="2dp"
                         android:gravity="center"
                         android:textColor="@color/black"
-                        android:backgroundTint="@color/purple_200"
+                        android:backgroundTint="@color/Transparent_Black90"
                         android:background="@drawable/ic_baseline_article_24"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -156,8 +147,8 @@
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:padding="2dp"
                         android:id="@+id/User_Profile_Friend_Civ"
-                        android:textColor="@color/black"
                         android:gravity="center"
+                        android:backgroundTint="@color/Transparent_Black50"
                         android:background="@drawable/ic_baseline_group_24"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">

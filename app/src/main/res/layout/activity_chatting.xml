@@ -11,7 +11,7 @@
 <LinearLayout
     tools:context="com.bigjeon.grumbling.Chatting_Activity"
     android:orientation="vertical"
-    android:background="@drawable/post_chatting_background"
+    android:background="@drawable/selected__post_view_activity_background_img"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
         <RelativeLayout

@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/mainactivity_background"
+    android:background="@drawable/main_activity_background_img"
     tools:context="com.bigjeon.grumbling.MainActivity">
 
     <ImageView

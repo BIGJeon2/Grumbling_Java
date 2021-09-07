@@ -52,6 +52,7 @@
                         android:textColor="@color/black"
                         android:textSize="10dp"
                         android:gravity="left"
+                        android:textStyle="bold"
                         android:background="@drawable/post_view_title_under_edge_1dp"
                         android:layout_alignParentTop="true"
                         android:layout_width="match_parent"
@@ -65,6 +66,7 @@
                         android:layout_centerInParent="true"
                         android:layout_below="@+id/Replied_Name"
                         android:text="답장칸"
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                     </TextView>
@@ -73,7 +75,8 @@
                     android:id="@+id/Chatting_Text_TV"
                     android:layout_below="@id/Reply_Containier"
                     android:gravity="left"
-                    android:padding="10dp"
+                    android:padding="11dp"
+                    android:textStyle="bold"
                     android:text="내용입력창입니다."
                     android:textColor="@color/black"
                     android:textSize="10dp"

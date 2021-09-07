@@ -11,12 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bigjeon.grumbling.Model.Api;
@@ -67,7 +71,7 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
 
     private static final String TAG = "확인 시바";
 
-    ActivityShowSelectedPostBinding binding;
+    private ActivityShowSelectedPostBinding binding;
     private Context mContext = Show_Selected_Post_Activity.this;
     private DatabaseReference DB;
     private FirebaseAuth mAuth;
@@ -111,11 +115,12 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 onFavoriteClicked(DB.child(Post.getPost_Title()));
                     if (Favorite_State == true){
-                        binding.SelectedPostFavoriteCircleCIV.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                        binding.SelectedPostFavoriteCircleCIV.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
                         Favorite_Count--;
                         Favorite_State = false;
                     }else{
-                        binding.SelectedPostFavoriteCircleCIV.setImageResource(R.drawable.ic_baseline_favorite_24);
+                        binding.SelectedPostFavoriteCircleCIV.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                        binding.SelectedPostFavoriteCircleCIV.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#80FFFFFF")));
                         Favorite_Count++;
                         Favorite_State = true;
                     }
@@ -124,7 +129,6 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         });
         //채팅방으로 이동(아이템 뷰 클릭시 이동후 바로 답장으로 셋팅(Intent Filter이용))
         binding.SelectedPostEnterChattingCIV.setOnClickListener(v -> Go_Chat_Intent());
-        binding.PostViewBackPressImv.setOnClickListener( v -> onBackPressed());
     }
 
     private void Go_Selected_User_Profile() {
@@ -227,6 +231,7 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         binding.SelectedPostContent.setBackgroundColor(ContextCompat.getColor(this, Post.getContent_Back_Color()));
         if (post.getFavorite().containsKey(mAuth.getCurrentUser().getUid())){
             binding.SelectedPostFavoriteCircleCIV.setImageResource(R.drawable.ic_baseline_favorite_24);
+            binding.SelectedPostFavoriteCircleCIV.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#80FFFFFF")));
             Favorite_Count = Post.getFavorite_Count();
             Favorite_State = true;
         }else {

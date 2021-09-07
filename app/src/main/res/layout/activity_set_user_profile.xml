@@ -13,7 +13,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:background="@drawable/post_chatting_background"
+    android:background="@drawable/selected__post_view_activity_background_img"
     tools:context="com.bigjeon.grumbling.Set_User_Profile_Activity">
     <RelativeLayout
         android:id="@+id/App_Title_Container"

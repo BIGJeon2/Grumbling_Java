@@ -33,7 +33,7 @@
                 android:gravity="left"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="23dp"
                 android:text="친구">
             </TextView>
             </RelativeLayout>
@@ -47,7 +47,7 @@
                 android:paddingBottom="5dp"
                 android:text="- 내 프로필"
                 android:textColor="@color/black"
-                android:textSize="10dp"
+                android:textSize="11dp"
                 android:textStyle="bold"></TextView>
         <RelativeLayout
             android:id="@+id/Friend_List_My_Profile_Container"
@@ -69,7 +69,7 @@
                 android:id="@+id/Friend_List_My_Name_TV"
                 android:layout_toRightOf="@id/Friend_List_My_Img_Civ"
                 android:textSize="15dp"
-                android:text="내이름"
+                android:text="내 이름"
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:layout_marginLeft="10dp"
@@ -104,7 +104,7 @@
                 android:padding="2dp"
                 android:text="- 친구"
                 android:textColor="@color/black"
-                android:textSize="10dp"
+                android:textSize="11dp"
                 android:textStyle="bold"></TextView>
            <RelativeLayout
                android:layout_below="@id/TV2"

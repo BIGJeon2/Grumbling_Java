@@ -10,7 +10,7 @@
     </data>
     <LinearLayout
         tools:context="com.bigjeon.grumbling.P2P_Chatting_Activity"
-        android:background="@drawable/post_chatting_background"
+        android:background="@drawable/selected__post_view_activity_background_img"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

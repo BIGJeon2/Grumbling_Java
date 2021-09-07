@@ -44,7 +44,8 @@
             android:padding="10dp"
             android:text="내용입력창입니다."
             android:textColor="@color/black"
-            android:textSize="10dp"
+            android:textSize="11dp"
+            android:textStyle="bold"
             android:layout_marginBottom="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
