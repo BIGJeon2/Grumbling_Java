@@ -11,12 +11,12 @@
     </data>
     <RelativeLayout
         xmlns:tools="http://schemas.android.com/tools"
-        android:background="@drawable/selected__post_view_activity_background_img"
+        android:background="@drawable/none_effect_background_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
             android:id="@+id/Top_Bar"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_alignParentTop="true">
@@ -69,7 +69,7 @@
             android:layout_height="350dp"
             android:layout_below="@+id/Top_Bar">
             <FrameLayout
-                android:background="@color/Transparent_Black30"
+                android:background="@color/Transparent_Black50"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <ImageView
@@ -82,7 +82,7 @@
             </FrameLayout>
             <EditText
                 android:id="@+id/Dialog_Posting_Content"
-                android:background="#50000000"
+                android:background="@color/Transparent_Black50"
                 android:hint="텍스트"
                 android:gravity="center"
                 android:layout_centerInParent="true"
@@ -106,7 +106,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/ic_baseline_text_format_24"
-                android:backgroundTint="@color/purple_200"></de.hdodenhof.circleimageview.CircleImageView>
+                android:backgroundTint="@color/Transparent_Black90"></de.hdodenhof.circleimageview.CircleImageView>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Dialog_Posting_Set_Img"
@@ -116,6 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/Dialog_Posting_Set_Text"
+                android:backgroundTint="@color/Transparent_Black50"
                 android:background="@drawable/ic_baseline_insert_photo_24"></de.hdodenhof.circleimageview.CircleImageView>
             <Button
                 android:id="@+id/Dialog_Posting_Set_Grade"

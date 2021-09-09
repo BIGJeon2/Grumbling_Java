@@ -156,12 +156,12 @@ public class Post_Write_Activity extends AppCompatActivity {
     private void Button_Background_Change(int position){
         switch (position){
             case 0 :
-                binding.DialogPostingSetText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
-                binding.DialogPostingSetImg.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                binding.DialogPostingSetText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
+                binding.DialogPostingSetImg.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
                 break;
             case 1 :
-                binding.DialogPostingSetText.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
-                binding.DialogPostingSetImg.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFBB86FC")));
+                binding.DialogPostingSetText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
+                binding.DialogPostingSetImg.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
                 break;
         }
     }

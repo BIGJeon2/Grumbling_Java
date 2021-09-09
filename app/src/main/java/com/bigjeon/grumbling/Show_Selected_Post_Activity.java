@@ -120,10 +120,10 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
                         Favorite_State = false;
                     }else{
                         binding.SelectedPostFavoriteCircleCIV.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
-                        binding.SelectedPostFavoriteCircleCIV.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#80FFFFFF")));
                         Favorite_Count++;
                         Favorite_State = true;
                     }
+                binding.SelectedPostFavoriteCircleCIV.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
                 binding.SelectedPostFavoriteCountTV.setText(Integer.toString(Favorite_Count));
             }
         });
@@ -230,15 +230,16 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         binding.SelectedPostContent.setTextColor(ContextCompat.getColor(this, Post.getContent_Text_Color()));
         binding.SelectedPostContent.setBackgroundColor(ContextCompat.getColor(this, Post.getContent_Back_Color()));
         if (post.getFavorite().containsKey(mAuth.getCurrentUser().getUid())){
-            binding.SelectedPostFavoriteCircleCIV.setImageResource(R.drawable.ic_baseline_favorite_24);
-            binding.SelectedPostFavoriteCircleCIV.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#80FFFFFF")));
+            binding.SelectedPostFavoriteCircleCIV.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+            binding.SelectedPostFavoriteCircleCIV.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
             Favorite_Count = Post.getFavorite_Count();
             Favorite_State = true;
         }else {
-            binding.SelectedPostFavoriteCircleCIV.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+            binding.SelectedPostFavoriteCircleCIV.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
             Favorite_Count = Post.getFavorite_Count();
             Favorite_State = false;
         }
+        binding.SelectedPostFavoriteCircleCIV.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
         if (Post.getFavorite_Count() < 1000){
             binding.SelectedPostFavoriteCountTV.setText(Integer.toString(Favorite_Count));
         }else{

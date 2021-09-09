@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
         <FrameLayout
             android:layout_below="@id/Post_View_Title_Container"
-            android:background="@color/Transparent_Black70"
+            android:background="@android:color/transparent"
             android:layout_width="match_parent"
             android:layout_height="420dp">
             <ImageView
@@ -66,7 +66,7 @@
         </TextView>
 
         <RelativeLayout
-            android:background="@color/Transparent_Black70"
+            android:background="@color/Transparent_Black90"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="40dp">
@@ -78,6 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:textStyle="bold"
                 android:layout_toRightOf="@id/Post_View_Favorite_Circle_CIV"
                 android:layout_marginRight="5dp">
             </TextView>
@@ -92,17 +93,14 @@
                 android:background="@drawable/ic_baseline_favorite_border_24">
             </de.hdodenhof.circleimageview.CircleImageView>
             <TextView
-                android:id="@+id/Post_Write_Date"
-                android:text="Write_Date"
-                android:textSize="10dp"
-                android:layout_marginRight="5dp"
-                android:textColor="@color/trans_60_light_white"
-                android:layout_centerInParent="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="5dp"
-                android:textStyle="bold"
+                android:id="@+id/Post_Write_Date_TV"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:textColor="@color/trans_60_light_white"
+                android:textStyle="bold"
+                android:textSize="12dp">
             </TextView>
         </RelativeLayout>
     </RelativeLayout>

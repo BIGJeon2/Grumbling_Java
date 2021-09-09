@@ -13,13 +13,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/none_effect_background_img"
-    android:backgroundTint="@android:color/transparent"
     tools:context="com.bigjeon.grumbling.Show_Selected_Post_Activity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/Selected_Post_Toolbar"
-        android:background="@drawable/none_effect_background_img"
+        android:background="@android:color/transparent"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         app:contentInsetStart="0dp"
         app:layout_constraintTop_toTopOf="parent">
         <RelativeLayout
@@ -55,21 +54,23 @@
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
     <LinearLayout
+        android:id="@+id/Linearlayout"
         android:layout_below="@id/Selected_Post_Toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/Transparent_Black50"
+        android:layout_height="460dp"
+        android:background="@android:color/transparent"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/Selected_Post_Toolbar">
         <RelativeLayout
             android:id="@+id/Selected_Post_Content_Container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#20000000">
+            android:background="@color/Transparent_Black90">
             <FrameLayout
                 android:id="@+id/Show_Selected_Post_FrameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_above="@id/Selected_Post_Bottom_Container"
                 android:backgroundTint="@android:color/transparent">
                 <ImageView
                     android:id="@+id/Selected_Post_Background"
@@ -91,39 +92,39 @@
             <RelativeLayout
                 android:id="@+id/Selected_Post_Bottom_Container"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="35dp"
                 android:layout_alignParentBottom="true"
-                android:background="@color/Transparent_Black70">
+                android:background="@drawable/none_effect_background_img">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Selected_Post_Enter_Chatting_CIV"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginRight="5dp"
                     android:padding="3dp"
                     android:layout_centerInParent="true"
                     android:layout_alignParentRight="true"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/black"
                     android:background="@drawable/ic_baseline_question_answer_24">
                 </de.hdodenhof.circleimageview.CircleImageView>
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Selected_Post_Favorite_Circle_CIV"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentLeft="true"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_centerInParent="true"
-                    android:layout_marginLeft="5dp"
-                    android:backgroundTint="@color/trans_80_light_white"
+                    android:layout_toLeftOf="@id/Selected_Post_Favorite_Count_TV"
+                    android:backgroundTint="@color/Transparent_Black90"
                     android:background="@drawable/ic_baseline_favorite_border_24"></de.hdodenhof.circleimageview.CircleImageView>
                 <TextView
                     android:id="@+id/Selected_Post_Favorite_Count_TV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/trans_80_light_white"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_toRightOf="@+id/Selected_Post_Favorite_Circle_CIV"
+                    android:textColor="@color/Transparent_Black90"
+                    android:layout_toLeftOf="@+id/Selected_Post_Enter_Chatting_CIV"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="3dp"
                     android:text="000"
+                    android:textStyle="bold"
                     android:textSize="10dp">
                 </TextView>
                 <TextView
@@ -134,39 +135,41 @@
                     android:visibility="gone"
                     android:textSize="12dp"
                     android:textStyle="bold"
-                    android:text="whrite_date"
+                    android:text="write_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
             </RelativeLayout>
         </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/Show_Selected_Post_Chat_Container"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:visibility="gone"
-            android:background="@android:color/transparent"
-            android:layout_weight="3">
-            <TextView
-                android:id="@+id/Show_Selected_Post_None_Chat_TV"
-                android:visibility="visible"
-                android:textSize="15dp"
-                android:textColor="@color/Transparent_Black30"
-                android:textStyle="bold"
-                android:text="현재 등록된 채팅이 없습니다.\n 자유롭게 채팅에 참여해보세요!"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </TextView>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/Chat_List_Rcv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:divider="@color/white"
-                android:descendantFocusability="blocksDescendants"
-                tools:listitem="@layout/other_chatting_item">
-            </androidx.recyclerview.widget.RecyclerView>
-        </RelativeLayout>
     </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/Show_Selected_Post_Chat_Container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingTop="5dp"
+        android:layout_below="@id/Linearlayout"
+        android:layout_alignParentBottom="true"
+        android:visibility="visible"
+        android:background="@drawable/none_effect_background_img">
+        <TextView
+            android:id="@+id/Show_Selected_Post_None_Chat_TV"
+            android:visibility="visible"
+            android:textSize="15dp"
+            android:textColor="@color/Transparent_Black30"
+            android:textStyle="bold"
+            android:text="현재 등록된 채팅이 없습니다.\n 자유롭게 채팅에 참여해보세요!"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </TextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Chat_List_Rcv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants"
+            android:divider="@color/white"
+            tools:listitem="@layout/other_chatting_item"></androidx.recyclerview.widget.RecyclerView>
+    </RelativeLayout>
 </RelativeLayout>
 </layout>

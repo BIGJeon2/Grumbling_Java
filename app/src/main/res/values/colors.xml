@@ -10,6 +10,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="Gray">#474646</color>
     <color name="Transparent_light_Green">#8071D675</color>
+    <color name="trans_60_light_white">#70FFFFFF</color>
     <color name="trans_80_light_white">#80FFFFFF</color>
 
     <color name="dark_black">#FF000000</color>

@@ -118,7 +118,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         holder.Post_Content.setBackgroundColor(ContextCompat.getColor(mContext, data.getContent_Back_Color()));
         holder.Post_Content.setTextColor(ContextCompat.getColor(mContext, data.getContent_Text_Color()));
         Glide.with(holder.itemView).load(data.getPost_Background()).into(holder.Post_Background_Img);
-        holder.WriteDate.setText(Change_Date(data.getPost_Write_Date()));
+        holder.WriteDate.setText(data.getPost_Write_Date());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("Users").whereEqualTo("UID", data.getUser_Uid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -140,9 +140,10 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         }
         if (data.getFavorite().containsKey(mAuth.getCurrentUser().getUid())){
             holder.Favorite_Btn.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
-            holder.Favorite_Btn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#80FFFFFF")));
+            holder.Favorite_Btn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90FFFFFF")));
         }else {
             holder.Favorite_Btn.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+            holder.Favorite_Btn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90FFFFFF")));
         }
         holder.Post_Background_Img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,7 +222,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
             Post_Background_Img = itemView.findViewById(R.id.Post_View_Background);
             Favorite_Btn = itemView.findViewById(R.id.Post_View_Favorite_Circle_CIV);
             Favorite_Count = itemView.findViewById(R.id.Posting_Favorite_Count_TV);
-            WriteDate = itemView.findViewById(R.id.Post_Write_Date);
+            WriteDate = itemView.findViewById(R.id.Post_Write_Date_TV);
         }
     }
 
@@ -343,6 +344,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
                     list.clear();
                     for (DataSnapshot data : snapshot.getChildren()) {
                         Post_Data post = data.getValue(Post_Data.class);
+                        post.setPost_Write_Date(Change_Date(post.getPost_Write_Date()));
                         list.add(0, post);
                     }
                     notifyDataSetChanged();

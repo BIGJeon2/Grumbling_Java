@@ -11,6 +11,7 @@
     <color name="Gray">#474646</color>
     <color name="Transparent_light_Green">#8071D675</color>
     <color name="trans_60_light_white">#70FFFFFF</color>
+    <color name="trans_80_light_white">#80FFFFFF</color>
 
     <color name="Transparent_Black10">#10000000</color>
     <color name="Transparent_Black30">#30000000</color>
