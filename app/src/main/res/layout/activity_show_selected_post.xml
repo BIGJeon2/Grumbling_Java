@@ -87,7 +87,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="#50000000"
-                android:text="나는 가끔 눈물을 흘린다."></TextView>
+                android:text="나는 가끔 눈물을 흘린다.">
+            </TextView>
 
             <RelativeLayout
                 android:id="@+id/Selected_Post_Bottom_Container"
@@ -169,7 +170,8 @@
             android:layout_height="match_parent"
             android:descendantFocusability="blocksDescendants"
             android:divider="@color/white"
-            tools:listitem="@layout/other_chatting_item"></androidx.recyclerview.widget.RecyclerView>
+            tools:listitem="@layout/other_chatting_item">
+        </androidx.recyclerview.widget.RecyclerView>
     </RelativeLayout>
 </RelativeLayout>
 </layout>

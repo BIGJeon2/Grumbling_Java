@@ -12,19 +12,20 @@
     android:id="@+id/Set_User_Profile_ProgreesBar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    android:background="@drawable/selected__post_view_activity_background_img"
+    android:background="@color/Theme_Color"
     tools:context="com.bigjeon.grumbling.Set_User_Profile_Activity">
     <RelativeLayout
         android:id="@+id/App_Title_Container"
-        android:background="@android:color/transparent"
+        android:background="@drawable/under_edge_2dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_alignParentTop="true">
         <TextView
             android:layout_centerInParent="true"
             android:textStyle="bold"
             android:textColor="@color/black"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_black"
             android:text="-프로필 설정-"
             android:textSize="20dp"
             android:layout_width="wrap_content"
@@ -33,10 +34,13 @@
 
         <Button
             android:id="@+id/Complete_Btn"
-            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="6dp"
             android:background="@drawable/round_shape_off"
             android:layout_width="60dp"
             android:layout_height="40dp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_regular"
             android:layout_alignParentRight="true"
             android:text="완료"></Button>
     </RelativeLayout>
@@ -46,76 +50,138 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
-            android:layout_weight="1"
+            android:layout_weight="2"
+            android:background="@drawable/post_view_title_under_edge_1dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/User_Img"
-                android:layout_marginTop="100dp"
                 android:layout_centerInParent="true"
-                app:civ_border_width="2dp"
-                app:civ_border_color="@color/Transparent_Black70"
-                android:padding="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                app:civ_border_width="1dp"
+                app:civ_border_color="@color/Theme_Text_Color"
+                android:layout_marginLeft="8dp"
                 android:src="@mipmap/main_app_icon_round"
-                android:layout_width="150dp"
-                android:layout_height="150dp">
+                android:layout_width="130dp"
+                android:layout_height="130dp">
             </de.hdodenhof.circleimageview.CircleImageView>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_below="@+id/User_Img"
-                android:layout_centerInParent="true"
+            <RelativeLayout
+                android:layout_below="@id/User_Img"
                 android:layout_marginTop="10dp"
-                android:layout_width="250dp"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <Button
                     android:id="@+id/Set_User_Img_Default_Btn"
-                    android:text="기본 프로필"
-                    android:textStyle="bold"
+                    android:padding="6dp"
+                    android:textSize="14dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/round_shape_off"
-                    android:textSize="15dp"
-                    android:layout_marginRight="5dp"
-                    android:textColor="@color/black"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent">
+                    android:fontFamily="@font/notosans_black"
+                    android:text="기본 이미지"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content">
                 </Button>
                 <Button
-                    android:id="@+id/Set_User_Img_from_Gallery_Btn"
-                    android:text="갤러리"
-                    android:textStyle="bold"
-                    android:textSize="15dp"
-                    android:layout_marginLeft="5dp"
+                    android:id="@+id/Set_User_Img_From_Gallery_Btn"
+                    android:padding="6dp"
+                    android:textSize="14dp"
+                    android:layout_toRightOf="@id/Set_User_Img_Default_Btn"
                     android:background="@drawable/round_shape_off"
-                    android:textColor="@color/black"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent">
+                    android:fontFamily="@font/notosans_black"
+                    android:text="갤러리"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content">
                 </Button>
-            </LinearLayout>
+            </RelativeLayout>
         </RelativeLayout>
-        <RelativeLayout
-            android:layout_weight="1"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="4"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:text="이름 : "
-                android:layout_toLeftOf="@+id/User_Name"
-                android:textSize="20dp"
-                android:textColor="@color/black"
-                android:layout_alignBaseline="@id/User_Name"
-                android:layout_width="wrap_content"
+            android:layout_height="0dp">
+            <RelativeLayout
+                android:padding="16dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            </TextView>
-            <EditText
-                android:id="@+id/User_Name"
-                android:hint="사용하실 이름을 입력하세요."
-                android:textSize="15dp"
-                android:layout_centerInParent="true"
-                android:layout_alignParentTop="true"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/User_Name_TV"
+                    android:text="닉네임"
+                    android:textSize="16dp"
+                    android:layout_marginRight="5dp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosans_black"
+                    android:textColor="@color/Theme_Text_Color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <EditText
+                    android:id="@+id/User_Name"
+                    android:padding="14dp"
+                    android:background="@drawable/round_shape_off"
+                    android:hint="사용하실 닉네임을 입력하세요."
+                    android:textSize="14dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_below="@id/User_Name_TV"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </EditText>
+            </RelativeLayout>
+            <RelativeLayout
+                android:padding="16dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            </EditText>
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/User_Location_TV"
+                    android:text="위치"
+                    android:textSize="16dp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosans_black"
+                    android:textColor="@color/Theme_Text_Color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <EditText
+                    android:id="@+id/User_Location"
+                    android:padding="14dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_below="@id/User_Location_TV"
+                    android:background="@drawable/round_shape_off"
+                    android:hint="도/시까지만 입력해주세요.(ex.경기도-성남시)"
+                    android:textSize="14dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </EditText>
+            </RelativeLayout>
+            <RelativeLayout
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/User_State_MSG_TV"
+                    android:text="상태 메세지"
+                    android:textSize="16dp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/notosans_black"
+                    android:textColor="@color/Theme_Text_Color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <EditText
+                    android:id="@+id/User_State_MSG"
+                    android:padding="14dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_below="@id/User_State_MSG_TV"
+                    android:background="@drawable/round_shape_off"
+                    android:hint="도/시까지만 입력해주세요.(ex.경기도-성남시)"
+                    android:textSize="14dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </EditText>
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
 </layout>

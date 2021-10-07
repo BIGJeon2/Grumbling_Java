@@ -4,6 +4,26 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
+        android:font="@font/notosans_black">
+    </font>
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="700"
+        android:font="@font/notosans_regular">
+    </font>
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="900"
         android:font="@font/uhbeerice">
+    </font>
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="700"
+        android:font="@font/binggrae">
+    </font>
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/notosans_medium">
     </font>
 </font-family>

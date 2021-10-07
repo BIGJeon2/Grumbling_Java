@@ -11,8 +11,32 @@ xmlns:tools="http://schemas.android.com/tools">
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_activity_background_img"
+    android:background="@color/Theme_Color"
     tools:context="com.bigjeon.grumbling.Google_Login_Activity">
+
+    <TextView
+        android:text="그렁"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="150dp"
+        android:textColor="@color/Theme_Text_Color"
+        android:fontFamily="@font/binggrae"
+        android:textSize="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
+    <TextView
+        android:text="소통에 자유로움을 더하다 "
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_above="@id/Google_SignIn_Btn"
+        android:layout_marginBottom="100dp"
+        android:textColor="@color/Theme_Text_Color"
+        android:fontFamily="@font/binggrae"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </TextView>
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/Google_SignIn_Btn"

@@ -67,6 +67,8 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
     private String My_Name;
     private String My_Img;
     private String My_Email;
+    private String My_Location;
+    private String My_State_Msg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +87,8 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
         }else{
             Picasso.get().load(My_Img).into(binding.SettingFragmentMyProfileImgCiv);
             binding.SettingFragmentMyNameTv.setText(My_Name);
-            binding.MyProfileActivityUserUIDTV.setText("#" + My_Uid);
+            binding.MyProfileActivityUserLocationTV.setText("#" + My_Location);
+            binding.SettingActivityStateMsgTv.setText(My_State_Msg);
         }
 
         mAuth = FirebaseAuth.getInstance();
@@ -115,6 +118,8 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult()){
                         binding.SettingFragmentMyNameTv.setText(document.get("Name").toString());
                         Picasso.get().load(document.get("Img").toString()).into(binding.SettingFragmentMyProfileImgCiv);
+                        binding.MyProfileActivityUserLocationTV.setText("#" + My_Location);
+                        binding.SettingActivityStateMsgTv.setText(My_State_Msg);
                         break;
                     }
                 }
@@ -127,6 +132,8 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
         My_Name = My_Data.getString("NAME", null);
         My_Img = My_Data.getString("IMG", null);
         My_Email = My_Data.getString("EMAIL", null);
+        My_Location = My_Data.getString("LOCATION", null);
+        My_State_Msg = My_Data.getString("STATE_MSG", null);
     }
 
     private void Go_Profile_Set_Act() {

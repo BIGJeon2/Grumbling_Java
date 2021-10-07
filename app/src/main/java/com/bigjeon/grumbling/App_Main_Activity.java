@@ -57,6 +57,8 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         binding = DataBindingUtil.setContentView(this, R.layout.activity_app_main);
         binding.setAppMainActivity(this);
 
+
+
         startService(new Intent(this, MyService.class));
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -90,16 +92,13 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         ViewPager_Adapter = new Fragment_Swipe_Adapter(this);
         binding.AppMainViewPager2.setAdapter(ViewPager_Adapter);
         binding.AppMainViewPager2.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-        binding.AppMainViewPager2.setCurrentItem(1, false);
+        binding.AppMainViewPager2.setCurrentItem(2, false);
         binding.AppMainViewPager2.setOffscreenPageLimit(3);
 
         binding.AppMainViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                if (positionOffsetPixels == 0){
-                    binding.AppMainViewPager2.setCurrentItem(position);
-                }
             }
             @Override
             public void onPageSelected(int position) {
@@ -108,8 +107,8 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
             }
         });
         binding.AppMainFriendCiv.setOnClickListener(v -> Change_Fragment_OnCLick(0));
-        binding.AppMainPostCiv.setOnClickListener(v -> Change_Fragment_OnCLick(1));
-        binding.AppMainChattingCiv.setOnClickListener(v -> Change_Fragment_OnCLick(2));
+        binding.AppMainChattingCiv.setOnClickListener(v -> Change_Fragment_OnCLick(1));
+        binding.AppMainPostCiv.setOnClickListener(v -> Change_Fragment_OnCLick(2));
         binding.AppMainNoticeCiv.setOnClickListener(v -> Go_Notification_Activity());
         binding.AppMainWritePostCIV.setOnClickListener(v -> Go_Post_Write_Act());
     }
@@ -141,21 +140,31 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
     private void Button_Background_Change(int position){
         switch (position){
             case 0 :
-                binding.AppMainFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
-                binding.AppMainPostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
-                binding.AppMainChattingCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
+//                binding.AppMainFriendCiv.setBackgroundTintList(ColorStateList.valueOf(this.getApplicationContext(), R.color.Btn_Off_Color);
+                binding.AppMainFriendCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_On_Color));
+                binding.AppMainChattingCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
+                binding.AppMainPostCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
+                binding.AppMainWritePostCIV.setVisibility(View.GONE);
                 break;
             case 1 :
-                binding.AppMainFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
-                binding.AppMainPostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
-                binding.AppMainChattingCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
+                binding.AppMainFriendCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
+                binding.AppMainChattingCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_On_Color));
+                binding.AppMainPostCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
+                binding.AppMainWritePostCIV.setVisibility(View.GONE);
                 break;
             case 2 :
-                binding.AppMainFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
-                binding.AppMainPostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
-                binding.AppMainChattingCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
+                binding.AppMainFriendCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
+                binding.AppMainChattingCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
+                binding.AppMainPostCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_On_Color));
+                binding.AppMainWritePostCIV.setVisibility(View.VISIBLE);
                 break;
         }
+    }
+
+    private void Go_User_Profile_View_Act() {
+        Intent Go_View_My_Profile_Intent = new Intent(App_Main_Activity.this, Setting_My_Profile_Activity.class);
+        Go_View_My_Profile_Intent.putExtra("UID", My_Uid);
+        startActivity(Go_View_My_Profile_Intent);
     }
 
     private void Go_Post_Write_Act() {
@@ -163,12 +172,6 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         Go_Post_Write.putExtra("KEY", "CREATE");
         Go_Post_Write.putExtra("TITLE", "NONE");
         startActivity(Go_Post_Write);
-    }
-
-    private void Go_User_Profile_View_Act() {
-        Intent Go_View_My_Profile_Intent = new Intent(App_Main_Activity.this, Setting_My_Profile_Activity.class);
-        Go_View_My_Profile_Intent.putExtra("UID", My_Uid);
-        startActivity(Go_View_My_Profile_Intent);
     }
 
 }

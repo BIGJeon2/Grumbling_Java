@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.bigjeon.grumbling"
-        minSdkVersion 26
+        minSdkVersion 27
         targetSdkVersion 30
         versionCode 12
         versionName "1.8.12"
@@ -46,14 +46,14 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
-    implementation 'com.google.firebase:firebase-database:20.0.0'
-    implementation 'com.google.android.gms:play-services-ads-lite:20.2.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     //갤러리로 부터 사진 쉽게 가져요기 위한 Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
     //Circle ImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     // Import the Firebase BoM
+    implementation 'com.google.firebase:firebase-database:20.0.0'
+    implementation 'com.google.android.gms:play-services-ads-lite:20.2.0'
     implementation platform('com.google.firebase:firebase-bom:28.2.0')    // Add the dependency for the Firebase SDK for Google Analytics
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-analytics'

@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@drawable/none_effect_background_img"
+    android:background="@drawable/post_view_title_under_edge_1dp"
     android:layout_width="match_parent"
-    android:layout_marginBottom="10dp"
-    android:layout_height="420dp">
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <RelativeLayout
         android:id="@+id/Post_View_Content_Container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="520dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,34 +32,48 @@
         </FrameLayout>
             <RelativeLayout
                 android:id="@+id/Post_View_Title_Container"
-                android:padding="2dp"
-                android:background="@drawable/none_effect_background_img"
+                android:background="@android:color/transparent"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
-
+                android:paddingLeft="2dp"
+                android:layout_height="60dp">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Post_View_User_Img"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:civ_border_color="@color/Theme_Less_Accent_Color"
+                    app:civ_border_width="0.5dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerInParent="true"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/default_profile_img"
-                    app:civ_border_color="@color/Transparent_Green"
-                    app:civ_border_width="1dp"></de.hdodenhof.circleimageview.CircleImageView>
+                    android:src="@drawable/default_profile_img">
+                </de.hdodenhof.circleimageview.CircleImageView>
             <TextView
                 android:id="@+id/Post_View_User_Name"
                 android:text="User_Name"
-                android:textSize="12dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:layout_centerInParent="true"
+                android:textSize="14dp"
+                android:fontFamily="@font/notosans_medium"
+                android:includeFontPadding="false"
+                android:textColor="@color/Theme_Text_Color"
+                android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/Post_View_User_Img"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </TextView>
+                <TextView
+                    android:id="@+id/Post_User_Location"
+                    android:text="User_Location"
+                    android:textSize="12dp"
+                    android:textColor="@color/Theme_Less_Accent_Color"
+                    android:fontFamily="@font/notosans_regular"
+                    android:layout_below="@id/Post_View_User_Name"
+                    android:layout_toRightOf="@id/Post_View_User_Img"
+                    android:layout_marginLeft="8dp"
+                    android:includeFontPadding="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
             </RelativeLayout>
         <TextView
             android:id="@+id/Post_View_Content"
@@ -66,42 +83,94 @@
         </TextView>
 
         <RelativeLayout
-            android:background="@color/Transparent_Black90"
+            android:id="@+id/Posting_View_Button_Container"
+            android:background="@color/Post_View_Button_Color"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="40dp">
             <TextView
+                android:visibility="gone"
                 android:id="@+id/Posting_Favorite_Count_TV"
                 android:text="000"
-                android:textSize="10dp"
-                android:textColor="@color/trans_80_light_white"
+                android:textSize="12dp"
+                android:textColor="@color/Theme_Text_Color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:textStyle="bold"
-                android:layout_toRightOf="@id/Post_View_Favorite_Circle_CIV"
-                android:layout_marginRight="5dp">
+                android:layout_toRightOf="@id/Post_View_Favorite_Circle_CIV">
             </TextView>
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Post_View_Favorite_Circle_CIV"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginLeft="3dp"
                 android:layout_centerInParent="true"
                 android:layout_alignParentLeft="true"
-                android:backgroundTint="@color/trans_80_light_white"
+                android:backgroundTint="@color/Theme_Text_Color"
                 android:background="@drawable/ic_baseline_favorite_border_24">
             </de.hdodenhof.circleimageview.CircleImageView>
+
             <TextView
+                android:visibility="gone"
                 android:id="@+id/Post_Write_Date_TV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
-                android:textColor="@color/trans_60_light_white"
+                android:textColor="@color/Theme_Text_Color"
                 android:textStyle="bold"
                 android:textSize="12dp">
             </TextView>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/Go_Chat_Room_CIV"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_toRightOf="@id/Posting_Favorite_Count_TV"
+                android:background="@drawable/ic_baseline_question_answer_24"
+                android:backgroundTint="@color/Theme_Text_Color"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="6dp">
+            </de.hdodenhof.circleimageview.CircleImageView>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/Post_View_Chat_Expand_Imv"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:padding="5dp"
+                android:background="@drawable/ic_baseline_expand_more_24"
+                android:backgroundTint="@color/Theme_Text_Color"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true">
+            </de.hdodenhof.circleimageview.CircleImageView>
         </RelativeLayout>
     </RelativeLayout>
+        <RelativeLayout
+            android:layout_below="@id/Post_View_Content_Container"
+            android:padding="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Theme_Color">
+            <TextView
+                android:id="@+id/Post_View_No_Chat_TV"
+                android:visibility="visible"
+                android:fontFamily="@font/notosans_medium"
+                android:textColor="@color/Theme_Less_Accent_Color"
+                android:textSize="14dp"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="포스팅의 채팅 기능을 이용해 \n 자유롭게 소통에 참여해 보세요!"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Chat_List_Rcv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@android:color/transparent"
+                android:descendantFocusability="blocksDescendants"
+                tools:listitem="@layout/other_chatting_item">
+            </androidx.recyclerview.widget.RecyclerView>
+        </RelativeLayout>
+        </RelativeLayout>
 </LinearLayout>

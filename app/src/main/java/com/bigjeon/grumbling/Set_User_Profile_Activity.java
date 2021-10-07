@@ -42,11 +42,13 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
     public static final String CODE_CHANGE_SET = "CHANGE_SET";
     private static final String TAG = "My_Post_Check";
     private ProgressBar progressBar;
-    Profile_Binding binding;
+    private Profile_Binding binding;
     private Uri Img_Uri = null;
     private String My_Uid;
     private String My_Name;
     private String My_Img;
+    private String My_Location;
+    private String My_State_Msg;
     private String Default_Img = "https://firebasestorage.googleapis.com/v0/b/grumber-9d1b9.appspot.com/o/Profile_Images%2Fuser_profile_default_img.png?alt=media&token=23407f6b-59a9-4148-969a-6434d361af47";
     private String My_Email;
     private Boolean Img_Pick_State = false;
@@ -71,8 +73,12 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
             My_Name = data.getString("NAME", null);
             My_Email = data.getString("EMAIL", null);
             My_Uid = data.getString("UID", null);
+            My_Location = data.getString("LOCATION", null);
+            My_State_Msg = data.getString("STATE_MSG", null);
             Picasso.get().load(My_Img).into(binding.UserImg);
             binding.UserName.setText(My_Name);
+            binding.UserLocation.setText(My_Location);
+            binding.UserStateMSG.setText(My_State_Msg);
         }
         //Cirle_Image_Btn 클릭시 갤러리에서 사진 가져오기
         binding.SetUserImgFromGalleryBtn.setOnClickListener(v -> Get_Img_From_Gallery());
@@ -106,10 +112,16 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
     }
 
     private void Upload_User_Profile() {
+
         My_Name = binding.UserName.getText().toString();
+        My_State_Msg = binding.UserStateMSG.getText().toString();
+        My_Location = binding.UserLocation.getText().toString();
+
         if(My_Name.length() < 2 || My_Name.length() > 7){
             Toast.makeText(this, "사용하실 이름을 작성해 주세요(2글자 이상 6글자 이하)", Toast.LENGTH_SHORT).show();
-        } else {
+        } else if (My_Location.length() <= 0){
+            Toast.makeText(this, "거주 중인 지역을 작성해 주세요(시/도 까지만 입력해 주세요)", Toast.LENGTH_SHORT).show();
+        }else {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -140,6 +152,8 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
                                 My_Profile.put("UID", My_Uid);
                                 My_Profile.put("Name", My_Name);
                                 My_Profile.put("Img", My_Img);
+                                My_Profile.put("Location", My_Location);
+                                My_Profile.put("State_Msg", My_State_Msg);
                                 FirebaseFirestore DB = FirebaseFirestore.getInstance();
                                 DB.collection("Users")
                                         .document(My_Uid)
@@ -153,6 +167,8 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
                                                 editor.putString("UID", My_Uid);
                                                 editor.putString("NAME", My_Name);
                                                 editor.putString("IMG", My_Img);
+                                                editor.putString("LOCATION", My_Location);
+                                                editor.putString("STATE_MSG", My_State_Msg);
                                                 editor.commit();
                                                 progressBar.setVisibility(View.INVISIBLE);
                                                 Go_App_Main();
@@ -168,6 +184,8 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
                 My_Profile.put("UID", My_Uid);
                 My_Profile.put("Name", My_Name);
                 My_Profile.put("Img", My_Img);
+                My_Profile.put("Location", My_Location);
+                My_Profile.put("State_Msg", My_State_Msg);
                 FirebaseFirestore DB = FirebaseFirestore.getInstance();
                 DB.collection("Users")
                         .document(My_Uid)
@@ -181,6 +199,8 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
                                 editor.putString("UID", My_Uid);
                                 editor.putString("NAME", My_Name);
                                 editor.putString("IMG", My_Img);
+                                editor.putString("LOCATION", My_Location);
+                                editor.putString("STATE_MSG", My_State_Msg);
                                 editor.commit();
                                 progressBar.setVisibility(View.INVISIBLE);
                                 Go_App_Main();

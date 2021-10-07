@@ -58,7 +58,7 @@ public class Friend_List_Adapter extends RecyclerView.Adapter<Friend_List_Adapte
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         holder.User_Name.setText(document.get("Name").toString());
                         Picasso.get().load(document.getString("Img")).into(holder.User_Img);
-                        holder.User_UID.setText("#" + document.getString("UID"));
+                        holder.User_Location.setText("#" + document.getString("Location"));
                     }
                 }
             }
@@ -76,14 +76,14 @@ public class Friend_List_Adapter extends RecyclerView.Adapter<Friend_List_Adapte
         private RelativeLayout Container;
         private TextView User_Name;
         private CircleImageView User_Img;
-        private TextView User_UID;
+        private TextView User_Location;
         public Friend_ViewHolder(UserListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
             Container = binding.UserListContainer;
             User_Name = binding.FriendListUserNameTV;
             User_Img = binding.FriendListUserImgCiv;
-            User_UID = binding.FriendListUserUidTV;
+            User_Location = binding.FriendListUserUidTV;
         }
     }
     private void Go_User_Profile_View_Act(String UID) {

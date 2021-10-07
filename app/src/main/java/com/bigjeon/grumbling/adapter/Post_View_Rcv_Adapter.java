@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,9 +30,11 @@ import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bigjeon.grumbling.App_Main_Activity;
+import com.bigjeon.grumbling.Chatting_Activity;
 import com.bigjeon.grumbling.Google_Login_Activity;
 import com.bigjeon.grumbling.Model.Api;
 import com.bigjeon.grumbling.Model.ApiCLient;
@@ -41,6 +44,7 @@ import com.bigjeon.grumbling.Model.NotificationModel;
 import com.bigjeon.grumbling.Setting_My_Profile_Activity;
 import com.bigjeon.grumbling.Show_Selected_Post_Activity;
 import com.bigjeon.grumbling.User_Profile_View_activity;
+import com.bigjeon.grumbling.data.Chat_Data;
 import com.bigjeon.grumbling.data.Chat_Noti;
 import com.bigjeon.grumbling.data.Notification_Data;
 import com.bigjeon.grumbling.data.Post_Data;
@@ -87,7 +91,8 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
     private String User_Uid;
     private int doubleclickFlag = 0;
     private int CLICK_DELAY = 300;
-    ArrayList<Post_Data> list;
+    private ArrayList<Post_Data> list = new ArrayList<>();
+    //private Chat_rcv_Adapter chat_adapter;
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -113,6 +118,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
     @Override
     public void onBindViewHolder(@NonNull @NotNull Holder holder, int position) {
         Post_Data data = list.get(position);
+
         holder.Post_Content.setText(data.getContent());
         holder.Post_Content.setTextSize(Dimension.DP, data.getContent_Text_Size());
         holder.Post_Content.setBackgroundColor(ContextCompat.getColor(mContext, data.getContent_Back_Color()));
@@ -128,6 +134,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
                     for (QueryDocumentSnapshot document : task.getResult()){
                         holder.User_Name.setText(document.get("Name").toString());
                         Picasso.get().load(document.getString("Img")).into(holder.User_Img);
+                        holder.Post_User_Location.setText("# " + document.get("Location").toString());
                         break;
                     }
                 }
@@ -140,10 +147,10 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         }
         if (data.getFavorite().containsKey(mAuth.getCurrentUser().getUid())){
             holder.Favorite_Btn.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
-            holder.Favorite_Btn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90FFFFFF")));
+            holder.Favorite_Btn.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.light_pink));
         }else {
             holder.Favorite_Btn.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
-            holder.Favorite_Btn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90FFFFFF")));
+            holder.Favorite_Btn.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.Theme_Text_Color));
         }
         holder.Post_Background_Img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,6 +170,56 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
             }
         });
         holder.User_Img.setOnClickListener(v -> Go_User_Profile_View_Act(data.getUser_Uid()));
+
+        //각포스팅별 채팅 목록을 불러옴
+        ArrayList<Chat_Data> chat_dataArrayList = new ArrayList<Chat_Data>();
+        Chat_rcv_Adapter chat_adapter = new Chat_rcv_Adapter(chat_dataArrayList, mAuth.getUid(), mContext, false);
+        holder.Chatting_List_Rcv.setAdapter(chat_adapter);
+        DatabaseReference Chat_DB = FirebaseDatabase.getInstance().getReference("Chats").child(data.getPost_Title());
+        Chat_DB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                int count = 0;
+                for (DataSnapshot data : snapshot.getChildren()){
+                    count++;
+                    if (data != null){
+                        if (count == 2){
+                            holder.Post_No_Chat_TV.setVisibility(View.GONE);
+                        } else if (count >= 3){
+                            holder.Expand_Civ.setVisibility(View.VISIBLE);
+                            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)holder.Chatting_List_Rcv.getLayoutParams();
+                            layoutParams.height = 120;
+                            holder.Chatting_List_Rcv.setLayoutParams(layoutParams);
+                        }
+                        if (count == 8 ){
+                            break;
+                        }
+                    }
+                    Chat_Data chat = data.getValue(Chat_Data.class);
+                    chat_dataArrayList.add(chat);
+                    chat_adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+        LinearLayoutManager lm = new LinearLayoutManager(mContext);
+        holder.Chatting_List_Rcv.setLayoutManager(lm);
+        holder.Chatting_List_Rcv.setHasFixedSize(true);
+        holder.Chatting_List_Rcv.scrollToPosition(list.size() - 1);
+
+        holder.Go_Chat_Room_Civ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Go_Chat = new Intent(mContext, Chatting_Activity.class);
+                Go_Chat.putExtra("TITLE", data.getPost_Title());
+                mContext.startActivity(Go_Chat);
+            }
+        });
+
     }
 
     private String Change_Date(String write_date){
@@ -214,6 +271,12 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         CircleImageView Favorite_Btn;
         TextView Favorite_Count;
         TextView WriteDate;
+        RecyclerView Chatting_List_Rcv;
+        ImageView Expand_Civ;
+        CircleImageView Go_Chat_Room_Civ;
+        TextView Post_User_Location;
+        TextView Post_No_Chat_TV;
+
         public Holder(@NonNull @NotNull View itemView) {
             super(itemView);
             User_Img = itemView.findViewById(R.id.Post_View_User_Img);
@@ -223,6 +286,32 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
             Favorite_Btn = itemView.findViewById(R.id.Post_View_Favorite_Circle_CIV);
             Favorite_Count = itemView.findViewById(R.id.Posting_Favorite_Count_TV);
             WriteDate = itemView.findViewById(R.id.Post_Write_Date_TV);
+            Chatting_List_Rcv = itemView.findViewById(R.id.Chat_List_Rcv);
+            Expand_Civ = itemView.findViewById(R.id.Post_View_Chat_Expand_Imv);
+            Go_Chat_Room_Civ = itemView.findViewById(R.id.Go_Chat_Room_CIV);
+            Post_User_Location = itemView.findViewById(R.id.Post_User_Location);
+            Post_No_Chat_TV = itemView.findViewById(R.id.Post_View_No_Chat_TV);
+
+            //채팅의 갯수가 3개 이상이면 Expand버튼을 통해 Recyclerview의 크기를 변경(200dp로)
+            Expand_Civ.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("Outside", "11");
+                    if (Chatting_List_Rcv.getHeight() == 120){
+                        Log.d("Inside", "21");
+                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)Chatting_List_Rcv.getLayoutParams();
+                        layoutParams.height = RelativeLayout.LayoutParams.WRAP_CONTENT;
+                        Chatting_List_Rcv.setLayoutParams(layoutParams);
+                        Expand_Civ.setBackgroundResource(R.drawable.ic_baseline_expand_less_24);
+                    }else{
+                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)Chatting_List_Rcv.getLayoutParams();
+                        layoutParams.height = 120;
+                        Chatting_List_Rcv.setLayoutParams(layoutParams);
+                        Expand_Civ.setBackgroundResource(R.drawable.ic_baseline_expand_more_24);
+                    }
+                }
+            });
+
         }
     }
 
@@ -399,4 +488,5 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
             }
         });
     }
+
 }

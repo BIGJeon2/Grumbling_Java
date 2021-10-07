@@ -45,7 +45,7 @@ import java.util.Set;
 
 public class Google_Login_Activity extends AppCompatActivity {
     //구글 로그인 id값 가져와 firestore의 값에 해당하는 값이 있는지 확인, 있으면 SharedPreference에 저장, 없으면 프로필 설정창으로 이동
-    Login_Binding binding;
+    private Login_Binding binding;
     private static final String TAG = "GoogleActivity";
     private GoogleSignInClient mGoogleSignInClient;
     private static int Sign_In_Code = 1001;
@@ -129,6 +129,8 @@ public class Google_Login_Activity extends AppCompatActivity {
                             editor.putString("UID", document.get("UID").toString());
                             editor.putString("NAME", document.get("Name").toString());
                             editor.putString("IMG", document.getString("Img"));
+                            editor.putString("LOCATION", document.getString("Location"));
+                            editor.putString("STATE_MSG", document.getString("State_Msg"));
                             editor.commit();
                             Intent_To_App_Main();
                             break;

@@ -9,6 +9,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="Gray">#474646</color>
+    <color name="Post_View_Button_Color">#FFFFFFFF</color>
     <color name="Transparent_light_Green">#8071D675</color>
     <color name="trans_60_light_white">#70FFFFFF</color>
     <color name="trans_80_light_white">#80FFFFFF</color>
@@ -48,14 +49,27 @@
     <color name="Transparent_Black30">#30000000</color>
     <color name="Transparent_Black40">#40000000</color>
     <color name="Transparent_Black50">#50000000</color>
+    <color name="Transparent_Black60">#60000000</color>
     <color name="Transparent_Black70">#70000000</color>
     <color name="Transparent_Black80">#80000000</color>
     <color name="Transparent_Black90">#90000000</color>
     <color name="Transparent_White">#50FFFFFF</color>
     <color name="Transparent_Green">#8039CF3F</color>
 
+    <color name="Theme_Color">#FFFFFF</color>
+    <color name="Friend_State_Color">#60000000</color>
+    <color name="None_Friend_State_Color">#000000</color>
+    <color name="Post_Create_Color">#000000</color>
+    <color name="Theme_Less_Accent_Color">#90000000</color>
+    <color name="Theme_Chat_List_Color">#000000</color>
+    <color name="Theme_Text_Color">#000000</color>
+    <color name="Btn_Off_Color">#50000000</color>
+    <color name="Btn_On_Color">#000000</color>
+    <color name="App_Main_ViewPager_Container_Color">#FFFFFF</color>
     <color name="Notify_TitleColor">#FF000000</color>
     <color name="My_Chat_Color">#5086EF29</color>
     <color name="Chatting_Container_Color">#20000000</color>
     <color name="Chatting_Titile_Color">#60BD38</color>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#000000</color>
 </resources>

@@ -10,7 +10,6 @@
     </data>
 <FrameLayout
     xmlns:tools="http://schemas.android.com/tools"
-    android:paddingTop="5dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
@@ -19,97 +18,9 @@
         android:background="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:id="@+id/Post_View_Category_Container"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-           <TextView
-               android:id="@+id/Category_TV_All"
-               android:gravity="center"
-               android:text="#모든 게시글"
-               android:textSize="12dp"
-               android:padding="3dp"
-               android:background="@drawable/round_shape"
-               android:layout_weight="1.3"
-               android:textStyle="bold"
-               android:textColor="@color/Transparent_Green"
-               android:layout_width="0dp"
-               android:layout_height="wrap_content">
-           </TextView>
-            <TextView
-                android:id="@+id/Category_TV_Talk"
-                android:text="#잡담"
-                android:gravity="center"
-                android:textSize="12dp"
-                android:background="@drawable/round_shape_off"
-                android:padding="3dp"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:textColor="@color/Transparent_Black50"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-            </TextView>
-            <TextView
-                android:id="@+id/Category_TV_Meet"
-                android:text="#모임"
-                android:gravity="center"
-                android:padding="3dp"
-                android:background="@drawable/round_shape_off"
-                android:textSize="12dp"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:textColor="@color/Transparent_Black50"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-            </TextView>
-            <TextView
-                android:id="@+id/Category_TV_Game"
-                android:text="#게임"
-                android:gravity="center"
-                android:textSize="12dp"
-                android:background="@drawable/round_shape_off"
-                android:textStyle="bold"
-                android:padding="3dp"
-                android:layout_weight="1"
-                android:textColor="@color/Transparent_Black50"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-            </TextView>
-            <TextView
-                android:id="@+id/Category_TV_Pride"
-                android:text="#자랑"
-                android:gravity="center"
-                android:textSize="12dp"
-                android:textStyle="bold"
-                android:background="@drawable/round_shape_off"
-                android:padding="3dp"
-                android:layout_weight="1"
-                android:textColor="@color/Transparent_Black50"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-            </TextView>
-            <TextView
-                android:id="@+id/Category_TV_Grung"
-                android:text="#고민"
-                android:gravity="center"
-                android:textSize="12dp"
-                android:background="@drawable/round_shape_off"
-                android:padding="3dp"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:textColor="@color/Transparent_Black50"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-            </TextView>
-        </LinearLayout>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/Post_Swipe_Refresh_Layout"
-        android:layout_below="@id/Post_View_Category_Container"
+        android:layout_marginTop="12dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView

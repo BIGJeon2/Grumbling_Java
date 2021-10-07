@@ -8,6 +8,8 @@ public class User_Profile {
     private String User_Uid;
     private String User_Name;
     private Uri User_Img;
+    private String User_State_Msg;
+    private String User_location;
     private ArrayList<String> User_Favorites;
     private ArrayList<String> User_Friends;
     private ArrayList<String> User_Comment;
@@ -37,6 +39,22 @@ public class User_Profile {
 
     public void setUser_Img(Uri user_Img) {
         User_Img = user_Img;
+    }
+
+    public String getUser_State_Msg() {
+        return User_State_Msg;
+    }
+
+    public void setUser_State_Msg(String user_State_Msg) {
+        User_State_Msg = user_State_Msg;
+    }
+
+    public String getUser_location() {
+        return User_location;
+    }
+
+    public void setUser_location(String user_location) {
+        User_location = user_location;
     }
 
     public ArrayList<String> getUser_Favorites() {

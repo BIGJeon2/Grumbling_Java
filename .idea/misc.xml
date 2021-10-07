@@ -42,17 +42,22 @@
         <entry key="app/src/main/res/drawable/ic_baseline_text_format_24.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/drawable/ic_baseline_textsms_24.xml" value="0.26614583333333336" />
         <entry key="app/src/main/res/drawable/ic_launcher_custom_background.xml" value="0.2518518518518518" />
+        <entry key="app/src/main/res/drawable/layout_round_shape.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/my_chat_background.xml" value="0.14739583333333334" />
         <entry key="app/src/main/res/drawable/post_view_edge_2dp.xml" value="0.14791666666666667" />
         <entry key="app/src/main/res/drawable/post_view_title_under_edge_1dp.xml" value="0.26614583333333336" />
         <entry key="app/src/main/res/drawable/round_shape.xml" value="0.1921875" />
         <entry key="app/src/main/res/drawable/round_shape_off.xml" value="0.1921875" />
+        <entry key="app/src/main/res/drawable/shadow_edge.xml" value="0.262037037037037" />
         <entry key="app/src/main/res/drawable/top_edge_black_1dp.xml" value="0.2518518518518518" />
+        <entry key="app/src/main/res/drawable/transparent_round_shape.xml" value="0.18177083333333333" />
         <entry key="app/src/main/res/drawable/transparent_rount_shape.xml" value="0.26614583333333336" />
+        <entry key="app/src/main/res/drawable/under_edge_2dp.xml" value="0.24722222222222223" />
+        <entry key="app/src/main/res/font/font.xml" value="0.24722222222222223" />
         <entry key="app/src/main/res/layout/activity_app_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_chatting.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_google_login.xml" value="0.21666666666666667" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25052083333333336" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_notification.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_p2p_chatting.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_post_write.xml" value="0.125" />
@@ -61,7 +66,7 @@
         <entry key="app/src/main/res/layout/activity_show_selected_post.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_user_profile_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/category_item.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/chatting_list_item.xml" value="0.24615384615384617" />
+        <entry key="app/src/main/res/layout/chatting_list_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/color_item.xml" value="0.24615384615384617" />
         <entry key="app/src/main/res/layout/db_gif_img_item.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/fragment_chatting_list_view.xml" value="0.21666666666666667" />
@@ -74,19 +79,19 @@
         <entry key="app/src/main/res/layout/fragment_timepeed_post.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/fragment_user__profile__friends_list_.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/fragment_user__profile__posts_list_.xml" value="0.21666666666666667" />
-        <entry key="app/src/main/res/layout/friend_list_fragment_view_.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/friend_list_fragment_view_.xml" value="0.25" />
         <entry key="app/src/main/res/layout/friends_request_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/my_chatting_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/my_chatting_reply.xml" value="0.25" />
         <entry key="app/src/main/res/layout/notification.xml" value="0.335" />
         <entry key="app/src/main/res/layout/notification_item.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/other_chatting_item.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/other_chatting_reply.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/post_view_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/other_chatting_item.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/other_chatting_reply.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/post_view_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/post_write_loading_dialog.xml" value="0.24615384615384617" />
         <entry key="app/src/main/res/layout/timepeed_friends_request_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/timepeed_post_item.xml" value="0.25052083333333336" />
-        <entry key="app/src/main/res/layout/user_list_item.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/layout/user_list_item.xml" value="0.25" />
         <entry key="app/src/main/res/menu/post_view_grade_menu.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_custom.xml" value="0.14791666666666667" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_custom_round.xml" value="0.14791666666666667" />

@@ -23,8 +23,8 @@ public class Fragment_Swipe_Adapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
 
         if (position == 0) return new Friend_List_Fragment();
-        else if (position == 1) return new Post_View_Fragment();
-        else return new Chatting_List_Fragment();
+        else if (position == 1) return new Chatting_List_Fragment();
+        else return new Post_View_Fragment();
     }
 
     @Override

@@ -137,19 +137,18 @@ public class User_Profile_View_activity extends AppCompatActivity {
     private void Button_Background_Change(int position) {
         switch (position) {
             case 0:
-                binding.UserProfilePostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
-                binding.UserProfileFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
+                binding.UserProfilePostCiv.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Theme_Text_Color));
+                binding.UserProfileFriendCiv.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Theme_Less_Accent_Color));
                 break;
             case 1:
-                binding.UserProfilePostCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
-                binding.UserProfileFriendCiv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
+                binding.UserProfilePostCiv.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Theme_Less_Accent_Color));
+                binding.UserProfileFriendCiv.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Theme_Text_Color));
                 break;
         }
     }
 
     private void Set_Users_Data() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         db.collection("Users").whereEqualTo("UID", User_Uid).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
@@ -157,6 +156,8 @@ public class User_Profile_View_activity extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult()){
                         binding.SettingFragmentMyNameTv.setText(document.get("Name").toString());
                         Picasso.get().load(document.get("Img").toString()).into(binding.SettingFragmentMyProfileImgCiv);
+                        binding.UserProfileActivityUserLocationTV.setText("#" + document.get("Location").toString());
+                        binding.UserProfileActivityStateMsgTv.setText(document.get("State_Msg").toString());
                         break;
                     }
                 }
@@ -208,9 +209,8 @@ public class User_Profile_View_activity extends AppCompatActivity {
             Friend_Data My_Friend = new Friend_Data(User_Uid, Send_Date);
             reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Friends").child(User_Uid);
             reference.setValue(My_Friend);
-            binding.SettingFragmentSendFriendRequestBtn.setBackgroundResource(R.drawable.round_shape);
-            binding.SettingFragmentSendFriendRequestBtn.setText("친구");
-            binding.SettingFragmentSendFriendRequestBtn.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.Transparent_Green));
+            binding.SettingFragmentSendFriendRequestBtn.setBackgroundResource(R.drawable.ic_baseline_group_24);
+            binding.SettingFragmentSendFriendRequestBtn.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Friend_State_Color));
             binding.SettingFragmentChattingCiv.setVisibility(View.VISIBLE);
             binding.P2PChatTV.setVisibility(View.VISIBLE);
             Send_Noti_To_User();
@@ -238,9 +238,8 @@ public class User_Profile_View_activity extends AppCompatActivity {
                         binding.P2PChatTV.setVisibility(View.GONE);
                     }else if (Friends.getUid().equals(User_Uid)){
                         Friend_State = "Friend";
-                        binding.SettingFragmentSendFriendRequestBtn.setBackgroundResource(R.drawable.round_shape);
-                        binding.SettingFragmentSendFriendRequestBtn.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.Transparent_Green));
-                        binding.SettingFragmentSendFriendRequestBtn.setText("친구");
+                        binding.SettingFragmentSendFriendRequestBtn.setBackgroundResource(R.drawable.ic_baseline_group_24);
+                        binding.SettingFragmentSendFriendRequestBtn.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.Friend_State_Color));
                     }
                 }
             }

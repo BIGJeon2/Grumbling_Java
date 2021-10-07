@@ -41,6 +41,7 @@ public class Friend_List_Fragment extends Fragment {
     private String My_Uid;
     private String My_Img;
     private String My_Name;
+    private String My_Location;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private Friend_List_Adapter Friend_Adapter;
     private ArrayList<Friend_Data> Friends_List = new ArrayList<>();
@@ -81,10 +82,11 @@ public class Friend_List_Fragment extends Fragment {
         My_Uid = Get_My_Data.getString("UID", null);
         My_Name = Get_My_Data.getString("NAME", null);
         My_Img = Get_My_Data.getString("IMG", null);
+        My_Location = Get_My_Data.getString("LOCATION", null);
 
         Picasso.get().load(My_Img).into(binding.FriendListMyImgCiv);
         binding.FriendListMyNameTV.setText(My_Name);
-        binding.FriendListFragmentMyUid.setText("#" + My_Uid);
+        binding.FriendListFragmentMyUid.setText("#" + My_Location);
     }
 
     private void Get_Friend_List(){

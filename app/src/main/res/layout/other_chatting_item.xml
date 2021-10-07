@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp">
+    android:layout_margin="4dp">
     <RelativeLayout
         android:layout_weight="4"
         android:layout_width="match_parent"
@@ -13,9 +13,9 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/Chatting_User_Img_CIV"
         android:src="@drawable/app_logo"
-        app:civ_border_width="1dp"
-        app:civ_border_color="@color/purple_200"
-        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
+        app:civ_border_width="0.2dp"
+        app:civ_border_color="@color/Theme_Text_Color"
         android:layout_width="35dp"
         android:layout_height="35dp">
     </de.hdodenhof.circleimageview.CircleImageView>
@@ -24,9 +24,12 @@
         android:id="@+id/Chatting_User_Name_TV"
         android:textSize="10dp"
         android:text="유저 이름"
-        android:layout_marginLeft="5dp"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/notosans_regular"
+        android:textStyle="bold"
+        android:layout_marginLeft="4dp"
         android:layout_toRightOf="@+id/Chatting_User_Img_CIV"
-        android:textColor="@color/black"
+        android:textColor="@color/Theme_Text_Color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </TextView>
@@ -42,9 +45,11 @@
             android:background="@drawable/other_chat_background"
             android:gravity="left"
             android:padding="10dp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_regular"
             android:text="내용입력창입니다."
             android:textColor="@color/black"
-            android:textSize="11dp"
+            android:textSize="12dp"
             android:textStyle="bold"
             android:layout_marginBottom="5dp"
             android:layout_width="wrap_content"
@@ -56,6 +61,9 @@
             android:layout_alignRight="@+id/Chatting_Text_TV"
             android:layout_below="@id/Chatting_Text_TV"
             android:textSize="7dp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosans_regular"
+            android:textColor="@color/Theme_Text_Color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </TextView>

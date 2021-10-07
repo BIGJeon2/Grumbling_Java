@@ -12,10 +12,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/user_profile_view_activity_background_img"
+    android:background="@color/Theme_Color"
     tools:context="com.bigjeon.grumbling.User_Profile_View_activity">
     <LinearLayout
         android:orientation="vertical"
+        android:padding="6dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
@@ -27,137 +28,164 @@
                 android:layout_marginLeft="5dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerInParent="true"
+                android:backgroundTint="@color/Theme_Text_Color"
                 android:background="@drawable/ic_baseline_navigate_before_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </ImageView>
+            <TextView
+                android:id="@+id/Setting_Fragment_My_Name_Tv"
+                android:text="Big_Jeon"
+                android:padding="2dp"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/notosans_medium"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@id/User_Profile_Back_IMV"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/Setting_Fragment_Send_Friend_Request_Btn"
+                android:layout_centerInParent="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginRight="6dp"
+                android:padding="4dp"
+                android:backgroundTint="@color/None_Friend_State_Color"
+                android:background="@drawable/ic_baseline_group_add_24">
+            </de.hdodenhof.circleimageview.CircleImageView>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/Setting_Fragment_Chatting_Civ"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:padding="4dp"
+                android:layout_toLeftOf="@id/Setting_Fragment_Send_Friend_Request_Btn"
+               android:layout_centerInParent="true"
+                android:layout_marginRight="12dp"
+                android:background="@drawable/ic_baseline_question_answer_24"
+                android:backgroundTint="@color/Theme_Text_Color">
+            </de.hdodenhof.circleimageview.CircleImageView>
+            <TextView
+                android:id="@+id/P2P_Chat_TV"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/Setting_Fragment_Chatting_Civ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1:1 채팅"
+                android:textSize="8dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/black">
+            </TextView>
         </RelativeLayout>
         <LinearLayout
             android:orientation="vertical"
-            android:paddingBottom="5dp"
-            android:layout_weight="3"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_weight="7.5"
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <RelativeLayout
-                android:padding="3dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Setting_Fragment_My_Profile_Img_Civ"
                     android:layout_alignParentLeft="true"
-                    android:src="@drawable/ic_launcher_background"
-                    app:civ_border_color="@color/purple_200"
-                    app:civ_border_width="2dp"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp">
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:src="@drawable/default_profile_img"
+                    app:civ_border_color="@color/Theme_Text_Color"
+                    app:civ_border_width="0.5dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp">
                 </de.hdodenhof.circleimageview.CircleImageView>
-                <LinearLayout
-                    android:id="@+id/Setting_Fragment_User_Profile_Container"
-                    android:orientation="vertical"
-                    android:padding="3dp"
-                    android:layout_toRightOf="@+id/Setting_Fragment_My_Profile_Img_Civ"
+                <TextView
+                    android:id="@+id/User_Profile_activity_User_Location_TV"
+                    android:text="#123 - 123"
+                    android:fontFamily="@font/notosans_regular"
+                    android:includeFontPadding="false"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="6dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/Theme_Less_Accent_Color"
+                    android:layout_above="@id/User_Profile_Btns_Container"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/Setting_Fragment_My_Name_Tv"
-                            android:text="Big_Jeon"
-                            android:textSize="20dp"
-                            android:layout_marginLeft="3dp"
-                            android:textStyle="bold"
-                            android:layout_centerInParent="true"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/Setting_Fragment_My_Profile_Img_Civ"
+                    android:padding="2dp"
+                    android:textSize="14dp">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/User_Profile_Activity_State_Msg_Tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@id/User_Profile_activity_User_Location_TV"
+                    android:layout_marginLeft="6dp"
+                    android:layout_toRightOf="@id/Setting_Fragment_My_Profile_Img_Civ"
+                    android:fontFamily="@font/notosans_regular"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:padding="6dp"
+                    android:text="상태 메세지"
+                    android:textColor="@color/Theme_Less_Accent_Color"
+                    android:textSize="16dp"></TextView>
+                <LinearLayout
+                    android:id="@+id/User_Profile_Btns_Container"
+                    android:orientation="horizontal"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="35dp">
+                    <LinearLayout
+                        android:id="@+id/User_Profile_Avtivity_Post_Btn_Container"
+                        android:gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/User_Profile_Post_Civ"
+                            android:gravity="center"
                             android:textColor="@color/black"
-                            android:layout_alignParentLeft="true"
+                            android:backgroundTint="@color/Transparent_Black90"
+                            android:background="@drawable/ic_baseline_article_24"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
-                        </TextView>
-
-                    <TextView
-                            android:id="@+id/Setting_Fragment_Send_Friend_Request_Btn"
-                            android:layout_marginRight="5dp"
-                            android:padding="4dp"
-                        android:layout_marginLeft="3dp"
+                        </de.hdodenhof.circleimageview.CircleImageView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/User_Profile_Avtivity_Friend_Btn_Container"
+                        android:gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/User_Profile_Friend_Civ"
+                            android:gravity="center"
+                            android:backgroundTint="@color/Transparent_Black50"
+                            android:background="@drawable/ic_baseline_group_24"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="10dp"
-                            android:textColor="@color/black"
-                            android:background="@drawable/round_shape_off"
-                            android:layout_marginTop="7dp"
-                            android:text="친구 추가 +">
-                        </TextView>
+                            android:layout_height="wrap_content">
+                        </de.hdodenhof.circleimageview.CircleImageView>
+                    </LinearLayout>
                 </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/Setting_Fragment_Chatting_Civ"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/ic_baseline_question_answer_24"
-                    android:backgroundTint="@color/black">
-                </ImageView>
-                <TextView
-                    android:id="@+id/P2P_Chat_TV"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@id/Setting_Fragment_Chatting_Civ"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1:1 채팅"
-                    android:textSize="8dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginRight="5dp"
-                    android:textColor="@color/black">
-                </TextView>
             </RelativeLayout>
         </LinearLayout>
         <RelativeLayout
+            android:layout_marginTop="12dp"
             android:layout_weight="25"
             android:layout_width="match_parent"
             android:layout_height="0dp">
-            <LinearLayout
-                android:id="@+id/User_Profile_Btns_Container"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_height="30dp">
-                <LinearLayout
-                    android:gravity="center_horizontal"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/User_Profile_Post_Civ"
-                        android:padding="2dp"
-                        android:gravity="center"
-                        android:textColor="@color/black"
-                        android:backgroundTint="@color/Transparent_Black90"
-                        android:background="@drawable/ic_baseline_article_24"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                    </de.hdodenhof.circleimageview.CircleImageView>
-                </LinearLayout>
-                <LinearLayout
-                    android:gravity="center_horizontal"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:padding="2dp"
-                        android:id="@+id/User_Profile_Friend_Civ"
-                        android:gravity="center"
-                        android:backgroundTint="@color/Transparent_Black50"
-                        android:background="@drawable/ic_baseline_group_24"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                    </de.hdodenhof.circleimageview.CircleImageView>
-                </LinearLayout>
-            </LinearLayout>
             <FrameLayout
                 android:id="@+id/User_Profile_FrameLayout"
-                android:layout_below="@id/User_Profile_Btns_Container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <androidx.viewpager2.widget.ViewPager2
