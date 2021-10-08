@@ -61,27 +61,26 @@ public class Timepeed_Rcv_Friends_Adapter extends RecyclerView.Adapter<Timepeed_
 
     @Override
     public void onBindViewHolder(@NonNull Timepeed_Friends_ViewHolder holder, int position) {
-        String User_Uid = notification_list.get(position).getUid();
+        Notification_Data data = notification_list.get(position);
         FirebaseFirestore Store = FirebaseFirestore.getInstance();
-        Store.collection("Users").whereEqualTo("UID", notification_list.get(position).getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        Store.collection("Users").whereEqualTo("UID", data.getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        holder.Text.setText(document.get("Name").toString() + "님이 친구추가 하였습니다.");
+                        holder.Text.setText("'" + document.get("Name").toString() + "'님이 친구추가 하였습니다.");
                         Picasso.get().load(document.getString("Img")).into(holder.User_Img);
                     }
                 }
             }
         });
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Friends").child(notification_list.get(position).getUid());
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Friends").child(data.getUid());
         db.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.getResult().getValue() == null) {
-                    holder.Friend_Add_Btn.setBackgroundResource(R.drawable.round_shape_off);
-                    holder.Friend_Add_Btn.setTextColor(ContextCompat.getColor(mContext.getApplicationContext(), R.color.Transparent_Black80));
-                    holder.Friend_Add_Btn.setText("친구 추가");
+                    holder.Friend_Add_Btn.setBackgroundResource(R.drawable.ic_baseline_group_add_24);
+                    holder.Friend_Add_Btn.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.Transparent_Green));
                     holder.Friend_Add_Btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -89,27 +88,25 @@ public class Timepeed_Rcv_Friends_Adapter extends RecyclerView.Adapter<Timepeed_
                             Date date = new Date();
                             String Set_Friend_Date = simpledate.format(date);
 
-                            Set_Friends(User_Uid);
+                            Set_Friends(data.getUid());
 
-                            Friend_Data My_Friend = new Friend_Data(User_Uid, Set_Friend_Date);
-                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Friends").child(User_Uid);
+                            Friend_Data My_Friend = new Friend_Data(data.getUid(), Set_Friend_Date);
+                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Friends").child(data.getUid());
                             reference.setValue(My_Friend);
 
-                            holder.Friend_Add_Btn.setText("친구");
-                            holder.Friend_Add_Btn.setBackgroundResource(R.drawable.round_shape);
-                            holder.Friend_Add_Btn.setTextColor(ContextCompat.getColor(mContext.getApplicationContext(), R.color.Transparent_Green));
+                            holder.Friend_Add_Btn.setBackgroundResource(R.drawable.ic_baseline_group_24);
+                            holder.Friend_Add_Btn.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.Theme_Less_Accent_Color));
                             notifyDataSetChanged();
                         }
                     });
                 } else {
-                    holder.Friend_Add_Btn.setText("친구");
-                    holder.Friend_Add_Btn.setBackgroundResource(R.drawable.round_shape);
-                    holder.Friend_Add_Btn.setTextColor(ContextCompat.getColor(mContext.getApplicationContext(), R.color.Transparent_Green));
+                    holder.Friend_Add_Btn.setBackgroundResource(R.drawable.ic_baseline_group_24);
+                    holder.Friend_Add_Btn.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.Theme_Less_Accent_Color));
                 }
             }
         });
 
-        holder.itemView.setOnClickListener(v -> Intent_To_User_Profile(User_Uid));
+        holder.itemView.setOnClickListener(v -> Intent_To_User_Profile(data.getUid()));
     }
 
     @Override
@@ -121,35 +118,13 @@ public class Timepeed_Rcv_Friends_Adapter extends RecyclerView.Adapter<Timepeed_
         public TimepeedFriendsRequestItemBinding binding;
         private CircleImageView User_Img;
         private TextView Text;
-        private Button Friend_Add_Btn;
+        private CircleImageView Friend_Add_Btn;
         public Timepeed_Friends_ViewHolder(TimepeedFriendsRequestItemBinding binding) {
             super(binding.getRoot());
             User_Img = binding.TimepeedFriendsUserCIV;
             Text = binding.TimepeedFriendsText;
             Friend_Add_Btn = binding.TimepeedFriendsAddBtn;
         }
-    }
-
-    public void Get_Friends_Timepeed(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Notifications").child("Firend_Timepeed");
-
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                for (DataSnapshot data : snapshot.getChildren()) {
-                    Notification_Data Noti = data.getValue(Notification_Data.class);
-                    if (!Noti.getUid().equals(My_Uid)){
-                        notification_list.add(0, Noti);
-                        notifyDataSetChanged();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
     }
 
     private void Set_Friends(String UID){
@@ -173,7 +148,4 @@ public class Timepeed_Rcv_Friends_Adapter extends RecyclerView.Adapter<Timepeed_
             mContext.startActivity(Go_View_User_Profile_Intent);
     }
 
-    public void List_Clear(){
-     notification_list.clear();
-    }
 }

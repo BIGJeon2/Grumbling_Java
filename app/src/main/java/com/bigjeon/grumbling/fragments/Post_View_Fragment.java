@@ -60,6 +60,7 @@ public class Post_View_Fragment extends Fragment {
     private FirebaseAuth mAuth;
     private DatabaseReference DB;
     private String My_Name;
+    private String My_Img;
     private Post_View_Rcv_Adapter adapter;
     private int Category_State = 1;
     private String Get_Content_Grade = "모든 게시글";
@@ -76,11 +77,12 @@ public class Post_View_Fragment extends Fragment {
 
         SharedPreferences Get_My_Data = this.getActivity().getSharedPreferences("My_Data", Context.MODE_PRIVATE);
         My_Name = Get_My_Data.getString("NAME", null);
+        My_Img = Get_My_Data.getString("IMG", null);
 
         My_Uid = mAuth.getCurrentUser().getUid();
 
         RecyclerView rcv = binding.PostRecyclerView;
-        adapter = new Post_View_Rcv_Adapter(mcontext, list, Get_Content_Grade, My_Name, null);
+        adapter = new Post_View_Rcv_Adapter(mcontext, list, Get_Content_Grade, My_Name, My_Img, null);
         LinearLayoutManager lm = new LinearLayoutManager(mcontext);
         rcv.setLayoutManager(lm);
         rcv.setAdapter(adapter);

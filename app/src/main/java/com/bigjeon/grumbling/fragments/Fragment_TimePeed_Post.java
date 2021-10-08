@@ -15,51 +15,53 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.bigjeon.grumbling.adapter.Timepeed_Rcv_Friends_Adapter;
+import com.bigjeon.grumbling.adapter.Timepeed_Rcv_Post_Adapter;
 import com.bigjeon.grumbling.data.Notification_Data;
 import com.example.grumbling.R;
-import com.example.grumbling.databinding.FragmentTimepeedFriendsBinding;
+import com.example.grumbling.databinding.FragmentTimepeedPostBinding;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class Fragment_TimePeed_Friends extends Fragment {
-    private FragmentTimepeedFriendsBinding binding;
+public class Fragment_TimePeed_Post extends Fragment {
+    private FragmentTimepeedPostBinding binding;
     private DatabaseReference reference;
     private String My_Uid;
     private String My_Img;
     private String My_Name;
-    private Timepeed_Rcv_Friends_Adapter adapter;
-    private ArrayList<Notification_Data> TimePeed_Friends_List = new ArrayList<>();
+    private Timepeed_Rcv_Post_Adapter adapter;
+    private ArrayList<Notification_Data> TimePeed_Post_List = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Get_My_Profile();
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Notifications").child("Firend_Timepeed");
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Notifications").child("Post_Timepeed");
         reference.addChildEventListener(Set_ChildEvent_Listner_Get_TimePeed());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_timepeed_friends, container, false);
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_timepeed_post, container, false);
         View root = binding.getRoot();
 
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
-        adapter = new Timepeed_Rcv_Friends_Adapter(getContext(), TimePeed_Friends_List, My_Uid);
-        binding.TimepeedFriendsRCV.setAdapter(adapter);
-        binding.TimepeedFriendsRCV.setLayoutManager(lm);
-        binding.TimepeedFriendsRCV.setHasFixedSize(true);
-        binding.TimepeedFriendsRCV.setNestedScrollingEnabled(false);
+        adapter = new Timepeed_Rcv_Post_Adapter(getContext(), TimePeed_Post_List, My_Uid);
+        binding.TimepeedPostRCV.setAdapter(adapter);
+        binding.TimepeedPostRCV.setLayoutManager(lm);
+        binding.TimepeedPostRCV.setHasFixedSize(true);
+        binding.TimepeedPostRCV.setNestedScrollingEnabled(false);
 
         return root;
     }
@@ -67,7 +69,7 @@ public class Fragment_TimePeed_Friends extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        TimePeed_Friends_List.clear();
+        TimePeed_Post_List.clear();
         reference.removeEventListener(Set_ChildEvent_Listner_Get_TimePeed());
     }
 
@@ -84,16 +86,16 @@ public class Fragment_TimePeed_Friends extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Notification_Data data = snapshot.getValue(Notification_Data.class);
-                TimePeed_Friends_List.add(data);
+                TimePeed_Post_List.add(data);
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Notification_Data data = snapshot.getValue(Notification_Data.class);
-                for (int i = 0; i < TimePeed_Friends_List.size(); i++) {
-                    if (TimePeed_Friends_List.get(i).getPost_Title().equals(data.getPost_Title())) {
-                        TimePeed_Friends_List.set(i, data);
+                for (int i = 0; i < TimePeed_Post_List.size(); i++) {
+                    if (TimePeed_Post_List.get(i).getPost_Title().equals(data.getPost_Title())) {
+                        TimePeed_Post_List.set(i, data);
                     }
                 }
                 adapter.notifyDataSetChanged();
@@ -102,9 +104,9 @@ public class Fragment_TimePeed_Friends extends Fragment {
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
                 Notification_Data data = snapshot.getValue(Notification_Data.class);
-                for (int i = 0; i < TimePeed_Friends_List.size(); i++) {
-                    if (TimePeed_Friends_List.get(i).getPost_Title().equals(data.getPost_Title())) {
-                        TimePeed_Friends_List.remove(data);
+                for (int i = 0; i < TimePeed_Post_List.size(); i++) {
+                    if (TimePeed_Post_List.get(i).getPost_Title().equals(data.getPost_Title())) {
+                        TimePeed_Post_List.remove(data);
                     }
                 }
                 adapter.notifyDataSetChanged();
@@ -122,4 +124,5 @@ public class Fragment_TimePeed_Friends extends Fragment {
         };
         return listner;
     }
+
 }

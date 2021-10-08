@@ -26,7 +26,6 @@
                 <category android:name="android.intent.category.DEFAULT"></category>
             </intent-filter>
         </activity>
-        <activity android:name="com.bigjeon.grumbling.Notification_Activity" />
         <activity android:name="com.bigjeon.grumbling.Setting_My_Profile_Activity" />
         <activity
             android:name="com.bigjeon.grumbling.Chatting_Activity"

@@ -56,7 +56,9 @@
     <color name="trans_light_white">#30FFFFFF</color>
     <color name="trans_light_Gray">#30474646</color>
 
+    <color name="Chat_ET_Color">#30FFFFFF</color>
     <color name="Theme_Color">#000000</color>
+    <color name="Chat_Room_Color">#10FFFFFF</color>
     <color name="Friend_State_Color">#60FFFFFF</color>
     <color name="None_Friend_State_Color">#FFFFFF</color>
     <color name="Post_Create_Color">#FFFFFF</color>

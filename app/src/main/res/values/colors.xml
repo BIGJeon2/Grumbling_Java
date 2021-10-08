@@ -56,7 +56,9 @@
     <color name="Transparent_White">#50FFFFFF</color>
     <color name="Transparent_Green">#8039CF3F</color>
 
+    <color name="Chat_ET_Color">#FFFFFF</color>
     <color name="Theme_Color">#FFFFFF</color>
+    <color name="Chat_Room_Color">#10000000</color>
     <color name="Friend_State_Color">#60000000</color>
     <color name="None_Friend_State_Color">#000000</color>
     <color name="Post_Create_Color">#000000</color>

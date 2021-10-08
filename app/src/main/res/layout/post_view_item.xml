@@ -135,17 +135,18 @@
                 android:id="@+id/Post_View_Chat_Expand_Imv"
                 android:visibility="gone"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="12dp"
                 android:padding="5dp"
                 android:background="@drawable/ic_baseline_expand_more_24"
                 android:backgroundTint="@color/Theme_Text_Color"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_centerInParent="true">
             </de.hdodenhof.circleimageview.CircleImageView>
         </RelativeLayout>
     </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/Post_Chat_Conatiner"
             android:layout_below="@id/Post_View_Content_Container"
             android:padding="6dp"
             android:layout_width="match_parent"
@@ -171,6 +172,23 @@
                 android:descendantFocusability="blocksDescendants"
                 tools:listitem="@layout/other_chatting_item">
             </androidx.recyclerview.widget.RecyclerView>
+            <Button
+                android:visibility="gone"
+                android:id="@+id/Post_View_Go_ChatRoom_Btn"
+                android:text="더보기..."
+                android:textSize="12dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="2dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/Chat_List_Rcv"
+                android:background="@drawable/round_shape_off"
+                android:textColor="@color/Theme_Text_Color"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/notosans_medium"
+                android:padding="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp">
+            </Button>
         </RelativeLayout>
         </RelativeLayout>
 </LinearLayout>

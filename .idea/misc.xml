@@ -55,7 +55,7 @@
         <entry key="app/src/main/res/drawable/under_edge_2dp.xml" value="0.24722222222222223" />
         <entry key="app/src/main/res/font/font.xml" value="0.24722222222222223" />
         <entry key="app/src/main/res/layout/activity_app_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_chatting.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_chatting.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_google_login.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_notification.xml" value="0.25" />
@@ -74,6 +74,7 @@
         <entry key="app/src/main/res/layout/fragment_post_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_set__post__background.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/fragment_set__post__text.xml" value="0.21666666666666667" />
+        <entry key="app/src/main/res/layout/fragment_time_peed_.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_timepeed_firends.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/fragment_timepeed_friends.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_timepeed_post.xml" value="0.25052083333333336" />

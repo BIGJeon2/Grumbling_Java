@@ -53,6 +53,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:layout_weight="7.5"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
+            android:layout_marginBottom="6dp"
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <RelativeLayout
@@ -75,29 +76,30 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 <TextView
                     android:id="@+id/My_Profile_activity_User_Location_TV"
                     android:text="#123 - 123"
-                    android:fontFamily="@font/notosans_regular"
+                    android:fontFamily="@font/notosans_medium"
                     android:includeFontPadding="false"
                     android:layout_marginTop="4dp"
                     android:layout_marginLeft="6dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/Theme_Less_Accent_Color"
+                    android:textColor="@color/Theme_Text_Color"
                     android:layout_above="@id/Setting_Fragment_Setting_Btns_Container"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/Setting_Fragment_My_Profile_Img_Civ"
                     android:padding="2dp"
-                    android:textSize="16dp">
+                    android:textSize="12dp">
                 </TextView>
                 <TextView
                     android:id="@+id/Setting_Activity_State_Msg_Tv"
                     android:gravity="center"
                     android:text="상태 메세지"
                     android:padding="6dp"
-                    android:fontFamily="@font/notosans_regular"
-                    android:textSize="14dp"
+                    android:fontFamily="@font/notosans_medium"
+                    android:textSize="12dp"
+                    android:background="@drawable/round_shape_off"
                     android:includeFontPadding="false"
                     android:layout_marginLeft="6dp"
-                    android:textColor="@color/Theme_Less_Accent_Color"
+                    android:textColor="@color/Theme_Text_Color"
                     android:layout_above="@id/My_Profile_activity_User_Location_TV"
                     android:layout_toRightOf="@id/Setting_Fragment_My_Profile_Img_Civ"
                     android:layout_width="match_parent"
@@ -114,7 +116,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                     android:paddingBottom="4dp"
                     android:layout_width="match_parent"
                     android:gravity="center_vertical"
-                    android:layout_height="28dp">
+                    android:layout_height="35dp">
                     <Button
                         android:id="@+id/Setting_Fragment_Unregister_Btn"
                         android:layout_weight="1"
@@ -137,7 +139,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                         android:text="프로필 수정"
                         android:fontFamily="@font/notosans_regular"
                         android:includeFontPadding="false"
-                        android:textColor="@color/Theme_Less_Accent_Color"
+                        android:textColor="@color/Theme_Text_Color"
                         android:background="@drawable/edge_right_1dp_black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -149,7 +151,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                         android:textSize="12dp"
                         android:fontFamily="@font/notosans_regular"
                         android:includeFontPadding="false"
-                        android:textColor="@color/Theme_Less_Accent_Color"
+                        android:textColor="@color/Theme_Text_Color"
                         android:background="@android:color/transparent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -159,7 +161,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         </LinearLayout>
         <RelativeLayout
             android:layout_marginTop="12dp"
-            android:layout_weight="25"
+            android:layout_weight="24"
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <androidx.recyclerview.widget.RecyclerView

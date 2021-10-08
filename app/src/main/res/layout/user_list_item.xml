@@ -52,6 +52,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true">
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/User_List_P2PChat_Civ"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

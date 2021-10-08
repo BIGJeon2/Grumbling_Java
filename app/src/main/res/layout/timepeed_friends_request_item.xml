@@ -3,42 +3,40 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="5dp"
-    android:layout_marginBottom="5dp"
-    android:layout_height="60dp"
+    android:layout_height="50dp"
+    android:layout_marginRight="6dp"
+    android:layout_marginLeft="6dp"
     android:background="@android:color/transparent">
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/Timepeed_Friends_User_CIV"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_centerInParent="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="3dp"
-        android:src="@drawable/app_main_title"
-        app:civ_border_color="@color/purple_200"
-        app:civ_border_width="1dp">
+        app:civ_border_color="@color/Theme_Text_Color"
+        app:civ_border_width="0.5dp">
     </de.hdodenhof.circleimageview.CircleImageView>
     <TextView
         android:id="@+id/Timepeed_Friends_Text"
-        android:text="친구추가하였습니다."
-        android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/Theme_Text_Color"
         android:textSize="12dp"
-        android:layout_marginLeft="7dp"
+        android:fontFamily="@font/notosans_medium"
+        android:includeFontPadding="false"
+        android:layout_marginLeft="6dp"
         android:layout_toRightOf="@+id/Timepeed_Friends_User_CIV"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </TextView>
 
-    <Button
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/Timepeed_Friends_Add_Btn"
-        android:background="@drawable/round_shape_off"
+        android:background="@drawable/ic_baseline_group_add_24"
         android:layout_alignParentRight="true"
-        android:text="친구 추가"
         android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp">
-    </Button>
+        android:layout_width="30dp"
+        android:backgroundTint="@color/Theme_Text_Color"
+        android:layout_height="30dp">
+    </de.hdodenhof.circleimageview.CircleImageView>
 </RelativeLayout>
 </layout>

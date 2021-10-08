@@ -215,7 +215,7 @@ public class User_Profile_View_activity extends AppCompatActivity {
             binding.P2PChatTV.setVisibility(View.VISIBLE);
             Send_Noti_To_User();
 
-            Notification_Data Noti = new Notification_Data(Notification_Key, My_Uid, Send_Date, "None");
+            Notification_Data Noti = new Notification_Data(Notification_Key, My_Uid, My_Name, My_Img, Send_Date, "None");
             reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("Notifications").child("Firend_Timepeed").child(Notification_Key + My_Uid);
             reference.setValue(Noti);
         }

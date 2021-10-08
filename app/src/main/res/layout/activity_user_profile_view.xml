@@ -25,7 +25,7 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/User_Profile_Back_IMV"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="6dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerInParent="true"
                 android:backgroundTint="@color/Theme_Text_Color"
@@ -35,7 +35,7 @@
             </ImageView>
             <TextView
                 android:id="@+id/Setting_Fragment_My_Name_Tv"
-                android:text="Big_Jeon"
+                android:text=""
                 android:padding="2dp"
                 android:textSize="18dp"
                 android:textStyle="bold"
@@ -43,7 +43,7 @@
                 android:fontFamily="@font/notosans_medium"
                 android:layout_centerInParent="true"
                 android:layout_toRightOf="@id/User_Profile_Back_IMV"
-                android:textColor="@color/black"
+                android:textColor="@color/Theme_Text_Color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </TextView>
@@ -110,34 +110,35 @@
                 <TextView
                     android:id="@+id/User_Profile_activity_User_Location_TV"
                     android:text="#123 - 123"
-                    android:fontFamily="@font/notosans_regular"
+                    android:fontFamily="@font/notosans_medium"
                     android:includeFontPadding="false"
                     android:layout_marginTop="4dp"
                     android:layout_marginLeft="6dp"
                     android:gravity="center_vertical"
-                    android:textColor="@color/Theme_Less_Accent_Color"
+                    android:textColor="@color/Theme_Text_Color"
                     android:layout_above="@id/User_Profile_Btns_Container"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/Setting_Fragment_My_Profile_Img_Civ"
                     android:padding="2dp"
-                    android:textSize="14dp">
+                    android:textSize="12dp">
                 </TextView>
 
                 <TextView
                     android:id="@+id/User_Profile_Activity_State_Msg_Tv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/round_shape_off"
                     android:layout_above="@id/User_Profile_activity_User_Location_TV"
                     android:layout_marginLeft="6dp"
                     android:layout_toRightOf="@id/Setting_Fragment_My_Profile_Img_Civ"
-                    android:fontFamily="@font/notosans_regular"
+                    android:fontFamily="@font/notosans_medium"
                     android:gravity="center"
                     android:includeFontPadding="false"
                     android:padding="6dp"
                     android:text="상태 메세지"
-                    android:textColor="@color/Theme_Less_Accent_Color"
-                    android:textSize="16dp"></TextView>
+                    android:textColor="@color/Theme_Text_Color"
+                    android:textSize="12dp"></TextView>
                 <LinearLayout
                     android:id="@+id/User_Profile_Btns_Container"
                     android:orientation="horizontal"

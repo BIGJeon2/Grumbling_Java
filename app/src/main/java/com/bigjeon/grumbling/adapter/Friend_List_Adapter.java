@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bigjeon.grumbling.P2P_Chatting_Activity;
 import com.bigjeon.grumbling.User_Profile_View_activity;
 import com.bigjeon.grumbling.data.Friend_Data;
 import com.example.grumbling.databinding.UserListItemBinding;
@@ -63,7 +64,8 @@ public class Friend_List_Adapter extends RecyclerView.Adapter<Friend_List_Adapte
                 }
             }
         });
-        holder.Container.setOnClickListener(v -> Go_User_Profile_View_Act(Friends_List.get(position).getUid()));
+        holder.User_Img.setOnClickListener(v -> Go_User_Profile_View_Act(Friends_List.get(position).getUid()));
+        holder.P2P_Chat_Civ.setOnClickListener(v -> Intent_To_P2P_Chatting(Friends_List.get(position).getUid()));
     }
 
     @Override
@@ -77,6 +79,7 @@ public class Friend_List_Adapter extends RecyclerView.Adapter<Friend_List_Adapte
         private TextView User_Name;
         private CircleImageView User_Img;
         private TextView User_Location;
+        private CircleImageView P2P_Chat_Civ;
         public Friend_ViewHolder(UserListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
@@ -84,11 +87,19 @@ public class Friend_List_Adapter extends RecyclerView.Adapter<Friend_List_Adapte
             User_Name = binding.FriendListUserNameTV;
             User_Img = binding.FriendListUserImgCiv;
             User_Location = binding.FriendListUserUidTV;
+            P2P_Chat_Civ = binding.UserListP2PChatCiv;
         }
     }
     private void Go_User_Profile_View_Act(String UID) {
             Intent Go_View_User_Profile_Intent = new Intent(mContext, User_Profile_View_activity.class);
             Go_View_User_Profile_Intent.putExtra("UID", UID);
             mContext.startActivity(Go_View_User_Profile_Intent);
+    }
+
+    private void Intent_To_P2P_Chatting(String User_Uid) {
+        Intent GO_P2P_Chat = new Intent(mContext, P2P_Chatting_Activity.class);
+        GO_P2P_Chat.putExtra("USER_UID", User_Uid);
+        GO_P2P_Chat.putExtra("MY_UID", My_Uid);
+        mContext.startActivity(GO_P2P_Chat);
     }
 }

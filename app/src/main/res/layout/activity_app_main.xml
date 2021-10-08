@@ -18,6 +18,7 @@
         android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="65dp"
+        android:layout_marginTop="6dp"
         android:orientation="horizontal"
         android:background="@drawable/gradient"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +31,7 @@
             android:fontFamily="@font/binggrae"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="40dp"
+            android:textSize="50dp"
             android:layout_marginLeft="12dp"
             android:layout_centerInParent="true"
             android:layout_alignParentLeft="true"
@@ -38,7 +39,7 @@
             android:textColor="@color/Post_Create_Color">
         </TextView>
         <TextView
-            android:text=".소통에 자유를 더하다"
+            android:text=" 소통에 자유를 더하다"
             android:includeFontPadding="false"
             android:textSize="16dp"
             android:layout_alignParentBottom="true"
@@ -61,23 +62,24 @@
             android:background="@drawable/ic_baseline_create_24">
         </de.hdodenhof.circleimageview.CircleImageView>
     </RelativeLayout>
-<RelativeLayout
-    android:id="@+id/adViewBanner_Container"
-    android:background="@color/colorPrimary"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent">
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adViewBanner"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/adViewBanner_Container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        app:adSize="BANNER"
-        app:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
-</RelativeLayout>
+        android:background="@color/Theme_Color"
+        app:layout_constraintBottom_toBottomOf="@+id/App_Main_Fragment_FrameLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adViewBanner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:adSize="BANNER"
+            app:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
+    </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/App_Main_Fragment_FrameLayout"
@@ -98,14 +100,14 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:gravity="center"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/top_edge_black_1dp"
+        android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/adViewBanner_Container">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <RelativeLayout
             android:id="@+id/Firend_List_Btn_Container"
@@ -123,6 +125,7 @@
                 android:backgroundTint="@color/Btn_Off_Color"
                 android:textSize="10dp"></de.hdodenhof.circleimageview.CircleImageView>
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/Chatting_List_Btn_Container"
             android:layout_width="wrap_content"
@@ -138,6 +141,7 @@
                 android:background="@drawable/ic_baseline_question_answer_24"
                 android:backgroundTint="@color/Btn_Off_Color"></de.hdodenhof.circleimageview.CircleImageView>
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/Post_List_Btn_Container"
             android:layout_width="wrap_content"
@@ -153,36 +157,38 @@
                 android:background="@drawable/ic_baseline_article_24"
                 android:backgroundTint="@color/Btn_On_Color"></de.hdodenhof.circleimageview.CircleImageView>
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/Timeline_List_Btn_Container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent">
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/App_Main_Notice_Civ"
-                android:background="@drawable/ic_baseline_notifications_24"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerInParent="true"
-                android:backgroundTint="@color/Btn_Off_Color">
-            </de.hdodenhof.circleimageview.CircleImageView>
+                android:background="@drawable/ic_baseline_notifications_24"
+                android:backgroundTint="@color/Btn_Off_Color"></de.hdodenhof.circleimageview.CircleImageView>
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/My_Profile_List_Btn_Container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent">
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/App_Main_My_Img"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:layout_centerInParent="true"
                 android:src="@drawable/app_logo"
                 app:civ_border_color="@color/Theme_Text_Color"
-                app:civ_border_width="0.5dp"
-                android:layout_centerInParent="true">
-            </de.hdodenhof.circleimageview.CircleImageView>
+                app:civ_border_width="0.5dp"></de.hdodenhof.circleimageview.CircleImageView>
         </RelativeLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

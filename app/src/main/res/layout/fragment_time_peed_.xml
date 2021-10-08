@@ -1,0 +1,110 @@
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View">
+        </import>
+        <variable
+            name="TimePeed_Fragment_binding"
+            type="com.bigjeon.grumbling.fragments.TimePeed_Fragment" />
+    </data>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bigjeon.grumbling.fragments.TimePeed_Fragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:layout_marginLeft="12dp"
+            android:padding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:id="@+id/Timepeed_Post_Btn_Container"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/edge_right_1dp_black">
+                <RelativeLayout
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/Timepeed_TV_Post"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_baseline_favorite_24"
+                    android:backgroundTint="@color/light_pink">
+                </de.hdodenhof.circleimageview.CircleImageView>
+                <TextView
+                    android:id="@+id/Timepeed_Post_Tv"
+                    android:text="친구 요청"
+                    android:fontFamily="@font/notosans_medium"
+                    android:includeFontPadding="false"
+                    android:textSize="12dp"
+                    android:textColor="@color/Theme_Text_Color"
+                    android:layout_marginLeft="4dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toRightOf="@id/Timepeed_TV_Post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <RelativeLayout
+                    android:id="@+id/Timepeed_Friend_Btn_Container"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/Timepeed_TV_Friends"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_baseline_person_24"
+                    android:backgroundTint="@color/Btn_Off_Color">
+                </de.hdodenhof.circleimageview.CircleImageView>
+                    <TextView
+                        android:id="@+id/Timepeed_Friends_Tv"
+                        android:text="친구 요청"
+                        android:fontFamily="@font/notosans_medium"
+                        android:includeFontPadding="false"
+                        android:textSize="12dp"
+                        android:textColor="@color/Theme_Less_Accent_Color"
+                        android:layout_marginLeft="4dp"
+                        android:layout_centerInParent="true"
+                        android:layout_toRightOf="@id/Timepeed_TV_Friends"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </TextView>
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/Time_Peed_Activity_FrameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"></FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
+</layout>

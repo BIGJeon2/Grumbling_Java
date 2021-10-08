@@ -8,6 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.bigjeon.grumbling.fragments.Chatting_List_Fragment;
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
 import com.bigjeon.grumbling.fragments.Friend_List_Fragment;
+import com.bigjeon.grumbling.fragments.TimePeed_Fragment;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -24,11 +25,12 @@ public class Fragment_Swipe_Adapter extends FragmentStateAdapter {
 
         if (position == 0) return new Friend_List_Fragment();
         else if (position == 1) return new Chatting_List_Fragment();
-        else return new Post_View_Fragment();
+        else if (position == 2) return new Post_View_Fragment();
+        else return new TimePeed_Fragment();
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 }

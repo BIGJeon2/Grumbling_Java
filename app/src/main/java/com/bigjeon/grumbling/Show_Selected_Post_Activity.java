@@ -329,7 +329,7 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
             Date date = new Date();
             String Send_Date = simpledate.format(date);
 
-            Notification_Data Favorite_Noti = new Notification_Data(Notification_Favorite_Key, My_Uid, Send_Date, Title);
+            Notification_Data Favorite_Noti = new Notification_Data(Notification_Favorite_Key, My_Uid, My_Name, My_Img, Send_Date, Title);
             DatabaseReference Other_Reference = FirebaseDatabase.getInstance().getReference("Users").child(UID).child("Notifications").child("Post_Timepeed");
             Other_Reference.push().setValue(Favorite_Noti);
         }

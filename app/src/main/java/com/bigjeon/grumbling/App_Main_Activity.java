@@ -57,8 +57,6 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         binding = DataBindingUtil.setContentView(this, R.layout.activity_app_main);
         binding.setAppMainActivity(this);
 
-
-
         startService(new Intent(this, MyService.class));
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -93,7 +91,7 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         binding.AppMainViewPager2.setAdapter(ViewPager_Adapter);
         binding.AppMainViewPager2.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         binding.AppMainViewPager2.setCurrentItem(2, false);
-        binding.AppMainViewPager2.setOffscreenPageLimit(3);
+        binding.AppMainViewPager2.setOffscreenPageLimit(4);
 
         binding.AppMainViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -109,7 +107,7 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         binding.AppMainFriendCiv.setOnClickListener(v -> Change_Fragment_OnCLick(0));
         binding.AppMainChattingCiv.setOnClickListener(v -> Change_Fragment_OnCLick(1));
         binding.AppMainPostCiv.setOnClickListener(v -> Change_Fragment_OnCLick(2));
-        binding.AppMainNoticeCiv.setOnClickListener(v -> Go_Notification_Activity());
+        binding.AppMainNoticeCiv.setOnClickListener(v -> Change_Fragment_OnCLick(3));
         binding.AppMainWritePostCIV.setOnClickListener(v -> Go_Post_Write_Act());
     }
 
@@ -118,14 +116,11 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
             binding.AppMainViewPager2.setCurrentItem(0, true);
         }else if (i == 1){
             binding.AppMainViewPager2.setCurrentItem(1, true);
-        }else{
+        }else if (i == 2){
             binding.AppMainViewPager2.setCurrentItem(2, true);
+        }else{
+            binding.AppMainViewPager2.setCurrentItem(3, true);
         }
-    }
-
-    private void Go_Notification_Activity() {
-        Intent Go_Notifi = new Intent(this, Notification_Activity.class);
-        startActivity(Go_Notifi);
     }
 
     public void Set_My_Data(){
@@ -140,23 +135,32 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
     private void Button_Background_Change(int position){
         switch (position){
             case 0 :
-//                binding.AppMainFriendCiv.setBackgroundTintList(ColorStateList.valueOf(this.getApplicationContext(), R.color.Btn_Off_Color);
                 binding.AppMainFriendCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_On_Color));
                 binding.AppMainChattingCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
                 binding.AppMainPostCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
+                binding.AppMainNoticeCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
                 binding.AppMainWritePostCIV.setVisibility(View.GONE);
                 break;
             case 1 :
                 binding.AppMainFriendCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
                 binding.AppMainChattingCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_On_Color));
                 binding.AppMainPostCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
+                binding.AppMainNoticeCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
                 binding.AppMainWritePostCIV.setVisibility(View.GONE);
                 break;
             case 2 :
                 binding.AppMainFriendCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
                 binding.AppMainChattingCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
                 binding.AppMainPostCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_On_Color));
+                binding.AppMainNoticeCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
                 binding.AppMainWritePostCIV.setVisibility(View.VISIBLE);
+                break;
+            case 3 :
+                binding.AppMainFriendCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
+                binding.AppMainChattingCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
+                binding.AppMainPostCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_Off_Color));
+                binding.AppMainNoticeCiv.setBackgroundTintList(ContextCompat.getColorStateList(this.getApplicationContext(), R.color.Btn_On_Color));
+                binding.AppMainWritePostCIV.setVisibility(View.GONE);
                 break;
         }
     }
