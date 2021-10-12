@@ -115,15 +115,16 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 onFavoriteClicked(DB.child(Post.getPost_Title()));
                     if (Favorite_State == true){
+                        binding.SelectedPostFavoriteCircleCIV.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.Theme_Text_Color));
                         binding.SelectedPostFavoriteCircleCIV.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
                         Favorite_Count--;
                         Favorite_State = false;
                     }else{
+                        binding.SelectedPostFavoriteCircleCIV.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.light_pink));
                         binding.SelectedPostFavoriteCircleCIV.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
                         Favorite_Count++;
                         Favorite_State = true;
                     }
-                binding.SelectedPostFavoriteCircleCIV.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
                 binding.SelectedPostFavoriteCountTV.setText(Integer.toString(Favorite_Count));
             }
         });
@@ -231,15 +232,15 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         binding.SelectedPostContent.setBackgroundColor(ContextCompat.getColor(this, Post.getContent_Back_Color()));
         if (post.getFavorite().containsKey(mAuth.getCurrentUser().getUid())){
             binding.SelectedPostFavoriteCircleCIV.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
-            binding.SelectedPostFavoriteCircleCIV.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
+            binding.SelectedPostFavoriteCircleCIV.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.light_pink));
             Favorite_Count = Post.getFavorite_Count();
             Favorite_State = true;
         }else {
             binding.SelectedPostFavoriteCircleCIV.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+            binding.SelectedPostFavoriteCircleCIV.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.Theme_Text_Color));
             Favorite_Count = Post.getFavorite_Count();
             Favorite_State = false;
         }
-        binding.SelectedPostFavoriteCircleCIV.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
         if (Post.getFavorite_Count() < 1000){
             binding.SelectedPostFavoriteCountTV.setText(Integer.toString(Favorite_Count));
         }else{
@@ -269,10 +270,10 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         Chat_DB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                if (!snapshot.exists()){
+                    binding.ShowSelectedPostNoneChatTV.setVisibility(View.VISIBLE);
+                }
                 for (DataSnapshot data : snapshot.getChildren()){
-                    if (data != null){
-                        binding.ShowSelectedPostNoneChatTV.setVisibility(View.INVISIBLE);
-                    }
                     Chat_Data chat = data.getValue(Chat_Data.class);
                     list.add(chat);
                     Log.d(TAG, list.toString());

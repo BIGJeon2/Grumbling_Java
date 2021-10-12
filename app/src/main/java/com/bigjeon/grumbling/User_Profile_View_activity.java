@@ -120,10 +120,14 @@ public class User_Profile_View_activity extends AppCompatActivity {
     }
 
     private void Intent_To_P2P_Chatting() {
-        Intent GO_P2P_Chat = new Intent(this, P2P_Chatting_Activity.class);
-        GO_P2P_Chat.putExtra("USER_UID", User_Uid);
-        GO_P2P_Chat.putExtra("MY_UID", My_Uid);
-        startActivity(GO_P2P_Chat);
+        if (!Friend_State.equals("NONE")) {
+            Intent GO_P2P_Chat = new Intent(this, P2P_Chatting_Activity.class);
+            GO_P2P_Chat.putExtra("USER_UID", User_Uid);
+            GO_P2P_Chat.putExtra("MY_UID", My_Uid);
+            startActivity(GO_P2P_Chat);
+        }else{
+            Toast.makeText(this, "메세지는 친구추가 이후 가능합니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void Change_Fragment_OnCLick(int i) {
@@ -137,10 +141,18 @@ public class User_Profile_View_activity extends AppCompatActivity {
     private void Button_Background_Change(int position) {
         switch (position) {
             case 0:
+                binding.UserProfilePostBtnContainer.setBackgroundResource(R.drawable.post_view_title_under_edge_1dp);
+                binding.UserProfileFriendsBtnContainer.setBackgroundColor(Color.TRANSPARENT);
+                binding.UserProfilePostsCountTv.setTextColor(ContextCompat.getColorStateList(this, R.color.Theme_Text_Color));
+                binding.UserProfileFriendsCountTv.setTextColor(ContextCompat.getColorStateList(this, R.color.Theme_Less_Accent_Color));
                 binding.UserProfilePostCiv.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Theme_Text_Color));
                 binding.UserProfileFriendCiv.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Theme_Less_Accent_Color));
                 break;
             case 1:
+                binding.UserProfileFriendsBtnContainer.setBackgroundResource(R.drawable.post_view_title_under_edge_1dp);
+                binding.UserProfilePostBtnContainer.setBackgroundColor(Color.TRANSPARENT);
+                binding.UserProfileFriendsCountTv.setTextColor(ContextCompat.getColorStateList(this, R.color.Theme_Text_Color));
+                binding.UserProfilePostsCountTv.setTextColor(ContextCompat.getColorStateList(this, R.color.Theme_Less_Accent_Color));
                 binding.UserProfilePostCiv.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Theme_Less_Accent_Color));
                 binding.UserProfileFriendCiv.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Theme_Text_Color));
                 break;
@@ -209,10 +221,10 @@ public class User_Profile_View_activity extends AppCompatActivity {
             Friend_Data My_Friend = new Friend_Data(User_Uid, Send_Date);
             reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Friends").child(User_Uid);
             reference.setValue(My_Friend);
-            binding.SettingFragmentSendFriendRequestBtn.setBackgroundResource(R.drawable.ic_baseline_group_24);
-            binding.SettingFragmentSendFriendRequestBtn.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Friend_State_Color));
-            binding.SettingFragmentChattingCiv.setVisibility(View.VISIBLE);
-            binding.P2PChatTV.setVisibility(View.VISIBLE);
+            binding.SettingFragmentSendFriendRequestBtn.setText("친구");
+            binding.SettingFragmentSendFriendRequestBtn.setBackgroundResource(R.drawable.transparent_round_shape);
+            binding.SettingFragmentSendFriendRequestBtn.setTextColor(ContextCompat.getColorStateList(getApplicationContext(), R.color.Theme_Text_Color));
+            binding.SettingFragmentChattingCiv.setTextColor(ContextCompat.getColorStateList(getApplicationContext(), R.color.Theme_Text_Color));
             Send_Noti_To_User();
 
             Notification_Data Noti = new Notification_Data(Notification_Key, My_Uid, My_Name, My_Img, Send_Date, "None");
@@ -228,18 +240,16 @@ public class User_Profile_View_activity extends AppCompatActivity {
             public void onComplete(@NonNull @NotNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()){
                     Friend_State = "NONE";
-                    binding.SettingFragmentChattingCiv.setVisibility(View.GONE);
-                    binding.P2PChatTV.setVisibility(View.GONE);
                 }else{
                     Friend_Data Friends = task.getResult().getValue(Friend_Data.class);
                     if (Friends == null){
                         Friend_State = "NONE";
-                        binding.SettingFragmentChattingCiv.setVisibility(View.GONE);
-                        binding.P2PChatTV.setVisibility(View.GONE);
                     }else if (Friends.getUid().equals(User_Uid)){
                         Friend_State = "Friend";
-                        binding.SettingFragmentSendFriendRequestBtn.setBackgroundResource(R.drawable.ic_baseline_group_24);
-                        binding.SettingFragmentSendFriendRequestBtn.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.Friend_State_Color));
+                        binding.SettingFragmentSendFriendRequestBtn.setText("친구");
+                        binding.SettingFragmentSendFriendRequestBtn.setBackgroundResource(R.drawable.transparent_round_shape);
+                        binding.SettingFragmentSendFriendRequestBtn.setTextColor(ContextCompat.getColorStateList(getApplicationContext(), R.color.Theme_Text_Color));
+                        binding.SettingFragmentChattingCiv.setTextColor(ContextCompat.getColorStateList(getApplicationContext(), R.color.Theme_Text_Color));
                     }
                 }
             }

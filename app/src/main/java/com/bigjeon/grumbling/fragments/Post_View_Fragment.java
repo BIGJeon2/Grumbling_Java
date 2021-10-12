@@ -82,7 +82,7 @@ public class Post_View_Fragment extends Fragment {
         My_Uid = mAuth.getCurrentUser().getUid();
 
         RecyclerView rcv = binding.PostRecyclerView;
-        adapter = new Post_View_Rcv_Adapter(mcontext, list, Get_Content_Grade, My_Name, My_Img, null);
+        adapter = new Post_View_Rcv_Adapter(mcontext, list, Get_Content_Grade, My_Uid, My_Name, My_Img, null);
         LinearLayoutManager lm = new LinearLayoutManager(mcontext);
         rcv.setLayoutManager(lm);
         rcv.setAdapter(adapter);

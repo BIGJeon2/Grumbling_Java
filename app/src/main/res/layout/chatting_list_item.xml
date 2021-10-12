@@ -4,10 +4,9 @@
     android:id="@+id/Chatting_List_Container"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="65dp"
     android:gravity="center"
-    android:layout_marginTop="6dp"
-    android:layout_marginBottom="6dp">
+    android:padding="6dp">
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/Chatting_List_User_Img_Civ"
         android:src="@drawable/app_logo"
@@ -34,13 +33,12 @@
     <TextView
         android:id="@+id/Chatting_List_Last_Chat_TV"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="2dp"
         android:textSize="14dp"
         android:text="마지막 채팅"
         android:includeFontPadding="false"
+        android:layout_alignParentBottom="true"
         android:fontFamily="@font/notosans_regular"
         android:textColor="@color/Theme_Less_Accent_Color"
-        android:layout_below="@id/Chatting_List_User_Name_TV"
         android:layout_toRightOf="@id/Chatting_List_User_Img_Civ"
         android:layout_width="270dp"
         android:layout_height="wrap_content">

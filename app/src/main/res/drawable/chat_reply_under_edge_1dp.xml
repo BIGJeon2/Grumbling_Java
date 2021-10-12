@@ -8,9 +8,9 @@
         <shape android:shape="rectangle">
             <stroke
                 android:width="0.5dp"
-                android:color="@color/Btn_Off_Color">
+                android:color="@color/Theme_Less_Accent_Color">
             </stroke>
-            <solid android:color="@color/Theme_Color"></solid>
+            <solid android:color="@color/white"></solid>
         </shape>
     </item>
 </layer-list>

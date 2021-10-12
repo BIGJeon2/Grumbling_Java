@@ -9,6 +9,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -43,6 +45,9 @@ import com.bigjeon.grumbling.data.DB_Posting_Background_GIF;
 import com.bigjeon.grumbling.data.Post_Data;
 import com.bigjeon.grumbling.dialogs.Post_Write_Loading_ProgressDialog;
 import com.bigjeon.grumbling.factory.Post_Write_VM_Factory;
+import com.bigjeon.grumbling.fragments.Fragment_TimePeed_Post;
+import com.bigjeon.grumbling.fragments.Set_Post_Background_Fragment;
+import com.bigjeon.grumbling.fragments.Set_Post_Text_Fragment;
 import com.bigjeon.grumbling.viewmodel.Post_Write_ViewModel;
 import com.bumptech.glide.Glide;
 import com.example.grumbling.R;
@@ -59,6 +64,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Transaction;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -72,7 +78,10 @@ import java.util.HashMap;
 
 public class Post_Write_Activity extends AppCompatActivity {
     private ActivityPostWriteBinding binding;
-    private Post_Write_ViewPager2_Adapter ViewPager_Adapter;
+    private Set_Post_Text_Fragment Text_Set_Fragment;
+    private Set_Post_Background_Fragment Background_Set_Fragment;
+    private FragmentTransaction transaction;
+    private FragmentManager fragmentManager;
     private Post_Write_Loading_ProgressDialog progressDialog;
     private String STATE = "CREATE";
     private int key = 0;
@@ -97,6 +106,13 @@ public class Post_Write_Activity extends AppCompatActivity {
         progressDialog = new Post_Write_Loading_ProgressDialog(this);
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        Text_Set_Fragment = new Set_Post_Text_Fragment();
+        Background_Set_Fragment = new Set_Post_Background_Fragment();
+        fragmentManager = getSupportFragmentManager();
+
+        transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.Post_Write_FrameLayout, Text_Set_Fragment).commit();
+
         //뷰모델 호출 / 데이터 변경 이벤트시 데이터 바로 적용
         VM = new ViewModelProvider(this, new Post_Write_VM_Factory()).get(Post_Write_ViewModel.class);
 
@@ -112,56 +128,30 @@ public class Post_Write_Activity extends AppCompatActivity {
         VM.getIMG_String().observe(this, img -> Glide.with(this).load(img).into(binding.DialogPostingBackground));
         VM.getIMG_URI().observe(this, img -> Glide.with(this).load(img).into(binding.DialogPostingBackground));
 
-        //ViewPager2
-        ViewPager_Adapter = new Post_Write_ViewPager2_Adapter(this);
-        binding.PostWriteViewPager2.setAdapter(ViewPager_Adapter);
-        binding.PostWriteViewPager2.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-        binding.PostWriteViewPager2.setCurrentItem(0, true);
-        binding.PostWriteViewPager2.setOffscreenPageLimit(1);
-        binding.PostWriteViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                if (positionOffsetPixels == 0){
-                    binding.PostWriteViewPager2.setCurrentItem(position);
-                }
-            }
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                Button_Background_Change(position);
-            }
-        });
         //텍스트 설정 창 버튼============================================
-        binding.DialogPostingSetText.setOnClickListener(v -> Change_Fragment_OnCLick(0));
+        binding.DialogPostingSetText.setOnClickListener(v -> Change_Fragment(0));
         //백그라운드 이미지 버튼==========================================
-        binding.DialogPostingSetImg.setOnClickListener(v -> Change_Fragment_OnCLick(1));
+        binding.DialogPostingSetImg.setOnClickListener(v -> Change_Fragment(1));
 
-        //보안 등급 설정 버튼===========================================
-        binding.DialogPostingSetGrade.setOnClickListener(v -> Set_Posting_Grade());
         //포스팅 완료 버튼==============================================
         binding.DialogPostingCompleteCIV.setOnClickListener(v -> Upload_Post());
 
         binding.PostWriteBackPressImv.setOnClickListener( v -> onBackPressed());
 
     }
-    //ViewPager2
-    private void Change_Fragment_OnCLick(int i) {
-        if (i == 0){
-            binding.PostWriteViewPager2.setCurrentItem(0, true);
-        }else{
-            binding.PostWriteViewPager2.setCurrentItem(1, true);
-        }
-    }
-    private void Button_Background_Change(int position){
+    private void Change_Fragment(int position){
         switch (position){
             case 0 :
-                binding.DialogPostingSetText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
-                binding.DialogPostingSetImg.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.Post_Write_FrameLayout, Text_Set_Fragment).commit();
+                binding.DialogPostingSetText.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Theme_Text_Color));
+                binding.DialogPostingSetImg.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Btn_Off_Color));
                 break;
             case 1 :
-                binding.DialogPostingSetText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#50000000")));
-                binding.DialogPostingSetImg.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#90000000")));
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.Post_Write_FrameLayout, Background_Set_Fragment).commit();
+                binding.DialogPostingSetText.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Btn_Off_Color));
+                binding.DialogPostingSetImg.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Theme_Text_Color));
                 break;
         }
     }
@@ -196,8 +186,6 @@ public class Post_Write_Activity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("My_Data", Context.MODE_PRIVATE);
         User_Name = sharedPreferences.getString("NAME", null);
         User_Uid = sharedPreferences.getString("UID", null);
-        binding.DialogPostingUserName.setText(User_Name);
-        Picasso.get().load(sharedPreferences.getString("IMG", null)).into(binding.DialogPostingUserImg);
         post_data = new Post_Data(null,
                 User_Uid,
                 null,
@@ -218,7 +206,6 @@ public class Post_Write_Activity extends AppCompatActivity {
         binding.DialogPostingContent.setTextSize(Dimension.DP, post.getContent_Text_Size());
         binding.DialogPostingContent.setBackgroundColor(ContextCompat.getColor(this, post.getContent_Back_Color()));
         binding.DialogPostingContent.setTextColor(ContextCompat.getColor(this, post.getContent_Text_Color()));
-        binding.DialogPostingSetGrade.setText(post.getGrade());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         if (post.getPost_Background() != null && key == 0){
             Glide.with(this).load(post.getPost_Background()).into(binding.DialogPostingBackground);
@@ -236,26 +223,11 @@ public class Post_Write_Activity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         binding.DialogPostingUserName.setText(document.get("Name").toString());
-                        Picasso.get().load(document.getString("Img")).into(binding.DialogPostingUserImg);
                         break;
                     }
                 }
             }
         });
-    }
-    //보안 등급 설정
-    private void Set_Posting_Grade() {
-        String[] Grade = {"모임", "게임", "고민", "자랑", "잡담"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("카테고리 설정").setItems(Grade, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                post_data.setGrade(Grade[which]);
-                VM.set_Post(post_data);
-                Toast.makeText(Post_Write_Activity.this, "카테고리 : " + Posting_Grade, Toast.LENGTH_SHORT).show();
-            }
-        });
-        builder.show();
     }
 
     //작성 완료된 포스트 파이어베이스에 저장
@@ -301,27 +273,7 @@ public class Post_Write_Activity extends AppCompatActivity {
                 finish();
             }
         }else {
-            Toast.makeText(Post_Write_Activity.this, "최소 3글자 이상 입력해 주세요!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Post_Write_Activity.this, "최소 2글자 이상 입력해 주세요!", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle("*주의*");
-        dialog.setMessage("이페이지에서 나가면 작성하신 내용이 삭제됩니다.");
-        dialog.setPositiveButton("머무르기", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        dialog.setNegativeButton("나가기", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Post_Write_Activity.super.onBackPressed();
-            }
-        });
-        dialog.show();
     }
 }

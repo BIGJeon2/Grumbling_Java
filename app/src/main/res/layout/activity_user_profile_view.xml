@@ -35,7 +35,7 @@
             </ImageView>
             <TextView
                 android:id="@+id/Setting_Fragment_My_Name_Tv"
-                android:text=""
+                android:text="User_Name"
                 android:padding="2dp"
                 android:textSize="18dp"
                 android:textStyle="bold"
@@ -47,120 +47,148 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </TextView>
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/Setting_Fragment_Send_Friend_Request_Btn"
-                android:layout_centerInParent="true"
-                android:layout_alignParentRight="true"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:layout_marginRight="6dp"
-                android:padding="4dp"
-                android:backgroundTint="@color/None_Friend_State_Color"
-                android:background="@drawable/ic_baseline_group_add_24">
-            </de.hdodenhof.circleimageview.CircleImageView>
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/Setting_Fragment_Chatting_Civ"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:padding="4dp"
-                android:layout_toLeftOf="@id/Setting_Fragment_Send_Friend_Request_Btn"
-               android:layout_centerInParent="true"
-                android:layout_marginRight="12dp"
-                android:background="@drawable/ic_baseline_question_answer_24"
-                android:backgroundTint="@color/Theme_Text_Color">
-            </de.hdodenhof.circleimageview.CircleImageView>
-            <TextView
-                android:id="@+id/P2P_Chat_TV"
-                android:visibility="gone"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/Setting_Fragment_Chatting_Civ"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1:1 채팅"
-                android:textSize="8dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginRight="5dp"
-                android:textColor="@color/black">
-            </TextView>
         </RelativeLayout>
         <LinearLayout
             android:orientation="vertical"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:layout_weight="7.5"
+            android:paddingTop="6dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="wrap_content">
             <RelativeLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Setting_Fragment_My_Profile_Img_Civ"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginStart="6dp"
+                    android:layout_alignParentTop="true"
                     android:layout_marginTop="6dp"
                     android:layout_marginEnd="6dp"
-                    android:layout_marginBottom="6dp"
                     android:src="@drawable/default_profile_img"
-                    app:civ_border_color="@color/Theme_Text_Color"
-                    app:civ_border_width="0.5dp"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp">
+                    app:civ_border_color="@color/Sub_Tutle_Color"
+                    app:civ_border_width="1dp">
                 </de.hdodenhof.circleimageview.CircleImageView>
-                <TextView
-                    android:id="@+id/User_Profile_activity_User_Location_TV"
-                    android:text="#123 - 123"
-                    android:fontFamily="@font/notosans_medium"
-                    android:includeFontPadding="false"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginLeft="6dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/Theme_Text_Color"
-                    android:layout_above="@id/User_Profile_Btns_Container"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/Setting_Fragment_My_Profile_Img_Civ"
-                    android:padding="2dp"
-                    android:textSize="12dp">
-                </TextView>
 
                 <TextView
-                    android:id="@+id/User_Profile_Activity_State_Msg_Tv"
+                    android:id="@+id/User_Profile_activity_User_Location_TV"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/round_shape_off"
-                    android:layout_above="@id/User_Profile_activity_User_Location_TV"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
                     android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
                     android:layout_toRightOf="@id/Setting_Fragment_My_Profile_Img_Civ"
                     android:fontFamily="@font/notosans_medium"
-                    android:gravity="center"
+                    android:gravity="center_vertical"
                     android:includeFontPadding="false"
-                    android:padding="6dp"
-                    android:text="상태 메세지"
+                    android:text="#123 - 123"
                     android:textColor="@color/Theme_Text_Color"
-                    android:textSize="12dp"></TextView>
+                    android:textSize="14dp"></TextView>
+                <TextView
+                    android:id="@+id/User_Profile_Activity_State_Msg_Tv"
+                    android:gravity="center"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_below="@id/User_Profile_activity_User_Location_TV"
+                    android:layout_toRightOf="@id/Setting_Fragment_My_Profile_Img_Civ"
+                    android:text="상태 메세지"
+                    android:fontFamily="@font/notosans_medium"
+                    android:textSize="14dp"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/Theme_Less_Accent_Color"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
+                </TextView>
+
+                    <RelativeLayout
+                        android:id="@+id/RTL1"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_below="@id/User_Profile_Activity_State_Msg_Tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp">
+                            <Button
+                                android:id="@+id/Setting_Fragment_Send_Friend_Request_Btn"
+                                android:text="친구 추가"
+                                android:layout_weight="1"
+                                android:layout_marginRight="6dp"
+                                android:textSize="14dp"
+                                android:fontFamily="@font/notosans_medium"
+                                android:includeFontPadding="false"
+                                android:textColor="@color/Theme_Text_Color"
+                                android:background="@drawable/state_friend_btn_shape"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent">
+                            </Button>
+                            <Button
+                                android:id="@+id/Setting_Fragment_Chatting_Civ"
+                                android:text="메세지"
+                                android:layout_weight="2"
+                                android:textSize="14dp"
+                                android:layout_marginLeft="6dp"
+                                android:fontFamily="@font/notosans_medium"
+                                android:includeFontPadding="false"
+                                android:textColor="@color/Theme_Text_Color"
+                                android:background="@drawable/transparent_round_shape"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent">
+                            </Button>
+                        </LinearLayout>
+                    </RelativeLayout>
                 <LinearLayout
                     android:id="@+id/User_Profile_Btns_Container"
                     android:orientation="horizontal"
-                    android:layout_alignParentBottom="true"
+                    android:layout_below="@id/RTL1"
+                    android:paddingBottom="2dp"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:layout_height="35dp">
+                    android:layout_marginTop="2dp"
+                    android:layout_height="wrap_content">
                     <LinearLayout
                         android:id="@+id/User_Profile_Avtivity_Post_Btn_Container"
                         android:gravity="center_horizontal"
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content">
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/User_Profile_Post_Civ"
-                            android:gravity="center"
-                            android:textColor="@color/black"
-                            android:backgroundTint="@color/Transparent_Black90"
-                            android:background="@drawable/ic_baseline_article_24"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-                        </de.hdodenhof.circleimageview.CircleImageView>
+                        <RelativeLayout
+                            android:id="@+id/User_Profile_Post_Btn_Container"
+                            android:gravity="center_horizontal"
+                            android:paddingBottom="2dp"
+                            android:background="@drawable/post_view_title_under_edge_1dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/User_Profile_Post_Civ"
+                                android:layout_width="25dp"
+                                android:layout_height="30dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/ic_baseline_article_24"
+                                android:backgroundTint="@color/Theme_Text_Color"
+                                android:textColor="@color/black"></de.hdodenhof.circleimageview.CircleImageView>
+                            <TextView
+                                android:id="@+id/User_Profile_Posts_Count_Tv"
+                                android:layout_centerInParent="true"
+                                android:layout_toRightOf="@id/User_Profile_Post_Civ"
+                                android:layout_marginLeft="6dp"
+                                android:text="0"
+                                android:textColor="@color/Theme_Text_Color"
+                                android:textSize="14dp"
+                                android:includeFontPadding="false"
+                                android:fontFamily="@font/notosans_medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                            </TextView>
+                        </RelativeLayout>
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/User_Profile_Avtivity_Friend_Btn_Container"
@@ -168,20 +196,41 @@
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content">
+                        <RelativeLayout
+                            android:id="@+id/User_Profile_Friends_Btn_Container"
+                            android:padding="6dp"
+                            android:gravity="center_horizontal"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp">
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/User_Profile_Friend_Civ"
-                            android:gravity="center"
-                            android:backgroundTint="@color/Transparent_Black50"
+                            android:layout_centerInParent="true"
+                            android:backgroundTint="@color/Theme_Less_Accent_Color"
                             android:background="@drawable/ic_baseline_group_24"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp">
+                        </de.hdodenhof.circleimageview.CircleImageView>
+                        <TextView
+                            android:id="@+id/User_Profile_Friends_Count_Tv"
+                            android:layout_centerInParent="true"
+                            android:layout_toRightOf="@id/User_Profile_Friend_Civ"
+                            android:layout_marginLeft="6dp"
+                            android:text="0"
+                            android:textColor="@color/Theme_Less_Accent_Color"
+                            android:textSize="14dp"
+                            android:includeFontPadding="false"
+                            android:fontFamily="@font/notosans_medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
-                        </de.hdodenhof.circleimageview.CircleImageView>
+                        </TextView>
+                        </RelativeLayout>
                     </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
         <RelativeLayout
-            android:layout_marginTop="12dp"
+            android:background="@color/Theme_Color"
             android:layout_weight="25"
             android:layout_width="match_parent"
             android:layout_height="0dp">

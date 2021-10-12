@@ -17,8 +17,7 @@
         android:id="@+id/Title"
         android:visibility="visible"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginTop="6dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:background="@drawable/gradient"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="50dp"
-            android:layout_marginLeft="12dp"
+            android:layout_marginLeft="6dp"
             android:layout_centerInParent="true"
             android:layout_alignParentLeft="true"
             android:textStyle="bold"
@@ -68,9 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/Theme_Color"
-        app:layout_constraintBottom_toBottomOf="@+id/App_Main_Fragment_FrameLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout">
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/adViewBanner"
@@ -86,9 +83,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/Title"
-        tools:layout_editor_absoluteX="6dp">
+        app:layout_constraintBottom_toTopOf="@+id/adViewBanner_Container"
+        app:layout_constraintTop_toBottomOf="@+id/Title">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/App_Main_ViewPager2"
@@ -102,12 +98,12 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/top_edge_black_1dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <RelativeLayout
             android:id="@+id/Firend_List_Btn_Container"
@@ -146,13 +142,12 @@
             android:id="@+id/Post_List_Btn_Container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent">
+            android:layout_weight="1">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/App_Main_Post_Civ"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="28dp"
+                android:layout_height="33dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/ic_baseline_article_24"
                 android:backgroundTint="@color/Btn_On_Color"></de.hdodenhof.circleimageview.CircleImageView>
@@ -187,7 +182,7 @@
                 android:layout_height="35dp"
                 android:layout_centerInParent="true"
                 android:src="@drawable/app_logo"
-                app:civ_border_color="@color/Theme_Text_Color"
+                app:civ_border_color="@color/Sub_Tutle_Color"
                 app:civ_border_width="0.5dp"></de.hdodenhof.circleimageview.CircleImageView>
         </RelativeLayout>
     </LinearLayout>

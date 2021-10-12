@@ -41,28 +41,33 @@
     <color name="light_white">#FFFFFFFF</color>
 
 
-    <color name="trans_light_purple">#30BB86FC</color>
-    <color name="trans_purple">#106200EE</color>
-    <color name="trans_light_pink">#30ED58DE</color>
-    <color name="trans_pink">#10FD04F9</color>
-    <color name="trans_light_red">#30F84242</color>
-    <color name="trans_red">#10FF0000</color>
-    <color name="trans_light_blue">#304578F8</color>
-    <color name="trans_blue">#300046F8</color>
-    <color name="trans_blue_purple">#103700B3</color>
-    <color name="trans_mint">#3003DAC5</color>
-    <color name="trans_dark_mint">#10018786</color>
-    <color name="trans_dark_black">#10000000</color>
-    <color name="trans_light_white">#30FFFFFF</color>
-    <color name="trans_light_Gray">#30474646</color>
+    <color name="trans_light_purple">#20BB86FC</color>
+    <color name="trans_purple">#206200EE</color>
+    <color name="trans_light_pink">#20ED58DE</color>
+    <color name="trans_pink">#20FD04F9</color>
+    <color name="trans_light_red">#20F84242</color>
+    <color name="trans_red">#20FF0000</color>
+    <color name="trans_light_blue">#204578F8</color>
+    <color name="trans_blue">#200046F8</color>
+    <color name="trans_blue_purple">#203700B3</color>
+    <color name="trans_mint">#2003DAC5</color>
+    <color name="trans_dark_mint">#20018786</color>
+    <color name="trans_dark_black">#20000000</color>
+    <color name="trans_light_white">#20FFFFFF</color>
+    <color name="trans_light_Gray">#20474646</color>
 
+
+    <color name="Sub_Tutle_Color">#FFFFFF</color>
+    <color name="Post_Write_Setting_Conatiner_Color">#70FFFFFF</color>
+    <color name="State_Msg_Color_Background">#20FFFFFF</color>
+    <color name="P2P_Chat_Room_Color">#10FFFFFF</color>
     <color name="Chat_ET_Color">#30FFFFFF</color>
     <color name="Theme_Color">#000000</color>
     <color name="Chat_Room_Color">#10FFFFFF</color>
     <color name="Friend_State_Color">#60FFFFFF</color>
     <color name="None_Friend_State_Color">#FFFFFF</color>
     <color name="Post_Create_Color">#FFFFFF</color>
-    <color name="Theme_Less_Accent_Color">#90FFFFFF</color>
+    <color name="Theme_Less_Accent_Color">#98FFFFFF</color>
     <color name="Theme_Chat_List_Color">#20FFFFFF</color>
     <color name="Theme_Text_Color">#FFFFFF</color>
     <color name="Btn_Off_Color">#40FFFFFF</color>

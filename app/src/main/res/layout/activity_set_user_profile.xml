@@ -16,18 +16,17 @@
     tools:context="com.bigjeon.grumbling.Set_User_Profile_Activity">
     <RelativeLayout
         android:id="@+id/App_Title_Container"
-        android:background="@drawable/under_edge_2dp"
+        android:background="@drawable/post_view_title_under_edge_1dp"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true">
         <TextView
             android:layout_centerInParent="true"
-            android:textStyle="bold"
             android:textColor="@color/black"
             android:includeFontPadding="false"
-            android:fontFamily="@font/notosans_black"
+            android:fontFamily="@font/notosans_medium"
             android:text="-프로필 설정-"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </TextView>
@@ -36,9 +35,11 @@
             android:id="@+id/Complete_Btn"
             android:layout_centerInParent="true"
             android:layout_marginRight="6dp"
-            android:background="@drawable/round_shape_off"
+            android:background="@drawable/transparent_round_shape"
             android:layout_width="60dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
+            android:textSize="14dp"
+            android:textColor="@color/Theme_Text_Color"
             android:includeFontPadding="false"
             android:fontFamily="@font/notosans_regular"
             android:layout_alignParentRight="true"
@@ -60,41 +61,51 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="20dp"
                 app:civ_border_width="1dp"
-                app:civ_border_color="@color/Theme_Text_Color"
+                app:civ_border_color="@color/Sub_Tutle_Color"
                 android:layout_marginLeft="8dp"
                 android:src="@mipmap/main_app_icon_round"
-                android:layout_width="130dp"
-                android:layout_height="130dp">
+                android:layout_width="150dp"
+                android:layout_height="150dp">
             </de.hdodenhof.circleimageview.CircleImageView>
-            <RelativeLayout
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_below="@id/User_Img"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <Button
+                    android:layout_weight="1"
                     android:id="@+id/Set_User_Img_Default_Btn"
-                    android:padding="6dp"
                     android:textSize="14dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/round_shape_off"
-                    android:fontFamily="@font/notosans_black"
+                    android:background="@drawable/transparent_round_shape"
+                    android:fontFamily="@font/notosans_medium"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/Theme_Text_Color"
                     android:text="기본 이미지"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content">
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp">
                 </Button>
                 <Button
+                    android:layout_weight="1"
                     android:id="@+id/Set_User_Img_From_Gallery_Btn"
                     android:padding="6dp"
                     android:textSize="14dp"
+                    android:textColor="@color/Theme_Text_Color"
                     android:layout_toRightOf="@id/Set_User_Img_Default_Btn"
-                    android:background="@drawable/round_shape_off"
-                    android:fontFamily="@font/notosans_black"
+                    android:background="@drawable/transparent_round_shape"
+                    android:fontFamily="@font/notosans_medium"
+                    android:includeFontPadding="false"
                     android:text="갤러리"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content">
+                    android:layout_width="0dp"
+                    android:layout_height="35dp">
                 </Button>
-            </RelativeLayout>
+            </LinearLayout>
         </RelativeLayout>
         <LinearLayout
             android:orientation="vertical"
@@ -107,56 +118,64 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/User_Name_TV"
-                    android:text="닉네임"
+                    android:text="1.닉네임"
                     android:textSize="16dp"
-                    android:layout_marginRight="5dp"
                     android:includeFontPadding="false"
-                    android:fontFamily="@font/notosans_black"
+                    android:fontFamily="@font/notosans_medium"
                     android:textColor="@color/Theme_Text_Color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
                 <EditText
                     android:id="@+id/User_Name"
-                    android:padding="14dp"
-                    android:background="@drawable/round_shape_off"
+                    android:padding="6dp"
+                    android:background="@drawable/transparent_round_shape"
                     android:hint="사용하실 닉네임을 입력하세요."
                     android:textSize="14dp"
+                    android:textColor="@color/Theme_Text_Color"
+                    android:fontFamily="@font/notosans_medium"
+                    android:includeFontPadding="false"
                     android:layout_marginTop="6dp"
                     android:layout_below="@id/User_Name_TV"
                     android:layout_centerInParent="true"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="40dp">
                 </EditText>
             </RelativeLayout>
             <RelativeLayout
-                android:padding="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/User_Location_TV"
-                    android:text="위치"
+                    android:text="2. 위치"
                     android:textSize="16dp"
                     android:includeFontPadding="false"
-                    android:fontFamily="@font/notosans_black"
+                    android:fontFamily="@font/notosans_medium"
                     android:textColor="@color/Theme_Text_Color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
                 <EditText
                     android:id="@+id/User_Location"
-                    android:padding="14dp"
-                    android:layout_marginTop="6dp"
+                    android:padding="6dp"
+                    android:background="@drawable/transparent_round_shape"
+                    android:fontFamily="@font/notosans_medium"
+                    android:textColor="@color/Theme_Text_Color"
                     android:layout_below="@id/User_Location_TV"
-                    android:background="@drawable/round_shape_off"
-                    android:hint="도/시까지만 입력해주세요.(ex.경기도-성남시)"
+                    android:includeFontPadding="false"
+                    android:hint="도/시까지만 입력해주세요.(ex.경기도_성남시)"
                     android:textSize="14dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="40dp">
                 </EditText>
             </RelativeLayout>
             <RelativeLayout
-                android:padding="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -164,7 +183,7 @@
                     android:text="상태 메세지"
                     android:textSize="16dp"
                     android:includeFontPadding="false"
-                    android:fontFamily="@font/notosans_black"
+                    android:fontFamily="@font/notosans_medium"
                     android:textColor="@color/Theme_Text_Color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -173,14 +192,29 @@
                     android:id="@+id/User_State_MSG"
                     android:padding="14dp"
                     android:layout_marginTop="6dp"
+                    android:includeFontPadding="false"
+                    android:gravity="left"
+                    android:fontFamily="@font/notosans_medium"
+                    android:textColor="@color/Theme_Text_Color"
                     android:layout_below="@id/User_State_MSG_TV"
-                    android:background="@drawable/round_shape_off"
-                    android:hint="도/시까지만 입력해주세요.(ex.경기도-성남시)"
+                    android:background="@drawable/transparent_round_shape"
+                    android:hint="자신을 소개 해보세요!"
                     android:textSize="14dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
                 </EditText>
             </RelativeLayout>
+            <TextView
+                android:textSize="25dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:textStyle="bold"
+                android:fontFamily="@font/binggrae"
+                android:textColor="@color/Transparent_Black30"
+                android:text="소통에 자유를 더하다 \n 그렁"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </TextView>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

@@ -39,6 +39,7 @@ public class User_Profile_PostsList_Fragment extends Fragment {
     private String User_Uid = "?";
     private String My_Name;
     private String My_Img;
+    private String My_Uid;
     private DatabaseReference reference;
     private String Get_Post_Key = "유저 게시글";
     private ArrayList<Post_Data> list = new ArrayList<>();
@@ -54,11 +55,12 @@ public class User_Profile_PostsList_Fragment extends Fragment {
         User_Uid = Parent_Act.SendData();
 
         SharedPreferences Get_My_Data = this.getActivity().getSharedPreferences("My_Data", Context.MODE_PRIVATE);
+        My_Uid = Get_My_Data.getString("UID", null);
         My_Name = Get_My_Data.getString("NAME", null);
         My_Img = Get_My_Data.getString("IMG", null);
 
         RecyclerView rcv = binding.UserPostListFragmentRCV;
-        adapter = new Post_View_Rcv_Adapter(getContext(), list, Get_Post_Key, My_Name, My_Img, User_Uid);
+        adapter = new Post_View_Rcv_Adapter(getContext(), list, Get_Post_Key, My_Uid, My_Name, My_Img, User_Uid);
         LinearLayoutManager lm = new LinearLayoutManager(v.getContext());
         rcv.setLayoutManager(lm);
         rcv.setAdapter(adapter);

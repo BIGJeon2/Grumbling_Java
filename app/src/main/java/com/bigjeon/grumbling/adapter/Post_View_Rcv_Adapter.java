@@ -15,6 +15,7 @@ import android.view.ContextMenu;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
@@ -42,6 +44,7 @@ import com.bigjeon.grumbling.Model.ApiCLient;
 import com.bigjeon.grumbling.Model.Data;
 import com.bigjeon.grumbling.Model.Model;
 import com.bigjeon.grumbling.Model.NotificationModel;
+import com.bigjeon.grumbling.Post_Write_Activity;
 import com.bigjeon.grumbling.Setting_My_Profile_Activity;
 import com.bigjeon.grumbling.Show_Selected_Post_Activity;
 import com.bigjeon.grumbling.User_Profile_View_activity;
@@ -91,6 +94,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
     private static final String TAG = "My_Check";
     private static final String Notification_Favorite_Key = "Add_Favorite";
     private String User_Uid;
+    private String My_Uid;
     private int doubleclickFlag = 0;
     private int CLICK_DELAY = 300;
     private ArrayList<Post_Data> list = new ArrayList<>();
@@ -99,10 +103,11 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference DB = FirebaseDatabase.getInstance().getReference("Posts");
-    public Post_View_Rcv_Adapter(Context context, ArrayList<Post_Data> list, String Key, String my_name, String my_img, String user_uid){
+    public Post_View_Rcv_Adapter(Context context, ArrayList<Post_Data> list, String Key, String my_Uid, String my_name, String my_img, String user_uid){
         this.mContext = context;
         this.list = list;
         this.Get_Post_Key = Key;
+        this.My_Uid = my_Uid;
         this.My_Name = my_name;
         this.My_Img = my_img;
         this.User_Uid = user_uid;
@@ -162,7 +167,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
                     @Override
                     public void run() {
                         if (doubleclickFlag == 1){
-                            //Show_Selected_Post(data);
+                            Show_Selected_Post(data);
                         }else if (doubleclickFlag == 2){
                             onFavoriteClicked(database.getReference().child("Posts").child(data.getPost_Title()));
                         }
@@ -185,13 +190,10 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
                 for (DataSnapshot data : snapshot.getChildren()){
                     count++;
                     if (data != null){
-                        if (count == 2){
+                        if (count == 1){
                             holder.Post_No_Chat_TV.setVisibility(View.GONE);
                         } else if (count >= 3){
                             holder.Expand_Civ.setVisibility(View.VISIBLE);
-                            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)holder.Chatting_List_Rcv.getLayoutParams();
-                            layoutParams.height = 150;
-                            holder.Chatting_List_Rcv.setLayoutParams(layoutParams);
                         }
                         if (count == 8 ){
                             break;
@@ -199,6 +201,9 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
                     }
                     Chat_Data chat = data.getValue(Chat_Data.class);
                     chat_dataArrayList.add(chat);
+                    RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)holder.Chatting_List_Rcv.getLayoutParams();
+                    layoutParams.height = 150;
+                    holder.Chatting_List_Rcv.setLayoutParams(layoutParams);
                     chat_adapter.notifyDataSetChanged();
                 }
             }
@@ -215,7 +220,6 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
 
         holder.Go_Chat_Room_Civ.setOnClickListener(v -> Go_Chat_Room(data));
         holder.Go_Chat_Room_Btn_In_Container.setOnClickListener(v -> Go_Chat_Room(data));
-
     }
 
     private String Change_Date(String write_date){
@@ -243,9 +247,11 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
     }
 
     private void Show_Selected_Post(Post_Data data) {
-        Intent Go_Show_Selected_Post = new Intent(mContext, Show_Selected_Post_Activity.class);
-        Go_Show_Selected_Post.putExtra("TITLE", data.getPost_Title());
-        mContext.startActivity(Go_Show_Selected_Post);
+        if (data.getUser_Uid().equals(My_Uid) && Get_Post_Key.equals("유저 게시글")) {
+            Intent Go_Show_Selected_Post = new Intent(mContext, Show_Selected_Post_Activity.class);
+            Go_Show_Selected_Post.putExtra("TITLE", data.getPost_Title());
+            mContext.startActivity(Go_Show_Selected_Post);
+        }
     }
 
     private void Go_User_Profile_View_Act(String UID) {

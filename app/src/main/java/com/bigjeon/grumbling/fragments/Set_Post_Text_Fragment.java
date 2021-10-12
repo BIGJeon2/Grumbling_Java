@@ -27,12 +27,19 @@ import com.example.grumbling.R;
 import com.example.grumbling.databinding.FragmentSetPostBackgroundBinding;
 import com.example.grumbling.databinding.FragmentSetPostTextBinding;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Set_Post_Text_Fragment extends Fragment {
 
     private FragmentSetPostTextBinding binding;
-    private int Posting_Content_BackColor = R.color.Transparent_Black40;
-    private Color_Select_Rcv_Adapter color_adapter;
+    private int Posting_Content_BackColor = R.color.Transparent_Black30;
+    private Color_Select_Rcv_Adapter Text_color_adapter;
+    private Color_Select_Rcv_Adapter Back_color_adapter;
     private Post_Write_ViewModel VM;
+    private List<Integer> Text_Colors;
+    private List<Integer> Back_Colors;
 
     public Set_Post_Text_Fragment() {
         // Required empty public constructor
@@ -70,13 +77,14 @@ public class Set_Post_Text_Fragment extends Fragment {
     }
 
     private void Set_Content_Back_Color() {
-        color_adapter = new Color_Select_Rcv_Adapter(getContext());
-        color_adapter.Set_Color_List(0);
-        binding.DialogPostingContentTextBackColorRcv.setAdapter(color_adapter);
-        color_adapter.setOnClickListener(new Color_Adapter_OnClickListener() {
+        Back_Colors = new ArrayList<>(Arrays.asList(R.color.trans_dark_black, R.color.trans_light_Gray ,R.color.trans_light_purple ,R.color.trans_purple ,R.color.trans_light_pink, R.color.trans_pink, R.color.trans_light_red, R.color.trans_red, R.color.trans_light_blue, R.color.trans_blue, R.color.trans_blue_purple, R.color.trans_mint, R.color.trans_dark_mint, R.color.trans_light_white));
+
+        Back_color_adapter = new Color_Select_Rcv_Adapter(getContext(), Back_Colors);
+        binding.DialogPostingContentTextBackColorRcv.setAdapter(Back_color_adapter);
+        Back_color_adapter.setOnClickListener(new Color_Adapter_OnClickListener() {
             @Override
             public void onItemClick(Color_Select_Rcv_Adapter.Holder_Color holder_color, View v, int pos) {
-                Posting_Content_BackColor = color_adapter.Get_Color(pos);
+                Posting_Content_BackColor = Back_color_adapter.Get_Color(pos);
                 VM.get_Post().getValue().setContent_Back_Color(Posting_Content_BackColor);
                 VM.set_Post(VM.get_Post().getValue());
             }
@@ -85,17 +93,17 @@ public class Set_Post_Text_Fragment extends Fragment {
         lm.setOrientation(RecyclerView.HORIZONTAL);
         binding.DialogPostingContentTextBackColorRcv.setLayoutManager(lm);
         binding.DialogPostingContentTextBackColorRcv.setHasFixedSize(true);
-        color_adapter.notifyDataSetChanged();
+        Back_color_adapter.notifyDataSetChanged();
     }
 
     private void Set_Content_Color() {
-        color_adapter = new Color_Select_Rcv_Adapter(getContext());
-        color_adapter.Set_Color_List(0);
-        binding.DialogPostingContentTextColorRcv.setAdapter(color_adapter);
-        color_adapter.setOnClickListener(new Color_Adapter_OnClickListener() {
+        Text_Colors = new ArrayList<>(Arrays.asList(R.color.dark_black, R.color.light_Gray ,R.color.light_purple ,R.color.purple ,R.color.light_pink, R.color.pink, R.color.light_red, R.color.red, R.color.light_blue, R.color.blue, R.color.blue_purple, R.color.mint, R.color.dark_mint, R.color.light_white));
+        Text_color_adapter = new Color_Select_Rcv_Adapter(getContext(), Text_Colors);
+        binding.DialogPostingContentTextColorRcv.setAdapter(Text_color_adapter);
+        Text_color_adapter.setOnClickListener(new Color_Adapter_OnClickListener() {
             @Override
             public void onItemClick(Color_Select_Rcv_Adapter.Holder_Color holder_color, View v, int pos) {
-                VM.get_Post().getValue().setContent_Text_Color(color_adapter.Get_Color(pos));
+                VM.get_Post().getValue().setContent_Text_Color(Text_color_adapter.Get_Color(pos));
                 VM.set_Post(VM.get_Post().getValue());
             }
         });
@@ -103,6 +111,6 @@ public class Set_Post_Text_Fragment extends Fragment {
         lm.setOrientation(RecyclerView.HORIZONTAL);
         binding.DialogPostingContentTextColorRcv.setLayoutManager(lm);
         binding.DialogPostingContentTextColorRcv.setHasFixedSize(true);
-        color_adapter.notifyDataSetChanged();
+        Text_color_adapter.notifyDataSetChanged();
     }
 }

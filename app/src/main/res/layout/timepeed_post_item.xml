@@ -2,7 +2,7 @@
 <layout>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="45dp"
     android:layout_marginRight="6dp"
     android:layout_marginLeft="6dp"
     android:background="@android:color/transparent"
@@ -11,22 +11,27 @@
         android:id="@+id/Timepeed_Post_User_CIV"
         android:layout_width="35dp"
         android:layout_height="35dp"
+        android:src="@drawable/default_profile_img"
         android:layout_centerInParent="true"
         android:layout_alignParentLeft="true"
-        app:civ_border_color="@color/Theme_Text_Color"
+        app:civ_border_color="@color/Sub_Tutle_Color"
         app:civ_border_width="0.5dp">
     </de.hdodenhof.circleimageview.CircleImageView>
+    <RelativeLayout
+        android:layout_marginLeft="6dp"
+        android:layout_toRightOf="@+id/Timepeed_Post_User_CIV"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <TextView
         android:id="@+id/Timepeed_PostText"
         android:textColor="@color/Theme_Text_Color"
         android:textSize="12dp"
-        android:layout_marginLeft="6dp"
-        android:layout_toRightOf="@+id/Timepeed_Post_User_CIV"
-        android:layout_centerInParent="true"
         android:fontFamily="@font/notosans_medium"
         android:includeFontPadding="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </TextView>
+    </RelativeLayout>
 </RelativeLayout>
 </layout>

@@ -16,5 +16,7 @@
         <item name="android:navigationBarColor">@color/black</item>
         <item name="colorAccent">@color/light_white</item>
         <item name="android:windowLightNavigationBar">false</item>
+        <item name="colorPrimaryDark">@color/Theme_Text_Color</item>
+        <item name="colorControlNormal">@android:color/white</item>
     </style>
 </resources>

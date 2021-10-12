@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
@@ -10,141 +10,136 @@
             type="com.bigjeon.grumbling.Post_Write_Activity" />
     </data>
     <RelativeLayout
-        xmlns:tools="http://schemas.android.com/tools"
-        android:background="@drawable/none_effect_background_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
             android:id="@+id/Top_Bar"
-            android:background="@android:color/transparent"
+            android:visibility="gone"
+            android:background="@drawable/post_view_title_under_edge_1dp"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_alignParentTop="true">
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Post_Write_BackPress_Imv"
-                android:layout_marginLeft="3dp"
+                android:layout_marginLeft="6dp"
+                android:backgroundTint="@color/Theme_Text_Color"
                 android:background="@drawable/ic_baseline_navigate_before_24"
                 android:layout_centerInParent="true"
                 android:layout_alignParentLeft="true"
                 android:layout_width="30dp"
                 android:layout_height="30dp">
-            </ImageView>
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/Dialog_Posting_User_Img"
-                android:layout_toRightOf="@id/Post_Write_BackPress_Imv"
-                android:src="@mipmap/ic_launcher"
-                app:civ_border_width="1dp"
-                app:civ_border_color="@color/Transparent_Green"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="2dp">
             </de.hdodenhof.circleimageview.CircleImageView>
             <TextView
                 android:id="@+id/Dialog_Posting_User_Name"
-                android:text="User_Name"
+                android:text="글 작성"
+                android:fontFamily="@font/notosans_medium"
+                android:includeFontPadding="false"
+                android:textSize="18dp"
+                android:textColor="@color/Theme_Text_Color"
+                android:layout_centerInParent="true"
+                android:padding="2dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/Dialog_Posting_User_Img"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="5dp">
+                android:layout_toRightOf="@id/Post_Write_BackPress_Imv">
             </TextView>
-            <Button
-                android:id="@+id/Dialog_Posting_Complete_CIV"
-                android:text="등록"
-                android:textSize="12dp"
-                android:background="@drawable/round_shape_off"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_centerInParent="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="5dp"
-                android:layout_width="50dp"
-                android:layout_height="30dp">
-            </Button>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/Dialog_Posting_Content_Container"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="460dp"
             android:layout_below="@+id/Top_Bar">
             <FrameLayout
-                android:background="@color/Transparent_Black50"
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <ImageView
                     android:id="@+id/Dialog_Posting_Background"
+                    android:background="@drawable/selected__post_view_activity_background_img"
                     android:scaleType="centerCrop"
-                    android:background="@drawable/post_view_title_under_edge_1dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 </ImageView>
             </FrameLayout>
             <EditText
                 android:id="@+id/Dialog_Posting_Content"
-                android:background="@color/Transparent_Black50"
+                android:background="@color/Transparent_Black30"
                 android:hint="텍스트"
+                android:fontFamily="@font/notosans_medium"
+                android:includeFontPadding="false"
+                android:textSize="16dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/Theme_Less_Accent_Color"
                 android:gravity="center"
                 android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </EditText>
         </RelativeLayout>
-
+            <RelativeLayout
+                android:id="@+id/Post_Write_Btns_Container"
+                android:background="@color/Theme_Color"
+                android:layout_below="@+id/Dialog_Posting_Content_Container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/Post_Write_Text_Set_Container"
+                    android:layout_alignParentLeft="true"
+                    android:padding="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/Dialog_Posting_Set_Text"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/ic_baseline_text_format_24"
+                    android:backgroundTint="@color/Theme_Text_Color">
+                </de.hdodenhof.circleimageview.CircleImageView>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:padding="4dp"
+                    android:id="@+id/Post_Write_Img_Set_Container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/Post_Write_Text_Set_Container">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/Dialog_Posting_Set_Img"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:backgroundTint="@color/Btn_Off_Color"
+                    android:background="@drawable/ic_baseline_insert_photo_24">
+                </de.hdodenhof.circleimageview.CircleImageView>
+                </RelativeLayout>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/Dialog_Posting_Complete_CIV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="6dp"
+                    android:background="@drawable/ic_baseline_check_24"
+                    android:backgroundTint="@color/Sub_Tutle_Color">
+                </de.hdodenhof.circleimageview.CircleImageView>
+            </RelativeLayout>
         <RelativeLayout
-            android:id="@+id/Dialog_Posting_Setting_Container"
+            android:background="@color/Theme_Color"
+            android:paddingTop="6dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/Dialog_Posting_Content_Container">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/Dialog_Posting_Set_Text"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="3dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/ic_baseline_text_format_24"
-                android:backgroundTint="@color/Transparent_Black90"></de.hdodenhof.circleimageview.CircleImageView>
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/Dialog_Posting_Set_Img"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="3dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/Dialog_Posting_Set_Text"
-                android:backgroundTint="@color/Transparent_Black50"
-                android:background="@drawable/ic_baseline_insert_photo_24"></de.hdodenhof.circleimageview.CircleImageView>
-            <Button
-                android:id="@+id/Dialog_Posting_Set_Grade"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="7dp"
-                android:textStyle="bold"
-                android:background="@drawable/round_shape_off"
-                android:text="잡담"
-                android:textColor="@color/black"
-                android:textSize="10dp"></Button>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/Dialog_Posting_Set_Img">
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/Post_Write_ViewPager2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:background="@color/Transparent_Black30"
-                    android:clipChildren="false"
-                    android:clipToPadding="false"></androidx.viewpager2.widget.ViewPager2>
-            </RelativeLayout>
+            android:layout_below="@id/Post_Write_Btns_Container">
+        <FrameLayout
+            android:id="@+id/Post_Write_FrameLayout"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+        </FrameLayout>
         </RelativeLayout>
-    </RelativeLayout>
+        </RelativeLayout>
 </layout>

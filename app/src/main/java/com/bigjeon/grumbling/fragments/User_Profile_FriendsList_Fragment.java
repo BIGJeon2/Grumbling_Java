@@ -1,5 +1,7 @@
 package com.bigjeon.grumbling.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -30,9 +32,11 @@ public class User_Profile_FriendsList_Fragment extends Fragment {
 
     private FragmentUserProfileFriendsListBinding binding;
     private String User_Uid;
+    private String My_Uid;
     private User_Profile_View_activity Parent_Act;
     private Friend_List_Adapter Friend_Adapter;
     private ArrayList<Friend_Data> Friends_List = new ArrayList<>();
+    private ArrayList<Friend_Data> My_Freiend_List = new ArrayList<>();
     private DatabaseReference reference;
 
     @Override
@@ -43,9 +47,12 @@ public class User_Profile_FriendsList_Fragment extends Fragment {
 
         Parent_Act = (User_Profile_View_activity)getActivity();
         User_Uid = Parent_Act.SendData();
+        SharedPreferences Get_My_Data = this.getActivity().getSharedPreferences("My_Data", Context.MODE_PRIVATE);
+        My_Uid = Get_My_Data.getString("UID", null);
+        Get_My_FirendList();
 
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
-        Friend_Adapter = new Friend_List_Adapter(getContext(), User_Uid, Friends_List);
+        Friend_Adapter = new Friend_List_Adapter(getContext(), User_Uid, Friends_List, My_Freiend_List, My_Uid);
         binding.UserFriendsListFragmentRCV.setAdapter(Friend_Adapter);
         binding.UserFriendsListFragmentRCV.setLayoutManager(lm);
         binding.UserFriendsListFragmentRCV.setHasFixedSize(true);
@@ -78,5 +85,24 @@ public class User_Profile_FriendsList_Fragment extends Fragment {
         super.onResume();
         Friends_List.clear();
         Get_Friend_List();
+    }
+
+    private void Get_My_FirendList(){
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Friends");
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    Friend_Data friend = data.getValue(Friend_Data.class);
+                    My_Freiend_List.add(friend);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
     }
 }

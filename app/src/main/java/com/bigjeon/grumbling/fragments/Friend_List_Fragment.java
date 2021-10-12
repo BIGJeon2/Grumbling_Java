@@ -53,7 +53,7 @@ public class Friend_List_Fragment extends Fragment {
 
         Get_My_Profile();
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
-        Friend_Adapter = new Friend_List_Adapter(getContext(), My_Uid, Friends_List);
+        Friend_Adapter = new Friend_List_Adapter(getContext(), My_Uid, Friends_List, null, My_Uid);
         binding.FriendListRcv.setAdapter(Friend_Adapter);
         binding.FriendListRcv.setLayoutManager(lm);
         binding.FriendListRcv.setHasFixedSize(true);

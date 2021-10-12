@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="5dp">
+    android:padding="4dp">
     <RelativeLayout
         android:id="@+id/Chatting_Text_Container"
         android:layout_alignParentRight="true"
@@ -16,13 +16,12 @@
         android:gravity="left"
         android:text="내용입력창입니다."
         android:includeFontPadding="false"
-        android:fontFamily="@font/notosans_regular"
+        android:fontFamily="@font/notosans_medium"
         android:background="@drawable/my_chat_background"
         android:textColor="@color/black"
         android:layout_alignParentRight="true"
         android:textSize="11dp"
-        android:textStyle="bold"
-        android:padding="10dp"
+        android:padding="8dp"
         android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -44,11 +43,10 @@
             android:visibility="gone"
             android:paddingRight="5dp"
             android:includeFontPadding="false"
-            android:fontFamily="@font/notosans_regular"
+            android:fontFamily="@font/notosans_medium"
             android:layout_alignBottom="@id/Chatting_Text_TV"
             android:layout_toLeftOf="@id/Chatting_Text_TV"
             android:text="1"
-            android:textStyle="bold"
             android:textColor="@color/Theme_Text_Color"
             android:textSize="10dp"
             android:layout_width="wrap_content"

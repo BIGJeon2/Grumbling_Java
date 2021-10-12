@@ -3,6 +3,7 @@ package com.bigjeon.grumbling.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import com.squareup.picasso.Picasso;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -31,12 +33,16 @@ public class Friend_List_Adapter extends RecyclerView.Adapter<Friend_List_Adapte
     private Context mContext;
     private UserListItemBinding binding;
     private String My_Uid;
-    ArrayList<Friend_Data> Friends_List;
+    private String User_Uid;
+    private ArrayList<Friend_Data> Friends_List;
+    private ArrayList<Friend_Data> My_Friend_List;
 
-    public Friend_List_Adapter(Context mContext, String my_Uid, ArrayList<Friend_Data> friends_List) {
+    public Friend_List_Adapter(Context mContext, String user_Uid, ArrayList<Friend_Data> friends_List, ArrayList<Friend_Data> my_friend_list, String my_Uid) {
         this.mContext = mContext;
-        My_Uid = my_Uid;
+        User_Uid = user_Uid;
         Friends_List = friends_List;
+        My_Friend_List = my_friend_list;
+        My_Uid = my_Uid;
     }
 
     @NonNull
@@ -51,6 +57,14 @@ public class Friend_List_Adapter extends RecyclerView.Adapter<Friend_List_Adapte
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull Friend_ViewHolder holder, int position) {
+        if (My_Uid != User_Uid){
+            if (My_Friend_List.contains(Friends_List.get(position))){
+                holder.P2P_Chat_Civ.setVisibility(View.VISIBLE);
+            }
+        }else{
+            holder.P2P_Chat_Civ.setVisibility(View.VISIBLE);
+        }
+
         FirebaseFirestore Store = FirebaseFirestore.getInstance();
         Store.collection("Users").whereEqualTo("UID", Friends_List.get(position).getUid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -99,7 +113,8 @@ public class Friend_List_Adapter extends RecyclerView.Adapter<Friend_List_Adapte
     private void Intent_To_P2P_Chatting(String User_Uid) {
         Intent GO_P2P_Chat = new Intent(mContext, P2P_Chatting_Activity.class);
         GO_P2P_Chat.putExtra("USER_UID", User_Uid);
-        GO_P2P_Chat.putExtra("MY_UID", My_Uid);
+        GO_P2P_Chat.putExtra("MY_UID", User_Uid);
         mContext.startActivity(GO_P2P_Chat);
     }
+
 }

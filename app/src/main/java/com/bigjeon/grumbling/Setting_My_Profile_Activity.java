@@ -69,6 +69,7 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
     private String My_Email;
     private String My_Location;
     private String My_State_Msg;
+    private int Post_Count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,6 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
         User_Uid = intent.getStringExtra("UID");
         if (!User_Uid.equals(My_Uid)){
             Set_Users_Data();
-            binding.SettingFragmentSettingBtnsContainer.setVisibility(View.GONE);
             Get_Post_Key = User_Uid;
         }else{
             Picasso.get().load(My_Img).into(binding.SettingFragmentMyProfileImgCiv);
@@ -95,7 +95,7 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
         DB = FirebaseDatabase.getInstance().getReference("Posts");
 
         RecyclerView rcv = binding.SettingFragmnetMyPostsRCV;
-        adapter = new Post_View_Rcv_Adapter(this, list, Get_Post_Key, My_Name, My_Img, User_Uid);
+        adapter = new Post_View_Rcv_Adapter(this, list, Get_Post_Key, My_Uid, My_Name, My_Img, User_Uid);
         LinearLayoutManager lm = new LinearLayoutManager(this);
         rcv.setLayoutManager(lm);
         rcv.setAdapter(adapter);
@@ -180,9 +180,11 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
                         Post_Data post = data.getValue(Post_Data.class);
                         if (post.getUser_Uid().equals(mAuth.getCurrentUser().getUid())){
                             list.add(0, post);
+                            Post_Count++;
                         }
                     }
                     adapter.notifyDataSetChanged();
+                    binding.UserProfilePostCount.setText(Integer.toString(adapter.getItemCount()));
                 }
 
                 @Override

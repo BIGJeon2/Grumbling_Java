@@ -25,7 +25,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/My_Profile_Back_IMV"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="6dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerInParent="true"
                 android:backgroundTint="@color/Theme_Text_Color"
@@ -37,7 +37,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:layout_centerInParent="true"
                 android:id="@+id/Setting_Fragment_My_Name_Tv"
                 android:text="User_Name"
-                android:padding="2dp"
                 android:textSize="18dp"
                 android:layout_toRightOf="@id/My_Profile_Back_IMV"
                 android:textStyle="bold"
@@ -47,129 +46,179 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </TextView>
+            <Button
+                android:id="@+id/Setting_Fragment_Unregister_Btn"
+                android:visibility="gone"
+                android:layout_weight="1"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:text="계정 탈퇴"
+                android:textSize="12dp"
+                android:fontFamily="@font/notosans_medium"
+                android:includeFontPadding="false"
+                android:textColor="@color/Theme_Less_Accent_Color"
+                android:background="@color/Theme_Color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </Button>
         </RelativeLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="7.5"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:layout_marginBottom="6dp"
+        <RelativeLayout
+            android:paddingBottom="6dp"
+            android:background="@drawable/post_view_title_under_edge_1dp"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="wrap_content">
             <RelativeLayout
-                android:orientation="horizontal"
+                android:id="@+id/State_Container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Setting_Fragment_My_Profile_Img_Civ"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginStart="6dp"
+                    android:layout_alignParentTop="true"
                     android:layout_marginTop="6dp"
                     android:layout_marginEnd="6dp"
-                    android:layout_marginBottom="6dp"
                     android:src="@drawable/default_profile_img"
-                    app:civ_border_color="@color/Theme_Text_Color"
-                    app:civ_border_width="0.5dp"></de.hdodenhof.circleimageview.CircleImageView>
+                    app:civ_border_color="@color/Sub_Tutle_Color"
+                    app:civ_border_width="1dp">
+                </de.hdodenhof.circleimageview.CircleImageView>
+
                 <TextView
                     android:id="@+id/My_Profile_activity_User_Location_TV"
-                    android:text="#123 - 123"
-                    android:fontFamily="@font/notosans_medium"
-                    android:includeFontPadding="false"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginLeft="6dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/Theme_Text_Color"
-                    android:layout_above="@id/Setting_Fragment_Setting_Btns_Container"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/Setting_Fragment_My_Profile_Img_Civ"
-                    android:padding="2dp"
-                    android:textSize="12dp">
-                </TextView>
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_toRightOf="@id/Setting_Fragment_My_Profile_Img_Civ"
+                    android:fontFamily="@font/notosans_medium"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="#123 - 123"
+                    android:textColor="@color/Theme_Text_Color"
+                    android:textSize="14dp"></TextView>
+
+                <RelativeLayout
+                    android:id="@+id/RTL1"
+                    android:layout_marginTop="12dp"
+                    android:layout_below="@id/Setting_Activity_State_Msg_Tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="6dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/Setting_Fragment_Change_Profile_Btn"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            android:layout_marginRight="12dp"
+                            android:layout_marginLeft="6dp"
+                            android:background="@drawable/transparent_round_shape"
+                            android:fontFamily="@font/notosans_medium"
+                            android:includeFontPadding="false"
+                            android:text="프로필 수정"
+                            android:textColor="@color/Theme_Text_Color"
+                            android:textSize="14dp">
+                        </Button>
+                        <RelativeLayout
+                            android:padding="6dp"
+                            android:background="@drawable/transparent_round_shape"
+                            android:layout_marginLeft="6dp"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/Setting_Fragment_Sign_Out_Btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:backgroundTint="@color/Theme_Text_Color"
+                            android:background="@drawable/ic_baseline_power_settings_new_24">
+                        </de.hdodenhof.circleimageview.CircleImageView>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+
                 <TextView
                     android:id="@+id/Setting_Activity_State_Msg_Tv"
                     android:gravity="center"
-                    android:text="상태 메세지"
-                    android:padding="6dp"
-                    android:fontFamily="@font/notosans_medium"
-                    android:textSize="12dp"
-                    android:background="@drawable/round_shape_off"
-                    android:includeFontPadding="false"
-                    android:layout_marginLeft="6dp"
-                    android:textColor="@color/Theme_Text_Color"
-                    android:layout_above="@id/My_Profile_activity_User_Location_TV"
-                    android:layout_toRightOf="@id/Setting_Fragment_My_Profile_Img_Civ"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </TextView>
-                <LinearLayout
-                    android:id="@+id/Setting_Fragment_Setting_Btns_Container"
-                    android:background="@drawable/transparent_round_shape"
-                    android:layout_alignParentBottom="true"
-                    android:orientation="horizontal"
                     android:layout_marginTop="6dp"
+                    android:layout_marginLeft="6dp"
                     android:layout_marginRight="6dp"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="4dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_below="@id/My_Profile_activity_User_Location_TV"
+                    android:layout_toRightOf="@id/Setting_Fragment_My_Profile_Img_Civ"
+                    android:text="상태 메세지"
+                    android:fontFamily="@font/notosans_medium"
+                    android:textSize="14dp"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/Theme_Less_Accent_Color"
                     android:layout_width="match_parent"
-                    android:gravity="center_vertical"
-                    android:layout_height="35dp">
-                    <Button
-                        android:id="@+id/Setting_Fragment_Unregister_Btn"
-                        android:layout_weight="1"
-                        android:layout_marginRight="3dp"
-                        android:text="계정 탈퇴"
-                        android:textSize="12dp"
-                        android:fontFamily="@font/notosans_regular"
-                        android:includeFontPadding="false"
-                        android:textColor="@color/light_red"
-                        android:background="@drawable/edge_right_1dp_black"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                    </Button>
-                    <Button
-                        android:id="@+id/Setting_Fragment_Change_Profile_Btn"
-                        android:layout_marginLeft="3dp"
-                        android:layout_marginRight="3dp"
-                        android:layout_weight="1"
-                        android:textSize="12dp"
-                        android:text="프로필 수정"
-                        android:fontFamily="@font/notosans_regular"
-                        android:includeFontPadding="false"
-                        android:textColor="@color/Theme_Text_Color"
-                        android:background="@drawable/edge_right_1dp_black"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                    </Button>
-                    <Button
-                        android:id="@+id/Setting_Fragment_Sign_Out_Btn"
-                        android:layout_weight="1"
-                        android:text="로그아웃"
-                        android:textSize="12dp"
-                        android:fontFamily="@font/notosans_regular"
-                        android:includeFontPadding="false"
-                        android:textColor="@color/Theme_Text_Color"
-                        android:background="@android:color/transparent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                    </Button>
-                </LinearLayout>
+                    android:layout_height="60dp"></TextView>
+
+                <RelativeLayout
+                    android:visibility="gone"
+                    android:id="@+id/LNL1"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_below="@id/My_Profile_activity_User_Location_TV"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/User_Profile_Post_Civ"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/ic_baseline_article_24"
+                            android:backgroundTint="@color/Theme_Text_Color"
+                            android:gravity="center"
+                            android:textColor="@color/black"></de.hdodenhof.circleimageview.CircleImageView>
+
+                        <TextView
+                            android:id="@+id/User_Profile_Post_Count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="6dp"
+                            android:fontFamily="@font/notosans_medium"
+                            android:gravity="center_vertical"
+                            android:includeFontPadding="false"
+                            android:text="0"
+                            android:textColor="@color/Theme_Text_Color"
+                            android:textSize="14dp"></TextView>
+                    </LinearLayout>
+                </RelativeLayout>
             </RelativeLayout>
-        </LinearLayout>
+        </RelativeLayout>
         <RelativeLayout
-            android:layout_marginTop="12dp"
             android:layout_weight="24"
             android:layout_width="match_parent"
             android:layout_height="0dp">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Setting_Fragmnet_My_Posts_RCV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/post_view_item">
-            </androidx.recyclerview.widget.RecyclerView>
+                tools:listitem="@layout/post_view_item"></androidx.recyclerview.widget.RecyclerView>
         </RelativeLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

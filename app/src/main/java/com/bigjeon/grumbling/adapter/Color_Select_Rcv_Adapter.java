@@ -25,8 +25,9 @@ public class Color_Select_Rcv_Adapter extends RecyclerView.Adapter<Color_Select_
     private List<Integer> Colors;
     Color_Adapter_OnClickListener listener;
 
-    public Color_Select_Rcv_Adapter(Context context) {
+    public Color_Select_Rcv_Adapter(Context context, List<Integer> colors) {
         this.context = context;
+        Colors = colors;
     }
 
     @NonNull
@@ -83,11 +84,4 @@ public class Color_Select_Rcv_Adapter extends RecyclerView.Adapter<Color_Select_
         return Colors.get(position);
     }
 
-    public void Set_Color_List(int state) {
-        if (state == 0) {
-            Colors = new ArrayList<>(Arrays.asList(R.color.dark_black, R.color.light_Gray ,R.color.light_purple ,R.color.purple ,R.color.light_pink, R.color.pink, R.color.light_red, R.color.red, R.color.light_blue, R.color.blue, R.color.blue_purple, R.color.mint, R.color.dark_mint, R.color.light_white));
-        } else {
-            Colors = new ArrayList<>(Arrays.asList(R.color.trans_dark_black, R.color.trans_light_Gray ,R.color.trans_light_purple ,R.color.trans_purple ,R.color.trans_light_pink, R.color.trans_pink, R.color.trans_light_red, R.color.trans_red, R.color.trans_light_blue, R.color.trans_blue, R.color.trans_blue_purple, R.color.trans_mint, R.color.trans_dark_mint, R.color.trans_light_white));
-        }
-    }
 }
