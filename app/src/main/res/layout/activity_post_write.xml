@@ -14,11 +14,21 @@
         android:layout_height="match_parent">
         <RelativeLayout
             android:id="@+id/Top_Bar"
-            android:visibility="gone"
+            android:visibility="visible"
             android:background="@drawable/post_view_title_under_edge_1dp"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_alignParentTop="true">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/Dialog_Posting_Complete_CIV"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="6dp"
+                android:background="@drawable/ic_baseline_check_24"
+                android:backgroundTint="@color/Sub_Tutle_Color">
+            </de.hdodenhof.circleimageview.CircleImageView>
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Post_Write_BackPress_Imv"
                 android:layout_marginLeft="6dp"
@@ -79,18 +89,27 @@
                 android:layout_height="wrap_content">
             </EditText>
         </RelativeLayout>
-            <RelativeLayout
+        <RelativeLayout
+            android:background="@color/Theme_Color"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:paddingTop="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Dialog_Posting_Content_Container">
+            <LinearLayout
                 android:id="@+id/Post_Write_Btns_Container"
-                android:background="@color/Theme_Color"
-                android:layout_below="@+id/Dialog_Posting_Content_Container"
+                android:orientation="horizontal"
+                android:layout_alignParentLeft="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <RelativeLayout
-                    android:id="@+id/Post_Write_Text_Set_Container"
-                    android:layout_alignParentLeft="true"
-                    android:padding="4dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+            <RelativeLayout
+                android:id="@+id/Post_Write_Text_Set_Container"
+                android:layout_alignParentLeft="true"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Dialog_Posting_Set_Text"
                     android:layout_width="35dp"
@@ -98,14 +117,13 @@
                     android:background="@drawable/ic_baseline_text_format_24"
                     android:backgroundTint="@color/Theme_Text_Color">
                 </de.hdodenhof.circleimageview.CircleImageView>
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_weight="1"
-                    android:padding="4dp"
-                    android:id="@+id/Post_Write_Img_Set_Container"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/Post_Write_Text_Set_Container">
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/Post_Write_Img_Set_Container"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Dialog_Posting_Set_Img"
                     android:layout_width="35dp"
@@ -113,32 +131,26 @@
                     android:backgroundTint="@color/Btn_Off_Color"
                     android:background="@drawable/ic_baseline_insert_photo_24">
                 </de.hdodenhof.circleimageview.CircleImageView>
-                </RelativeLayout>
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/Dialog_Posting_Complete_CIV"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginRight="6dp"
-                    android:background="@drawable/ic_baseline_check_24"
-                    android:backgroundTint="@color/Sub_Tutle_Color">
-                </de.hdodenhof.circleimageview.CircleImageView>
             </RelativeLayout>
-        <RelativeLayout
-            android:background="@color/Theme_Color"
-            android:paddingTop="6dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/Post_Write_Btns_Container">
+            </LinearLayout>
         <FrameLayout
             android:id="@+id/Post_Write_FrameLayout"
-            android:layout_alignParentTop="true"
-            android:background="@android:color/transparent"
+       android:layout_below="@id/Post_Write_Btns_Container"
+                 android:background="@android:color/transparent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipChildren="false"
             android:clipToPadding="false">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/Post_Write_ViewPager2"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="220dp">
+            </androidx.viewpager2.widget.ViewPager2>
+            </RelativeLayout>
         </FrameLayout>
         </RelativeLayout>
         </RelativeLayout>

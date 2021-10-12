@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 <FrameLayout
     android:layout_width="match_parent"
-    android:layout_height="220dp"
+    android:layout_height="200dp"
     android:background="@android:color/transparent"
     tools:context="com.bigjeon.grumbling.fragments.Set_Post_Text_Fragment">
     <RelativeLayout
@@ -55,7 +55,7 @@
             android:id="@+id/Text_Color_Con"
             android:layout_below="@id/SeekBar_Con"
             android:layout_width="match_parent"
-            android:layout_height="80dp">
+            android:layout_height="60dp">
             <TextView
                 android:id="@+id/Dialog_Posting_Content_Text_Color"
                 android:textColor="@color/Theme_Text_Color"
@@ -82,7 +82,7 @@
         <RelativeLayout
             android:layout_below="@id/Text_Color_Con"
             android:layout_width="match_parent"
-            android:layout_height="80dp">
+            android:layout_height="60dp">
             <TextView
                 android:id="@+id/Dialog_Posting_Content_Text_BackColor"
                 android:textColor="@color/Theme_Text_Color"

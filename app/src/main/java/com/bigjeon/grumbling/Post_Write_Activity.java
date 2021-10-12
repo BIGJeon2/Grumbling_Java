@@ -78,11 +78,8 @@ import java.util.HashMap;
 
 public class Post_Write_Activity extends AppCompatActivity {
     private ActivityPostWriteBinding binding;
-    private Set_Post_Text_Fragment Text_Set_Fragment;
-    private Set_Post_Background_Fragment Background_Set_Fragment;
-    private FragmentTransaction transaction;
-    private FragmentManager fragmentManager;
     private Post_Write_Loading_ProgressDialog progressDialog;
+    private Post_Write_ViewPager2_Adapter viewPager2_adapter;
     private String STATE = "CREATE";
     private int key = 0;
     private Post_Data post_data;
@@ -103,15 +100,26 @@ public class Post_Write_Activity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_post_write);
         binding.setPostWriteActivityBinding(this);
 
+        viewPager2_adapter = new Post_Write_ViewPager2_Adapter(this);
+        binding.PostWriteViewPager2.setAdapter(viewPager2_adapter);
+        binding.PostWriteViewPager2.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
+        binding.PostWriteViewPager2.setCurrentItem(0, false);
+        binding.PostWriteViewPager2.setOffscreenPageLimit(2);
+
+        binding.PostWriteViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+            }
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                Change_Fragment(position);
+            }
+        });
+
         progressDialog = new Post_Write_Loading_ProgressDialog(this);
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        Text_Set_Fragment = new Set_Post_Text_Fragment();
-        Background_Set_Fragment = new Set_Post_Background_Fragment();
-        fragmentManager = getSupportFragmentManager();
-
-        transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.Post_Write_FrameLayout, Text_Set_Fragment).commit();
 
         //뷰모델 호출 / 데이터 변경 이벤트시 데이터 바로 적용
         VM = new ViewModelProvider(this, new Post_Write_VM_Factory()).get(Post_Write_ViewModel.class);
@@ -129,9 +137,9 @@ public class Post_Write_Activity extends AppCompatActivity {
         VM.getIMG_URI().observe(this, img -> Glide.with(this).load(img).into(binding.DialogPostingBackground));
 
         //텍스트 설정 창 버튼============================================
-        binding.DialogPostingSetText.setOnClickListener(v -> Change_Fragment(0));
+        binding.DialogPostingSetText.setOnClickListener(v -> Change_Fragment_OnCLick(0));
         //백그라운드 이미지 버튼==========================================
-        binding.DialogPostingSetImg.setOnClickListener(v -> Change_Fragment(1));
+        binding.DialogPostingSetImg.setOnClickListener(v -> Change_Fragment_OnCLick(1));
 
         //포스팅 완료 버튼==============================================
         binding.DialogPostingCompleteCIV.setOnClickListener(v -> Upload_Post());
@@ -142,19 +150,24 @@ public class Post_Write_Activity extends AppCompatActivity {
     private void Change_Fragment(int position){
         switch (position){
             case 0 :
-                transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.Post_Write_FrameLayout, Text_Set_Fragment).commit();
                 binding.DialogPostingSetText.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Theme_Text_Color));
                 binding.DialogPostingSetImg.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Btn_Off_Color));
                 break;
             case 1 :
-                transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.Post_Write_FrameLayout, Background_Set_Fragment).commit();
                 binding.DialogPostingSetText.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Btn_Off_Color));
                 binding.DialogPostingSetImg.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.Theme_Text_Color));
                 break;
         }
     }
+
+    private void Change_Fragment_OnCLick(int i) {
+        if (i == 0){
+            binding.PostWriteViewPager2.setCurrentItem(0, true);
+        }else{
+            binding.PostWriteViewPager2.setCurrentItem(1, true);
+        }
+    }
+
     //수정작업일시 데이터 불러오기
     private void Get_Selected_Posts() {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -199,7 +212,7 @@ public class Post_Write_Activity extends AppCompatActivity {
                 0,
                 Favorite);
         VM.set_Post(post_data);
-        VM.setIMG_State("NONE");
+        VM.setIMG_State("String");
     }
     //수정일시 데이터 적용시켜줌
     private void Data_Adjust(Post_Data post) {
@@ -244,7 +257,7 @@ public class Post_Write_Activity extends AppCompatActivity {
         if (VM.get_Post().getValue().getContent().length() >= 2) {
             progressDialog.show();
             progressDialog.setCancelable(false);
-            if (VM.getIMG_State().getValue().equals("Uri")){
+            if (VM.getIMG_State().getValue() != null && VM.getIMG_State().getValue().equals("Uri")){
                 String File_Name = Posting_Write_Date + User_Uid + ".png";
                 FirebaseStorage storage = FirebaseStorage.getInstance();
                 final StorageReference Post_Img_Ref = storage.getReference("Posting_Images/" + File_Name);

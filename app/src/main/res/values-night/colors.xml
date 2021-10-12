@@ -41,20 +41,20 @@
     <color name="light_white">#FFFFFFFF</color>
 
 
-    <color name="trans_light_purple">#20BB86FC</color>
-    <color name="trans_purple">#206200EE</color>
-    <color name="trans_light_pink">#20ED58DE</color>
-    <color name="trans_pink">#20FD04F9</color>
-    <color name="trans_light_red">#20F84242</color>
-    <color name="trans_red">#20FF0000</color>
-    <color name="trans_light_blue">#204578F8</color>
-    <color name="trans_blue">#200046F8</color>
-    <color name="trans_blue_purple">#203700B3</color>
-    <color name="trans_mint">#2003DAC5</color>
-    <color name="trans_dark_mint">#20018786</color>
-    <color name="trans_dark_black">#20000000</color>
-    <color name="trans_light_white">#20FFFFFF</color>
-    <color name="trans_light_Gray">#20474646</color>
+    <color name="trans_light_purple">#50BB86FC</color>
+    <color name="trans_purple">#506200EE</color>
+    <color name="trans_light_pink">#50ED58DE</color>
+    <color name="trans_pink">#50FD04F9</color>
+    <color name="trans_light_red">#50F84242</color>
+    <color name="trans_red">#50FF0000</color>
+    <color name="trans_light_blue">#504578F8</color>
+    <color name="trans_blue">#500046F8</color>
+    <color name="trans_blue_purple">#503700B3</color>
+    <color name="trans_mint">#5003DAC5</color>
+    <color name="trans_dark_mint">#50018786</color>
+    <color name="trans_dark_black">#50000000</color>
+    <color name="trans_light_white">#50FFFFFF</color>
+    <color name="trans_light_Gray">#50474646</color>
 
 
     <color name="Sub_Tutle_Color">#FFFFFF</color>

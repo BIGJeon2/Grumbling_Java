@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.bigjeon.grumbling.adapter.Fragment_Swipe_Adapter;
 import com.bigjeon.grumbling.adapter.Post_View_Rcv_Adapter;
+import com.bigjeon.grumbling.adapter.Post_Write_ViewPager2_Adapter;
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
 import com.bigjeon.grumbling.service.MyService;
 import com.example.grumbling.App_Main_Binding;
@@ -65,6 +66,9 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
 
             }
         });
+
+
+
         AdRequest adRequest = new AdRequest.Builder().build();
         binding.adViewBanner.loadAd(adRequest);
         AdView adview = new AdView(this);
