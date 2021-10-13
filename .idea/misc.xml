@@ -86,12 +86,12 @@
         <entry key="app/src/main/res/layout/fragment_user__profile__posts_list_.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/friend_list_fragment_view_.xml" value="0.25" />
         <entry key="app/src/main/res/layout/friends_request_item.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/my_chatting_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/my_chatting_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/my_chatting_reply.xml" value="0.25" />
         <entry key="app/src/main/res/layout/notification.xml" value="0.335" />
         <entry key="app/src/main/res/layout/notification_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/other_chatting_item.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/other_chatting_reply.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/other_chatting_reply.xml" value="0.375" />
         <entry key="app/src/main/res/layout/post_view_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/post_write_loading_dialog.xml" value="0.24615384615384617" />
         <entry key="app/src/main/res/layout/timepeed_friends_request_item.xml" value="0.25" />

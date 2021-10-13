@@ -56,12 +56,14 @@
     <color name="Transparent_White">#50FFFFFF</color>
     <color name="Transparent_Green">#8039CF3F</color>
 
+    <color name="Other_Chat_Item_Backcolor">#FFFFFF</color>
+    <color name="My_Chat_Item_Backcolor">#FFF0B6</color>
     <color name="Sub_Tutle_Color">#CF9D51</color>
     <color name="Post_Titel_Container_Color">#40FFFFFF</color>
     <color name="Post_Write_Setting_Conatiner_Color">#70000000</color>
     <color name="State_Msg_Color_Background">#20000000</color>
-    <color name="P2P_Chat_Room_Color">#70CF9D51</color>
-    <color name="Chat_Room_Color">#7058A15B</color>
+    <color name="P2P_Chat_Room_Color">#7180D3</color>
+    <color name="Chat_Room_Color">#8D6EDA</color>
     <color name="Chat_ET_Color">#FFFFFF</color>
     <color name="Theme_Color">#FFFFFF</color>
     <color name="Friend_State_Color">#60000000</color>

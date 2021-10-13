@@ -10,7 +10,7 @@
                 android:width="0.5dp"
                 android:color="@color/Theme_Less_Accent_Color">
             </stroke>
-            <solid android:color="@color/white"></solid>
+            <solid android:color="@android:color/transparent"></solid>
         </shape>
     </item>
 </layer-list>

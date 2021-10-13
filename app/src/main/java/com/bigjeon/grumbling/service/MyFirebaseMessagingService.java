@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -27,6 +28,7 @@ import com.bigjeon.grumbling.Show_Selected_Post_Activity;
 import com.bigjeon.grumbling.User_Profile_View_activity;
 import com.bigjeon.grumbling.data.Chat_Noti;
 import com.bigjeon.grumbling.data.Favorite_Noti;
+import com.bigjeon.grumbling.fragments.Post_View_Fragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -80,12 +82,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     public void sendNotification_Chat(String tittle, String text, String data, String tag, String img) {
         Log.d(TAG, "sendNotification: ");
-            Intent intent = new Intent(this, P2P_Chatting_Activity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("USER_UID", data);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                    PendingIntent.FLAG_ONE_SHOT);
+        Intent Main_intent = new Intent(this, App_Main_Activity.class);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        stackBuilder.addNextIntent(Main_intent);
+
+        Intent P2P_Chat_intent = new Intent(this, P2P_Chatting_Activity.class);
+        P2P_Chat_intent.putExtra("USER_UID", data);
+        stackBuilder.addNextIntent(P2P_Chat_intent);
+
+        PendingIntent pendingIntent = stackBuilder.getPendingIntent( 0 /* Request code */,
+                PendingIntent.FLAG_ONE_SHOT);
 
             String channelId = getString(R.string.default_notification_channel_id);
 
@@ -125,11 +133,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
     public void sendNotification_Favorite(String tittle, String text, String data, String tag, String img) {
         Log.d(TAG, "sendNotification: ");
-        Intent intent = new Intent(this, Show_Selected_Post_Activity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("TITLE", data);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+        Intent Main_intent = new Intent(this, App_Main_Activity.class);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        stackBuilder.addNextIntent(Main_intent);
+
+        Intent Favorite_intent = new Intent(this, Show_Selected_Post_Activity.class);
+        Favorite_intent.putExtra("TITLE", data);
+        stackBuilder.addNextIntent(Favorite_intent);
+
+        PendingIntent pendingIntent = stackBuilder.getPendingIntent( 0 /* Request code */,
                 PendingIntent.FLAG_ONE_SHOT);
 
         String channelId = getString(R.string.default_notification_channel_id);
@@ -162,11 +176,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     public void sendNotification_Friend(String tittle, String text, String data, String tag, String img) {
         Log.d(TAG, "sendNotification: ");
-        Intent intent = new Intent(this, User_Profile_View_activity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("USER_UID", data);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+        Intent Main_intent = new Intent(this, App_Main_Activity.class);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        stackBuilder.addNextIntent(Main_intent);
+
+        Intent Friend_intent = new Intent(this, User_Profile_View_activity.class);
+        Friend_intent.putExtra("USER_UID", data);
+        stackBuilder.addNextIntent(Friend_intent);
+
+        PendingIntent pendingIntent = stackBuilder.getPendingIntent( 0 /* Request code */,
                 PendingIntent.FLAG_ONE_SHOT);
 
         String channelId = getString(R.string.default_notification_channel_id);
@@ -208,11 +228,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     public void sendNotification_Post_Chat(String tittle, String text, String data, String tag, String img) {
         Log.d(TAG, "sendNotification: ");
-        Intent intent = new Intent(this, Chatting_Activity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("TITLE", data);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+        Intent Main_intent = new Intent(this, App_Main_Activity.class);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        stackBuilder.addNextIntent(Main_intent);
+
+        Intent Chat_intent = new Intent(this, Chatting_Activity.class);
+        Chat_intent.putExtra("TITLE", data);
+        stackBuilder.addNextIntent(Chat_intent);
+
+        PendingIntent pendingIntent = stackBuilder.getPendingIntent( 0 /* Request code */,
                 PendingIntent.FLAG_ONE_SHOT);
 
         String channelId = getString(R.string.default_notification_channel_id);

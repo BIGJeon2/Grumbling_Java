@@ -8,7 +8,7 @@
     android:paddingBottom="6dp">
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/Chatting_List_User_Img_Civ"
-        android:src="@drawable/app_logo"
+        android:src="@drawable/user_profile_default_img"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         app:civ_border_color="@color/Sub_Tutle_Color"

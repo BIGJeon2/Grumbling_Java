@@ -20,7 +20,8 @@
         android:theme="@style/Theme.Grumbling">
         <activity android:name="com.bigjeon.grumbling.Post_Write_Activity"
             android:windowSoftInputMode="adjustNothing"/>
-        <activity android:name="com.bigjeon.grumbling.P2P_Chatting_Activity">
+        <activity android:name="com.bigjeon.grumbling.P2P_Chatting_Activity"
+            android:parentActivityName="com.bigjeon.grumbling.App_Main_Activity">
             <intent-filter>
                 <action android:name=".P2P"></action>
                 <category android:name="android.intent.category.DEFAULT"></category>
@@ -29,19 +30,22 @@
         <activity android:name="com.bigjeon.grumbling.Setting_My_Profile_Activity" />
         <activity
             android:name="com.bigjeon.grumbling.Chatting_Activity"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name=".Chatting"></action>
-                <category android:name="android.intent.category.DEFAULT"></category>
-            </intent-filter>
+            android:windowSoftInputMode="adjustResize"
+            android:parentActivityName="com.bigjeon.grumbling.App_Main_Activity">
+<!--            <intent-filter>-->
+<!--                <action android:name=".Chatting"></action>-->
+<!--                <category android:name="android.intent.category.DEFAULT"></category>-->
+<!--            </intent-filter>-->
         </activity>
-        <activity android:name="com.bigjeon.grumbling.User_Profile_View_activity">
+        <activity android:name="com.bigjeon.grumbling.User_Profile_View_activity"
+            android:parentActivityName="com.bigjeon.grumbling.App_Main_Activity">
             <intent-filter>
                 <action android:name=".Friend"></action>
                 <category android:name="android.intent.category.DEFAULT"></category>
             </intent-filter>
         </activity>
-        <activity android:name="com.bigjeon.grumbling.Show_Selected_Post_Activity">
+        <activity android:name="com.bigjeon.grumbling.Show_Selected_Post_Activity"
+            android:parentActivityName="com.bigjeon.grumbling.App_Main_Activity">
             <intent-filter>
                 <action android:name=".Post"></action>
                 <category android:name="android.intent.category.DEFAULT"></category>
@@ -49,16 +53,13 @@
         </activity>
         <activity android:name="com.bigjeon.grumbling.Google_Login_Activity" />
         <activity android:name="com.bigjeon.grumbling.Set_User_Profile_Activity" />
-        <activity android:name="com.bigjeon.grumbling.App_Main_Activity">
+        <activity android:name="com.bigjeon.grumbling.App_Main_Activity"
+            android:parentActivityName="com.bigjeon.grumbling.MainActivity">
         </activity>
         <activity android:name="com.bigjeon.grumbling.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name=".Main"></action>
-                <category android:name="android.intent.category.DEFAULT"></category>
             </intent-filter>
         </activity>
         <service

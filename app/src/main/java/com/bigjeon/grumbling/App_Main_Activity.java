@@ -44,8 +44,6 @@ import com.squareup.picasso.Picasso;
 public class App_Main_Activity extends AppCompatActivity implements View.OnCreateContextMenuListener{
     public static Context mcontext;
     private App_Main_Binding binding;
-    public String Intent_Activity;
-    public String Intent_Data;
     public String My_Uid;
     public String My_Img;
     public String My_Name;
@@ -68,8 +66,6 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
 
             }
         });
-
-
 
         AdRequest adRequest = new AdRequest.Builder().build();
         binding.adViewBanner.loadAd(adRequest);
@@ -183,5 +179,4 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         Go_Post_Write.putExtra("TITLE", "NONE");
         startActivity(Go_Post_Write);
     }
-
 }

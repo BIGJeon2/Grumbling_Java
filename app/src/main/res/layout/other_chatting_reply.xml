@@ -4,14 +4,16 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_margin="4dp">
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="@android:color/transparent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Chatting_User_Img_CIV"
-                android:src="@drawable/app_logo"
+                android:src="@drawable/user_profile_default_img"
                 app:civ_border_width="0.2dp"
                 android:layout_marginTop="2dp"
                 app:civ_border_color="@color/Sub_Tutle_Color"
@@ -21,11 +23,11 @@
 
             <TextView
                 android:id="@+id/Chatting_User_Name_TV"
-                android:textSize="12dp"
+                android:textSize="14dp"
                 android:text="유저 이름"
                 android:includeFontPadding="false"
                 android:fontFamily="@font/notosans_medium"
-                android:layout_marginLeft="6dp"
+                android:layout_marginLeft="4dp"
                 android:layout_marginTop="2dp"
                 android:layout_toRightOf="@+id/Chatting_User_Img_CIV"
                 android:textColor="@color/Theme_Text_Color"
@@ -34,14 +36,12 @@
             </TextView>
             <RelativeLayout
                 android:id="@+id/Chatting_Text_Container"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="6dp"
                 android:background="@drawable/other_chat_background"
                 android:layout_toRightOf="@+id/Chatting_User_Img_CIV"
                 android:layout_below="@id/Chatting_User_Name_TV"
-                android:layout_marginBottom="5dp"
                 android:padding="8dp"
-                android:layout_marginLeft="6dp"
-                android:layout_width="220dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content">
                 <RelativeLayout
                     android:id="@+id/Reply_Containier"
@@ -52,8 +52,8 @@
                         android:id="@+id/Replied_Name"
                         android:text="uid"
                         android:padding="2dp"
-                        android:textColor="@color/Transparent_Black90"
-                        android:textSize="10dp"
+                        android:textColor="@color/Theme_Text_Color"
+                        android:textSize="12dp"
                         android:gravity="left"
                         android:includeFontPadding="false"
                         android:fontFamily="@font/notosans_medium"
@@ -66,7 +66,7 @@
                         android:id="@+id/Replied_Chat_TV"
                         android:layout_alignParentLeft="true"
                         android:textSize="12dp"
-                        android:textColor="@color/Transparent_Black80"
+                        android:textColor="@color/Theme_Less_Accent_Color"
                         android:layout_centerInParent="true"
                         android:layout_below="@+id/Replied_Name"
                         android:text="답장칸"
@@ -80,10 +80,10 @@
                     android:id="@+id/Chatting_Text_TV"
                     android:layout_below="@id/Reply_Containier"
                     android:gravity="left"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
                     android:text="내용입력창입니다."
-                    android:textColor="@color/black"
+                    android:textColor="@color/Theme_Text_Color"
                     android:textSize="14dp"
                     android:includeFontPadding="false"
                     android:fontFamily="@font/notosans_medium"
@@ -95,7 +95,7 @@
                 android:text="입력시간"
                 android:id="@+id/Chatting_WriteDate_TV"
                 android:layout_below="@id/Chatting_Text_Container"
-                android:layout_alignRight="@id/Chatting_Text_Container"
+                android:layout_toRightOf="@id/Chatting_Text_Container"
                 android:textSize="7dp"
                 android:includeFontPadding="false"
                 android:fontFamily="@font/notosans_regular"

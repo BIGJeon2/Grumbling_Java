@@ -206,7 +206,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
                     Chat_Data chat = data.getValue(Chat_Data.class);
                     chat_dataArrayList.add(chat);
                     RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)holder.Chatting_List_Rcv.getLayoutParams();
-                    layoutParams.height = 150;
+                    layoutParams.height = 180;
                     holder.Chatting_List_Rcv.setLayoutParams(layoutParams);
                     chat_adapter.notifyDataSetChanged();
                 }
@@ -222,6 +222,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         holder.Chatting_List_Rcv.setHasFixedSize(true);
         holder.Chatting_List_Rcv.scrollToPosition(list.size() - 1);
 
+        holder.Favorite_Btn.setOnClickListener(v -> onFavoriteClicked(database.getReference().child("Posts").child(data.getPost_Title())));
         holder.Go_Chat_Room_Civ.setOnClickListener(v -> Go_Chat_Room(data));
         holder.Go_Chat_Room_Btn_In_Container.setOnClickListener(v -> Go_Chat_Room(data));
     }
@@ -311,18 +312,16 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
                 @Override
                 public void onClick(View v) {
                     Log.d("Outside", "11");
-                    if (Chatting_List_Rcv.getHeight() == 150){
+                    if (Chatting_List_Rcv.getHeight() == 180){
                         Log.d("Inside", "21");
                         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)Chatting_List_Rcv.getLayoutParams();
                         layoutParams.height = RelativeLayout.LayoutParams.WRAP_CONTENT;
-                        Go_Chat_Room_Btn_In_Container.setVisibility(View.VISIBLE);
                         Chatting_List_Rcv.setLayoutParams(layoutParams);
                         Expand_Civ.setBackgroundResource(R.drawable.ic_baseline_expand_less_24);
                     }else{
                         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)Chatting_List_Rcv.getLayoutParams();
-                        layoutParams.height = 150;
+                        layoutParams.height = 180;
                         Chatting_List_Rcv.setLayoutParams(layoutParams);
-                        Go_Chat_Room_Btn_In_Container.setVisibility(View.GONE);
                         Expand_Civ.setBackgroundResource(R.drawable.ic_baseline_expand_more_24);
                     }
                 }

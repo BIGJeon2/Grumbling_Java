@@ -4,14 +4,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_margin="4dp">
+        android:background="@android:color/transparent"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
         <RelativeLayout
             android:layout_weight="4"
             android:background="@drawable/my_chat_background"
             android:id="@+id/Chatting_Text_Container"
             android:layout_alignParentRight="true"
-            android:padding="6dp"
+            android:padding="8dp"
             android:layout_width="220dp"
             android:layout_height="wrap_content">
             <RelativeLayout
@@ -26,12 +28,11 @@
                     <TextView
                         android:id="@+id/Replied_Name"
                         android:text="uid"
-                        android:textColor="@color/Transparent_Black90"
-                        android:textSize="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="12dp"
                         android:padding="2dp"
                         android:includeFontPadding="false"
                         android:fontFamily="@font/notosans_medium"
-                        android:background="@drawable/chat_reply_under_edge_1dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:layout_width="match_parent"
@@ -41,9 +42,13 @@
                         android:id="@+id/Replied_Chat_TV"
                         android:layout_alignParentRight="true"
                         android:textSize="12dp"
+                        android:padding="2dp"
+                        android:maxLines="1"
+                        android:tooltipText="..."
                         android:includeFontPadding="false"
                         android:fontFamily="@font/notosans_medium"
-                        android:textColor="@color/Transparent_Black80"
+                        android:textColor="@color/Transparent_Black50"
+                        android:background="@drawable/chat_reply_under_edge_1dp"
                         android:layout_centerInParent="true"
                         android:layout_alignParentLeft="true"
                         android:layout_below="@+id/Replied_Name"
@@ -54,8 +59,8 @@
                 </RelativeLayout>
                 <TextView
                     android:id="@+id/Chatting_Text_TV"
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
                     android:gravity="left"
                     android:text="내용입력창입니다."
                     android:includeFontPadding="false"

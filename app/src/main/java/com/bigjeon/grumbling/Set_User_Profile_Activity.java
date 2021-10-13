@@ -49,7 +49,7 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
     private String My_Img;
     private String My_Location;
     private String My_State_Msg;
-    private String Default_Img = "https://firebasestorage.googleapis.com/v0/b/grumber-9d1b9.appspot.com/o/Profile_Images%2Fuser_profile_default_img.png?alt=media&token=23407f6b-59a9-4148-969a-6434d361af47";
+    private String Default_Img = "https://firebasestorage.googleapis.com/v0/b/grumber-9d1b9.appspot.com/o/Profile_Images%2Fuser_profile_default_img.png?alt=media&token=dfc9c293-5410-4a4b-bda9-34a1e8574066";
     private String My_Email;
     private Boolean Img_Pick_State = false;
     private String Intent_Code;

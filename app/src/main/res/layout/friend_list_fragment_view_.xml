@@ -43,7 +43,7 @@
                 android:id="@+id/Friend_List_My_Img_Civ"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@id/TV_My_Profie"
-                android:src="@drawable/app_logo"
+                android:src="@drawable/default_profile_img"
                 app:civ_border_width="0.5dp"
                 android:layout_marginTop="8dp"
                 app:civ_border_color="@color/Transparent_Green"
