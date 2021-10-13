@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="5dp"
-    android:paddingBottom="15dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
@@ -16,13 +16,15 @@
         android:layout_height="20dp">
         <ImageView
             android:background="@mipmap/main_app_icon_round"
-            android:layout_width="15dp"
-            android:layout_height="15dp">
+            android:layout_width="20dp"
+            android:layout_height="20dp">
         </ImageView>
         <TextView
-            android:textSize="13dp"
+            android:textSize="14dp"
             android:layout_marginLeft="5dp"
             android:text="그렁"
+            android:fontFamily="@font/notosans_medium"
+            android:includeFontPadding="false"
             android:textColor="@color/Notify_TitleColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -44,11 +46,10 @@
             <ImageView
                 android:id="@+id/noti_icon"
                 style="@style/Theme.AppCompat.Light"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="5dp"
-                android:src="@mipmap/ic_launcher"
-                app:srcCompat="@drawable/app_logo" />
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@mipmap/main_app_icon_round"
+                app:srcCompat="@drawable/user_profile_default_img" />
 
         </LinearLayout>
 
@@ -56,27 +57,29 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/noti_title"
+                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12dp"
+                android:layout_height="0dp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/notosans_medium"
+                android:textSize="16dp"
                 android:paddingBottom="3dp"
                 android:text="Title"
-                android:textColor="@color/Notify_TitleColor"
-                android:textStyle="bold" />
+                android:textColor="@color/Notify_TitleColor"/>
 
             <TextView
                 android:id="@+id/noti_message"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:textColor="@color/Notify_TitleColor"
                 android:text="Message"
-                android:textSize="10sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
     </LinearLayout>

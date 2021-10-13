@@ -37,19 +37,6 @@
             android:textStyle="bold"
             android:textColor="@color/Post_Create_Color">
         </TextView>
-        <TextView
-            android:text=" 소통에 자유를 더하다"
-            android:includeFontPadding="false"
-            android:textSize="16dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="12dp"
-            android:layout_marginLeft="2dp"
-            android:layout_toRightOf="@id/TITLE"
-            android:textColor="@color/Theme_Less_Accent_Color"
-            android:fontFamily="@font/binggrae"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </TextView>
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/App_Main_Write_Post_CIV"
             android:layout_width="25dp"
@@ -184,7 +171,8 @@
                 android:layout_centerInParent="true"
                 android:src="@drawable/user_profile_default_img"
                 app:civ_border_color="@color/Sub_Tutle_Color"
-                app:civ_border_width="0.5dp"></de.hdodenhof.circleimageview.CircleImageView>
+                app:civ_border_width="0.5dp">
+            </de.hdodenhof.circleimageview.CircleImageView>
         </RelativeLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

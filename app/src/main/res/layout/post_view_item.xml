@@ -32,7 +32,7 @@
         </FrameLayout>
             <RelativeLayout
                 android:id="@+id/Post_View_Title_Container"
-                android:background="@color/Post_Titel_Container_Color"
+                android:background="@color/Transparent_Black50"
                 android:layout_width="match_parent"
                 android:paddingLeft="2dp"
                 android:paddingTop="6dp"
@@ -42,7 +42,7 @@
                     android:id="@+id/Post_View_User_Img"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    app:civ_border_color="@color/Sub_Tutle_Color"
+                    app:civ_border_color="@color/Theme_Color"
                     app:civ_border_width="0.5dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerInParent="true"
@@ -54,7 +54,7 @@
                 android:textSize="14dp"
                 android:fontFamily="@font/notosans_medium"
                 android:includeFontPadding="false"
-                android:textColor="@color/Theme_Text_Color"
+                android:textColor="@color/Theme_Color"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/Post_View_User_Img"
                 android:layout_marginLeft="4dp"
@@ -65,7 +65,7 @@
                     android:id="@+id/Post_User_Location"
                     android:text="User_Location"
                     android:textSize="12dp"
-                    android:textColor="@color/Theme_Less_Accent_Color"
+                    android:textColor="@color/Post_Titel_Container_Color"
                     android:fontFamily="@font/notosans_medium"
                     android:layout_below="@id/Post_View_User_Name"
                     android:layout_toRightOf="@id/Post_View_User_Img"
@@ -187,6 +187,7 @@
                 android:id="@+id/Post_View_Go_ChatRoom_Btn"
                 android:padding="12dp"
                 android:background="@android:color/transparent"
+                android:layout_alignTop="@id/Chat_List_Rcv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignBottom="@id/Chat_List_Rcv">

@@ -19,10 +19,9 @@
             android:layout_height="match_parent">
         <RelativeLayout
             android:id="@+id/Friend_List_My_Profile_Container"
-            android:layout_marginTop="12dp"
-            android:paddingBottom="24dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
+            android:paddingBottom="12dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginLeft="6dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
@@ -33,7 +32,7 @@
                 android:includeFontPadding="false"
                 android:fontFamily="@font/notosans_medium"
                 android:textColor="@color/Theme_Text_Color"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginBottom="12dp"
                 android:gravity="left"
                 android:text="- 내 프로필"
@@ -45,10 +44,10 @@
                 android:layout_below="@id/TV_My_Profie"
                 android:src="@drawable/default_profile_img"
                 app:civ_border_width="0.5dp"
-                android:layout_marginTop="8dp"
-                app:civ_border_color="@color/Transparent_Green"
-                android:layout_width="60dp"
-                android:layout_height="60dp">
+                android:layout_marginTop="6dp"
+                app:civ_border_color="@color/Sub_Tutle_Color"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
             </de.hdodenhof.circleimageview.CircleImageView>
             <TextView
                 android:id="@+id/Friend_List_My_Name_TV"
@@ -60,19 +59,19 @@
                 android:includeFontPadding="false"
                 android:gravity="center"
                 android:textColor="@color/Theme_Text_Color"
-                android:layout_marginLeft="6dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </TextView>
             <TextView
                 android:id="@+id/Friend_List_Fragment_My_Uid"
-                android:layout_marginTop="6dp"
-                android:textSize="15dp"
+                android:layout_marginTop="2dp"
+                android:textSize="14dp"
                 android:text="#내 지역"
                 android:includeFontPadding="false"
                 android:fontFamily="@font/notosans_regular"
-                android:layout_marginLeft="6dp"
+                android:layout_marginLeft="4dp"
                 android:layout_toRightOf="@id/Friend_List_My_Img_Civ"
                 android:layout_below="@id/Friend_List_My_Name_TV"
                 android:textColor="@color/Theme_Less_Accent_Color"
@@ -81,8 +80,8 @@
             </TextView>
         </RelativeLayout>
         <RelativeLayout
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
             android:layout_below="@id/Friend_List_My_Profile_Container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -100,7 +99,7 @@
             </TextView>
            <RelativeLayout
                android:layout_below="@id/TV2"
-               android:layout_marginTop="2dp"
+               android:layout_marginTop="6dp"
                android:layout_width="match_parent"
                android:layout_height="match_parent">
                <FrameLayout

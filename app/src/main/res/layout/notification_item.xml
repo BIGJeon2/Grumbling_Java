@@ -3,10 +3,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginLeft="10dp"
-    android:background="@drawable/layout_round_shape"
+    android:layout_marginRight="6dp"
+    android:layout_marginLeft="6dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
     android:id="@+id/Notification_Container"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <de.hdodenhof.circleimageview.CircleImageView
@@ -23,12 +23,12 @@
     <TextView
         android:id="@+id/Notification_User_Name"
         android:text="User_Name님이 친구추가 하였습니다."
-        android:textSize="14dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:fontFamily="@font/notosans_medium"
+        android:includeFontPadding="false"
+        android:textColor="@color/Theme_Text_Color"
         android:layout_toRightOf="@+id/Notification_User_Img"
-        android:layout_marginTop="6dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </TextView>
@@ -36,7 +36,7 @@
         android:id="@+id/Notification_Friend_Add_Btn"
         android:visibility="invisible"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="6dp"
         android:text="수락"
         android:textColor="@color/Transparent_Black70"
         android:padding="3dp"

@@ -59,7 +59,7 @@
     <color name="Other_Chat_Item_Backcolor">#FFFFFF</color>
     <color name="My_Chat_Item_Backcolor">#FFF0B6</color>
     <color name="Sub_Tutle_Color">#CF9D51</color>
-    <color name="Post_Titel_Container_Color">#40FFFFFF</color>
+    <color name="Post_Titel_Container_Color">#60FFFFFF</color>
     <color name="Post_Write_Setting_Conatiner_Color">#70000000</color>
     <color name="State_Msg_Color_Background">#20000000</color>
     <color name="P2P_Chat_Room_Color">#7180D3</color>

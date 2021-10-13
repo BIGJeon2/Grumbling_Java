@@ -6,14 +6,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:paddingTop="6dp"
-        android:layout_margin="5dp"
         android:paddingBottom="6dp">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/Friend_List_User_Img_Civ"
             android:layout_alignParentLeft="true"
             android:src="@drawable/user_profile_default_img"
-            app:civ_border_color="@color/Sub_Tutle_Color"
+            app:civ_border_color="@color/Theme_Text_Color"
             app:civ_border_width="0.5dp"
             android:layout_width="50dp"
             android:layout_height="50dp">
@@ -23,7 +21,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User_Name"
-            android:paddingTop="2dp"
             android:includeFontPadding="false"
             android:fontFamily="@font/notosans_medium"
             android:textColor="@color/Theme_Text_Color"
@@ -38,6 +35,7 @@
             android:includeFontPadding="false"
             android:fontFamily="@font/notosans_regular"
             android:textSize="14dp"
+            android:layout_marginTop="2dp"
             android:textColor="@color/Theme_Less_Accent_Color"
             android:layout_below="@+id/Friend_List_User_Name_TV"
             android:layout_toRightOf="@+id/Friend_List_User_Img_Civ"

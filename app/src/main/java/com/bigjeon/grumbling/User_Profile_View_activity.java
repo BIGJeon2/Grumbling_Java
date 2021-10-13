@@ -223,7 +223,7 @@ public class User_Profile_View_activity extends AppCompatActivity {
             reference.setValue(My_Friend);
             binding.SettingFragmentSendFriendRequestBtn.setText("친구");
             binding.SettingFragmentSendFriendRequestBtn.setBackgroundResource(R.drawable.transparent_round_shape);
-            binding.SettingFragmentSendFriendRequestBtn.setTextColor(ContextCompat.getColorStateList(getApplicationContext(), R.color.Theme_Text_Color));
+            binding.SettingFragmentSendFriendRequestBtn.setTextColor(ContextCompat.getColorStateList(getApplicationContext(), R.color.Theme_Less_Accent_Color));
             binding.SettingFragmentChattingCiv.setTextColor(ContextCompat.getColorStateList(getApplicationContext(), R.color.Theme_Text_Color));
             Send_Noti_To_User();
 
