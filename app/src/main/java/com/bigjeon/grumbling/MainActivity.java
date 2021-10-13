@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         Loading_View = findViewById(R.id.Loading_GIF);
         Glide.with(this).asGif().load(R.drawable.loading).into(Loading_View);
 

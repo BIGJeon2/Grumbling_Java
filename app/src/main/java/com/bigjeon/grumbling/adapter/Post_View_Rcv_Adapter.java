@@ -130,7 +130,11 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         holder.Post_Content.setTextSize(Dimension.DP, data.getContent_Text_Size());
         holder.Post_Content.setBackgroundColor(ContextCompat.getColor(mContext, data.getContent_Back_Color()));
         holder.Post_Content.setTextColor(ContextCompat.getColor(mContext, data.getContent_Text_Color()));
-        Glide.with(holder.itemView).load(data.getPost_Background()).into(holder.Post_Background_Img);
+        if (data.getPost_Background() == null){
+            Glide.with(holder.itemView).load(R.drawable.post_default_img).into(holder.Post_Background_Img);
+        }else{
+            Glide.with(holder.itemView).load(data.getPost_Background()).into(holder.Post_Background_Img);
+        }
         holder.WriteDate.setText(data.getPost_Write_Date());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 

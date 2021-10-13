@@ -3,28 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@drawable/post_view_title_under_edge_1dp"
+    android:background="@drawable/chat_reply_under_edge_1dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingBottom="10dp">
+    android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <RelativeLayout
         android:id="@+id/Post_View_Content_Container"
         android:layout_width="match_parent"
-        android:layout_height="520dp"
+        android:layout_height="560dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <FrameLayout
-            android:layout_below="@id/Post_View_Title_Container"
+            android:layout_alignParentTop="true"
             android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="420dp">
+            android:layout_height="520dp">
             <ImageView
                 android:id="@+id/Post_View_Background"
+                android:background="@drawable/post_default_img"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -32,15 +32,17 @@
         </FrameLayout>
             <RelativeLayout
                 android:id="@+id/Post_View_Title_Container"
-                android:background="@android:color/transparent"
+                android:background="@color/Post_Titel_Container_Color"
                 android:layout_width="match_parent"
-                android:paddingLeft="6dp"
-                android:layout_height="56dp">
+                android:paddingLeft="2dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:layout_height="wrap_content">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/Post_View_User_Img"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    app:civ_border_color="@color/Theme_Less_Accent_Color"
+                    app:civ_border_color="@color/Sub_Tutle_Color"
                     app:civ_border_width="0.5dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerInParent="true"
@@ -55,8 +57,7 @@
                 android:textColor="@color/Theme_Text_Color"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/Post_View_User_Img"
-                android:layout_marginTop="6dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
             </TextView>
@@ -65,10 +66,10 @@
                     android:text="User_Location"
                     android:textSize="12dp"
                     android:textColor="@color/Theme_Less_Accent_Color"
-                    android:fontFamily="@font/notosans_regular"
+                    android:fontFamily="@font/notosans_medium"
                     android:layout_below="@id/Post_View_User_Name"
                     android:layout_toRightOf="@id/Post_View_User_Img"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="4dp"
                     android:includeFontPadding="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">

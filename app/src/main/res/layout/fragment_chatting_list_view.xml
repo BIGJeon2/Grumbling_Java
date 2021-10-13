@@ -19,7 +19,7 @@
             android:layout_height="wrap_content">
             <RelativeLayout
                 android:id="@+id/Chatting_List_Title_Container"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
                 <TextView
@@ -39,7 +39,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_below="@id/Chatting_List_Title_Container"
                 android:id="@+id/Chatting_List_Rcv"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="6dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 tools:listitem="@layout/chatting_list_item"

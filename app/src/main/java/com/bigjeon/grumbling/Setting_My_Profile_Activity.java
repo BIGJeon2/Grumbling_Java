@@ -119,7 +119,7 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
                         binding.SettingFragmentMyNameTv.setText(document.get("Name").toString());
                         Picasso.get().load(document.get("Img").toString()).into(binding.SettingFragmentMyProfileImgCiv);
                         binding.MyProfileActivityUserLocationTV.setText("#" + My_Location);
-                        binding.SettingActivityStateMsgTv.setText(My_State_Msg);
+                        binding.SettingActivityStateMsgTv.setText(" ' " + My_State_Msg + " ' ");
                         break;
                     }
                 }

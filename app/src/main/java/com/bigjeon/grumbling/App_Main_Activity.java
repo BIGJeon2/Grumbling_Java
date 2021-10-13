@@ -44,6 +44,8 @@ import com.squareup.picasso.Picasso;
 public class App_Main_Activity extends AppCompatActivity implements View.OnCreateContextMenuListener{
     public static Context mcontext;
     private App_Main_Binding binding;
+    public String Intent_Activity;
+    public String Intent_Data;
     public String My_Uid;
     public String My_Img;
     public String My_Name;

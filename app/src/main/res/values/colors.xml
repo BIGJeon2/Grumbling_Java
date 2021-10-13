@@ -57,6 +57,7 @@
     <color name="Transparent_Green">#8039CF3F</color>
 
     <color name="Sub_Tutle_Color">#CF9D51</color>
+    <color name="Post_Titel_Container_Color">#40FFFFFF</color>
     <color name="Post_Write_Setting_Conatiner_Color">#70000000</color>
     <color name="State_Msg_Color_Background">#20000000</color>
     <color name="P2P_Chat_Room_Color">#70CF9D51</color>
@@ -67,6 +68,7 @@
     <color name="None_Friend_State_Color">#000000</color>
     <color name="Post_Create_Color">#000000</color>
     <color name="Theme_Less_Accent_Color">#95000000</color>
+    <color name="Theme_Background_Less_Accent_Color">#95FFFFFF</color>
     <color name="Theme_Chat_List_Color">#000000</color>
     <color name="Theme_Text_Color">#000000</color>
     <color name="Btn_Off_Color">#50000000</color>

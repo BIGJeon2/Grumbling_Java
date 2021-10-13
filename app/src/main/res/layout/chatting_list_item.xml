@@ -4,18 +4,17 @@
     android:id="@+id/Chatting_List_Container"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="65dp"
-    android:gravity="center"
-    android:padding="6dp">
+    android:layout_height="wrap_content"
+    android:paddingBottom="6dp">
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/Chatting_List_User_Img_Civ"
         android:src="@drawable/app_logo"
         android:layout_alignParentLeft="true"
-        android:layout_centerInParent="true"
-        app:civ_border_color="@color/Theme_Less_Accent_Color"
+        android:layout_alignParentTop="true"
+        app:civ_border_color="@color/Sub_Tutle_Color"
         app:civ_border_width="0.5dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp">
+        android:layout_width="55dp"
+        android:layout_height="55dp">
     </de.hdodenhof.circleimageview.CircleImageView>
     <TextView
         android:id="@+id/Chatting_List_User_Name_TV"
@@ -25,18 +24,20 @@
         android:textColor="@color/Theme_Text_Color"
         android:fontFamily="@font/notosans_medium"
         android:includeFontPadding="false"
-        android:layout_marginLeft="8dp"
-        android:textSize="16dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        android:textSize="15dp"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/Chatting_List_User_Img_Civ">
     </TextView>
     <TextView
         android:id="@+id/Chatting_List_Last_Chat_TV"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="4dp"
         android:textSize="14dp"
         android:text="마지막 채팅"
+        android:layout_marginTop="2dp"
         android:includeFontPadding="false"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/Chatting_List_User_Name_TV"
         android:fontFamily="@font/notosans_regular"
         android:textColor="@color/Theme_Less_Accent_Color"
         android:layout_toRightOf="@id/Chatting_List_User_Img_Civ"
@@ -68,8 +69,8 @@
         android:includeFontPadding="false"
         android:fontFamily="@font/notosans_regular"
         android:text="Last_Chat_Time"
-        android:textColor="@color/Theme_Text_Color"
+        android:textColor="@color/Theme_Less_Accent_Color"
         android:layout_marginRight="4dp"
-        android:textSize="8dp"></TextView>
+        android:textSize="12dp"></TextView>
 </RelativeLayout>
 </layout>

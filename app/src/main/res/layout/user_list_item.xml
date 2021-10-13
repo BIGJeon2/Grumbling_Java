@@ -13,21 +13,21 @@
             android:id="@+id/Friend_List_User_Img_Civ"
             android:layout_alignParentLeft="true"
             android:src="@drawable/app_logo"
-            android:paddingTop="4dp"
-            app:civ_border_color="@color/Theme_Less_Accent_Color"
+            app:civ_border_color="@color/Sub_Tutle_Color"
             app:civ_border_width="0.5dp"
-            android:layout_width="45dp"
-            android:layout_height="45dp">
+            android:layout_width="50dp"
+            android:layout_height="50dp">
         </de.hdodenhof.circleimageview.CircleImageView>
         <TextView
             android:id="@+id/Friend_List_User_Name_TV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User_Name"
+            android:paddingTop="2dp"
             android:includeFontPadding="false"
             android:fontFamily="@font/notosans_medium"
             android:textColor="@color/Theme_Text_Color"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="4dp"
             android:textSize="16dp"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/Friend_List_User_Img_Civ">
@@ -41,7 +41,7 @@
             android:textColor="@color/Theme_Less_Accent_Color"
             android:layout_below="@+id/Friend_List_User_Name_TV"
             android:layout_toRightOf="@+id/Friend_List_User_Img_Civ"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </TextView>

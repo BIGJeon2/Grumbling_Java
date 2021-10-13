@@ -15,13 +15,13 @@
         <TextView
             android:id="@+id/TV1"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/notosans_medium"
             android:includeFontPadding="false"
             android:text="배경 이미지 설정"
-            android:textStyle="bold"
+            android:paddingBottom="6dp"
             android:textColor="@color/Theme_Text_Color"
-            android:textSize="10dp"></TextView>
+            android:textSize="16dp"></TextView>
         <Button
             android:id="@+id/Dialog_Posting_Background_Gallery"
             android:text="갤러리에서 사진 가져오기 ..."

@@ -115,10 +115,11 @@ public class Chatting_List_Fragment extends Fragment {
     }
 
     private String Change_Date(String write_date){
+
+        SimpleDateFormat before = new SimpleDateFormat("yyyy-MM-dd k:mm:ss:SSSS");
         String new_writedate = "0000";
         try{
-            SimpleDateFormat before = new SimpleDateFormat("yyyy-MM-dd k:mm:ss:SSSS");
-            SimpleDateFormat after = new SimpleDateFormat("MM-dd hh:mm");
+            SimpleDateFormat after = new SimpleDateFormat("yyyy/MM/dd hh:mm");
             Date dt_format = before.parse(write_date);
             new_writedate = after.format(dt_format);
             return new_writedate;

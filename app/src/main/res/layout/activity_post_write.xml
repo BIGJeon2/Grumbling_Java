@@ -64,7 +64,7 @@
                 android:layout_height="match_parent">
                 <ImageView
                     android:id="@+id/Dialog_Posting_Background"
-                    android:background="@drawable/selected__post_view_activity_background_img"
+                    android:background="@drawable/post_default_img"
                     android:scaleType="centerCrop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">

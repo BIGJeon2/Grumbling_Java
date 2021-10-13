@@ -12,13 +12,13 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Theme_Color"
+    android:background="@android:color/transparent"
     tools:context="com.bigjeon.grumbling.Show_Selected_Post_Activity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/Selected_Post_Toolbar"
-        android:background="@android:color/transparent"
+        android:background="@color/Post_Titel_Container_Color"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         app:contentInsetStart="0dp"
         app:layout_constraintTop_toTopOf="parent">
         <RelativeLayout
@@ -57,9 +57,9 @@
     </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:id="@+id/Linearlayout"
-        android:layout_below="@id/Selected_Post_Toolbar"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
-        android:layout_height="460dp"
+        android:layout_height="480dp"
         android:background="@android:color/transparent"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/Selected_Post_Toolbar">
@@ -70,13 +70,12 @@
             <FrameLayout
                 android:id="@+id/Show_Selected_Post_FrameLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_above="@id/Selected_Post_Bottom_Container">
+                android:layout_height="match_parent">
                 <ImageView
                     android:id="@+id/Selected_Post_Background"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white"
+                    android:background="@drawable/post_default_img"
                     android:scaleType="centerCrop">
                 </ImageView>
             </FrameLayout>
@@ -93,66 +92,65 @@
                 android:background="@color/Transparent_Black30"
                 android:text="나는 가끔 눈물을 흘린다.">
             </TextView>
-
-            <RelativeLayout
-                android:id="@+id/Selected_Post_Bottom_Container"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/post_view_title_under_edge_1dp">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/Selected_Post_Enter_Chatting_CIV"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginRight="6dp"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentRight="true"
-                    android:backgroundTint="@color/Theme_Text_Color"
-                    android:background="@drawable/ic_baseline_question_answer_24">
-                </de.hdodenhof.circleimageview.CircleImageView>
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/Selected_Post_Favorite_Circle_CIV"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerInParent="true"
-                    android:layout_toLeftOf="@id/Selected_Post_Favorite_Count_TV"
-                    android:backgroundTint="@color/Theme_Text_Color"
-                    android:background="@drawable/ic_baseline_favorite_border_24"></de.hdodenhof.circleimageview.CircleImageView>
-                <TextView
-                    android:id="@+id/Selected_Post_Favorite_Count_TV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/Theme_Text_Color"
-                    android:fontFamily="@font/notosans_regular"
-                    android:textSize="12dp"
-                    android:includeFontPadding="false"
-                    android:layout_toLeftOf="@+id/Selected_Post_Enter_Chatting_CIV"
-                    android:layout_centerInParent="true"
-                    android:layout_marginRight="6dp"
-                    android:text="000">
-                </TextView>
-                <TextView
-                    android:id="@+id/Show_Selected_Post_Whrite_Date_Tv"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="5dp"
-                    android:layout_centerInParent="true"
-                    android:visibility="gone"
-                    android:textSize="12dp"
-                    android:textStyle="bold"
-                    android:text="write_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                </TextView>
-            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/Selected_Post_Bottom_Container"
+        android:layout_below="@+id/Linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/post_view_title_under_edge_1dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/Selected_Post_Enter_Chatting_CIV"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="6dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
+            android:backgroundTint="@color/Theme_Text_Color"
+            android:background="@drawable/ic_baseline_question_answer_24">
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/Selected_Post_Favorite_Circle_CIV"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@id/Selected_Post_Favorite_Count_TV"
+            android:backgroundTint="@color/Theme_Text_Color"
+            android:background="@drawable/ic_baseline_favorite_border_24"></de.hdodenhof.circleimageview.CircleImageView>
+        <TextView
+            android:id="@+id/Selected_Post_Favorite_Count_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Theme_Text_Color"
+            android:fontFamily="@font/notosans_regular"
+            android:textSize="12dp"
+            android:includeFontPadding="false"
+            android:layout_toLeftOf="@+id/Selected_Post_Enter_Chatting_CIV"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="6dp"
+            android:text="000">
+        </TextView>
+        <TextView
+            android:id="@+id/Show_Selected_Post_Whrite_Date_Tv"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:text="write_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/Show_Selected_Post_Chat_Container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingTop="6dp"
-        android:layout_below="@id/Linearlayout"
+        android:layout_below="@id/Selected_Post_Bottom_Container"
         android:layout_alignParentBottom="true"
         android:visibility="visible"
         android:background="@color/Theme_Color">

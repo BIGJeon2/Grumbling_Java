@@ -70,7 +70,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 sendNotification_Favorite(title, body, data, tag, img);
             }else if (click_action.equals(".Friend")){
                 sendNotification_Friend(title, body, data, tag, img);
-            }else{
+            }else {
                 sendNotification_Post_Chat(title, body, data, tag, img);
             }
         }

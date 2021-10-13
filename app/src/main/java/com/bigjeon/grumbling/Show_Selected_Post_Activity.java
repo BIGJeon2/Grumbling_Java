@@ -109,6 +109,7 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
         Set_My_Data();
         Get_Chatting_List();
 
+        binding.SelectedPostToolbar.bringToFront();
         binding.SelectedPostUserImg.setOnClickListener(v -> Go_Selected_User_Profile());
         binding.SelectedPostFavoriteCircleCIV.setOnClickListener(new View.OnClickListener() {
             @Override
