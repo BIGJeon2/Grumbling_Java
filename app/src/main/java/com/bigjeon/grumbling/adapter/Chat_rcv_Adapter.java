@@ -186,7 +186,7 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         String new_writedate = "0000";
         try{
             SimpleDateFormat before = new SimpleDateFormat("yyyy-MM-dd k:mm:ss:SSSS");
-            SimpleDateFormat after = new SimpleDateFormat("MM.dd hh:mm");
+            SimpleDateFormat after = new SimpleDateFormat("MM월 dd일 hh:mm");
             Date dt_format = before.parse(write_date);
             new_writedate = after.format(dt_format);
             return new_writedate;

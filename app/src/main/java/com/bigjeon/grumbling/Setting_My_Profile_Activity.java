@@ -88,7 +88,7 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
             Picasso.get().load(My_Img).into(binding.SettingFragmentMyProfileImgCiv);
             binding.SettingFragmentMyNameTv.setText(My_Name);
             binding.MyProfileActivityUserLocationTV.setText("#" + My_Location);
-            binding.SettingActivityStateMsgTv.setText(My_State_Msg);
+            binding.SettingActivityStateMsgTv.setText(" ' " + My_State_Msg + " ' ");
         }
 
         mAuth = FirebaseAuth.getInstance();

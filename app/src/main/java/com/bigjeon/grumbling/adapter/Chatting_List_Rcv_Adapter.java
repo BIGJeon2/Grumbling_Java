@@ -74,17 +74,18 @@ public class Chatting_List_Rcv_Adapter extends RecyclerView.Adapter<Chatting_Lis
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull Chat_List_ViewHolder holder, int position) {
-        db.collection("Users").whereEqualTo("UID", Chatting_Room_List.get(holder.getAdapterPosition()).getUser_Uid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        Chat_User_Uid_Data room = Chatting_Room_List.get(position);
+        db.collection("Users").whereEqualTo("UID", room.getUser_Uid()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         holder.User_Name.setText(document.getString("Name"));
                         Picasso.get().load(document.getString("Img")).into(holder.User_Img);
-                        holder.Last_Chat_Date.setText(Chatting_Room_List.get(holder.getAdapterPosition()).getLast_Date());
-                        holder.Last_Chat_Comment.setText(Chatting_Room_List.get(holder.getAdapterPosition()).getLast_Content());
-                        if (Chatting_Room_List.get(holder.getAdapterPosition()).getNew_Chat_Count() != 0){
-                            holder.New_Chat_Count.setText(Integer.toString(Chatting_Room_List.get(holder.getAdapterPosition()).getNew_Chat_Count()));
+                        holder.Last_Chat_Date.setText(room.getLast_Date());
+                        holder.Last_Chat_Comment.setText(room.getLast_Content());
+                        if (room.getNew_Chat_Count() != 0){
+                            holder.New_Chat_Count.setText(Integer.toString(room.getNew_Chat_Count()));
                         }else{
                             holder.New_Chat_Count.setText("");
                         }

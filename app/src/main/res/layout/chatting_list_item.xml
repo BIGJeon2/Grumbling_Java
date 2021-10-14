@@ -46,14 +46,12 @@
         android:layout_height="wrap_content">
     </TextView>
     <TextView
-        android:visibility="gone"
         android:id="@+id/Chatting_List_New_Chat_Count_TV"
         android:layout_marginTop="4dp"
         android:layout_marginRight="6dp"
         android:layout_alignParentRight="true"
         android:layout_below="@id/Chatting_List_Last_Chat_Date_TV"
         android:textColor="@color/Sub_Tutle_Color"
-        android:text="1"
         android:textSize="16dp"
         android:fontFamily="@font/notosans_medium"
         android:includeFontPadding="false"
@@ -72,6 +70,7 @@
         android:text="Last_Chat_Time"
         android:textColor="@color/Theme_Less_Accent_Color"
         android:layout_marginRight="4dp"
-        android:textSize="12dp"></TextView>
+        android:textSize="12dp">
+    </TextView>
 </RelativeLayout>
 </layout>

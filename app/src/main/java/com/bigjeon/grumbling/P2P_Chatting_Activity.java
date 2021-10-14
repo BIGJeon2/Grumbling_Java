@@ -69,7 +69,6 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
     private String My_Img;
     private String User_Uid;
     private String User_Token;
-    private int count;
     private Boolean User_State = false;
     private String Chatting_Room_ID;
     private String Reply_Target_Uid = "NONE";
@@ -83,6 +82,8 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DatabaseReference reference;
     private ValueEventListener listener;
+
+    private int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +118,8 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
         Get_User_Data();
         Set_Chatting_Room_ID();
         Check_Chatting_State();
+        Get_New_Chat_Count();
+
         Set_User_State(My_Uid, true);
         //list뷰 설정
         adapter = new Chat_rcv_Adapter(list, My_Uid, this, true);
@@ -142,7 +145,6 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
         binding.ChattingListListView.setHasFixedSize(true);
 
         DB = FirebaseDatabase.getInstance();
-        Chat_Count_Reset();
         reference = DB.getReference("Chat_Room").child(Chatting_Room_ID);
         reference.addValueEventListener(Regist_DB_Listener());
 
@@ -234,9 +236,11 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
             HashMap<String, Boolean> Read_Users = new HashMap<>();
             Read_Users.put(My_Uid, true);
             Chat_Data chat_data = new Chat_Data(My_Uid, Message, Time, Reply_Target_Text, Reply_Target_Uid, Read_Users, Chat_Id);
-            Add_Chatting_Room_To_Profile(Time, Message);
             reference = DB.getReference("Chat_Room").child(Chatting_Room_ID).child(Chat_Id);
             reference.setValue(chat_data);
+
+            Add_Chatting_Room_To_Profile(Time, Message);
+
             binding.ChattingETV.setText("");
             binding.ReplidedEditContainer.setVisibility(View.GONE);
             binding.ReplyImg.setVisibility(View.GONE);
@@ -248,6 +252,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Chat_Count_Reset();
         Set_User_State(My_Uid, false);
         reference.removeEventListener(listener);
     }
@@ -304,7 +309,9 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
             Chat_User_Uid_Data My_data = new Chat_User_Uid_Data(User_Uid, Chatting_Room_ID, Last_Chat, Write_Date, 0);
             reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
             reference.setValue(My_data);
-            Chat_User_Uid_Data User_data = new Chat_User_Uid_Data(My_Uid, Chatting_Room_ID, Last_Chat, Write_Date, count++);
+
+            count++;
+            Chat_User_Uid_Data User_data = new Chat_User_Uid_Data(My_Uid, Chatting_Room_ID, Last_Chat, Write_Date, count);
             reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
             reference.setValue(User_data);
             First_Chat_Status = false;
@@ -336,17 +343,15 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
                     if (Chatting_Room_ID.equals(task.getResult().getValue())){
                     }else if (task.getResult().getValue() == null){
                         Send_Noti_To_User(Message);
-                        Chat_Count_Add();
                     }else{
                         Send_Noti_To_User(Message);
-                        Chat_Count_Add();
                     }
                 }
             });
             return User_State;
         }
 
-    private void Chat_Count_Add(){
+    private void Get_New_Chat_Count(){
         reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("My_Chatting_List").child(Chatting_Room_ID).child("new_Chat_Count");
         reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
