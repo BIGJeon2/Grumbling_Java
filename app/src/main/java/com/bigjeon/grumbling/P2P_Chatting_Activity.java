@@ -352,13 +352,15 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
         }
 
     private void Get_New_Chat_Count(){
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("My_Chatting_List").child(Chatting_Room_ID).child("new_Chat_Count");
-        reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                count = Integer.parseInt(task.getResult().getValue().toString());
-            }
-        });
+        if (!First_Chat_Status) {
+            reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("My_Chatting_List").child(Chatting_Room_ID).child("new_Chat_Count");
+            reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    count = Integer.parseInt(task.getResult().getValue().toString());
+                }
+            });
+        }
     }
 
     private void Chat_Count_Reset(){
