@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class Fragment_TimePeed_Post extends Fragment {
         super.onCreate(savedInstanceState);
         Get_My_Profile();
         reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Notifications").child("Post_Timepeed");
-        reference.addChildEventListener(Set_ChildEvent_Listner_Get_TimePeed());
+
     }
 
     @Override
@@ -64,6 +65,11 @@ public class Fragment_TimePeed_Post extends Fragment {
         binding.TimepeedPostRCV.setNestedScrollingEnabled(false);
 
         return root;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        reference.addChildEventListener(Set_ChildEvent_Listner_Get_TimePeed());
     }
 
     @Override

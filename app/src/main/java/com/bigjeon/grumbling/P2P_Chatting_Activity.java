@@ -69,6 +69,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
     private String My_Img;
     private String User_Uid;
     private String User_Token;
+    private int count;
     private Boolean User_State = false;
     private String Chatting_Room_ID;
     private String Reply_Target_Uid = "NONE";
@@ -141,6 +142,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
         binding.ChattingListListView.setHasFixedSize(true);
 
         DB = FirebaseDatabase.getInstance();
+        Chat_Count_Reset();
         reference = DB.getReference("Chat_Room").child(Chatting_Room_ID);
         reference.addValueEventListener(Regist_DB_Listener());
 
@@ -302,7 +304,7 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
             Chat_User_Uid_Data My_data = new Chat_User_Uid_Data(User_Uid, Chatting_Room_ID, Last_Chat, Write_Date, 0);
             reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
             reference.setValue(My_data);
-            Chat_User_Uid_Data User_data = new Chat_User_Uid_Data(My_Uid, Chatting_Room_ID, Last_Chat, Write_Date, 0);
+            Chat_User_Uid_Data User_data = new Chat_User_Uid_Data(My_Uid, Chatting_Room_ID, Last_Chat, Write_Date, count++);
             reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("My_Chatting_List").child(Chatting_Room_ID);
             reference.setValue(User_data);
             First_Chat_Status = false;
@@ -334,11 +336,28 @@ public class P2P_Chatting_Activity extends AppCompatActivity {
                     if (Chatting_Room_ID.equals(task.getResult().getValue())){
                     }else if (task.getResult().getValue() == null){
                         Send_Noti_To_User(Message);
+                        Chat_Count_Add();
                     }else{
                         Send_Noti_To_User(Message);
+                        Chat_Count_Add();
                     }
                 }
             });
             return User_State;
         }
+
+    private void Chat_Count_Add(){
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(User_Uid).child("My_Chatting_List").child(Chatting_Room_ID).child("new_Chat_Count");
+        reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                count = Integer.parseInt(task.getResult().getValue().toString());
+            }
+        });
+    }
+
+    private void Chat_Count_Reset(){
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List").child(Chatting_Room_ID).child("new_Chat_Count");
+        reference.setValue(0);
+    }
 }

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,9 +44,10 @@ public class Fragment_TimePeed_Friends extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Get_My_Profile();
         reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("Notifications").child("Firend_Timepeed");
-        reference.addChildEventListener(Set_ChildEvent_Listner_Get_TimePeed());
+
     }
 
     @Override
@@ -53,7 +55,6 @@ public class Fragment_TimePeed_Friends extends Fragment {
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_timepeed_friends, container, false);
         View root = binding.getRoot();
-
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
         adapter = new Timepeed_Rcv_Friends_Adapter(getContext(), TimePeed_Friends_List, My_Uid);
         binding.TimepeedFriendsRCV.setAdapter(adapter);
@@ -62,6 +63,12 @@ public class Fragment_TimePeed_Friends extends Fragment {
         binding.TimepeedFriendsRCV.setNestedScrollingEnabled(false);
 
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        reference.addChildEventListener(Set_ChildEvent_Listner_Get_TimePeed());
     }
 
     @Override

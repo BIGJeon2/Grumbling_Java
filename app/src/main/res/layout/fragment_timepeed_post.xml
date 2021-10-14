@@ -12,11 +12,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
     tools:context="com.bigjeon.grumbling.fragments.Fragment_TimePeed_Post">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Timepeed_Post_RCV"
-        android:layout_marginTop="6dp"
         tools:listitem="@layout/timepeed_post_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

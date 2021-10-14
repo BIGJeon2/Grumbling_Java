@@ -59,14 +59,6 @@ public class Chatting_List_Fragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        chat_list.clear();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List");
-        reference.addChildEventListener(Chat_Child_Listener());
-    }
-
     private ChildEventListener Chat_Child_Listener(){
         ChildEventListener Chat_Listener = new ChildEventListener() {
             @Override
@@ -130,12 +122,19 @@ public class Chatting_List_Fragment extends Fragment {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        chat_list.clear();
+    public void onResume() {
+        super.onResume();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List");
-        reference.removeEventListener(Chat_Child_Listener());
+        reference.addChildEventListener(Chat_Child_Listener());
     }
+
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        chat_list.clear();
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(My_Uid).child("My_Chatting_List");
+//        reference.removeEventListener(Chat_Child_Listener());
+//    }
 
 
     @Override

@@ -67,8 +67,13 @@ public class Friend_List_Fragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Friends_List.clear();
         Get_Friend_List();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Friends_List.clear();
     }
 
     private void Go_User_Profile_View_Act() {

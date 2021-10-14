@@ -9,6 +9,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/Chatting_List_User_Img_Civ"
         android:src="@drawable/user_profile_default_img"
+        android:layout_marginTop="4dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         app:civ_border_color="@color/Theme_Text_Color"
@@ -18,6 +19,7 @@
     </de.hdodenhof.circleimageview.CircleImageView>
     <TextView
         android:id="@+id/Chatting_List_User_Name_TV"
+        android:layout_marginTop="4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="User_Name"
@@ -44,16 +46,16 @@
         android:layout_height="wrap_content">
     </TextView>
     <TextView
-        android:visibility="invisible"
+        android:visibility="gone"
         android:id="@+id/Chatting_List_New_Chat_Count_TV"
         android:layout_marginTop="4dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="6dp"
         android:layout_alignParentRight="true"
-        android:layout_centerInParent="true"
-        android:textColor="@android:color/holo_red_light"
+        android:layout_below="@id/Chatting_List_Last_Chat_Date_TV"
+        android:textColor="@color/Sub_Tutle_Color"
         android:text="1"
-        android:textSize="14dp"
-        android:fontFamily="@font/notosans_regular"
+        android:textSize="16dp"
+        android:fontFamily="@font/notosans_medium"
         android:includeFontPadding="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

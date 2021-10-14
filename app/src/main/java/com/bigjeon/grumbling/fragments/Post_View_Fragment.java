@@ -87,7 +87,6 @@ public class Post_View_Fragment extends Fragment {
         rcv.setLayoutManager(lm);
         rcv.setAdapter(adapter);
         rcv.setHasFixedSize(true);
-        Get_Post();
 
         binding.PostSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -117,75 +116,8 @@ public class Post_View_Fragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        adapter.Get_Post_Child_Listener();
+        Get_Post();
+        //adapter.Get_Post_Child_Listener();
     }
-
-//    private void Category_Color_Change_On(int Select_Btn){
-//        switch (Select_Btn){
-//            case 1 : binding.CategoryTVAll.setBackgroundResource(R.drawable.round_shape);
-//                binding.CategoryTVAll.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(), R.color.Transparent_Green));
-//                Category_Color_Change_OFF(Category_State);
-//                Category_State = 1;
-//                Get_Content_Grade = "모든 게시글";
-//
-//                break;
-//            case 2 : binding.CategoryTVTalk.setBackgroundResource(R.drawable.round_shape);
-//                binding.CategoryTVTalk.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(), R.color.Transparent_Green));
-//                Category_Color_Change_OFF(Category_State);
-//                Category_State = 2;
-//                Get_Content_Grade = "잡담";
-//                break;
-//            case 3 : binding.CategoryTVMeet.setBackgroundResource(R.drawable.round_shape);
-//                binding.CategoryTVMeet.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(), R.color.Transparent_Green));
-//                Category_Color_Change_OFF(Category_State);
-//                Category_State = 3;
-//                Get_Content_Grade = "모임";
-//                break;
-//            case 4 : binding.CategoryTVGame.setBackgroundResource(R.drawable.round_shape);
-//                binding.CategoryTVGame.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(), R.color.Transparent_Green));
-//                Category_Color_Change_OFF(Category_State);
-//                Category_State = 4;
-//                Get_Content_Grade = "게임";
-//                break;
-//            case 5 : binding.CategoryTVPride.setBackgroundResource(R.drawable.round_shape);
-//                binding.CategoryTVPride.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(), R.color.Transparent_Green));
-//                Category_Color_Change_OFF(Category_State);
-//                Category_State = 5;
-//                Get_Content_Grade = "자랑";
-//                break;
-//            case 6 : binding.CategoryTVGrung.setBackgroundResource(R.drawable.round_shape);
-//                binding.CategoryTVGrung.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(), R.color.Transparent_Green));
-//                Category_Color_Change_OFF(Category_State);
-//                Category_State = 6;
-//                Get_Content_Grade = "고민";
-//                break;
-//        }
-//        adapter.Set_Grade(Get_Content_Grade);
-//        Get_Post();
-//    }
-
-    /*private void Category_Color_Change_OFF(int State){
-        switch (State){
-            case 1 : binding.CategoryTVAll.setBackgroundResource(R.drawable.round_shape_off);
-                binding.CategoryTVAll.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(), R.color.Transparent_Black50));
-                break;
-            case 2 : binding.CategoryTVTalk.setBackgroundResource(R.drawable.round_shape_off);
-                binding.CategoryTVTalk.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(), R.color.Transparent_Black50));
-                break;
-            case 3 : binding.CategoryTVMeet.setBackgroundResource(R.drawable.round_shape_off);
-                binding.CategoryTVMeet.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(), R.color.Transparent_Black50));
-                break;
-            case 4 : binding.CategoryTVGame.setBackgroundResource(R.drawable.round_shape_off);
-                binding.CategoryTVGame.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(), R.color.Transparent_Black50));
-                break;
-            case 5 : binding.CategoryTVPride.setBackgroundResource(R.drawable.round_shape_off);
-                binding.CategoryTVPride.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(), R.color.Transparent_Black50));
-                break;
-            case 6 : binding.CategoryTVGrung.setBackgroundResource(R.drawable.round_shape_off);
-                binding.CategoryTVGrung.setTextColor(ContextCompat.getColor(getContext().getApplicationContext(), R.color.Transparent_Black50));
-                break;
-        }
-    }*/
-
 
 }

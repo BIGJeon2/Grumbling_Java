@@ -141,7 +141,7 @@ public class Google_Login_Activity extends AppCompatActivity {
                 String My_Uid = user.getUid();
                 String My_Email = user.getEmail();
                 Intent_To_Set_Profile(My_Uid, My_Email);
-                Toast.makeText(Google_Login_Activity.this, My_Uid + "로그인 성공", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Google_Login_Activity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show();
         }
