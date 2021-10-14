@@ -81,6 +81,7 @@
             android:background="@color/Transparent_Black30"
             android:fontFamily="@font/notosans_medium"
             android:includeFontPadding="false"
+            android:gravity="center"
             android:textSize="16dp"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"
