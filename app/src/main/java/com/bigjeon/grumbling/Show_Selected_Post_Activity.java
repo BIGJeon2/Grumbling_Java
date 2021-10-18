@@ -219,7 +219,7 @@ public class Show_Selected_Post_Activity extends AppCompatActivity {
             public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot document : task.getResult()){
-                        Picasso.get().load(document.getString("Img")).into(binding.SelectedPostUserImg);
+                        Picasso.get().load(document.getString("Img")).fit().into(binding.SelectedPostUserImg);
                         binding.SelectedPostUserName.setText(document.getString("Name"));
                         break;
                     }

@@ -75,7 +75,7 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
             My_Uid = data.getString("UID", null);
             My_Location = data.getString("LOCATION", null);
             My_State_Msg = data.getString("STATE_MSG", null);
-            Picasso.get().load(My_Img).into(binding.UserImg);
+            Picasso.get().load(My_Img).fit().into(binding.UserImg);
             binding.UserName.setText(My_Name);
             binding.UserLocation.setText(My_Location);
             binding.UserStateMSG.setText(My_State_Msg);
@@ -91,7 +91,7 @@ public class Set_User_Profile_Activity extends AppCompatActivity {
     private void Set_Default_Img() {
         My_Img = Default_Img;
         Img_Pick_State = false;
-        Picasso.get().load(R.drawable.user_profile_default_img).into(binding.UserImg);
+        Picasso.get().load(R.drawable.user_profile_default_img).fit().into(binding.UserImg);
     }
 
     ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),

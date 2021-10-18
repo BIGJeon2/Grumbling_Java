@@ -66,7 +66,7 @@ public class Timepeed_Rcv_Post_Adapter extends RecyclerView.Adapter<Timepeed_Rcv
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         holder.Text.setText("'" + document.get("Name").toString() + "' 님이 회원님의 게시글을 좋아합니다.");
-                        Picasso.get().load(document.getString("Img")).into(holder.User_Img);
+                        Picasso.get().load(document.getString("Img")).fit().into(holder.User_Img);
                     }
                 }
             }

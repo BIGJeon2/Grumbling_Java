@@ -72,7 +72,7 @@ public class Friend_List_Adapter extends RecyclerView.Adapter<Friend_List_Adapte
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         holder.User_Name.setText(document.get("Name").toString());
-                        Picasso.get().load(document.getString("Img")).into(holder.User_Img);
+                        Picasso.get().load(document.getString("Img")).fit().into(holder.User_Img);
                         holder.User_Location.setText("#" + document.getString("Location"));
                     }
                 }

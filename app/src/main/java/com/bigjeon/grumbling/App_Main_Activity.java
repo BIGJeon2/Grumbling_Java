@@ -131,7 +131,7 @@ public class App_Main_Activity extends AppCompatActivity implements View.OnCreat
         My_Name = My_Data.getString("NAME", null);
         My_Img = My_Data.getString("IMG", null);
         My_Email = My_Data.getString("EMAIL", null);
-        Picasso.get().load(My_Img).into(binding.AppMainMyImg);
+        Picasso.get().load(My_Img).fit().into(binding.AppMainMyImg);
     }
 
     private void Button_Background_Change(int position){

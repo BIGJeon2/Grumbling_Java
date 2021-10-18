@@ -11,6 +11,7 @@
     <LinearLayout
         tools:context="com.bigjeon.grumbling.P2P_Chatting_Activity"
         android:orientation="vertical"
+        android:background="@color/Theme_Color"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
@@ -162,7 +163,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_centerInParent="true"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginLeft="6dp"
                     android:layout_marginRight="6dp"
                     android:layout_toLeftOf="@id/Chatting_Send_CIV"
                     android:layout_toRightOf="@id/Reply_Img"

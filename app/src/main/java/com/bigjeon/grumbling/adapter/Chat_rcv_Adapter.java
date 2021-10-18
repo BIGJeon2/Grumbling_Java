@@ -139,7 +139,7 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             ((Other_Chat_ViewHolder) holder).User_Name.setText(document.get("Name").toString());
-                            Picasso.get().load(document.getString("Img")).into(((Other_Chat_ViewHolder) holder).User_Img);
+                            Picasso.get().load(document.getString("Img")).fit().into(((Other_Chat_ViewHolder) holder).User_Img);
                             break;
                         }
                     }
@@ -161,7 +161,7 @@ public class Chat_rcv_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             ((Other_Repling_Chat_ViewHolder) holder).User_Name.setText(document.get("Name").toString());
-                            Picasso.get().load(document.getString("Img")).into(((Other_Repling_Chat_ViewHolder) holder).User_Img);
+                            Picasso.get().load(document.getString("Img")).fit().into(((Other_Repling_Chat_ViewHolder) holder).User_Img);
                             break;
                         }
                     }

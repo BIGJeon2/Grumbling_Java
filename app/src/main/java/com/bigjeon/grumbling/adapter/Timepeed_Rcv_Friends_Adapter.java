@@ -69,7 +69,7 @@ public class Timepeed_Rcv_Friends_Adapter extends RecyclerView.Adapter<Timepeed_
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         holder.Text.setText("'" + document.get("Name").toString() + "' 님이 회원님을 친구추가 하였습니다.");
-                        Picasso.get().load(document.getString("Img")).into(holder.User_Img);
+                        Picasso.get().load(document.getString("Img")).fit().into(holder.User_Img);
                     }
                 }
             }

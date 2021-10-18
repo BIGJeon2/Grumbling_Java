@@ -162,7 +162,7 @@
                 android:hint="내용을 입력하세요."
                 android:layout_toRightOf="@id/Reply_Img"
                 android:layout_marginRight="6dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="6dp"
                 android:background="@null"
                 android:textColor="@color/Theme_Text_Color"
                 android:textSize="14dp"

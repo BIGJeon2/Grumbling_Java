@@ -85,7 +85,7 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
             Set_Users_Data();
             Get_Post_Key = User_Uid;
         }else{
-            Picasso.get().load(My_Img).into(binding.SettingFragmentMyProfileImgCiv);
+            Picasso.get().load(My_Img).fit().into(binding.SettingFragmentMyProfileImgCiv);
             binding.SettingFragmentMyNameTv.setText(My_Name);
             binding.MyProfileActivityUserLocationTV.setText("#" + My_Location);
             binding.SettingActivityStateMsgTv.setText(" ' " + My_State_Msg + " ' ");
@@ -117,7 +117,7 @@ public class Setting_My_Profile_Activity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot document : task.getResult()){
                         binding.SettingFragmentMyNameTv.setText(document.get("Name").toString());
-                        Picasso.get().load(document.get("Img").toString()).into(binding.SettingFragmentMyProfileImgCiv);
+                        Picasso.get().load(document.get("Img").toString()).fit().into(binding.SettingFragmentMyProfileImgCiv);
                         binding.MyProfileActivityUserLocationTV.setText("#" + My_Location);
                         binding.SettingActivityStateMsgTv.setText(" ' " + My_State_Msg + " ' ");
                         break;

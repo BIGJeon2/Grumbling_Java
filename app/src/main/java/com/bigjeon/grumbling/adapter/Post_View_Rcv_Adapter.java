@@ -54,6 +54,7 @@ import com.bigjeon.grumbling.data.Notification_Data;
 import com.bigjeon.grumbling.data.Post_Data;
 import com.bigjeon.grumbling.fragments.Post_View_Fragment;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.grumbling.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -131,7 +132,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
         holder.Post_Content.setBackgroundColor(ContextCompat.getColor(mContext, data.getContent_Back_Color()));
         holder.Post_Content.setTextColor(ContextCompat.getColor(mContext, data.getContent_Text_Color()));
         if (data.getPost_Background() == null){
-            Glide.with(holder.itemView).load(R.drawable.post_default_img).into(holder.Post_Background_Img);
+            Glide.with(holder.itemView).load(R.drawable.post_default_img).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.Post_Background_Img);
         }else{
             Glide.with(holder.itemView).load(data.getPost_Background()).into(holder.Post_Background_Img);
         }
@@ -144,7 +145,7 @@ public class Post_View_Rcv_Adapter extends RecyclerView.Adapter<Post_View_Rcv_Ad
                 if (task.isSuccessful()){
                     for (QueryDocumentSnapshot document : task.getResult()){
                         holder.User_Name.setText(document.get("Name").toString());
-                        Picasso.get().load(document.getString("Img")).into(holder.User_Img);
+                        Picasso.get().load(document.getString("Img")).fit().into(holder.User_Img);
                         holder.Post_User_Location.setText("# " + document.get("Location").toString());
                         break;
                     }

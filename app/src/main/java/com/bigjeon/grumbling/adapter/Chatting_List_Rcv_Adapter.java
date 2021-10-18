@@ -81,7 +81,7 @@ public class Chatting_List_Rcv_Adapter extends RecyclerView.Adapter<Chatting_Lis
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         holder.User_Name.setText(document.getString("Name"));
-                        Picasso.get().load(document.getString("Img")).into(holder.User_Img);
+                        Picasso.get().load(document.getString("Img")).fit().into(holder.User_Img);
                         holder.Last_Chat_Date.setText(room.getLast_Date());
                         holder.Last_Chat_Comment.setText(room.getLast_Content());
                         if (room.getNew_Chat_Count() != 0){
